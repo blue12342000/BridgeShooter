@@ -141,10 +141,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Keymannager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Singtleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="Keymannager.h" />
+    <ClInclude Include="Singtleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

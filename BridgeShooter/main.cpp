@@ -1,5 +1,4 @@
 #include "BridgeShooter.h"
-
 HINSTANCE g_hInstance;
 HWND g_hWnd;
 LPSTR g_lpszClass = (LPSTR)TEXT("Bridge Shooter");
@@ -10,7 +9,6 @@ void SetWindowSize(HWND hWnd, int width, int height);
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	g_hInstance = hInstance;
-
 	WNDCLASS wndClass;
 	wndClass.cbClsExtra = 0;
 	wndClass.cbWndExtra = 0;
@@ -38,10 +36,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 			if (message.message == WM_QUIT) break;
 			TranslateMessage(&message);
 			DispatchMessage(&message);
+			
 		}
 		else
 		{
-
+			
 		}
 	}
 
