@@ -37,12 +37,7 @@ void TimerManager::Render(HDC hdc)
     }
 }
 
-float TimerManager::GetElapsedTime()
+float TimerManager::GetDeltaTime()
 {
-    return timer->GetElapsedTime();
-}
-
-float TimerManager::GetCurrTime()
-{
-    return timer->GetCurrTime();
+    return timer->GetDeltaTime();
 }

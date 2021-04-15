@@ -1,13 +1,13 @@
 #pragma once
-#include "Singleton.h"
 #include "BridgeShooter.h"
+#include "Singleton.h"
 
 class Timer;
 class TimerManager : public Singleton<TimerManager>
 {
 private:
 	Timer* timer;
-	char szText[128];	//타이머 확인용
+	char szText[128];
 
 public:
 	HRESULT Init();
@@ -15,7 +15,6 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
-	float GetElapsedTime();
-	float GetCurrTime();
+	float GetDeltaTime();
 };
 

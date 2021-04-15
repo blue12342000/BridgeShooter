@@ -4,321 +4,148 @@ HRESULT Image::Init(int width, int height)
 {
     HDC hdc = GetDC(g_hWnd);
 
-    imageInfo = new IMAGE_INFO();
-    imageInfo->resID = 0;
-    imageInfo->hMemDC = CreateCompatibleDC(hdc);
-    imageInfo->hBitmap = CreateCompatibleBitmap(hdc, width, height);
-    imageInfo->hOldBit =
-        (HBITMAP)SelectObject(imageInfo->hMemDC, imageInfo->hBitmap);
-    imageInfo->width = width;
-    imageInfo->height = height;
-    imageInfo->loadType = IMAGE_LOAD_TYPE::EMPTY;
+    lpImageInfo = new ImageInfo();
+    lpImageInfo->resID = 0;
+    lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
+    lpImageInfo->hBitmap = CreateCompatibleBitmap(hdc, width, height);
+    lpImageInfo->width = width;
+    lpImageInfo->height = height;
+    lpImageInfo->loadType = IMAGE_LOAD_TYPE::EMPTY;
 
+    lpImageInfo->maxFrameX = 1;
+    lpImageInfo->maxFrameY = 1;
+    lpImageInfo->totalFrame = 1;
+
+    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
     ReleaseDC(g_hWnd, hdc);
 
-    if (imageInfo->hBitmap == NULL)
+    if (lpImageInfo->hBitmap == NULL)
     {
         Release();
         return E_FAIL;
     }
 
-    this->isTransparent = FALSE;
-    this->transColor = FALSE;
+    lpImageInfo->isTransparent = false;
+    lpImageInfo->transColor = 0;
+
+    lpBlendInfo = nullptr;
 
     return S_OK;
 }
 
-HRESULT Image::Init(const char* fileName, int width, int height,
-    bool isTransparent/* = FALSE*/, COLORREF transColor/* = FALSE*/)
+HRESULT Image::Init(const char* fileName, int width, int height, bool isTransparent, COLORREF transColor)
 {
     HDC hdc = GetDC(g_hWnd);
 
-    imageInfo = new IMAGE_INFO();
-    imageInfo->resID = 0;
-    imageInfo->hMemDC = CreateCompatibleDC(hdc);
-    imageInfo->hBitmap =
-        (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
-    imageInfo->hOldBit =
-        (HBITMAP)SelectObject(imageInfo->hMemDC, imageInfo->hBitmap);
-    imageInfo->width = width;
-    imageInfo->height = height;
-    imageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
+    lpImageInfo = new ImageInfo();
+    lpImageInfo->resID = 0;
+    lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
+    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+    lpImageInfo->width = width;
+    lpImageInfo->height = height;
+    lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
 
+    lpImageInfo->maxFrameX = 1;
+    lpImageInfo->maxFrameY = 1;
+    lpImageInfo->totalFrame = 1;
+
+    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
     ReleaseDC(g_hWnd, hdc);
 
-    if (imageInfo->hBitmap == NULL)
+    if (lpImageInfo->hBitmap == NULL)
     {
         Release();
         return E_FAIL;
     }
 
-    this->isTransparent = isTransparent;
-    this->transColor = transColor;
+    lpImageInfo->isTransparent = isTransparent;
+    lpImageInfo->transColor = transColor;
 
-    //알파 블렌드 조절용
-    this->blendFunc.AlphaFormat = 0;
-    this->blendFunc.BlendFlags = 0;
-    this->blendFunc.BlendOp = AC_SRC_OVER;
-    this->blendFunc.SourceConstantAlpha = 255;
+    lpBlendInfo = new BlendInfo();
+    lpBlendInfo->blendFunc.AlphaFormat = 0;
+    lpBlendInfo->blendFunc.BlendFlags = 0;
+    lpBlendInfo->blendFunc.BlendOp = AC_SRC_OVER;
+    lpBlendInfo->blendFunc.SourceConstantAlpha = 255;
 
     return S_OK;
 }
 
-HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, int maxFrameY, bool isTransparent, COLORREF transColor)
+HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent, COLORREF transColor)
 {
     HDC hdc = GetDC(g_hWnd);
 
-    imageInfo = new IMAGE_INFO();
-    imageInfo->resID = 0;
-    imageInfo->hMemDC = CreateCompatibleDC(hdc);
-    imageInfo->hBitmap =
-        (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
-    imageInfo->hOldBit =
-        (HBITMAP)SelectObject(imageInfo->hMemDC, imageInfo->hBitmap);
-    imageInfo->width = width;
-    imageInfo->height = height;
-    imageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
+    lpImageInfo = new ImageInfo();
+    lpImageInfo->resID = 0;
+    lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
+    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+    lpImageInfo->width = width / maxFrameX;
+    lpImageInfo->height = height / maxFrameY;
+    lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
 
-    imageInfo->maxFrameX = maxFrameX;
-    imageInfo->maxFrameY = maxFrameY;
-    imageInfo->frameWidth = width / maxFrameX;
-    imageInfo->frameHeight = height / maxFrameY;
-    imageInfo->currFrameX = 0;
-    imageInfo->currFrameY = 0;
+    lpImageInfo->maxFrameX = maxFrameX;
+    lpImageInfo->maxFrameY = maxFrameY;
+    lpImageInfo->totalFrame = totalFrame;
 
+    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
     ReleaseDC(g_hWnd, hdc);
 
-    if (imageInfo->hBitmap == NULL)
+    if (lpImageInfo->hBitmap == NULL)
     {
         Release();
         return E_FAIL;
     }
 
-    this->isTransparent = isTransparent;
-    this->transColor = transColor;
+    lpImageInfo->isTransparent = isTransparent;
+    lpImageInfo->transColor = transColor;
+
+    lpBlendInfo = new BlendInfo();
+    lpBlendInfo->blendFunc.AlphaFormat = 0;
+    lpBlendInfo->blendFunc.BlendFlags = 0;
+    lpBlendInfo->blendFunc.BlendOp = AC_SRC_OVER;
+    lpBlendInfo->blendFunc.SourceConstantAlpha = 255;
 
     return S_OK;
 }
 
-void Image::Render(HDC hdc, int destX, int destY, bool isCenterRenderring)
+void Image::Render(HDC hdc, int destX, int destY, int frame)
 {
-    int x = destX;
-    int y = destY;
-
-    if (isCenterRenderring)
+    if (lpImageInfo->isTransparent)
     {
-        x = destX - (imageInfo->width / 2);
-        y = destY - (imageInfo->height / 2);
-    }
-
-    if (isTransparent)
-    {
-        // 특정 색상을 빼고 복사하는 함수
-        GdiTransparentBlt(hdc,x, y,imageInfo->width, imageInfo->height,
-            imageInfo->hMemDC,0, 0,imageInfo->width, imageInfo->height,transColor);
+        GdiTransparentBlt(hdc, destX, destY,lpImageInfo->width, lpImageInfo->height,
+            lpImageInfo->hMemDC,0, 0,lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
     }
     else
     {
-        // bitmap 에 있는 이미지 정보를 다른 비트맵에 복사
-        BitBlt(
-            hdc,                // 복사 목적지 DC
-            destX, destY,       // 복사 시작 위치
-            imageInfo->width,   // 원본에서 복사될 가로크기
-            imageInfo->height,  // 원본에서 복사될 세로크기
-            imageInfo->hMemDC,  // 원본 DC
-            0, 0,               // 원본에서 복사 시작 위치
-            SRCCOPY             // 복사 옵션
-        );
-    }
-
-
-}
-
-void Image::FrameRender(HDC hdc, int destX, int destY, int currFrameX, int currFrameY)
-{
-    imageInfo->currFrameX = currFrameX;
-    imageInfo->currFrameY = currFrameY;
-
-    int x = destX - (imageInfo->frameWidth / 2);
-    int y = destY - (imageInfo->frameHeight / 2);
-
-    if (isTransparent)
-    {
-        // 특정 색상을 빼고 복사하는 함수
-        GdiTransparentBlt(
-            hdc,                // 목적지 DC
-            x, y,               // 복사 위치
-            imageInfo->frameWidth, imageInfo->frameHeight,  // 복사 크기
-
-            imageInfo->hMemDC,  // 원본 DC
-            imageInfo->frameWidth * imageInfo->currFrameX,  // 복사 X 위치
-            imageInfo->frameHeight * imageInfo->currFrameY, // 복사 Y 위치
-            imageInfo->frameWidth, imageInfo->frameHeight,  // 복사 크기
-            transColor  // 제외할 색상
-        );
-    }
-    else
-    {
-        BitBlt(
-            hdc,
-            x, y,
-            imageInfo->frameWidth,
-            imageInfo->frameHeight,
-            imageInfo->hMemDC,
-            imageInfo->frameWidth * imageInfo->currFrameX,
-            imageInfo->frameHeight * imageInfo->currFrameY,
-            SRCCOPY
-        );
+        BitBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height, lpImageInfo->hMemDC, 0, 0, SRCCOPY);
     }
 }
 
-void Image::AlphaRender(HDC hdc, int destX, int destY, bool isCenterRenderring)
+void Image::AlphaRender(HDC hdc, int destX, int destY)
 {
-    int x = destX;
-    int y = destY;
-    if (isCenterRenderring)
-    {
-        x = destX - (imageInfo->width / 2);
-        y = destY - (imageInfo->height / 2);
-    }
+    BitBlt(lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height, hdc, destX, destY, SRCCOPY);
 
-    // 1. 목적지 DC에 그려져 있는 내용을 BlendDC에 복사
-    BitBlt(imageInfo->hBlendDC, 0, 0, imageInfo->width, imageInfo->height, hdc, x, y, SRCCOPY);
-    // 2. 출력할 이미지 DC에 내용을 BlendDC 에 지정한 색상을 제외하면서 복사
-    GdiTransparentBlt(imageInfo->hBlendDC, 0, 0, imageInfo->width, imageInfo->height, imageInfo->hMemDC, 0, 0, imageInfo->width, imageInfo->height, RGB(255, 0, 255));
+    GdiTransparentBlt(lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height,
+        lpImageInfo->hMemDC, 0, 0, lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
 
-    // 3. 
-    AlphaBlend(hdc, x, y, imageInfo->width, imageInfo->height,
-        imageInfo->hBlendDC, 0, 0, imageInfo->width, imageInfo->height, blendFunc);
-
-    /*  
-    if (image)
-    {
-        BLENDFUNCTION* blendFunc = image->GetBlendFunc();
-
-        if (blendFunc->SourceConstantAlpha > 0)
-        {
-            blendFunc->SourceConstantAlpha--;
-        }
-    }
-    */
-}
-
-
-//(미구현)모자이크 : 이미지를 키웠다가 작은 해상도로 복사하면서 해상도 깨지는 방법으로 연출
-void Image::MosaicRender(HDC hdc, int destX, int destY, bool isCenterRenderring)
-{
-    int x = destX;
-    int y = destY;
-    if (isCenterRenderring)
-    {
-        x = destX - (imageInfo->width / 2);
-        y = destY - (imageInfo->height / 2);
-    }
-
-    // 1. 이미지를 크게 호출
-    BitBlt(imageInfo->hBlendDC, 0, 0, imageInfo->width, imageInfo->height, hdc, x, y, SRCCOPY);
-    // 2. 출력할 이미지 DC에 내용을 BlendDC 에 작은 해상도로 지정한 색상을 제외하면서 복사
-    GdiTransparentBlt(imageInfo->hBlendDC, 0, 0, imageInfo->width, imageInfo->height, imageInfo->hMemDC, 0, 0, imageInfo->width, imageInfo->height, RGB(255, 0, 255));
-
-    // 3. 
-    AlphaBlend(hdc, x, y, imageInfo->width, imageInfo->height,
-        imageInfo->hBlendDC, 0, 0, imageInfo->width, imageInfo->height, blendFunc);
-
-    /* 원본
-    if (isTransparent)
-    {
-
-        // 특정 색상을 빼고 복사하는 함수
-        GdiTransparentBlt(
-            hdc,
-            x, y,
-            imageInfo->width, imageInfo->height,
-
-            imageInfo->hMemDC,
-            0, 0,
-            imageInfo->width, imageInfo->height,
-            transColor
-        );
-    }
-    else
-    {
-        // bitmap 에 있는 이미지 정보를 다른 비트맵에 복사
-        BitBlt(
-            hdc,                // 복사 목적지 DC
-            x, y,               // 복사 시작 위치
-            imageInfo->width,   // 원본에서 복사될 가로크기
-            imageInfo->height,  // 원본에서 복사될 세로크기
-            imageInfo->hMemDC,  // 원본 DC
-            0, 0,               // 원본에서 복사 시작 위치
-            SRCCOPY             // 복사 옵션
-        );
-    }
-    */
-
-
-}
-//(미구현)블러 : 색상 정보를 제한해서 비슷한 색끼리 같은 값으로 출력되도록 연출 - 어케함
-void Image::BlurRender(HDC hdc, int destX, int destY, bool isCenterRenderring)
-{
-    int x = destX;
-    int y = destY;
-    if (isCenterRenderring)
-    {
-        x = destX - (imageInfo->width / 2);
-        y = destY - (imageInfo->height / 2);
-    }
-
-    /* 원본
-    if (isTransparent)
-    {
-
-        // 특정 색상을 빼고 복사하는 함수
-        GdiTransparentBlt(
-            hdc,
-            x, y,
-            imageInfo->width, imageInfo->height,
-
-            imageInfo->hMemDC,
-            0, 0,
-            imageInfo->width, imageInfo->height,
-            transColor
-        );
-    }
-    else
-    {
-        // bitmap 에 있는 이미지 정보를 다른 비트맵에 복사
-        BitBlt(
-            hdc,                // 복사 목적지 DC
-            x, y,               // 복사 시작 위치
-            imageInfo->width,   // 원본에서 복사될 가로크기
-            imageInfo->height,  // 원본에서 복사될 세로크기
-            imageInfo->hMemDC,  // 원본 DC
-            0, 0,               // 원본에서 복사 시작 위치
-            SRCCOPY             // 복사 옵션
-        );
-    }
-    */
-
-
+    AlphaBlend(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
+        lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height, lpBlendInfo->blendFunc);
 }
 
 void Image::Release()
 {
-    if (imageInfo)
+    if (lpImageInfo)
     {
-        SelectObject(imageInfo->hMemDC, imageInfo->hOldBit);
-        DeleteObject(imageInfo->hBitmap);
-        DeleteDC(imageInfo->hMemDC);
+        DeleteObject(lpImageInfo->hBitmap);
+        DeleteDC(lpImageInfo->hMemDC);
+        delete lpImageInfo;
+        lpImageInfo = nullptr;
 
-        if (imageInfo->hBlendDC != NULL)
+        if (lpBlendInfo)
         {
-            SelectObject(imageInfo->hBlendDC, imageInfo->hBlendOldBit);
-            DeleteObject(imageInfo->hBlendBit);
-            DeleteDC(imageInfo->hBlendDC);
+            DeleteObject(lpBlendInfo->hBlendBit);
+            DeleteDC(lpBlendInfo->hBlendDC);
+            delete lpBlendInfo;
+            lpBlendInfo = nullptr;
         }
-
-        delete imageInfo;
-        imageInfo = nullptr;
     }
 }
