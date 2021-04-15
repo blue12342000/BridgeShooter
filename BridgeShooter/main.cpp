@@ -28,12 +28,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 	g_hWnd = CreateWindow(g_lpszClass, g_lpszClass, WS_OVERLAPPEDWINDOW, 0, 0, WINSIZE_WIDTH, WINSIZE_HEIGHT, NULL, NULL, g_hInstance, NULL);
 
 	ShowWindow(g_hWnd, nShowCmd);
+	SetWindowSize(g_hWnd, WINSIZE_WIDTH, WINSIZE_HEIGHT);
 
 	MSG message;
 	while (true)
 	{
 		if (PeekMessage(&message, 0, 0, 0, PM_REMOVE))
 		{
+			if (message.message == WM_QUIT) break;
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
@@ -42,16 +44,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 
 		}
 	}
+
+	return message.wParam;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+{
+	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
 
 void SetWindowSize(HWND hWnd, int width, int height)
 {
-	RECT rect;
-	DWORD dwStyle = GetWindowLong(hWnd, GWL_STYLE);
+	RECT wndRect;
+	DWORD wndStyle = GetWindowLong(hWnd, GWL_STYLE);
 
-	SetRect(&rect, 0, 0, WINSIZE_WIDTH, WINSIZE_HEIGHT);
-	AdjustWindowRect(&rect, dwStyle, GetMenu(hWnd) != NULL);
-	
+	SetRect(&wndRect, 0, 0, width, height);
+	AdjustWindowRect(&wndRect, wndStyle, GetMenu(hWnd) != NULL);
 
-	SetWindowPos(hWnd, NULL, WINPOS_STARTX, WINPOS_STARTY, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
+	if (wndStyle & WS_VSCROLL) wndRect.right += GetSystemMetrics(SM_CYVSCROLL);
+	if (wndStyle & WS_HSCROLL) wndRect.bottom += GetSystemMetrics(SM_CXVSCROLL);
+
+	SetWindowPos(hWnd, NULL, WINPOS_STARTX, WINPOS_STARTY, wndRect.right - wndRect.left, wndRect.bottom - wndRect.top, SWP_NOMOVE | SWP_NOZORDER);
 }
