@@ -11,9 +11,9 @@ private:
 	__int64 lastTime;
 	__int64 periodFrequency;
 
-	float fpsTimeElapsed;
-	unsigned long fpsFrameCount;
-	unsigned long FPS;
+	float fpsTimeElapsed;			// fps
+	unsigned long fpsFrameCount;	// FPS 세는거
+	unsigned long FPS;				// 초당 프레임 수 frame per second?
 
 public:
 	HRESULT Init();
