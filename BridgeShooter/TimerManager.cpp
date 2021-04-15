@@ -3,41 +3,41 @@
 
 HRESULT TimerManager::Init()
 {
-    timer = new Timer();
-    timer->Init();
+    lpTimer = new Timer();
+    lpTimer->Init();
 
     return S_OK;
 }
 
 void TimerManager::Release()
 {
-    if (timer)
+    if (lpTimer)
     {
-        delete timer;
-        timer = nullptr;
+        delete lpTimer;
+        lpTimer = nullptr;
     }
 
 }
 
 void TimerManager::Update()
 {
-    if (timer)
+    if (lpTimer)
     {
-        timer->Tick();
+        lpTimer->Tick();
     }
 }
 
 void TimerManager::Render(HDC hdc)
 {
-    if (timer)
+    if (lpTimer)
     {
         //확인용 출력
-        wsprintf(szText, "FPS : %d", timer->GetFPS());
+        wsprintf(szText, "FPS : %d", lpTimer->GetFPS());
         TextOut(hdc, WINSIZE_WIDTH - 150, 20, szText, strlen(szText));
     }
 }
 
 float TimerManager::GetDeltaTime()
 {
-    return timer->GetDeltaTime();
+    return lpTimer->GetDeltaTime();
 }

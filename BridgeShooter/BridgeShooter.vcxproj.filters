@@ -24,14 +24,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Singtleton.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Keymannager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-    </ClCompile>
     <ClCompile Include="ImageManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
@@ -47,15 +39,15 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Singtleton.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Keymannager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ImageManager.h">
@@ -77,6 +69,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
+      <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
   </ItemGroup>

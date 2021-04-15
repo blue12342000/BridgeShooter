@@ -6,7 +6,7 @@ class Timer;
 class TimerManager : public Singleton<TimerManager>
 {
 private:
-	Timer* timer;
+	Timer* lpTimer;
 	char szText[128];
 
 public:

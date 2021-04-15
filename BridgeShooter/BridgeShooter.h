@@ -23,3 +23,4 @@ extern HWND g_hWnd;
 extern bool isDebugMode;
 
 #include "TimerManager.h"
+#include "KeyManager.h"

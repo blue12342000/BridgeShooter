@@ -33,14 +33,14 @@ HRESULT Image::Init(int width, int height)
     return S_OK;
 }
 
-HRESULT Image::Init(const char* fileName, int width, int height, bool isTransparent, COLORREF transColor)
+HRESULT Image::Init(string fileName, int width, int height, bool isTransparent, COLORREF transColor)
 {
     HDC hdc = GetDC(g_hWnd);
 
     lpImageInfo = new ImageInfo();
     lpImageInfo->resID = 0;
     lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
-    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
     lpImageInfo->width = width;
     lpImageInfo->height = height;
     lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
@@ -70,14 +70,14 @@ HRESULT Image::Init(const char* fileName, int width, int height, bool isTranspar
     return S_OK;
 }
 
-HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent, COLORREF transColor)
+HRESULT Image::Init(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent, COLORREF transColor)
 {
     HDC hdc = GetDC(g_hWnd);
 
     lpImageInfo = new ImageInfo();
     lpImageInfo->resID = 0;
     lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
-    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
     lpImageInfo->width = width / maxFrameX;
     lpImageInfo->height = height / maxFrameY;
     lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;

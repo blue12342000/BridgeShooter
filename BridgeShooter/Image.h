@@ -59,8 +59,8 @@ private:
 
 public:
 	HRESULT Init(int width, int height);
-	HRESULT Init(const char* fileName, int width, int height, bool isTransparent = FALSE, COLORREF transColor = FALSE);
-	HRESULT Init(const char* fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent = FALSE, COLORREF transColor = FALSE);
+	HRESULT Init(string fileName, int width, int height, bool isTransparent = false, COLORREF transColor = 0);
+	HRESULT Init(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent = false, COLORREF transColor = 0);
 
 	void Render(HDC hdc, int destX = 0, int destY = 0, int frame = 0);
 	void AlphaRender(HDC hdc, int destX, int destY);

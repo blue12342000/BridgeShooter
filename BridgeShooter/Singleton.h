@@ -7,7 +7,7 @@ protected:
 
 protected:
 	Singleton() {};
-	~Singleton() {};
+	virtual ~Singleton() {};
 
 public:
 	static T* GetSingleton();

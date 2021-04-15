@@ -141,22 +141,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Keymannager.cpp" />
+    <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Singtleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h" />
-    <ClInclude Include="Keymannager.h" />
-    <ClInclude Include="Singtleton.h" />
+    <ClInclude Include="KeyManager.h" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Image.h" />
