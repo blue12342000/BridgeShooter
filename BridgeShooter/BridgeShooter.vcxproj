@@ -141,15 +141,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerManager.cpp" />
+    <ClCompile Include="MainGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimerManager.h" />
+
+
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="MainGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

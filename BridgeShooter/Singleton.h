@@ -3,7 +3,9 @@
 template <typename T>
 class Singleton
 {
+
 protected:
+
 	static T* instance;
 
 	Singleton() {};
@@ -14,8 +16,15 @@ public:
 	void ReleaseSingleton();
 };
 
+
+
+
+template <typename T>
+T* Singleton<T> ::instance = nullptr;
+
 template<typename T>
-inline T* Singleton<T>::GetSingleton()
+inline T* Singleton<T> ::GetSingleton()
+
 {
 	if (instance == nullptr)
 	{
