@@ -149,6 +149,12 @@
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Keymannager.h" />
     <ClInclude Include="Singtleton.h" />
+    <ClCompile Include="MainGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="MainGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
