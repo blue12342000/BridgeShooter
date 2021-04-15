@@ -1,8 +1,10 @@
 #pragma once
 
+#include <iostream>
 #include <Windows.h>
 #include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -13,6 +15,11 @@ using namespace std;
 
 #define PI 3.141592f
 
+#define U_IA_DEFAULT 0x00
+#define U_IA_CENTER 0x01
+
 extern HINSTANCE g_hInstance;
 extern HWND g_hWnd;
 extern bool isDebugMode;
+
+#include "TimerManager.h"

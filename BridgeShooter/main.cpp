@@ -1,7 +1,12 @@
 #include "BridgeShooter.h"
+
+#include "MainGame.h"
+
+
 HINSTANCE g_hInstance;
 HWND g_hWnd;
 LPSTR g_lpszClass = (LPSTR)TEXT("Bridge Shooter");
+MainGame g_mainGame;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 void SetWindowSize(HWND hWnd, int width, int height);
@@ -28,6 +33,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 	ShowWindow(g_hWnd, nShowCmd);
 	SetWindowSize(g_hWnd, WINSIZE_WIDTH, WINSIZE_HEIGHT);
 
+	if (FAILED(g_mainGame.Init()))
+	{
+		MessageBox(g_hWnd, "게임초기화에 실패했습니다", "에러", MB_OK);
+		return 0;
+	}
+
+	g_mainGame.Init();
 	MSG message;
 	while (true)
 	{
@@ -40,16 +52,21 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 		}
 		else
 		{
-			
+
+			TimerManager::GetSingleton()->Update();
+			g_mainGame.Update();
+			g_mainGame.Render();
+
 		}
 	}
+	g_mainGame.Release();
 
 	return message.wParam;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
-	return DefWindowProc(hWnd, iMessage, wParam, lParam);
+	return g_mainGame.WndProc(hWnd, iMessage, wParam, lParam);
 }
 
 void SetWindowSize(HWND hWnd, int width, int height)
