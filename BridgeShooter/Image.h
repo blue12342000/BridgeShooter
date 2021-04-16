@@ -67,9 +67,6 @@ public:
 	
 	void Release();
 
-	inline HDC GetMemDC()
-	{
-		if (lpImageInfo) return lpImageInfo->hMemDC;
-		return NULL;
-	}
+	inline HDC GetMemDC() { return (lpImageInfo) ? lpImageInfo->hMemDC : NULL; }
+	inline int GetTotalFrame() { return (lpImageInfo) ? lpImageInfo->totalFrame : 1; }
 };
