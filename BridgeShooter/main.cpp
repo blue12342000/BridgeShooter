@@ -50,7 +50,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 		}
 		else
 		{
-			TimerManager::GetSingleton()->Update();
+			
 			g_mainGame.Update();
 			g_mainGame.Render();
 

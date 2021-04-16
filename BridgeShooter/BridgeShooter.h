@@ -22,5 +22,13 @@ extern HINSTANCE g_hInstance;
 extern HWND g_hWnd;
 extern bool isDebugMode;
 
-#include "TimerManager.h"
+enum class UNIT_KIND
+{
+	PLAYER,
+	ENEMY,
+	NONE
+};
+
 #include "KeyManager.h"
+#include "ImageManager.h"
+#include "MissileManager.h"

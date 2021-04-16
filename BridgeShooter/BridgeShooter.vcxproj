@@ -141,26 +141,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicPattern.cpp" />
+    <ClCompile Include="HomingPattern.cpp" />
+    <ClCompile Include="MissileManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="InGameScene.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SinePattern.cpp" />
+    <ClCompile Include="SpaceShip.cpp" />
+    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="BasicPattern.h" />
+    <ClInclude Include="HomingPattern.h" />
+    <ClInclude Include="MissileManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="InGameScene.h" />
     <ClInclude Include="KeyManager.h" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="TimerManager.cpp" />
+    <ClInclude Include="SinePattern.h" />
+    <ClInclude Include="SpaceShip.h" />
+    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Missile.h" />
+    <ClInclude Include="Pattern.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="TimerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

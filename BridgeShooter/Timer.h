@@ -15,9 +15,13 @@ private:
 	unsigned long fpsFrameCount;	// FPS 세는거
 	unsigned long FPS;				// 초당 프레임 수 frame per second?
 
+	char lpszText[128];
+
 public:
-	HRESULT Init();
+	HRESULT Init(); 
 	void Tick();
+	void Release();
+	void Render(HDC hdc);
 
 	inline unsigned long GetFPS() { return this->FPS; }
 	inline float GetDeltaTime() { return this->deltaTime; }

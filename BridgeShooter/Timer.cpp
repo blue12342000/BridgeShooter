@@ -43,12 +43,6 @@ void Timer::Tick()
 		currTime = timeGetTime();
 	}
 
-	//밑에 함수에서나, QueryPerformanceConter 함수 기능도 그렇고, currtime은 수행시간동안 발생한 총 진동수다.
-	//currTime은(lastTime도 본질적으론 같으니 마찬가지로) time(지금까지 걸린 시간) / timeScale 이므로
-	//지금까지 돈 총 루프 수가 나온다. 그걸 다시 시간으로 바꿔주려면 timeScale 곱해야 함.
-
-	//deltaTime : currTime(지금까지의 총 루프수(진동수)) = timeScale(1루프에 걸리는 시간) : 1(루프)
-	//비례식으로 표현하면 다음과 같다.
 	deltaTime = (currTime - lastTime) * timeScale;
 
 	fpsTimeElapsed += deltaTime;
@@ -61,4 +55,17 @@ void Timer::Tick()
 		fpsTimeElapsed -= 1.0f;
 	}
 	lastTime = currTime;
+}
+
+void Timer::Release()
+{
+}
+
+void Timer::Render(HDC hdc)
+{
+	
+	//확인용 출력
+	wsprintf(lpszText, "FPS : %d", FPS);
+	TextOut(hdc, WINSIZE_WIDTH - 150, 20, lpszText, strlen(lpszText));
+
 }
