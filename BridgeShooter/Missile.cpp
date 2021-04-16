@@ -9,8 +9,8 @@ void Missile::Init()
 
 void Missile::Update(float deltaTime)
 {
-	pos.x += cosf(angle) * speed * deltaTime;
-	pos.y += sinf(angle) * speed * deltaTime;
+	elapsedTime += deltaTime;
+	Move(deltaTime);
 }
 
 void Missile::Release()
@@ -27,4 +27,5 @@ void Missile::Render(HDC hdc)
 
 void Missile::Move(float deltaTime)
 {
+	if (lpPattern) lpPattern->Move(deltaTime, this);
 }
