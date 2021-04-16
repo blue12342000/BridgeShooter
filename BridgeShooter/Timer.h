@@ -20,6 +20,7 @@ private:
 public:
 	HRESULT Init(); 
 	void Tick();
+	void Release();
 	void Render(HDC hdc);
 
 	inline unsigned long GetFPS() { return this->FPS; }
