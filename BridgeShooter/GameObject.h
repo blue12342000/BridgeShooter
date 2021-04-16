@@ -21,6 +21,7 @@ class GameObject
 public:
 	POINTFLOAT pos;
 	float angle;
+	float speed;
 	Collider collider;
 
 public:
