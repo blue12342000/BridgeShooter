@@ -75,9 +75,6 @@
     <ClCompile Include="BasicPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Pattern.cpp">
-      <Filter>소스 파일\Pattern\Super</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\GameObject</Filter>
     </ClCompile>

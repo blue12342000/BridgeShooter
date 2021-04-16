@@ -23,9 +23,10 @@ public:
 	float angle;
 	float speed;
 	Collider collider;
+	float elapsedTime;
 
 public:
-	GameObject() :pos({ 0,0 }), angle(0), collider(Collider()) {}
+	GameObject() :pos({ 0,0 }), angle(0), speed(0), collider(Collider()), elapsedTime(0) {}
 	virtual ~GameObject() {}
 
 	virtual void Init() {}
