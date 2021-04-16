@@ -34,7 +34,7 @@ bool KeyManager::IsKeyUpOne(int input)
     {
         if (!isKeyUp[input])
         {
-            isKeyUp[input] = false;
+            isKeyUp[input] = true;
             return true;
         }
     }

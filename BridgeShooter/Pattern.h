@@ -3,13 +3,13 @@
 class GameObject; 
 class Pattern
 {
-private:
+protected:
 	float elapsedTime;
 
 public:
-	Pattern() {};
+	Pattern():elapsedTime(0) {};
 	virtual ~Pattern() {};
 
-	virtual void Move(float deltaTime, GameObject* lpObject);
+	virtual void Move(float deltaTime, GameObject* lpObject) = 0;
 };
 

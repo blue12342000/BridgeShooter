@@ -163,7 +163,6 @@
     <ClInclude Include="KeyManager.h" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
-    <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
