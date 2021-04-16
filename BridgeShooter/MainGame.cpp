@@ -1,11 +1,13 @@
 #include "MainGame.h"
-
+#include "Timer.h"
 HRESULT MainGame::Init()
 {
     HDC hdc = GetDC(g_hWnd);
 
     KeyManager::GetSingleton()->Init();
-    TimerManager::GetSingleton()->Init();
+    lptimer = new Timer(); 
+    lptimer->Init();
+  
 
     return S_OK;
 }
@@ -13,8 +15,13 @@ HRESULT MainGame::Init()
 void MainGame::Release()
 {
     KeyManager::GetSingleton()->ReleaseSingleton();
-    TimerManager::GetSingleton()->ReleaseSingleton();
 
+    if (lptimer)
+    {
+        delete lptimer;
+        lptimer = nullptr;
+    }
+  
     ReleaseDC(g_hWnd, hdc);
 }
 
