@@ -40,6 +40,9 @@
     <Filter Include="소스 파일\Pattern\Super">
       <UniqueIdentifier>{c8ec3400-3f06-4c35-8bb1-9180733068ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Scene">
+      <UniqueIdentifier>{e906b2e7-aa15-4a3d-8f33-51794057335d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,17 +78,20 @@
     <ClCompile Include="BasicPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Pattern.cpp">
-      <Filter>소스 파일\Pattern\Super</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MissileManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="BasicFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
     <ClCompile Include="InGameScene.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SinePattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="BoomerangPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -138,7 +144,16 @@
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
     <ClInclude Include="InGameScene.h">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BridgeShooter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="SinePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="BridgeShooter.h">
       <Filter>소스 파일\Pattern</Filter>

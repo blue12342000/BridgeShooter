@@ -107,16 +107,75 @@ HRESULT Image::Init(string fileName, int width, int height, int maxFrameX, int m
     return S_OK;
 }
 
-void Image::Render(HDC hdc, int destX, int destY, int frame)
+HRESULT Image::Reverse(const Image& target)
 {
-    if (lpImageInfo->isTransparent)
+    lpImageInfo = new ImageInfo();
+    lpImageInfo->resID = target.lpImageInfo->resID;
+    lpImageInfo->hMemDC = CreateCompatibleDC(target.lpImageInfo->hMemDC);
+    lpImageInfo->hBitmap = CreateCompatibleBitmap(target.lpImageInfo->hMemDC, target.lpImageInfo->width * target.lpImageInfo->maxFrameX, target.lpImageInfo->height * target.lpImageInfo->maxFrameY);
+    lpImageInfo->width = target.lpImageInfo->width;
+    lpImageInfo->height = target.lpImageInfo->height;
+    lpImageInfo->loadType = target.lpImageInfo->loadType;
+
+    lpImageInfo->maxFrameX = target.lpImageInfo->maxFrameX;
+    lpImageInfo->maxFrameY = target.lpImageInfo->maxFrameY;
+    lpImageInfo->totalFrame = target.lpImageInfo->totalFrame;
+
+    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
+
+    if (lpImageInfo->hBitmap == NULL)
     {
-        GdiTransparentBlt(hdc, destX, destY,lpImageInfo->width, lpImageInfo->height,
-            lpImageInfo->hMemDC,0, 0,lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
+        Release();
+        return E_FAIL;
+    }
+
+    lpImageInfo->isTransparent = target.lpImageInfo->isTransparent;
+    lpImageInfo->transColor = target.lpImageInfo->transColor;
+
+    if (target.lpBlendInfo)
+    {
+        lpBlendInfo = new BlendInfo();
+        lpBlendInfo->blendFunc.AlphaFormat = target.lpBlendInfo->blendFunc.AlphaFormat;
+        lpBlendInfo->blendFunc.BlendFlags = target.lpBlendInfo->blendFunc.BlendFlags;
+        lpBlendInfo->blendFunc.BlendOp = target.lpBlendInfo->blendFunc.BlendOp;
+        lpBlendInfo->blendFunc.SourceConstantAlpha = target.lpBlendInfo->blendFunc.SourceConstantAlpha;
     }
     else
     {
-        BitBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height, lpImageInfo->hMemDC, 0, 0, SRCCOPY);
+        lpBlendInfo = nullptr;
+    }
+
+    for (int y = 0; y < lpImageInfo->maxFrameY; ++y)
+    {
+        for (int x = 0; x < lpImageInfo->maxFrameX; ++x)
+        {
+            StretchBlt(lpImageInfo->hMemDC, (x + 1) * lpImageInfo->width, y * lpImageInfo->height, -lpImageInfo->width, lpImageInfo->height,
+                target.lpImageInfo->hMemDC, x * lpImageInfo->width, y * lpImageInfo->height, lpImageInfo->width, lpImageInfo->height, SRCCOPY);
+        }
+    }
+
+    return S_OK;
+}
+
+void Image::Render(HDC hdc, int destX, int destY, int frame, UINT uFlag)
+{
+    switch (uFlag)
+    {
+    case U_IA_CENTER:
+        destX -= lpImageInfo->width / 2;
+        destY -= lpImageInfo->height / 2;
+        break;
+    }
+
+    if (lpImageInfo->isTransparent)
+    {
+        GdiTransparentBlt(hdc, destX, destY,lpImageInfo->width, lpImageInfo->height,
+            lpImageInfo->hMemDC, lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
+    }
+    else
+    {
+        BitBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
+            lpImageInfo->hMemDC, lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), SRCCOPY);
     }
 }
 

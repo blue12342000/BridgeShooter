@@ -15,13 +15,8 @@ void Item::Update(float deltaTime)
 	if (!lpImage) return;
 
 	elapsedTime += deltaTime;
-	if (elapsedTime > 1)
-	{
-		frame += (int)elapsedTime;
-		frame %= lpImage->GetTotalFrame();
-
-		elapsedTime -= (int)elapsedTime;
-	}
+	frame = (int)elapsedTime;
+	frame %= lpImage->GetTotalFrame();
 }
 
 void Item::Render(HDC hdc)

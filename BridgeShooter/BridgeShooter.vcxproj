@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
@@ -150,10 +151,12 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
@@ -164,8 +167,8 @@
     <ClInclude Include="KeyManager.h" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
-    <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
