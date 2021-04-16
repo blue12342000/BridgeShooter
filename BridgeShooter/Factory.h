@@ -1,16 +1,8 @@
 #pragma once
-#include"GameObject.h"
-class Image;
-class Pattern;
+class GameObject;
 class Factory
 {
-private:
-	//Collider collider;
-	float elapsedTimer;
-	int frame;
-	Pattern* lpPattern;
-	Image* lpImage;
 public:
-	virtual void Fire(GameObject* lpObject) {};
+	virtual void Fire(GameObject* lpObject) = 0;
 };
 

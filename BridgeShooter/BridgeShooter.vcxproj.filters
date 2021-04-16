@@ -69,24 +69,6 @@
     <ClCompile Include="SpaceShip.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="Factory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="MissileAFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="Boss_.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="MissileBFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="MissileCFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="Missile.cpp">
       <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
@@ -135,21 +117,6 @@
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileAFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy_.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Boss_.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileBFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileCFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Missile.h">
