@@ -19,6 +19,15 @@
     <Filter Include="소스 파일\Engine">
       <UniqueIdentifier>{f764d7e1-208f-44e0-8294-8b69db1b7d50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Bridge">
+      <UniqueIdentifier>{b31905a5-04ce-457c-8204-ff33b01daf19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Bridge\Unit">
+      <UniqueIdentifier>{719e516d-9771-4642-b73d-cdf504531c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Bridge\Factory">
+      <UniqueIdentifier>{ffdaf051-7293-4f09-89fd-4c4abeeaecaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +50,30 @@
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="SpaceShip.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileAFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileBFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileCFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +100,30 @@
     </ClInclude>
     <ClInclude Include="KeyManager.h">
       <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileAFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileBFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileCFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

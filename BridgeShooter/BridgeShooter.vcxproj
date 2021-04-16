@@ -141,16 +141,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss_.cpp" />
+    <ClCompile Include="Enemy_.cpp" />
+    <ClCompile Include="Factory.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MissileAFactory.cpp" />
+    <ClCompile Include="MissileBFactory.cpp" />
+    <ClCompile Include="MissileCFactory.cpp" />
+    <ClCompile Include="SpaceShip.cpp" />
+    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boss_.h" />
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="Enemy_.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="KeyManager.h" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClInclude Include="MissileAFactory.h" />
+    <ClInclude Include="MissileBFactory.h" />
+    <ClInclude Include="MissileCFactory.h" />
+    <ClInclude Include="SpaceShip.h" />
+    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h" />
