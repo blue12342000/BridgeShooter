@@ -59,10 +59,12 @@ private:
 
 public:
 	HRESULT Init(int width, int height);
-	HRESULT Init(string fileName, int width, int height, bool isTransparent = false, COLORREF transColor = 0);
-	HRESULT Init(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent = false, COLORREF transColor = 0);
+	HRESULT Init(string fileName, int width, int height, bool isTransparent = false, COLORREF transColor = RGB(255, 0, 255));
+	HRESULT Init(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent = false, COLORREF transColor = RGB(255, 0, 255));
 
-	void Render(HDC hdc, int destX = 0, int destY = 0, int frame = 0);
+	HRESULT Reverse(const Image& target);
+
+	void Render(HDC hdc, int destX = 0, int destY = 0, int frame = 0, UINT uFlag = U_IA_DEFAULT);
 	void AlphaRender(HDC hdc, int destX, int destY);
 	
 	void Release();

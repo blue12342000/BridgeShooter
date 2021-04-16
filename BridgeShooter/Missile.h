@@ -11,11 +11,8 @@ class Pattern;
 class Image;
 class Missile : public GameObject
 {
-private:
-	MISSILE_TYPE type;
+public:
 	Pattern* lpPattern;
-	//콜라이더
-	float elapsedTime;
 	int frame;
 	Image* lpImage; 
 
@@ -26,6 +23,7 @@ public:
 	void Render(HDC hdc) override;
 
 	void Move(float deltaTime);
-	void SetPattern(Pattern* lpPattern);
+
+	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
 };
 
