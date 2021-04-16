@@ -1,0 +1,230 @@
+[33mcommit 6d8f63f243e1ee33059781e2fb75e116dbdb1a58[m[33m ([m[1;36mHEAD -> [m[1;32mSSJ[m[33m, [m[1;31morigin/SSJ[m[33m)[m
+Merge: 6089b47 f69f704
+Author: SSJ <soboki.game@gmail.com>
+Date:   Fri Apr 16 17:12:05 2021 +0900
+
+    Merge branch 'main' into SSJ
+
+[33mcommit 6089b47ed5248d68232fd4bf35c1db69e033cc35[m
+Author: SSJ <soboki.game@gmail.com>
+Date:   Fri Apr 16 17:10:08 2021 +0900
+
+    사인 패턴 만드는중
+
+[33mcommit f69f70488bd03b010ad64cfeee078af0f7bb3c2f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 2020596 326525d
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 17:08:48 2021 +0900
+
+    Merge branch 'PHS' into main
+
+[33mcommit 326525d0b9509a5d025e40e35d382caba9da61c9[m
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 17:08:19 2021 +0900
+
+    배경이미지 추가 및 InGame연결
+
+[33mcommit 7ad8e6b07312ad430ef7b97f47f37b3521e14c12[m
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 16:34:44 2021 +0900
+
+    Pattern 맴버변수 Protected로 변경
+
+[33mcommit 05f6cb162169bc33f8fb24f3a2c025801ea8b41a[m
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 16:25:31 2021 +0900
+
+    BasicMissile 직선 구현, MissileType enum 생성
+
+[33mcommit 20205960235be1730960f9e6242fff25a4a20afd[m[33m ([m[1;31morigin/kms[m[33m)[m
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Fri Apr 16 16:20:31 2021 +0900
+
+    Uint, Factory 수정
+
+[33mcommit 93c854f0e64654612a60de4cda30ccefc136657b[m[33m ([m[1;31morigin/PHS[m[33m)[m
+Merge: b0ee38f e3e6782
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Fri Apr 16 16:11:40 2021 +0900
+
+    Merge branch 'main' of https://github.com/blue12342000/BridgeShooter
+
+[33mcommit b0ee38f979d9f8ddd36256f6ad113fd9bdc4746a[m
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Fri Apr 16 16:08:32 2021 +0900
+
+    bridge간소화
+
+[33mcommit e3e67824d024fd64d25ffcfb06d252263acfe050[m
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 15:56:09 2021 +0900
+
+    GameObject Speed
+
+[33mcommit f1aed0dda281e14f6696ad6ae9c796fdba5917d2[m
+Merge: 211b718 3c00d86
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Fri Apr 16 15:45:51 2021 +0900
+
+    메인>kms(bridge구역추가)
+
+[33mcommit 3c00d863979e693d9467283317de7218cafe973e[m
+Merge: 8160298 08ee40f
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 15:29:37 2021 +0900
+
+    충돌난 부분 병합
+
+[33mcommit 8160298c32d2fbdaae004deb4d9242321d9583c6[m
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 15:26:47 2021 +0900
+
+    Item MissileManager 추가
+
+[33mcommit 08ee40f67282429520c2586949737e8685c9f887[m[33m ([m[1;31morigin/Bae[m[33m)[m
+Author: baedole1 <qodydwls1013@naver.com>
+Date:   Fri Apr 16 15:05:18 2021 +0900
+
+    배용진_자잘한 변수명lp수정
+
+[33mcommit 211b7180bc724811ac081a7b2231b9483222056e[m
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Fri Apr 16 15:01:49 2021 +0900
+
+    +브릿지
+
+[33mcommit aef67c7b4de2a9304467eaf629eb82cb7edcb8b7[m
+Author: baedole1 <qodydwls1013@naver.com>
+Date:   Fri Apr 16 14:51:05 2021 +0900
+
+    배용진_인게임 신 작성
+
+[33mcommit db3e7c994890c56751e6543e31a1ff4251c6eb46[m
+Author: SSJ <soboki.game@gmail.com>
+Date:   Fri Apr 16 14:20:18 2021 +0900
+
+    4/16-1 미사일, 패턴 클래스 추가
+
+[33mcommit 2dad42000a35a1707960c4740cb0c8d55f6589b0[m
+Author: SSJ <soboki.game@gmail.com>
+Date:   Fri Apr 16 09:33:14 2021 +0900
+
+    타이머 매니저 삭제
+
+[33mcommit 064f829c06714208f120a3a7e50717e90382a785[m
+Author: HS <blue12342000@gmail.com>
+Date:   Fri Apr 16 00:00:26 2021 +0900
+
+    잘못된 파일 삭제
+
+[33mcommit 7afa44aac1c56017c28ae17f28fae23d41dc0a8f[m
+Author: HS <blue12342000@gmail.com>
+Date:   Thu Apr 15 23:59:37 2021 +0900
+
+    기본 프로젝트 생성
+
+[33mcommit 5be3fbbbb9525deab617249ecb721fa3c3e2182e[m
+Merge: be6dcf3 ced536d
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Thu Apr 15 22:45:16 2021 +0900
+
+    메인수정>메인에푸쉬
+
+[33mcommit ced536d56aed82f1ed010aa7c95a279065fef1be[m
+Author: HS <blue12342000@gmail.com>
+Date:   Thu Apr 15 22:24:14 2021 +0900
+
+    기본 프로젝트 생성
+
+[33mcommit 5f05b17bb6474282ab9552f0f3801cb55dc4faad[m
+Author: SooJeongSon <soboki.game@gamil.com>
+Date:   Thu Apr 15 20:49:26 2021 +0900
+
+    4/15 충돌 오류 수정
+
+[33mcommit 60334d36b71f55ba662789389a6a85bfefbb991b[m
+Author: SooJeongSon <soboki.game@gamil.com>
+Date:   Thu Apr 15 20:32:50 2021 +0900
+
+    Update Timer.cpp
+
+[33mcommit 264c10e21c37cd7cd2745108ff17e9618341d38a[m
+Merge: 4574fcb ec73c80
+Author: SooJeongSon <soboki.game@gamil.com>
+Date:   Thu Apr 15 20:32:38 2021 +0900
+
+    Merge branch 'main' into SSJ
+
+[33mcommit ec73c80bec80f85adfe9f4ec96eb8b65f3e48374[m
+Merge: d03bf7e e728600
+Author: baedole1 <qodydwls1013@gmail.com>
+Date:   Thu Apr 15 20:12:31 2021 +0900
+
+    배용진_이미지매니저
+
+[33mcommit 4574fcbbd0d22cbd0eb729e09eaa8557a983805e[m
+Author: SooJeongSon <soboki.game@gamil.com>
+Date:   Thu Apr 15 20:07:40 2021 +0900
+
+    4/15 세번째, 주석 수정
+
+[33mcommit d03bf7e6cfcbd2a8cc4d0c54f328c52f2032515f[m
+Author: baedole1 <qodydwls1013@gmail.com>
+Date:   Thu Apr 15 20:06:20 2021 +0900
+
+    배용진_이미지매니저
+
+[33mcommit be6dcf3ce68d8e8ffd3f55de77cce2416f473309[m
+Merge: 36a286c e728600
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Thu Apr 15 19:58:48 2021 +0900
+
+    (21.04.15) 메인>kms 머지_1
+
+[33mcommit 36a286c82452512c18150f16a2398ca3ef95c4c5[m
+Author: kms <kimmyoungsun24@gmail.com>
+Date:   Thu Apr 15 19:21:48 2021 +0900
+
+    1.싱글톤 2.키 매니저 추가 +메인 변경됬다고 뜰텐데 실제로 변경된사항없음(테스트하느라키매니저 호출하고 그런 흔적(지금은 없음))
+
+[33mcommit 58f6b2bf839f7e36a6cb5d01c6bdeb101f2a6d7e[m
+Author: SooJeongSon <soboki.game@gamil.com>
+Date:   Thu Apr 15 18:35:24 2021 +0900
+
+    4/15 타이머 주석 조금 추가
+
+[33mcommit 23621b8eeb7c10ddbc54ed0a1653eb1755dd72d9[m
+Author: SooJeongSon <soboki.game@gamil.com>
+Date:   Thu Apr 15 18:25:56 2021 +0900
+
+    4/15 타이머, 타이머매니저 추가
+
+[33mcommit e728600ebab85c2708fdbd7df889fe52a04f1254[m
+Author: HS <blue12342000@gmail.com>
+Date:   Thu Apr 15 17:40:19 2021 +0900
+
+    최초 환경 설정
+
+[33mcommit 1e7d2158f35fff57e142f829081d1c4787c7979e[m
+Author: HS <blue12342000@gmail.com>
+Date:   Thu Apr 15 17:39:08 2021 +0900
+
+    최초 환경 설정 - GameObject최상위 객채 생성
+
+[33mcommit 56321398b0aa76b158a7d3d4e561025f72e1975a[m
+Author: HS <blue12342000@gmail.com>
+Date:   Thu Apr 15 16:59:19 2021 +0900
+
+    최초 생성
+
+[33mcommit 30458adc51f031d678927593914c00b30b694e83[m
+Author: HS <blue12342000@gmail.com>
+Date:   Thu Apr 15 16:51:52 2021 +0900
+
+    초기 작업 생성
+
+[33mcommit bedd08abb1c8e7a615ddf8dc899891ccf861d519[m
+Author: blue12342000 <blue12342000@gmail.com>
+Date:   Wed Apr 14 22:22:00 2021 +0900
+
+    Initial commit
