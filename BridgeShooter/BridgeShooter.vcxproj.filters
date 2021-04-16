@@ -90,6 +90,9 @@
     <ClCompile Include="InGameScene.cpp">
       <Filter>소스 파일\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="SinePattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="BasicFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="SinePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
