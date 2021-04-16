@@ -57,6 +57,10 @@ void Timer::Tick()
 	lastTime = currTime;
 }
 
+void Timer::Release()
+{
+}
+
 void Timer::Render(HDC hdc)
 {
 	
