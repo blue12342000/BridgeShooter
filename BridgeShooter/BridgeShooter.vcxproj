@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
