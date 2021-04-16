@@ -13,6 +13,11 @@ using namespace std;
 #define WINSIZE_WIDTH 800
 #define WINSIZE_HEIGHT 800
 
+#define WINSIZE_LEFT -200
+#define WINSIZE_TOP -200
+#define WINSIZE_RIGHT 1000
+#define WINSIZE_BOTTOM 1000
+
 #define PI 3.141592f
 
 #define U_IA_DEFAULT 0x00

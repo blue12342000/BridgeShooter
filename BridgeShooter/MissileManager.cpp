@@ -31,11 +31,11 @@ void MissileManager::Update(float deltaTime)
 		vector<Missile*>& vLpMissile = pair.second;
 		for (int i = 0; i < vLpMissile.size();)
 		{
-			if (vLpMissile[i]->pos.x < -200 || vLpMissile[i]->pos.y < -200
-				|| vLpMissile[i]->pos.x > WINSIZE_WIDTH + 200 || vLpMissile[i]->pos.y > WINSIZE_HEIGHT + 200)
+			if (vLpMissile[i]->pos.x < WINSIZE_LEFT || vLpMissile[i]->pos.y < WINSIZE_TOP
+				|| vLpMissile[i]->pos.x > WINSIZE_RIGHT || vLpMissile[i]->pos.y > WINSIZE_BOTTOM)
 			{
 				vLpDeactive.push_back(vLpMissile[i]);
-				vLpMissile.erase(vLpMissile.begin() + i);
+				//vLpMissile.erase(vLpMissile.begin() + i);
 			}
 			else
 			{

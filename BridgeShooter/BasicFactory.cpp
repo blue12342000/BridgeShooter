@@ -2,22 +2,18 @@
 #include "BridgeShooter.h"
 #include "BasicPattern.h"
 #include "Missile.h"
+#include "Unit.h"
 
-BasicFactory::BasicFactory()
+void BasicFactory::Init()
 {
 	pattern = new BasicPattern();
 }
 
-BasicFactory::~BasicFactory()
-{
-	if (pattern) delete pattern;
-}
-
-void BasicFactory::Fire(GameObject* lpObject)
+void BasicFactory::Fire(Unit* lpUnit)
 {
 	Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-	lpMissile->pos = lpObject->pos;
-	lpMissile->angle = lpObject->angle;
+	lpMissile->pos = lpUnit->pos;
+	lpMissile->angle = lpUnit->angle;
 	lpMissile->speed = 300;
 	lpMissile->elapsedTime = 0;
 	lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");

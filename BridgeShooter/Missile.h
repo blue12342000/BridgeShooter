@@ -12,6 +12,7 @@ class Image;
 class Missile : public GameObject
 {
 public:
+	bool isActive;
 	Pattern* lpPattern;
 	int frame;
 	Image* lpImage; 

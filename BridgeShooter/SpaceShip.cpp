@@ -11,7 +11,8 @@ void SpaceShip::Init()
 	motionTimer = 0;
 	motionSpeed = 12;
 	angle = -PI / 2;
-	lpFactory = new BasicFactory();
+
+	SetFactory(new BasicFactory());
 }
 
 void SpaceShip::Update(float deltaTime)
