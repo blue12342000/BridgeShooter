@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicPattern.cpp" />
+    <ClCompile Include="HomingPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="InGameScene.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
+    <ClInclude Include="HomingPattern.h" />
     <ClInclude Include="MissileManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="InGameScene.h" />

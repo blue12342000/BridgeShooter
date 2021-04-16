@@ -87,6 +87,9 @@
     <ClCompile Include="SinePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="HomingPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h">
@@ -141,6 +144,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="SinePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
