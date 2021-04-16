@@ -44,7 +44,7 @@ void MissileManager::Update(float deltaTime)
 		}
 	}
 }
-
+  
 void MissileManager::Render(HDC hdc)
 {
 	for (auto pair : mvLpMissiles)

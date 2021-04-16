@@ -150,6 +150,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Planet_SSJ.cpp" />
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClInclude Include="Planet_SSJ.h" />
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Unit.h" />

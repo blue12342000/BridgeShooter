@@ -93,6 +93,9 @@
     <ClCompile Include="SinePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="Planet_SSJ.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="SinePattern.h">
       <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet_SSJ.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

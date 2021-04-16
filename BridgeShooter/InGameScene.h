@@ -15,6 +15,7 @@ private:
 	Image* lpBackImage;		//¹è°æ
 	int frame;
 	float elapsedTime;
+	Unit* lpPlanetSSJ;
 
 public:
 	HRESULT Init();
