@@ -63,6 +63,12 @@
     <ClCompile Include="Pattern.cpp">
       <Filter>소스 파일\Pattern\Super</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h">
@@ -97,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="Pattern.h">
       <Filter>소스 파일\Pattern\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileManager.h">
+      <Filter>소스 파일\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

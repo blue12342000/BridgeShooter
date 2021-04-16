@@ -1,10 +1,30 @@
 #pragma once
 #include "BridgeShooter.h"
 
+enum class COLLIDER_TYPE
+{
+	RECTANGLE,
+	CIRCLE,
+	NONE
+};
+
+struct Collider
+{
+	COLLIDER_TYPE type;
+	int width;
+	int height;
+	RECT hitBox;
+};
+
 class GameObject
 {
 public:
-	GameObject() {}
+	POINTFLOAT pos;
+	float angle;
+	Collider collider;
+
+public:
+	GameObject() :pos({ 0,0 }), angle(0), collider(Collider()) {}
 	virtual ~GameObject() {}
 
 	virtual void Init() {}
