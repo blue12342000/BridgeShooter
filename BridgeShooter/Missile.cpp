@@ -21,6 +21,6 @@ void Missile::Move(float deltaTime)
 {
 }
 
-void Missile::SetPattern(Pattern* pattern)
+void Missile::SetPattern(Pattern* lpPattern)
 {
 }

@@ -5,8 +5,8 @@ HRESULT MainGame::Init()
     HDC hdc = GetDC(g_hWnd);
 
     KeyManager::GetSingleton()->Init();
-    lptimer = new Timer(); 
-    lptimer->Init();
+    lpTimer = new Timer();
+    lpTimer->Init();
   
 
     return S_OK;
@@ -16,10 +16,10 @@ void MainGame::Release()
 {
     KeyManager::GetSingleton()->ReleaseSingleton();
 
-    if (lptimer)
+    if (lpTimer)
     {
-        delete lptimer;
-        lptimer = nullptr;
+        delete lpTimer;
+        lpTimer = nullptr;
     }
   
     ReleaseDC(g_hWnd, hdc);
