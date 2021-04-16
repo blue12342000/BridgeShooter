@@ -3,8 +3,11 @@
 
 HRESULT ImageManager::Init()
 {
-    mLpImageDatas.insert(make_pair("KEY", new Image()));
-    mLpImageDatas["KEY"]->Init(100, 100);
+    mLpImageDatas.insert(make_pair("BACKBUFFER", new Image()));
+    mLpImageDatas["BACKBUFFER"]->Init(WINSIZE_WIDTH, WINSIZE_HEIGHT);
+
+    mLpImageDatas.insert(make_pair("SPACE", new Image()));
+    mLpImageDatas["SPACE"]->Init("Image/UI/Space.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, 1, 1, 1);
 
     return S_OK;
 }
