@@ -6,6 +6,7 @@ HRESULT MainGame::Init()
 {
     KeyManager::GetSingleton()->Init();
     ImageManager::GetSingleton()->Init();
+    MissileManager::GetSingleton()->Init();
 
     hdc = GetDC(g_hWnd);
     
@@ -34,6 +35,8 @@ void MainGame::Release()
         lpScene = nullptr;
     }
   
+    MissileManager::GetSingleton()->Release();
+    MissileManager::GetSingleton()->ReleaseSingleton();
     KeyManager::GetSingleton()->ReleaseSingleton();
     ImageManager::GetSingleton()->Release();
     ImageManager::GetSingleton()->ReleaseSingleton();
@@ -43,12 +46,14 @@ void MainGame::Release()
 
 void MainGame::Update()
 {
+    lpTimer->Tick();
     if (lpScene) lpScene->Update(lpTimer->GetDeltaTime());
 }
 
 void MainGame::Render()
 {
     if (lpScene) lpScene->Render(hdc);
+    lpTimer->Render(hdc);
 }
 
 LRESULT MainGame::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

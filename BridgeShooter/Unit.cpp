@@ -4,8 +4,6 @@
 
 void Unit::Init()
 {
-
-
 	elapsedTime = 0;
 	frame = 0;
 	lpImage = nullptr;
@@ -20,13 +18,13 @@ void Unit::Release()
 }
 void Unit::Render(HDC hdc)
 {
-	if (lpImage) lpImage->Render(hdc);
+	if (lpImage) lpImage->Render(hdc, pos.x, pos.y, frame, U_IA_CENTER);
 }
 void Unit::SetFactory(Factory* lpFactory)
 {
 	this->lpFactory = lpFactory;
 }
-void Unit::fire(void)
+void Unit::Fire(void)
 {
 	if (lpFactory) lpFactory->Fire(this);
 }
