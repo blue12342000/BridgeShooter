@@ -4,8 +4,7 @@ class Image;
 class Factory;
 class Unit:public GameObject
 {
-private:
-	//Collider collider;
+protected:
 	float elapsedTime;
 	int frame;
 	Image* lpImage;
