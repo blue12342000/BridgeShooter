@@ -3,5 +3,6 @@
 
 void BasicPattern::Move(float deltaTime, GameObject* lpObject)
 {
-	//기본 직선 무빙
+	lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
+	lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
 }

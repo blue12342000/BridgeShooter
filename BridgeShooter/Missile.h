@@ -1,11 +1,18 @@
 #pragma once
 #include "GameObject.h"
 
+enum class MISSILE_TYPE
+{
+	BASIC,
+	NONE
+};
+
 class Pattern;
 class Image;
 class Missile : public GameObject
 {
 private:
+	MISSILE_TYPE type;
 	Pattern* lpPattern;
 	//콜라이더
 	float elapsedTime;
