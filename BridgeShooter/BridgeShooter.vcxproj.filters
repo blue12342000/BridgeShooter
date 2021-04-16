@@ -19,6 +19,18 @@
     <Filter Include="소스 파일\Engine">
       <UniqueIdentifier>{f764d7e1-208f-44e0-8294-8b69db1b7d50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\GameObject">
+      <UniqueIdentifier>{75976b39-36e5-45d7-b253-5d63d6873468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObject\Super">
+      <UniqueIdentifier>{e19c1309-80bb-4c4d-8d19-86fe96dfdb9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Pattern">
+      <UniqueIdentifier>{959906b6-f79c-4dff-8cee-0acba65d3642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Pattern\Super">
+      <UniqueIdentifier>{c8ec3400-3f06-4c35-8bb1-9180733068ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +54,15 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Missile.cpp">
+      <Filter>소스 파일\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Pattern.cpp">
+      <Filter>소스 파일\Pattern\Super</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BridgeShooter.h">
@@ -49,9 +70,6 @@
     </ClInclude>
     <ClInclude Include="ImageManager.h">
       <Filter>소스 파일\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>소스 파일\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>소스 파일\Engine</Filter>
@@ -67,6 +85,18 @@
     </ClInclude>
     <ClInclude Include="KeyManager.h">
       <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Missile.h">
+      <Filter>소스 파일\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\GameObject\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Pattern.h">
+      <Filter>소스 파일\Pattern\Super</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

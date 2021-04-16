@@ -141,19 +141,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="KeyManager.h" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Missile.cpp" />
+    <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Missile.h" />
+    <ClInclude Include="Pattern.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="GameObject.h" />
