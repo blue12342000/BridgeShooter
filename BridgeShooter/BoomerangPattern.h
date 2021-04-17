@@ -3,7 +3,8 @@
 class BoomerangPattern :public Pattern
 {
 private:
-	bool isMove;
+	const float stopTime=1.0f;
+	const float stopDuration = 1.0f;
 public:
 	virtual MoveInfo Move(float deltaTime, GameObject* lpObject);
 };

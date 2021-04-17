@@ -30,6 +30,8 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Planet04", new Image()));
     mLpImageDatas["Planet04"]->Init("Image/Unit/Planet/Planet_04_square2.bmp", 2800 /2, 3840/2, 10, 12, 120, true);
 
+    mLpImageDatas.insert(make_pair("Planet_KMS", new Image()));
+    mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 400*110,400, 110, 1, 110, true, RGB(255, 0, 255));
     return S_OK;
 }
 
