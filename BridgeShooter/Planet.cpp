@@ -2,7 +2,6 @@
 #include "Image.h"
 #include "BasicFactory.h"
 #include "SineFactory.h"
-#include "HomingFactory.h"
 
 void Planet::Init()
 {

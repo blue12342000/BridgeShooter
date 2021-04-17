@@ -11,7 +11,6 @@ HRESULT InGameScene::Init()
     lpPlayer->Init();
     lpPlayer->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT});
 
-    //?????? ?¡À??? ???
     lpPlanet = new Planet();
     lpPlanet->Init();
     lpPlanet->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/6 });
@@ -76,9 +75,7 @@ void InGameScene::Update(float deltaTime)
     if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
 
     MissileManager::GetSingleton()->Update(deltaTime);
-    MissileManager::GetSingleton()->Update(deltaTime);
 
-    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
     backgroundMover += 0.1f;
