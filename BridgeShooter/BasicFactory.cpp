@@ -1,8 +1,9 @@
 #include "BasicFactory.h"
 #include "BridgeShooter.h"
-#include "BasicPattern.h"
 #include "Missile.h"
 #include "Unit.h"
+#include "BasicPattern.h"
+#include "SinePattern.h"
 
 void BasicFactory::Init()
 {
@@ -19,4 +20,5 @@ void BasicFactory::Fire(Unit* lpUnit)
 	lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 	lpMissile->lpPattern = pattern;
 	MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+
 }

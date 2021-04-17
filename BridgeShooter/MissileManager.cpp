@@ -26,21 +26,19 @@ void MissileManager::Release()
 
 void MissileManager::Update(float deltaTime)
 {
-	for (auto& pair : mvLpMissiles)
+	vector<Missile*>& vLpMissile = mvLpMissiles[UNIT_KIND::PLAYER];
+	for (int i = 0; i < vLpMissile.size();)
 	{
-		vector<Missile*>& vLpMissile = pair.second;
-		for (int i = 0; i < vLpMissile.size();)
+		if (vLpMissile[i]->pos.x < WINSIZE_LEFT || vLpMissile[i]->pos.y < WINSIZE_TOP
+			|| vLpMissile[i]->pos.x > WINSIZE_RIGHT || vLpMissile[i]->pos.y > WINSIZE_BOTTOM)
 		{
-			if (vLpMissile[i]->pos.x < WINSIZE_LEFT || vLpMissile[i]->pos.y < WINSIZE_TOP
-				|| vLpMissile[i]->pos.x > WINSIZE_RIGHT || vLpMissile[i]->pos.y > WINSIZE_BOTTOM)
-			{
-				vLpDeactive.push_back(vLpMissile[i]);
-				//vLpMissile.erase(vLpMissile.begin() + i);
-			}
-			else
-			{
-				vLpMissile[i++]->Update(deltaTime);
-			}
+			vLpDeactive.push_back(vLpMissile[i]);
+			vLpMissile.erase(vLpMissile.begin() + i);
+		}
+		else
+		{
+			vLpMissile[i]->Update(deltaTime);
+			++i;
 		}
 	}
 }
