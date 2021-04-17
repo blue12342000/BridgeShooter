@@ -21,6 +21,10 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("MISSILE_01", new Image()));
     mLpImageDatas["MISSILE_01"]->Init("Image/Missile/Missile_01.bmp", 58 / 2, 58 / 2, 1, 1, 1, true);
 
+    mLpImageDatas.insert(make_pair("Planet04", new Image()));
+    mLpImageDatas["Planet04"]->Init("Image/Unit/Planet/Planet_04_long.bmp", 8400*8, 1280/2, 120, 1, 120, true);
+
+
     return S_OK;
 }
 
