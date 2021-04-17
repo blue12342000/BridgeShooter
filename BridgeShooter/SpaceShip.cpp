@@ -4,6 +4,7 @@
 #include "SineFactory.h"
 #include "RainFactory.h"
 #include "BoomerangPattern.h"
+#include "SSJFactory.h"
 
 void SpaceShip::Init()
 {
@@ -63,6 +64,11 @@ void SpaceShip::Update(float deltaTime)
 	{
 		SetFactory(new RainFactory());
 	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
+	{
+		SetFactory(new SSJFactory());
+	}
+
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
 	{
 		Fire();

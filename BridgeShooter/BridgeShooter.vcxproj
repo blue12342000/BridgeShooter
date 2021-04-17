@@ -162,7 +162,7 @@
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Planet.cpp" />
-    <ClCompile Include="SpiralPattern.cpp" />
+    <ClCompile Include="SprialPattern.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +189,7 @@
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Planet.h" />
-    <ClInclude Include="SpiralPattern.h" />
+    <ClInclude Include="SprialPattern.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
