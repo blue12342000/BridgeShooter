@@ -126,14 +126,11 @@
     <ClCompile Include="ReflectPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="SpiralPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="Planet_SSJ.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="SSJFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+    <ClCompile Include="SpiralPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,9 +232,6 @@
     </ClInclude>
     <ClInclude Include="SpiralPattern.h">
       <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="SSJFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
