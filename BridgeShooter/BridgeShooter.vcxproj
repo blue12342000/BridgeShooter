@@ -143,9 +143,10 @@
   <ItemGroup>
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
+    <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
-    <ClCompile Include="HomingFactory.cpp" />
-    <ClCompile Include="HomingPattern.cpp" />
+    <ClCompile Include="RainFactory.cpp" />
+    <ClCompile Include="RainPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="InGameScene.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Planet_KMS.cpp" />
     <ClCompile Include="Planet_SSJ.cpp" />
     <ClCompile Include="SineFactory.cpp" />
     <ClCompile Include="SinePattern.cpp" />
@@ -162,12 +164,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicFactory.h" />
+    <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
-    <ClInclude Include="HomingFactory.h" />
-    <ClInclude Include="HomingPattern.h" />
+    <ClInclude Include="RainFactory.h" />
+    <ClInclude Include="RainPattern.h" />
     <ClInclude Include="MissileManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="InGameScene.h" />
@@ -175,6 +178,7 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClInclude Include="Planet_KMS.h" />
     <ClInclude Include="Planet_SSJ.h" />
     <ClInclude Include="SineFactory.h" />
     <ClInclude Include="SinePattern.h" />

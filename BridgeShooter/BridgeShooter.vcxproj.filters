@@ -96,16 +96,26 @@
     <ClCompile Include="BoomerangPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="HomingPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
+    <ClCompile Include="Planet_SSJ.cpp">
+    <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    
+    <ClCompile Include="RainPattern.cpp">
+   <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="SineFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="HomingFactory.cpp">
+    <ClCompile Include="RainFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Planet.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet_KMS.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Planet_SSJ.cpp">
@@ -176,16 +186,28 @@
     <ClInclude Include="BoomerangPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="HomingPattern.h">
+   
+	 <ClInclude Include="Planet_SSJ.h">
+	<Filter>소스 파일\Bridge\Unit</Filter>
+         </ClInclude>
+
+
+    <ClInclude Include="RainPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="SineFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="HomingFactory.h">
+    <ClInclude Include="RainFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Planet.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="BoomerangFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet_KMS.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Planet_SSJ.h">

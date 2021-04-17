@@ -2,7 +2,8 @@
 #include "Image.h"
 #include "BasicFactory.h"
 #include "SineFactory.h"
-#include "HomingFactory.h"
+#include "RainFactory.h"
+#include "BoomerangPattern.h"
 
 void SpaceShip::Init()
 {
@@ -48,15 +49,19 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
 	{
-		lpFactory = new BasicFactory();
+		SetFactory(new BasicFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
 	{
-		lpFactory = new SineFactory();
+		SetFactory(new SineFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-		lpFactory = new HomingFactory();
+		SetFactory(new RainFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
+	{
+		SetFactory(new RainFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
 	{
