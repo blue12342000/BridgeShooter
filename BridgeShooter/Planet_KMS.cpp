@@ -1,9 +1,9 @@
 #include "Planet_KMS.h"
-#include"BasicFactory.h"
-#include"BoomerangFactory.h"
-#include"HomingFactory.h"
-#include"SineFactory.h"
-#include"Image.h"
+#include "BasicFactory.h"
+#include "BoomerangFactory.h"
+#include "SineFactory.h"
+#include "Image.h"
+
 
 void Planet_KMS::Init()
 {
