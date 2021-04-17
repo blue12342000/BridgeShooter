@@ -7,6 +7,9 @@ protected:
 	int maxCreateLIne;
 
 public:
+	Factory():createLine(0),maxCreateLIne(0) {}
+	virtual ~Factory() {}
+
 	virtual void Init() = 0;
 	virtual void Release() = 0;
 	virtual void Fire(Unit* lpUnit) = 0;

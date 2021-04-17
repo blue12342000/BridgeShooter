@@ -1,5 +1,5 @@
 #include "JinHwang.h"
-#include "BasicFactory.h"
+#include "JinHwangFactory.h"
 #include "Image.h"
 
 void JinHwang::Init()
@@ -11,7 +11,7 @@ void JinHwang::Init()
 	motionTimer = 0;
 	motionSpeed = 12;
 	angle = PI / 2;
-	lpFactory = new BasicFactory();
+	lpFactory = new JinHwangFactory();
 	lpFactory->Init();
 }
 
@@ -24,7 +24,7 @@ void JinHwang::Update(float deltaTime)
 	if (fireTimer > 0.2f)
 	{
 		fireTimer = 0;
-		//Fire();
+		Fire();
 	}
 
 	if (lpImage)
@@ -38,6 +38,8 @@ void JinHwang::Update(float deltaTime)
 		}
 	}
 	elapsedTime += deltaTime;
+
+	collider.SetHitBox(pos, 100, 100);
 }
 
 void JinHwang::Release()
