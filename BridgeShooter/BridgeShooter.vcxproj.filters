@@ -43,6 +43,9 @@
     <Filter Include="소스 파일\Scene">
       <UniqueIdentifier>{e906b2e7-aa15-4a3d-8f33-51794057335d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Bridge\Factory\Super">
+      <UniqueIdentifier>{26cbf9f6-215a-4be5-aeda-baa085185fe3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -96,9 +99,6 @@
     <ClCompile Include="BoomerangPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Planet_SSJ.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="SineFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
@@ -114,9 +114,6 @@
     <ClCompile Include="Planet.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="SprialPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="BoomerangFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
@@ -128,6 +125,21 @@
     </ClCompile>
     <ClCompile Include="JinHwang.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="ReflectPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet_SSJ.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="SpiralPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SSJFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="JinHwangFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="SpaceShip.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Factory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Missile.h">
       <Filter>소스 파일\GameObject</Filter>
@@ -221,11 +230,23 @@
     <ClInclude Include="Planet_SSJ.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="SprialPattern.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="JinHwang.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiralPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SSJFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="JinHwangFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>소스 파일\Bridge\Factory\Super</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

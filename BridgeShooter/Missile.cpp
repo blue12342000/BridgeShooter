@@ -10,8 +10,8 @@ void Missile::Init()
 
 void Missile::Update(float deltaTime)
 {
-	elapsedTime += deltaTime;
 	Move(deltaTime);
+	elapsedTime += deltaTime;
 }
 
 void Missile::Release()

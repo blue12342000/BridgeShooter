@@ -14,6 +14,14 @@ struct Collider
 	int width;
 	int height;
 	RECT hitBox;
+
+	void SetHitBox(POINTFLOAT pos, int width, int height)
+	{
+		hitBox.left = pos.x - width / 2;
+		hitBox.right = pos.x + width / 2;
+		hitBox.top = pos.y - height / 2;
+		hitBox.bottom = pos.y + height / 2;
+	}
 };
 
 struct MoveInfo

@@ -1,6 +1,7 @@
 #include "Unit.h"
 #include "Factory.h"
 #include "Image.h"
+#include "BridgeShooter.h"
 
 void Unit::Init()
 {
@@ -19,6 +20,10 @@ void Unit::Release()
 void Unit::Render(HDC hdc)
 {
 	if (lpImage) lpImage->Render(hdc, pos.x, pos.y, frame, U_IA_CENTER);
+	if (isDebugMode)
+	{
+		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);
+	}
 }
 void Unit::SetFactory(Factory* lpFactory)
 {

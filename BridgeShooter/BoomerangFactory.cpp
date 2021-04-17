@@ -22,6 +22,7 @@ void BoomerangFactory::Fire(Unit* lpUnit)
 		for (int i = 0; i < missileNum; i++)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->SetDelayTime(-10);//-·Î
 			lpMissile->pos = lpUnit->pos;
 			lpMissile->angle = 2*PI*i/ missileNum;
 			lpMissile->speed = 170;

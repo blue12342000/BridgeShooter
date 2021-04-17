@@ -17,6 +17,7 @@ public:
 	int frame;
 	Image* lpImage;
 
+	float delayTime;
 	MoveInfo deltaMove;
 
 public:	
@@ -28,5 +29,6 @@ public:
 	void Move(float deltaTime);
 
 	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
+	inline void SetDelayTime(float delayTime) { this->delayTime = delayTime; }
 };
 

@@ -4,6 +4,7 @@
 #include "SineFactory.h"
 #include "RainFactory.h"
 #include "BoomerangPattern.h"
+#include "SSJFactory.h"
 #include"BoomerangFactory.h"
 
 void SpaceShip::Init()
@@ -15,7 +16,7 @@ void SpaceShip::Init()
 	motionTimer = 0;
 	motionSpeed = 20;
 	angle = -PI / 2;
-
+	power = 0;
 	SetFactory(new BasicFactory());
 }
 
@@ -64,8 +65,22 @@ void SpaceShip::Update(float deltaTime)
 	{
 		SetFactory(new BoomerangFactory());
 	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
+	{
+		SetFactory(new SSJFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
+	{
+		if (lpFactory) lpFactory->SetCreateLine(--power);
+		if (power < 0) power = 0;
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_6))
+	{
+		if (lpFactory) lpFactory->SetCreateLine(++power);
+		if (power < 0) power = 0;
+	}
 
-	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
+	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_SPACE))
 	{
 		Fire();
 	}
@@ -81,6 +96,8 @@ void SpaceShip::Update(float deltaTime)
 		}
 	}
 	elapsedTime += deltaTime;
+
+	collider.SetHitBox(pos, 30, 30);
 }
 
 void SpaceShip::Release()
