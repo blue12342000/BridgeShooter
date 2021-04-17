@@ -2,12 +2,22 @@
 #include "GameObject.h"
 void BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
 {
-	if (lpObject) {
-		if (deltaTime == 0.900f) {
-			lpObject->angle= lpObject->angle+PI;
+	if (lpObject) 
+	{
+		isMove = true;
+		if ((lpObject->elapsedTime > 2.0f)&& (lpObject->elapsedTime <= 3.0f))
+		{
+			isMove = false;
 		}
-		lpObject->pos.x = cos(lpObject->angle) * lpObject->speed * deltaTime;
-		lpObject->pos.y = sin(lpObject->angle) * lpObject->speed * deltaTime;
+		else if ((lpObject->elapsedTime > 3.0f) && (lpObject->elapsedTime <= 3.001f))
+		{
+			lpObject->angle = atan2((WINSIZE_HEIGHT / 2) - lpObject->pos.y, (WINSIZE_WIDTH / 2) - lpObject->pos.x);
+		}
+		if (isMove) {
+			lpObject->pos.x += cos(lpObject->angle) * lpObject->speed * deltaTime;
+			lpObject->pos.y += sin(lpObject->angle) * lpObject->speed * deltaTime;
+		}
+		
 	}
 	
 }
