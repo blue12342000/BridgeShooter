@@ -1,13 +1,19 @@
 #pragma once
 #include "Factory.h"
+
 class Pattern;
-class BoomerangFactory :public Factory
+class SSJFactory : public Factory
 {
 private:
-	Pattern* lpPattern;
-	int missileNum = 16;
-private:
+	Pattern* pattern1;
+	Pattern* pattern2;
+	Pattern* pattern3;
+	Pattern* pattern4;
+
+public:
 	virtual void Init();
 	virtual void Release();
 	virtual void Fire(Unit* lpUnit);
+	
 };
+

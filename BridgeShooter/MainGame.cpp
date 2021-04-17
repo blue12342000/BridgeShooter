@@ -1,9 +1,12 @@
 #include "MainGame.h"
+#include "BridgeShooter.h"
 #include "Timer.h"
 #include "InGameScene.h"
 
 HRESULT MainGame::Init()
 {
+    srand(time(NULL));
+
     KeyManager::GetSingleton()->Init();
     ImageManager::GetSingleton()->Init();
     MissileManager::GetSingleton()->Init();
@@ -46,6 +49,11 @@ void MainGame::Release()
 
 void MainGame::Update()
 {
+    if (KeyManager::GetSingleton()->IsKeyDownOne('P'))
+    {
+        isDebugMode = !isDebugMode;
+    }
+
     lpTimer->Tick();
     if (lpScene) lpScene->Update(lpTimer->GetDeltaTime());
 }

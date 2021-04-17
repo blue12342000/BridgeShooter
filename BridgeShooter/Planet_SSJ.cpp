@@ -1,6 +1,6 @@
 #include "Planet_SSJ.h"
 #include "Image.h"
-#include "BasicFactory.h"	//일단 실험용
+#include "SSJFactory.h"	
 
 void Planet_SSJ::Init()
 {
@@ -11,12 +11,24 @@ void Planet_SSJ::Init()
 	motionTimer = 0;
 	motionSpeed = 12;
 	angle = -PI / 2;
-	lpFactory = new BasicFactory();	//일단 실험용
+	lpFactory = new SSJFactory();	
+	lpFactory->Init();
 	frame = 50;
+	fireTimer = 0;
 }
 
 void Planet_SSJ::Update(float deltaTime)
 {
+	state = UNIT_STATE::IDLE;
+	lpImage = ImageManager::GetSingleton()->FindImage("PLANET_SSJ");
+
+	fireTimer += deltaTime;
+	if (fireTimer >= 0.1f)
+	{
+		Fire();
+		fireTimer = 0;
+	}
+
 	if (lpImage)
 	{
 		motionTimer += (deltaTime * motionSpeed);
@@ -32,6 +44,7 @@ void Planet_SSJ::Update(float deltaTime)
 
 void Planet_SSJ::Release()
 {
+	if (lpFactory) delete lpFactory; lpFactory = nullptr; 
 }
 
 void Planet_SSJ::Render(HDC hdc)

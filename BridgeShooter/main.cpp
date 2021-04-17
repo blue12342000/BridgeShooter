@@ -7,6 +7,7 @@ HINSTANCE g_hInstance;
 HWND g_hWnd;
 LPSTR g_lpszClass = (LPSTR)TEXT("Bridge Shooter");
 MainGame g_mainGame;
+bool isDebugMode = false;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 void SetWindowSize(HWND hWnd, int width, int height);
