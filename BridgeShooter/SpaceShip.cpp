@@ -8,11 +8,11 @@
 void SpaceShip::Init()
 {
 	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("JINHWANG");
+	lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE");
 	speed = 200;
 	elapsedTime = 0;
 	motionTimer = 0;
-	motionSpeed = 40;
+	motionSpeed = 20;
 	angle = -PI / 2;
 
 	SetFactory(new BasicFactory());
@@ -21,7 +21,7 @@ void SpaceShip::Init()
 void SpaceShip::Update(float deltaTime)
 {
 	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("JINHWANG");
+	lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE");
 
 	if (KeyManager::GetSingleton()->IsKeyDownStay('W'))
 	{
@@ -63,6 +63,7 @@ void SpaceShip::Update(float deltaTime)
 	{
 		SetFactory(new RainFactory());
 	}
+
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
 	{
 		Fire();

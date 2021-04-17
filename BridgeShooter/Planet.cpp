@@ -4,7 +4,6 @@
 #include "SineFactory.h"
 #include "RainFactory.h"
 
-
 void Planet::Init()
 {
 	state = UNIT_STATE::IDLE;
