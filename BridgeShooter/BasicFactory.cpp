@@ -7,7 +7,7 @@
 
 void BasicFactory::Init()
 {
-	pattern = new BasicPattern();
+	pattern = new SinePattern();
 }
 
 void BasicFactory::Fire(Unit* lpUnit)
@@ -15,10 +15,10 @@ void BasicFactory::Fire(Unit* lpUnit)
 	Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 	lpMissile->pos = lpUnit->pos;
 	lpMissile->angle = lpUnit->angle;
-	lpMissile->speed = 300;
+	lpMissile->speed = 400;
 	lpMissile->elapsedTime = 0;
 	lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-	lpMissile->lpPattern = pattern;
+	lpMissile->SetPattern(pattern);
 	MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 
 }
