@@ -1,13 +1,15 @@
 #include "JinHwangFactory.h"
-
+#include "BridgeShooter.h"
+#include "BasicPattern.h"
+#include "ReflectPattern.h"
 
 void JinHwangFactory::Init()
 {
-	vLpPatterns.resize(CREATE_PATTERN::BFCP_NONE);
-	vLpPatterns[CREATE_PATTERN::BFCP_BASIC] = new BasicPattern();
-	vLpPatterns[CREATE_PATTERN::BFCP_REFLECT] = new ReflectPattern();
+	vLpPatterns.resize(CREATE_PATTERN::JFCP_NONE);
+	vLpPatterns[CREATE_PATTERN::JFCP_BASIC] = new BasicPattern();
+	vLpPatterns[CREATE_PATTERN::JFCP_REFLECT] = new ReflectPattern();
 
-	maxCreateLIne = 3;
+	maxCreateLIne = 0;
 }
 
 void JinHwangFactory::Release()
