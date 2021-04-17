@@ -14,7 +14,8 @@ MoveInfo BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
 		{
 			lpObject->angle = atan2((WINSIZE_HEIGHT / 2) - lpObject->pos.y, (WINSIZE_WIDTH / 2) - lpObject->pos.x);
 		}
-		if (isMove) {
+		if (isMove)
+		{
 			lpObject->pos.x += cos(lpObject->angle) * lpObject->speed * deltaTime;
 			lpObject->pos.y += sin(lpObject->angle) * lpObject->speed * deltaTime;
 		}

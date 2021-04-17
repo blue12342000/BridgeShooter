@@ -16,14 +16,15 @@ HRESULT InGameScene::Init()
     lpPlanet->Init();
     lpPlanet->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/6 });
 
+    lpPlanetSSJ = new Planet_SSJ();
+    lpPlanetSSJ->Init();
+    lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
     frame = 0;
     elapsedTime = 0;
 
-    lpPlanetSSJ = new Planet_SSJ();
-    lpPlanetSSJ->Init();
-    lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
     return S_OK;
 }
