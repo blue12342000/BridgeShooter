@@ -7,11 +7,9 @@ class BasicFactory : public Factory
 private:
 	Pattern* pattern;
 
-public:
-	BasicFactory();
-	~BasicFactory();
-
 private:
-	virtual void Fire(GameObject* lpObject) final;
+	virtual void Init() final;
+	virtual void Release() {};
+	virtual void Fire(Unit* lpUnit) final;
 };
 

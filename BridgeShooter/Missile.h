@@ -12,9 +12,12 @@ class Image;
 class Missile : public GameObject
 {
 public:
+	bool isActive;
 	Pattern* lpPattern;
 	int frame;
-	Image* lpImage; 
+	Image* lpImage;
+
+	MoveInfo deltaMove;
 
 public:	
 	void Init() override;

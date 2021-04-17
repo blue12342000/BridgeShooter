@@ -5,7 +5,7 @@
 class HomingPattern : public Pattern
 {
 public:
-	void Move(float deltaTime, GameObject* lpObject) override;
+	MoveInfo Move(float deltaTime, GameObject* lpObject) override;
 
 
 };

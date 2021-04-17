@@ -5,6 +5,7 @@
 void Missile::Init()
 {
 	lpImage = nullptr;
+	isActive = false;
 }
 
 void Missile::Update(float deltaTime)
@@ -19,13 +20,10 @@ void Missile::Release()
 
 void Missile::Render(HDC hdc)
 {
-	if (lpImage)
-	{
-		lpImage->Render(hdc, pos.x, pos.y, frame, U_IA_CENTER);
-	}
+	lpImage->Render(hdc, pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y, frame, U_IA_CENTER);
 }
 
 void Missile::Move(float deltaTime)
 {
-	if (lpPattern) lpPattern->Move(deltaTime, this);
+	if (lpPattern) deltaMove = lpPattern->Move(deltaTime, this);
 }

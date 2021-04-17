@@ -1,6 +1,7 @@
 #pragma once
 
-class GameObject; 
+struct MoveInfo;
+class GameObject;
 class Pattern
 {
 protected:
@@ -10,6 +11,6 @@ public:
 	Pattern():elapsedTime(0) {};
 	virtual ~Pattern() {};
 
-	virtual void Move(float deltaTime, GameObject* lpObject) = 0;
+	virtual MoveInfo Move(float deltaTime, GameObject* lpObject) = 0;
 };
 

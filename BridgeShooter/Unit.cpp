@@ -22,7 +22,14 @@ void Unit::Render(HDC hdc)
 }
 void Unit::SetFactory(Factory* lpFactory)
 {
+	if (this->lpFactory)
+	{
+		this->lpFactory->Release();
+		delete this->lpFactory;
+	}
+
 	this->lpFactory = lpFactory;
+	this->lpFactory->Init();
 }
 void Unit::Fire(void)
 {

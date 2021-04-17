@@ -16,6 +16,12 @@ struct Collider
 	RECT hitBox;
 };
 
+struct MoveInfo
+{
+	float angle;
+	POINTFLOAT deltaPos;
+};
+
 class GameObject
 {
 public:

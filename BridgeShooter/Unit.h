@@ -16,8 +16,10 @@ class Unit : public GameObject
 protected:
 	UNIT_STATE state;
 	int frame;
+
 	float motionTimer;
 	float motionSpeed;
+
 	Image* lpImage;
 	Factory* lpFactory;
 
