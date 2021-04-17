@@ -98,13 +98,7 @@
     </ClCompile>
     <ClCompile Include="Planet_SSJ.cpp">
     </ClCompile>
-    <ClCompile Include="HomingPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="SineFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="HomingFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Planet.cpp">
@@ -183,13 +177,7 @@
     </ClInclude>
     <ClInclude Include="Planet_SSJ.h">
     </ClInclude>
-    <ClInclude Include="HomingPattern.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="SineFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="HomingFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Planet.h">

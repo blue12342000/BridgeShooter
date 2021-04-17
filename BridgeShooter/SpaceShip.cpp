@@ -2,7 +2,6 @@
 #include "Image.h"
 #include "BasicFactory.h"
 #include "SineFactory.h"
-#include "HomingFactory.h"
 
 void SpaceShip::Init()
 {
@@ -54,10 +53,7 @@ void SpaceShip::Update(float deltaTime)
 	{
 		lpFactory = new SineFactory();
 	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
-	{
-		lpFactory = new HomingFactory();
-	}
+
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
 	{
 		Fire();

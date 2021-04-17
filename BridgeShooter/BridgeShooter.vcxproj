@@ -145,8 +145,6 @@
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
-    <ClCompile Include="HomingFactory.cpp" />
-    <ClCompile Include="HomingPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="InGameScene.cpp" />
@@ -169,8 +167,6 @@
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
-    <ClInclude Include="HomingFactory.h" />
-    <ClInclude Include="HomingPattern.h" />
     <ClInclude Include="MissileManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="InGameScene.h" />
