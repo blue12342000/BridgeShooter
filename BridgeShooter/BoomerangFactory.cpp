@@ -24,7 +24,7 @@ void BoomerangFactory::Fire(Unit* lpUnit)
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->pos = lpUnit->pos;
 			lpMissile->angle = 2*PI*i/ missileNum;
-			lpMissile->speed = 200;
+			lpMissile->speed = 170;
 			lpMissile->elapsedTime = 0;
 			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 			lpMissile->SetPattern(lpPattern);
