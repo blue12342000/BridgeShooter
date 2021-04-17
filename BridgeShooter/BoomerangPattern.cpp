@@ -5,8 +5,6 @@ MoveInfo BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
     MoveInfo moveinfo = {};
     if (lpObject)
     {
-
-
         if (((lpObject->elapsedTime > stopTime + stopDuration) && (lpObject->elapsedTime <= stopTime + stopDuration + 0.01f)))
         {
             lpObject->angle = atan2((WINSIZE_HEIGHT / 2) - lpObject->pos.y, (WINSIZE_WIDTH / 2) - lpObject->pos.x);
@@ -16,9 +14,7 @@ MoveInfo BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
             lpObject->pos.x += cos(lpObject->angle) * lpObject->speed * deltaTime;
             lpObject->pos.y += sin(lpObject->angle) * lpObject->speed * deltaTime;
         }
-
-
-
+       
     }
     return moveinfo;
 }

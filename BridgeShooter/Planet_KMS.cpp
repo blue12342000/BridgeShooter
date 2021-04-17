@@ -3,7 +3,7 @@
 #include"BoomerangFactory.h"
 #include"SineFactory.h"
 #include"Image.h"
-
+#include"Missile.h"
 void Planet_KMS::Init()
 {
 	state = UNIT_STATE::IDLE;
@@ -21,6 +21,8 @@ void Planet_KMS::Update(float deltaTime)
 {
 	if (lpImage&&this)
 	{
+		this->Fire();
+		this->Update(deltaTime);
 		motionTimer += (deltaTime * motionSpeed);
 		if (motionTimer > 1.0f)
 		{

@@ -5,7 +5,7 @@ class BoomerangFactory :public Factory
 {
 private:
 	Pattern* lpPattern;
-
+	int missileNum = 16;
 private:
 	virtual void Init();
 	virtual void Release();

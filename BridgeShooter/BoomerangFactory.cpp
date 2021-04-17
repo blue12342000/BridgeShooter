@@ -19,14 +19,18 @@ void BoomerangFactory::Release()
 void BoomerangFactory::Fire(Unit* lpUnit)
 {
 	if (lpUnit) {
-		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = lpUnit->pos;
-		lpMissile->angle = lpUnit->angle;
-		lpMissile->speed = 200;
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-		lpMissile->SetPattern(lpPattern);
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		for (int i = 0; i < missileNum; i++)
+		{
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->pos = lpUnit->pos;
+			lpMissile->angle = 2*PI*i/ missileNum;
+			lpMissile->speed = 200;
+			lpMissile->elapsedTime = 0;
+			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+			lpMissile->SetPattern(lpPattern);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		}
+		
 	}
 	
 }
