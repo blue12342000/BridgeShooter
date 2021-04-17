@@ -11,6 +11,8 @@ private:
 	vector<Unit*> vEnemys;
 	vector<Item*> vItems;
 	Unit* lpPlayer;
+	Unit* lpPlanet;
+
 	Image* lpBackBuffer;
 	Image* lpBackImage;		//¹è°æ
 	int frame;

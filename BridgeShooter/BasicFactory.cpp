@@ -1,5 +1,5 @@
-#include "BasicFactory.h"
 #include "BridgeShooter.h"
+#include "BasicFactory.h"
 #include "BasicPattern.h"
 #include "Missile.h"
 
