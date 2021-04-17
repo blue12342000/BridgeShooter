@@ -96,6 +96,9 @@
     <ClCompile Include="BoomerangPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="SineFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
     <ClCompile Include="RainPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="Planet_SSJ.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="SineFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="RainPattern.h">
       <Filter>소스 파일\Pattern</Filter>

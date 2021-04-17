@@ -68,6 +68,7 @@ void SpaceShip::Update(float deltaTime)
 	{
 		SetFactory(new SSJFactory());
 	}
+
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
 	{
 		Fire();

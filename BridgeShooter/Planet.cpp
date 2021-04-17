@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "BasicFactory.h"
 #include "SineFactory.h"
+#include "RainFactory.h"
 
 void Planet::Init()
 {
