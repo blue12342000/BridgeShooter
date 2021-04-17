@@ -2,15 +2,17 @@
 #include "Image.h"
 #include "BasicFactory.h"
 #include "SineFactory.h"
+#include "RainFactory.h"
+#include "BoomerangPattern.h"
 
 void SpaceShip::Init()
 {
 	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("JINHWANG");
+	lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE");
 	speed = 200;
 	elapsedTime = 0;
 	motionTimer = 0;
-	motionSpeed = 40;
+	motionSpeed = 20;
 	angle = -PI / 2;
 
 	SetFactory(new BasicFactory());
@@ -19,7 +21,7 @@ void SpaceShip::Init()
 void SpaceShip::Update(float deltaTime)
 {
 	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("JINHWANG");
+	lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE");
 
 	if (KeyManager::GetSingleton()->IsKeyDownStay('W'))
 	{
@@ -47,11 +49,19 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
 	{
-		lpFactory = new BasicFactory();
+		SetFactory(new BasicFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
 	{
-		lpFactory = new SineFactory();
+		SetFactory(new SineFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
+	{
+		SetFactory(new RainFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
+	{
+		SetFactory(new RainFactory());
 	}
 
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))

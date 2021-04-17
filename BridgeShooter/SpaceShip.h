@@ -4,6 +4,7 @@
 class SpaceShip : public Unit
 {
 private:
+	float fireTimer;
 
 public:
 	virtual void Init() override;
