@@ -1,7 +1,8 @@
 #include "BoomerangPattern.h"
 #include "GameObject.h"
-void BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
+MoveInfo BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
 {
+	MoveInfo moveinfo = {};
 	if (lpObject) 
 	{
 		isMove = true;
@@ -19,5 +20,5 @@ void BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
 		}
 		
 	}
-	
+	return moveinfo;
 }

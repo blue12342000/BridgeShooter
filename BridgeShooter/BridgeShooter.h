@@ -10,8 +10,13 @@ using namespace std;
 
 #define WINPOS_STARTX 200
 #define WINPOS_STARTY 200
-#define WINSIZE_WIDTH 800
+#define WINSIZE_WIDTH 600
 #define WINSIZE_HEIGHT 800
+
+#define WINSIZE_LEFT -200
+#define WINSIZE_TOP -200
+#define WINSIZE_RIGHT 1000
+#define WINSIZE_BOTTOM 1000
 
 #define PI 3.141592f
 

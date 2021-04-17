@@ -1,8 +1,10 @@
 #pragma once
-class GameObject;
+class Unit;
 class Factory
 {
 public:
-	virtual void Fire(GameObject* lpObject) = 0;
+	virtual void Init() = 0;
+	virtual void Release() = 0;
+	virtual void Fire(Unit* lpUnit) = 0;
 };
 

@@ -1,23 +1,26 @@
 #include "SpaceShip.h"
 #include "Image.h"
 #include "BasicFactory.h"
+#include "SineFactory.h"
+#include "HomingFactory.h"
 
 void SpaceShip::Init()
 {
 	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE");
+	lpImage = ImageManager::GetSingleton()->FindImage("JINHWANG");
 	speed = 200;
 	elapsedTime = 0;
 	motionTimer = 0;
-	motionSpeed = 12;
+	motionSpeed = 40;
 	angle = -PI / 2;
-	lpFactory = new BasicFactory();
+
+	SetFactory(new BasicFactory());
 }
 
 void SpaceShip::Update(float deltaTime)
 {
 	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE");
+	lpImage = ImageManager::GetSingleton()->FindImage("JINHWANG");
 
 	if (KeyManager::GetSingleton()->IsKeyDownStay('W'))
 	{
@@ -33,6 +36,7 @@ void SpaceShip::Update(float deltaTime)
 	{
 		lpImage = ImageManager::GetSingleton()->FindImage("SPACESHIP_LEFT");
 		pos.x -= speed * deltaTime;
+		
 		state = UNIT_STATE::MOVE_LEFT;
 	}
 
@@ -42,7 +46,18 @@ void SpaceShip::Update(float deltaTime)
 		pos.x += speed * deltaTime;
 		state = UNIT_STATE::MOVE_RIGHT;
 	}
-
+	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
+	{
+		lpFactory = new BasicFactory();
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
+	{
+		lpFactory = new SineFactory();
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
+	{
+		lpFactory = new HomingFactory();
+	}
 	if (KeyManager::GetSingleton()->IsKeyDownStay(VK_SPACE))
 	{
 		Fire();
