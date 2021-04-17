@@ -111,9 +111,6 @@
     <ClCompile Include="Planet.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="SprialPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="BoomerangFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
@@ -125,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="JinHwang.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="ReflectPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SpiralPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,11 +218,14 @@
     <ClInclude Include="Planet_SSJ.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="SprialPattern.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="JinHwang.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiralPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -157,11 +157,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Planet_KMS.cpp" />
     <ClCompile Include="Planet_SSJ.cpp" />
+    <ClCompile Include="ReflectPattern.cpp" />
     <ClCompile Include="SineFactory.cpp" />
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Planet.cpp" />
-    <ClCompile Include="SprialPattern.cpp" />
+    <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,11 +184,12 @@
     <ClCompile Include="Timer.cpp" />
     <ClInclude Include="Planet_KMS.h" />
     <ClInclude Include="Planet_SSJ.h" />
+    <ClInclude Include="ReflectPattern.h" />
     <ClInclude Include="SineFactory.h" />
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Planet.h" />
-    <ClInclude Include="SprialPattern.h" />
+    <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
