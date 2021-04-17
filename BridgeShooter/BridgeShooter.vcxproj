@@ -146,6 +146,7 @@
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="JinHwang.cpp" />
+    <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="RainFactory.cpp" />
     <ClCompile Include="RainPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
@@ -160,7 +161,7 @@
     <ClCompile Include="SineFactory.cpp" />
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
-    <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="Planet04.cpp" />
     <ClCompile Include="SprialPattern.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
     <ClInclude Include="JinHwang.h" />
+    <ClInclude Include="Planet04Factory.h" />
     <ClInclude Include="RainFactory.h" />
     <ClInclude Include="RainPattern.h" />
     <ClInclude Include="MissileManager.h" />
@@ -186,7 +188,7 @@
     <ClInclude Include="SineFactory.h" />
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
-    <ClInclude Include="Planet.h" />
+    <ClInclude Include="Planet04.h" />
     <ClInclude Include="SprialPattern.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>

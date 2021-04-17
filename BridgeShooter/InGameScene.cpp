@@ -2,7 +2,7 @@
 #include "Image.h"
 #include "SpaceShip.h"
 #include "Planet_SSJ.h"
-#include "Planet.h"
+#include "Planet04.h"
 #include "JinHwang.h"
 #include"Planet_KMS.h"
 
@@ -12,9 +12,9 @@ HRESULT InGameScene::Init()
     lpPlayer->Init();
     lpPlayer->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT});
 
-    lpPlanet = new Planet();
-    lpPlanet->Init();
-    lpPlanet->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/6 });
+    lpPlanet04 = new Planet04();
+    lpPlanet04->Init();
+    lpPlanet04->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 });
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
@@ -57,11 +57,11 @@ void InGameScene::Release()
         lpPlanetSSJ = nullptr;
     }
 
-    if (lpPlanet)
+    if (lpPlanet04)
     {
-        lpPlanet->Release();
-        delete lpPlanet;
-        lpPlanet = nullptr;
+        lpPlanet04->Release();
+        delete lpPlanet04;
+        lpPlanet04 = nullptr;
     }
     if (lpPlanetKMS)
     {
@@ -81,7 +81,7 @@ void InGameScene::Release()
 void InGameScene::Update(float deltaTime)
 {
     if (lpPlayer) lpPlayer->Update(deltaTime);
-    if (lpPlanet) lpPlanet->Update(deltaTime);
+    if (lpPlanet04) lpPlanet04->Update(deltaTime);
     if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
 
     MissileManager::GetSingleton()->Update(deltaTime);
@@ -105,8 +105,7 @@ void InGameScene::Render(HDC hdc)
     if (lpPlayer) lpPlayer->Render(hBackDC);
 
     if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
-
-    if (lpPlanet) lpPlanet->Render(hBackDC);
+    if (lpPlanet04) lpPlanet04->Render(hBackDC);
     if (lpJinHwang) lpJinHwang->Render(hBackDC);
     if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 

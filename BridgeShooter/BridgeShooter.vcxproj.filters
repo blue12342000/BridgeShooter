@@ -111,7 +111,7 @@
     <ClCompile Include="RainFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="Planet.cpp">
+    <ClCompile Include="Planet04.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
     <ClCompile Include="SprialPattern.cpp">
@@ -128,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="JinHwang.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet04Factory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +212,7 @@
     <ClInclude Include="RainFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="Planet.h">
+    <ClInclude Include="Planet04.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
     <ClInclude Include="BoomerangFactory.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="JinHwang.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet04Factory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

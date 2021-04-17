@@ -24,7 +24,7 @@ void JinHwang::Update(float deltaTime)
 	if (fireTimer > 0.2f)
 	{
 		fireTimer = 0;
-		Fire();
+		//Fire();
 	}
 
 	if (lpImage)
