@@ -15,9 +15,12 @@ private:
 
 	Image* lpBackBuffer;
 	Image* lpBackImage;		//배경
+	Image* lpBackImage2;	//스크롤용 배경
 	int frame;
 	float elapsedTime;
 	Unit* lpPlanetSSJ;
+
+	float backgroundMover;
 
 public:
 	HRESULT Init();
