@@ -28,11 +28,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 
 	RegisterClass(&wndClass);
 
-	g_hWnd = CreateWindow(g_lpszClass, g_lpszClass, WS_OVERLAPPEDWINDOW, 0, 0, 0, 0, NULL, NULL, g_hInstance, NULL);
+	g_hWnd = CreateWindow(g_lpszClass, g_lpszClass, WS_OVERLAPPEDWINDOW, WINPOS_STARTX, WINPOS_STARTY, WINSIZE_WIDTH, WINSIZE_HEIGHT, NULL, NULL, g_hInstance, NULL);
 
-	SetWindowSize(g_hWnd, WINSIZE_WIDTH, WINSIZE_HEIGHT);
-	
 	ShowWindow(g_hWnd, nShowCmd);
+	SetWindowSize(g_hWnd, WINSIZE_WIDTH, WINSIZE_HEIGHT);
 
 	if (FAILED(g_mainGame.Init()))
 	{
@@ -49,9 +48,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
-
-		g_mainGame.Update();
-		g_mainGame.Render();
+		else
+		{
+			g_mainGame.Render();
+			g_mainGame.Update();
+			
+		}
 	}
 	g_mainGame.Release();
 	return message.wParam;
