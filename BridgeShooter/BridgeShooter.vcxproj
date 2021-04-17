@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
+    <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="HomingFactory.cpp" />
     <ClCompile Include="HomingPattern.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Planet_KMS.cpp" />
     <ClCompile Include="Planet_SSJ.cpp" />
     <ClCompile Include="SineFactory.cpp" />
     <ClCompile Include="SinePattern.cpp" />
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicFactory.h" />
+    <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
@@ -175,6 +178,7 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClInclude Include="Planet_KMS.h" />
     <ClInclude Include="Planet_SSJ.h" />
     <ClInclude Include="SineFactory.h" />
     <ClInclude Include="SinePattern.h" />

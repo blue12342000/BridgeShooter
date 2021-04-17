@@ -12,12 +12,14 @@ private:
 	vector<Item*> vItems;
 	Unit* lpPlayer;
 	Unit* lpPlanet;
+	Unit* lpPlanetSSJ;
+	Unit* lpPlanetKMS;
 
 	Image* lpBackBuffer;
 	Image* lpBackImage;		//¹è°æ
 	int frame;
 	float elapsedTime;
-	Unit* lpPlanetSSJ;
+	
 
 public:
 	HRESULT Init();
