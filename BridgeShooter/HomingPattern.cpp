@@ -3,9 +3,9 @@
 #include "Planet.h"
 
 
-void HomingPattern::Move(float deltaTime, GameObject* lpObject)
+MoveInfo HomingPattern::Move(float deltaTime, GameObject* lpObject)
 {
-		
+	MoveInfo moveInfo = {0, 0};
 	if (lpObject)
 	{
 		elapsedTime *= -1;
@@ -13,5 +13,5 @@ void HomingPattern::Move(float deltaTime, GameObject* lpObject)
 		lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
 
 	}
-
+	return moveInfo;
 }

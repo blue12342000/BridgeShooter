@@ -2,18 +2,14 @@
 #include "SineFactory.h"
 #include "SinePattern.h"
 #include "Missile.h"
+#include "Unit.h"
 
-SineFactory::SineFactory()
+void SineFactory::Init()
 {
 	pattern = new SinePattern();
 }
 
-SineFactory::~SineFactory()
-{
-	if (pattern) delete pattern;
-}
-
-void SineFactory::Fire(GameObject* lpObject)
+void SineFactory::Fire(Unit* lpObject)
 {
 	Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 	lpMissile->pos = lpObject->pos;

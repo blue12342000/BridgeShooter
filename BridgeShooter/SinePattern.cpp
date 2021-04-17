@@ -3,7 +3,7 @@
 
 MoveInfo SinePattern::Move(float deltaTime, GameObject* lpObject)
 {
-	MoveInfo moveInfo;
+	MoveInfo moveInfo = { 0, 0 };
 	if (lpObject)
 	{
 		//사인처럼 움직이게 각도값을 계속 변경...할수가있나? 값 계산 방법 고민

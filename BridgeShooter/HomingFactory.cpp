@@ -2,18 +2,14 @@
 #include "HomingFactory.h"
 #include "HomingPattern.h"
 #include "Missile.h"
+#include "Unit.h"
 
-HomingFactory::HomingFactory()
+void HomingFactory::Init()
 {
 	pattern = new HomingPattern();
 }
 
-HomingFactory::~HomingFactory()
-{
-	if (pattern) delete pattern;
-}
-
-void HomingFactory::Fire(GameObject* lpObject)
+void HomingFactory::Fire(Unit* lpObject)
 {
 	Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 	lpMissile->pos = lpObject->pos;
