@@ -19,10 +19,13 @@ HRESULT ImageManager::Init()
     mLpImageDatas["SPACESHIP_RIGHT"]->Reverse(*mLpImageDatas["SPACESHIP_LEFT"]);
 
     mLpImageDatas.insert(make_pair("JINHWANG", new Image()));
-    mLpImageDatas["JINHWANG"]->Init("Image/Unit/JinHwang/JinHwang.bmp", 5000, 2754, 10, 9, 90, true);
+    mLpImageDatas["JINHWANG"]->Init("Image/Unit/JinHwang/JinHwang.bmp", 5000 / 2, 2754 / 2, 10, 9, 90, true);
 
     mLpImageDatas.insert(make_pair("MISSILE_01", new Image()));
     mLpImageDatas["MISSILE_01"]->Init("Image/Missile/Missile_01.bmp", 58 / 2, 58 / 2, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("MISSILE_02", new Image()));
+    mLpImageDatas["MISSILE_02"]->Init("Image/Missile/Missile_02.bmp", 40 / 2, 40 / 2, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("PLANET_SSJ", new Image()));
     mLpImageDatas["PLANET_SSJ"]->Init("Image/Unit/Planet/Planet_SSJ.bmp", 20000, 266, 50, 1, 50, true, RGB(255, 0, 255));

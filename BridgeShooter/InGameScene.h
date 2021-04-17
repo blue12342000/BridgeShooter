@@ -13,6 +13,8 @@ private:
 	Unit* lpPlayer;
 	Unit* lpPlanet;
 
+	Unit* lpJinHwang;
+
 	Image* lpBackBuffer;
 	Image* lpBackImage;		//¹è°æ
 	int frame;

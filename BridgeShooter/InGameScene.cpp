@@ -3,7 +3,7 @@
 #include "SpaceShip.h"
 #include "Planet_SSJ.h"
 #include "Planet.h"
-
+#include "JinHwang.h"
 
 HRESULT InGameScene::Init()
 {
@@ -24,6 +24,10 @@ HRESULT InGameScene::Init()
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
     lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+
+    lpJinHwang = new JinHwang();
+    lpJinHwang->Init();
+    lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2 + 200, (float)WINSIZE_HEIGHT / 3 });
 
     return S_OK;
 }
@@ -52,7 +56,12 @@ void InGameScene::Release()
         lpPlanet = nullptr;
     }
 
-
+    if (lpJinHwang)
+    {
+        lpJinHwang->Release();
+        delete lpJinHwang;
+        lpJinHwang = nullptr;
+    }
 }
 
 void InGameScene::Update(float deltaTime)
@@ -62,6 +71,8 @@ void InGameScene::Update(float deltaTime)
     MissileManager::GetSingleton()->Update(deltaTime);
 
     if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (lpJinHwang) lpJinHwang->Update(deltaTime);
+
     MissileManager::GetSingleton()->Update(deltaTime);
 }
 
@@ -75,6 +86,7 @@ void InGameScene::Render(HDC hdc)
     if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
 
     if (lpPlanet) lpPlanet->Render(hBackDC);
+    if (lpJinHwang) lpJinHwang->Render(hBackDC);
 
     MissileManager::GetSingleton()->Render(hBackDC);
 

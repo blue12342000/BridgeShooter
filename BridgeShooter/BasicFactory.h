@@ -6,6 +6,7 @@ class BasicFactory : public Factory
 {
 private:
 	Pattern* pattern;
+	Pattern* pattern2;
 
 private:
 	virtual void Init() final;

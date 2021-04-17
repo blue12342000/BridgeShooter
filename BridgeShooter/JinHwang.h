@@ -1,7 +1,7 @@
 #pragma once
 #include "Unit.h"
 
-class SpaceShip : public Unit
+class JinHwang : public Unit
 {
 private:
 	float fireTimer;
@@ -12,3 +12,4 @@ public:
 	virtual void Release() override;
 	virtual void Render(HDC hdc) override;
 };
+
