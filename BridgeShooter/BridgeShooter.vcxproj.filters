@@ -135,6 +135,9 @@
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="ReverseSpiralPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="SSJFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseSpiralPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
