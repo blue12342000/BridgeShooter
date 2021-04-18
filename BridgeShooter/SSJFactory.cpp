@@ -7,6 +7,8 @@
 #include "SpiralPattern.h"
 #include "ReverseSpiralPattern.h"
 #include "SinePattern.h"
+#include "ReflectPattern.h"
+#include "DelayBasicPattern.h"
 
 void SSJFactory::Init()
 {
@@ -14,7 +16,14 @@ void SSJFactory::Init()
 	pattern2 = new SpiralPattern();
 	pattern3 = new ReverseSpiralPattern();
 	pattern4 = new SinePattern();
-	createLine = 1;
+	pattern5 = new ReflectPattern();
+	pattern6 = new DelayBasicPattern(); 
+	createLine = 0;
+	delayTime_0 = 0;
+	delayTime_1 = 0;
+	delayTime_2 = 0;
+	phaseChanger = 0;
+
 }
 
 void SSJFactory::Release()
@@ -23,61 +32,31 @@ void SSJFactory::Release()
 	if (pattern2) delete pattern2; pattern2 = nullptr;
 	if (pattern3) delete pattern3; pattern3 = nullptr;
 	if (pattern4) delete pattern4; pattern4 = nullptr;
+	if (pattern5) delete pattern5; pattern5 = nullptr;
+	if (pattern6) delete pattern6; pattern6 = nullptr;
 }
 
 void SSJFactory::Fire(Unit* lpUnit)
 {
-	//5개씩 3방향으로 주기적으로 발사
-	//if ((int)(lpUnit->elapsedTime*10) %3 == 0)
-	//{
-	//	for (int i = -2; i < 3; ++i)
-	//	{
-	//		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-	//		lpMissile->pos = lpUnit->pos;
-	//		lpMissile->angle = lpUnit->angle - 0.05f * i -PI;
-	//		lpMissile->speed = 200;
-	//		lpMissile->elapsedTime = 0;
-	//		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-	//		lpMissile->deltaMove.deltaPos = { 0,  0 };
-	//		lpMissile->SetPattern(pattern1);
-	//		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
-	//	}
-	//}	
-	//else if ((int)(lpUnit->elapsedTime*10) %3 == 1)
-	//{
-	//	for (int i = -2; i < 3; ++i)
-	//	{
-	//		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-	//		lpMissile->pos = lpUnit->pos;
-	//		lpMissile->angle = lpUnit->angle - 0.05f * i - PI - 0.8f;
-	//		lpMissile->speed = 200;
-	//		lpMissile->elapsedTime = 0;
-	//		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-	//		lpMissile->deltaMove.deltaPos = { 0,  0 };
-	//		lpMissile->SetPattern(pattern1);
-	//		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
-	//	}
-	//}
-	//else if ((int)(lpUnit->elapsedTime * 10) % 3 == 2)
-	//{
-	//	for (int i = -2; i < 3; ++i)
-	//	{
-	//		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-	//		lpMissile->pos = lpUnit->pos;
-	//		lpMissile->angle = lpUnit->angle - 0.05f * i - PI +0.8f;
-	//		lpMissile->speed = 200;
-	//		lpMissile->elapsedTime = 0;
-	//		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-	//		lpMissile->deltaMove.deltaPos = { 0,  0 };
-	//		lpMissile->SetPattern(pattern1);
-	//		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
-	//	}
-	//}
+	//각 페이즈 발사 주기 설정부
+	delayTime_0 += 0.1f;
+	if (delayTime_0 > 1.5f) delayTime_0 = 0;
+
+	delayTime_1 += 0.1f;
+	if (delayTime_1 >= 5.0f) delayTime_1 = 0;
 		
+	delayTime_2 += 1;
+	if (delayTime_2 >= 15) delayTime_2 = 0;
+
+	phaseChanger++;
+	if (phaseChanger >= 100) createLine = 1;
+	if (phaseChanger >= 200) createLine = 2;
+
+	//1페이즈
 	if (createLine == 0)
 	{
 		//36방향으로 원처럼 발사
-		if ((int)(lpUnit->elapsedTime * 10) % 5 == 0)
+		if (1.0f < delayTime_0 && delayTime_0 < 1.099999f)
 		{
 			for (int i = 0; i < 36; ++i)
 			{
@@ -120,9 +99,11 @@ void SSJFactory::Fire(Unit* lpUnit)
 		}
 	}
 	
+	//2페이즈
 	else if (createLine == 1)
 	{
-	/*	for (int i = 0; i < 6; ++i)
+		//가두는 그물S
+		for (int i = 0; i < 6; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->pos = lpUnit->pos;
@@ -133,7 +114,8 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->deltaMove.deltaPos = { 0,  0 };
 			lpMissile->SetPattern(pattern4);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
-		}*/
+		}
+		//가두는 그물
 		for (int i = 0; i < 6; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -147,6 +129,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->SetPattern(pattern4);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
+		//가두는 그물
 		for (int i = 0; i < 6; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -160,6 +143,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->SetPattern(pattern4);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
+		//가두는 그물
 		for (int i = 0; i < 6; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -173,6 +157,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->SetPattern(pattern4);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
+		//가두는 그물
 		for (int i = 0; i < 6; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -186,5 +171,89 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->SetPattern(pattern4);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
+		//반사 레이저
+		if(delayTime_1 < 1.0f)
+		{
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->pos = lpUnit->pos;
+			lpMissile->angle = lpUnit->angle - 2 * PI / 5*4;
+			lpMissile->speed = 500;
+			lpMissile->elapsedTime = 0;
+			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_03");
+			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetPattern(pattern5);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		}
+		//반사 레이저
+		else if (delayTime_1 < 2.0f)
+		{
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->pos = lpUnit->pos;
+			lpMissile->angle = lpUnit->angle - 2 * PI / 5*3;
+			lpMissile->speed = 500;
+			lpMissile->elapsedTime = 0;
+			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_03");
+			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetPattern(pattern5);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		}
+		//반사 레이저
+		else if (delayTime_1 < 3.0f)
+		{
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->pos = lpUnit->pos;
+			lpMissile->angle = lpUnit->angle - 2 * PI / 5 * 1;
+			lpMissile->speed = 500;
+			lpMissile->elapsedTime = 0;
+			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_03");
+			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetPattern(pattern5);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		}
+		//반사 레이저
+		else if (delayTime_1 < 4.0f)
+		{
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->pos = lpUnit->pos;
+			lpMissile->angle = lpUnit->angle - 2 * PI / 5 * 2;
+			lpMissile->speed = 500;
+			lpMissile->elapsedTime = 0;
+			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_03");
+			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetPattern(pattern5);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		}
+	}
+
+	//3페이즈
+	else if (createLine == 2)
+	{
+		if (delayTime_2 == 1)
+		{
+			for (int j = 0; j < 10; ++j)
+			{
+				for (int i = 0; i < 20; ++i)
+				{
+					if (patternArray[i + j * 20] == 1)
+					{
+						Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+						lpMissile->pos = lpUnit->pos;
+						lpMissile->angle = lpUnit->angle - PI*4/5 - 0.05 * i;
+						lpMissile->speed = 200;
+						lpMissile->elapsedTime = 0;
+						lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+						lpMissile->deltaMove.deltaPos = { 0,  0 };
+						lpMissile->SetPattern(pattern6);
+						lpMissile->SetDelayTime(0.07f * j);
+						MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+					}
+					else
+						continue;
+
+				}
+
+			}
+		}
+
 	}
 }

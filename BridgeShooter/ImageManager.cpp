@@ -27,6 +27,9 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("MISSILE_02", new Image()));
     mLpImageDatas["MISSILE_02"]->Init("Image/Missile/Missile_02.bmp", 40 / 2, 40 / 2, 1, 1, 1, true);
 
+    mLpImageDatas.insert(make_pair("MISSILE_03", new Image()));
+    mLpImageDatas["MISSILE_03"]->Init("Image/Missile/Missile_03.bmp", 14, 17, 1, 1, 1, true);
+
     mLpImageDatas.insert(make_pair("PLANET_SSJ", new Image()));
     mLpImageDatas["PLANET_SSJ"]->Init("Image/Unit/Planet/Planet_SSJ.bmp", 20000, 266, 50, 1, 50, true, RGB(255, 0, 255));
  
@@ -35,6 +38,7 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("Planet_KMS", new Image()));
     mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 134*10,134, 10, 1, 10, true, RGB(0, 0, 0));
+
     /*
     mLpImageDatas.insert(make_pair("Item_Power", new Image()));
     mLpImageDatas["Item_PowerUP"]->Init("Image/Item/Item_Power.bmp", 266 , 32, 6, 1, 6, true, RGB(255, 0, 255));
