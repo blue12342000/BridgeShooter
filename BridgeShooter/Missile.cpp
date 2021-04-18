@@ -38,11 +38,11 @@ void Missile::SetMissile(string ImageKey, POINTFLOAT pos, float angle, float spe
 	this->isActive = true;
 	this->elapsedTime = 0;
 	this->delayTime = delayTime;
-	this->lpImage = ImageManager::GetSingleton()->FindImage("ImageKey");
+	this->lpImage = ImageManager::GetSingleton()->FindImage(ImageKey);
 	this->pos = pos;
 	this->angle = angle;
 	this->speed = speed;
+	this->deltaMove = { 0, 0 };
 	collider.SetHitBox(pos, size, size);
-	
 	lpPattern = nullptr;
 }

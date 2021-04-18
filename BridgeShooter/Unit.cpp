@@ -2,12 +2,12 @@
 #include "Factory.h"
 #include "Image.h"
 #include "BridgeShooter.h"
+#include "Animation.h"
 
 void Unit::Init()
 {
 	elapsedTime = 0;
-	frame = 0;
-	lpImage = nullptr;
+	lpAnimation = nullptr;
 	lpFactory = nullptr;
 }
 void Unit::Update(float deltaTime)
@@ -16,10 +16,19 @@ void Unit::Update(float deltaTime)
 }
 void Unit::Release()
 {
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpFactory)
+	{
+		lpFactory->Release();
+		delete lpFactory;
+	}
 }
 void Unit::Render(HDC hdc)
 {
-	if (lpImage) lpImage->Render(hdc, pos.x, pos.y, frame, U_IA_CENTER);
+	if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y);
 	if (isDebugMode)
 	{
 		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);

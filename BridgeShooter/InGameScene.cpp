@@ -27,7 +27,7 @@ HRESULT InGameScene::Init()
 
     lpItem = new Item();
     lpItem->Init();
-    lpItem->SetPos({ (float)WINSIZE_WIDTH *3/4, (float)WINSIZE_HEIGHT *7/8  });
+    lpItem->SetPos({ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  });
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -97,6 +97,7 @@ void InGameScene::Update(float deltaTime)
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
+    if (lpItem) lpItem->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
     backgroundMover += 0.1f;
     if (backgroundMover >= 800) backgroundMover = 0;
@@ -113,7 +114,7 @@ void InGameScene::Render(HDC hdc)
 
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
-    if (lpJinHwang) lpJinHwang->Render(hBackDC);
+    //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);

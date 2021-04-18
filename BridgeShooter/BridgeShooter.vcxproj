@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="BoomerangFactory.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
