@@ -5,8 +5,8 @@ class Pattern;
 class RainFactory : public Factory
 {
 private:
-	Pattern* pattern;
-	Pattern* pattern2;
+	Pattern* lpPattern01;
+	Pattern* lpPattern02;
 	int rnd;
 
 private:

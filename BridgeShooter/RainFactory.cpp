@@ -8,8 +8,8 @@
 
 void RainFactory::Init()
 {
-	pattern = new RainPattern();
-	pattern2 = new BasicPattern();
+	lpPattern01 = new RainPattern();
+	lpPattern02 = new BasicPattern();
 	srand(time(NULL));
 }
 
@@ -27,7 +27,7 @@ void RainFactory::Fire(Unit* lpObject)
 			lpMissile->speed = 150;
 			lpMissile->elapsedTime = 0;
 			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-			lpMissile->lpPattern = pattern;
+			lpMissile->lpPattern = lpPattern01;
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
 	}
@@ -42,7 +42,7 @@ void RainFactory::Fire(Unit* lpObject)
 			lpMissile->speed = 200;
 			lpMissile->elapsedTime = 0;
 			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-			lpMissile->lpPattern = pattern2;
+			lpMissile->lpPattern = lpPattern02;
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
 	}
