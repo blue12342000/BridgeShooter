@@ -148,6 +148,7 @@
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="HPgauge.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
+    <ClInclude Include="HPgauge.h" />
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="Planet04Factory.h" />
     <ClInclude Include="JinHwangFactory.h" />
