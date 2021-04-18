@@ -18,23 +18,13 @@ void Planet_KMS::Init()
 	frame = 0;
 	attack1Timer = 0.0;
 }
-struct TimeSet
-{
-	float attack1 = 5.0;
-};
+
 void Planet_KMS::Update(float deltaTime)
 {
-	TimeSet timeset;
 	if (lpImage&&this)
 	{
-		//this->Fire();
-		//this->Update(deltaTime);
-		motionTimer += (deltaTime * motionSpeed);
-		attack1Timer += deltaTime;
-		if (attack1Timer >= deltaTime) {
-			attack1Timer -= deltaTime;
-			//this->Fire();
-		}
+			this->Fire();
+
 		if (motionTimer > 1.0f)
 		{
 			frame += (int)motionTimer;
