@@ -6,6 +6,7 @@
 #include "BoomerangFactory.h"
 #include "BoomerangPattern.h"
 #include "SSJFactory.h"
+#include "JinHwangFactory.h"
 
 void SpaceShip::Init()
 {
@@ -68,6 +69,10 @@ void SpaceShip::Update(float deltaTime)
 	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
 	{
 		SetFactory(new SSJFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('6'))
+	{
+		SetFactory(new JinHwangFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
 	{

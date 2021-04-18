@@ -1,9 +1,20 @@
 #include "ReflectPattern.h"
 #include "GameObject.h"
+#include "Missile.h"
 
 MoveInfo ReflectPattern::Move(float deltaTime, GameObject* lpObject)
 {
-    MoveInfo moveInfo = {};
+    MoveInfo moveInfo = { 0, 0 };
+
+    if (typeid(*lpObject) == typeid(Missile))
+    {
+        Missile* lpMissile = (Missile*)lpObject;
+        if (lpMissile->delayTime > 0.000001f)
+        {
+            lpMissile->delayTime -= deltaTime;
+            return moveInfo;
+        }
+    }
 
     lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
     lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
@@ -56,6 +67,6 @@ MoveInfo ReflectPattern::Move(float deltaTime, GameObject* lpObject)
             }
         }
     }
-
+    moveInfo.angle = lpObject->angle;
     return moveInfo;
 }
