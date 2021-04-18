@@ -94,8 +94,8 @@ void InGameScene::Update(float deltaTime)
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    if (lpJinHwang) lpJinHwang->Update(deltaTime);
-    //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
+    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
+    if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
     MissileManager::GetSingleton()->Update(deltaTime);
     backgroundMover += 0.1f;

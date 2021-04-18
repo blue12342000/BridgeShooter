@@ -10,10 +10,15 @@ private:
 	
 private:
 	PatternNum patternNum;
+
+	const float phaseTimeSet = 15.0;
+	const float changeAngleSpeed = 5.0;
 	float changeAngle;
 	int phase;
-	int phaseTimeSet=20;
-	bool changePattern;
+	bool isShoot;
+	float imsiDeltaTime;
+	float missile1Timer;
+	float timer;
 private:
 	std::map<PatternNum, int>mMissileNum;
 	std::map<PatternNum, float>mMissileSpeed;
