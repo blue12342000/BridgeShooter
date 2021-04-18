@@ -32,12 +32,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 	{
 		// �⺻ź
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = lpUnit->pos;
-		lpMissile->angle = lpUnit->angle;
-		lpMissile->speed = 200;
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-		lpMissile->deltaMove.deltaPos = { 0,  0 };
+		lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpMissile->deltaMove.deltaPos, lpUnit->angle, 200, 20);
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
@@ -47,12 +42,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 		for (int i = 0; i < 20; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->pos = lpUnit->pos;
-			lpMissile->angle = lpUnit->angle + ((float)(rand() % 101) - 50) / 100;
-			lpMissile->speed = rand() % 100 + 100;
-			lpMissile->elapsedTime = 0;
-			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpMissile->deltaMove.deltaPos, lpUnit->angle + ((float)(rand() % 101) - 50) / 100, rand() % 100 + 100, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
@@ -63,12 +53,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 		for (int i = -3; i < 4; i += 2)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->pos = lpUnit->pos;
-			lpMissile->angle = lpUnit->angle + PI / 24 * i;
-			lpMissile->speed = 400;
-			lpMissile->elapsedTime = 0;
-			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpMissile->deltaMove.deltaPos, lpUnit->angle + PI / 24 * i, 400, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_REFLECT]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}

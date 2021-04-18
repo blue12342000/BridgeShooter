@@ -4,7 +4,7 @@
 
 enum class ITEM_TYPE
 {
-	POWER_UP,
+	POWER_UP,	//À¯´ÖÀÇ »ý¼º¶óÀÎ ¹Ù²Þ
 	BOMB,
 	HP_POTION,
 	SLOW_MOTION,
@@ -12,21 +12,23 @@ enum class ITEM_TYPE
 	NONE
 };
 
-
 class Image;
 class Item : public GameObject
 {
 private:
-	POINTFLOAT pos;
 	int frame;
-	float elapsedTime;
+	int count;
 
 	float motionTimer;
 	float motionSpeed;
 
+	bool isItemAlive;
+	
 public:
 	ITEM_TYPE type;
 	Image* lpImage;
+
+
 
 public:
 	void Init() override;
@@ -35,5 +37,7 @@ public:
 	void Render(HDC hdc) override;
 
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
+
+	void Move(float deltaTime);
 };
 

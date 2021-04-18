@@ -50,6 +50,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 				lpMissile->speed = 150;
 				lpMissile->elapsedTime = 0;
 				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
+				lpMissile->deltaMove.deltaPos = { 0,  0 };
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 				//if (count >= 200) count *= -1;
@@ -68,6 +69,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 		lpMissile->speed = 150;
 		lpMissile->elapsedTime = 0;
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->deltaMove.deltaPos = { 0,  0 };
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		if (count >= 9) count *= -1;
@@ -80,6 +82,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 			lpMissile->speed = 200;
 			lpMissile->elapsedTime = 0;
 			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
+			lpMissile->deltaMove.deltaPos = { 0,  0 };
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
@@ -96,6 +99,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 		lpMissile->speed = 150 + (8*count);
 		lpMissile->elapsedTime = 0;
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->deltaMove.deltaPos = { 0,  0 };
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		if (count >= 9) count *= -1;
@@ -111,12 +115,13 @@ void Planet04Factory::Fire(Unit* lpUnit)
 				lpMissile->speed = 200;
 				lpMissile->elapsedTime = 0;
 				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
+				lpMissile->deltaMove.deltaPos = { 0,  0 };
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 			}
 		}
 	}
-
+	//1~3 페이즈때 보스 카운트가 3000 넘으면 초기화후 2페이즈
 	if (isPattern01 && bossCount >= 3000)
 	{
 		bossCount = 0;

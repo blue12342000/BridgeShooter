@@ -244,7 +244,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 	//3∆‰¿Ã¡Ó
 	else if (createLine == 2)
 	{
-		if (delayTime_0 % 500 == 0)
+		if (delayTime_0 % 1000 == 0)
 		{
 			for (int j = 0; j < 10; ++j)
 			{
@@ -255,12 +255,12 @@ void SSJFactory::Fire(Unit* lpUnit)
 						Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 						lpMissile->pos = lpUnit->pos;
 						lpMissile->angle = lpUnit->angle - PI*4/5 - 0.06 * i;
-						lpMissile->speed = 100;
+						lpMissile->speed = 200;
 						lpMissile->elapsedTime = 0;
 						lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 						lpMissile->deltaMove.deltaPos = { 0,  0 };
 						lpMissile->SetPattern(lpPattern6);
-						lpMissile->SetDelayTime(0.1f * j);
+						lpMissile->SetDelayTime(0.3f * j);
 						lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 						lpMissile->collider.width = 14;
 						lpMissile->collider.height = 14;

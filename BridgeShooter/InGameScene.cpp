@@ -28,7 +28,7 @@ HRESULT InGameScene::Init()
 
     lpItem = new Item();
     lpItem->Init();
-    lpItem->SetPos({ (float)WINSIZE_WIDTH *3/4, (float)WINSIZE_HEIGHT *7/8  });
+    lpItem->SetPos({ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  });
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -92,16 +92,24 @@ void InGameScene::Release()
 
 void InGameScene::Update(float deltaTime)
 {
+    if (KeyManager::GetSingleton()->IsKeyDownOne('M'))
+    {
+        isOnlyPlayer = !isOnlyPlayer;
+    }
+
 
     CheckCollision();
 
     if (lpPlayer) lpPlayer->Update(deltaTime);
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
+    if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
+    if (lpItem) lpItem->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
     
     
