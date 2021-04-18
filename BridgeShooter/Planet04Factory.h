@@ -2,12 +2,13 @@
 #include "Factory.h"
 
 class Pattern;
-class RainFactory : public Factory
+class Planet04Factory : public Factory
 {
 private:
 	Pattern* pattern;
 	Pattern* pattern2;
 	int rnd;
+	int count;
 
 private:
 	virtual void Init() final;

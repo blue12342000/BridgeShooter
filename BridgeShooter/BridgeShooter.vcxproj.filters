@@ -111,7 +111,7 @@
     <ClCompile Include="RainFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="Planet.cpp">
+    <ClCompile Include="Planet04.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
     <ClCompile Include="BoomerangFactory.cpp">
@@ -125,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="JinHwang.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet04Factory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
     <ClCompile Include="ReflectPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -145,6 +148,8 @@
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
     <ClCompile Include="NormalPattern.cpp">
+    </ClCompile>
+    <ClCompile Include="DelayBasicPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,9 +199,6 @@
     <ClInclude Include="InGameScene.h">
       <Filter>소스 파일\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="BridgeShooter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="BasicFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
@@ -224,7 +226,7 @@
     <ClInclude Include="RainFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="Planet.h">
+    <ClInclude Include="Planet04.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
     <ClInclude Include="BoomerangFactory.h">
@@ -238,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="JinHwang.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet04Factory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="ReflectPattern.h">
       <Filter>소스 파일\Pattern</Filter>
@@ -258,6 +263,11 @@
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
     </ClInclude>
     <ClInclude Include="NormalPattern.h">
+    </ClInclude>
+    <ClInclude Include="BridgeShooter.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="DelayBasicPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>

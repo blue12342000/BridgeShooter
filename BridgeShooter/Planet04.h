@@ -1,10 +1,10 @@
 #pragma once
 #include "Unit.h"
 
-class Planet : public Unit
+class Planet04 : public Unit
 {
 private:
-
+	float fireTimer;
 public:
 	virtual void Init() override;
 	virtual void Update(float deltaTime) override;

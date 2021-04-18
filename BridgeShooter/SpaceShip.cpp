@@ -3,9 +3,9 @@
 #include "BasicFactory.h"
 #include "SineFactory.h"
 #include "RainFactory.h"
+#include "BoomerangFactory.h"
 #include "BoomerangPattern.h"
 #include "SSJFactory.h"
-#include"BoomerangFactory.h"
 
 void SpaceShip::Init()
 {

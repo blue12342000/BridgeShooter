@@ -33,7 +33,7 @@ void Planet_KMS::Update(float deltaTime)
 		attack1Timer += deltaTime;
 		if (attack1Timer >= deltaTime) {
 			attack1Timer -= deltaTime;
-			this->Fire();
+			//this->Fire();
 		}
 		if (motionTimer > 1.0f)
 		{

@@ -31,8 +31,7 @@ MoveInfo BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
             }
            
         }
-       
-       
+
     }
     return moveinfo;
 }

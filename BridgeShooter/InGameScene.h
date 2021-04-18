@@ -11,7 +11,7 @@ private:
 	vector<Unit*> vEnemys;
 	vector<Item*> vItems;
 	Unit* lpPlayer;
-	Unit* lpPlanet;
+	Unit* lpPlanet04;
 	Unit* lpPlanetSSJ;
 	Unit* lpPlanetKMS;
 

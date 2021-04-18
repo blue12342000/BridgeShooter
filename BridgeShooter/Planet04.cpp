@@ -1,10 +1,8 @@
-#include "Planet.h"
+#include "Planet04.h"	//배용진 행성
+#include "Planet04Factory.h"
 #include "Image.h"
-#include "BasicFactory.h"
-#include "SineFactory.h"
-#include "RainFactory.h"
 
-void Planet::Init()
+void Planet04::Init()
 {
 	state = UNIT_STATE::IDLE;
 	lpImage = ImageManager::GetSingleton()->FindImage("Planet04");
@@ -12,16 +10,23 @@ void Planet::Init()
 	elapsedTime = 0;
 	motionTimer = 0;
 	motionSpeed = 12;
-	angle = -PI / 2;
-	lpFactory = new BasicFactory();
+	angle = PI / 2;
+	lpFactory = new Planet04Factory();
+	lpFactory->Init();
 }
 
-void Planet::Update(float deltaTime)
+void Planet04::Update(float deltaTime)
 {
 	state = UNIT_STATE::IDLE;
 	lpImage = ImageManager::GetSingleton()->FindImage("Planet04");
 
-	
+	fireTimer += deltaTime;
+	if (fireTimer > 0.01f)
+	{
+		fireTimer = 0;
+		Fire();
+	}
+
 	if (lpImage)
 	{
 		motionTimer += (deltaTime * motionSpeed);
@@ -35,11 +40,11 @@ void Planet::Update(float deltaTime)
 	elapsedTime += deltaTime;
 }
 
-void Planet::Release()
+void Planet04::Release()
 {
 }
 
-void Planet::Render(HDC hdc)
+void Planet04::Render(HDC hdc)
 {
 	Unit::Render(hdc);
 }

@@ -1,7 +1,6 @@
 #include "RainPattern.h"
 #include "GameObject.h"
-#include "Planet.h"
-
+#include "Planet04.h"
 
 MoveInfo RainPattern::Move(float deltaTime, GameObject* lpObject)
 {
@@ -10,38 +9,20 @@ MoveInfo RainPattern::Move(float deltaTime, GameObject* lpObject)
 	MoveInfo moveInfo = {0, 0};
 	if (lpObject)
 	{
-		float count = lpObject->elapsedTime;
-
 		//왼쪽으로 얼마나 나가서 멈추느냐
-		if (lpObject->elapsedTime< 0.1f)
+		if (lpObject->elapsedTime < 4.0f)
 		{
-			lpObject->pos.x -= cosf(lpObject->angle * elapsedTime) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4;
-			lpObject->pos.y -= sinf(lpObject->angle * elapsedTime) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4; // elapsedTime 은 비율. delltaTime의 역할이 아님.
+			lpObject->pos.x -= cosf(lpObject->angle) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4;
+			lpObject->pos.y -= sinf(lpObject->angle) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4; // elapsedTime 은 비율. delltaTime의 역할이 아님.
 		}
-		//오른쪽으로 얼마나 나가서 멈추느냐
-		/*
-		if (lpObject->elapsedTime < 0.1f)
+
+		if (lpObject->elapsedTime > 5.0f)
 		{
-			lpObject->pos.x += cosf(lpObject->angle * elapsedTime) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4;
-			lpObject->pos.y += sinf(lpObject->angle * elapsedTime) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4; // elapsedTime 은 비율. delltaTime의 역할이 아님.
-		}
-		*/
-		//6초 있다가 deltaTime * 값 만큼 속도를 곱해서 내려꽃는다
-		/*
-		if (lpObject->elapsedTime > 6.0f)
-		{
-			lpObject->pos.x -= cos(lpObject->angle) * lpObject->speed * deltaTime * 30.0f;
-			lpObject->pos.y -= sin(lpObject->angle) * lpObject->speed * deltaTime * 30.0f;
-		}
-		*/
-		//6초 있다가 deltaTime * 값 만큼 속도를 곱해서 위쪽으로 꽃는다
-		if (lpObject->elapsedTime > 6.0f)
-		{
-			lpObject->pos.x += cos(lpObject->angle) * lpObject->speed * deltaTime * 30.0f;
-			lpObject->pos.y += sin(lpObject->angle) * lpObject->speed * deltaTime * 30.0f;
+			lpObject->angle = PI / 2;
+			lpObject->pos.x += cos(lpObject->angle) * lpObject->speed * deltaTime / 3;
+			lpObject->pos.y += sin(lpObject->angle) * lpObject->speed * deltaTime / 3;
 		}
 
 	}
-	
 	return moveInfo;
 }
