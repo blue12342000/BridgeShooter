@@ -1,8 +1,9 @@
 #include "BoomerangFactory.h"
 #include "Pattern.h"
 #include"BoomerangPattern.h"
-#include"NormalPattern.h"
+#include"BasicPattern.h"
 #include"Missile.h"
+#include<ctime>
 #include "Unit.h"
 
 //enum PatternNum{ normal,boomerang,leftRain,rightRain,topRain,end }; <- 참고용
@@ -20,11 +21,11 @@ void BoomerangFactory::Init()
 	missile5Timer = 0.0;
 	isShoot = false;
 
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::normal, new NormalPattern()));
+	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::normal, new BasicPattern()));
 	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::boomerang, new BoomerangPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::leftRain, new NormalPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::rightRain, new NormalPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::topRain, new NormalPattern()));
+	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::leftRain, new BasicPattern()));
+	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::rightRain, new BasicPattern()));
+	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::topRain, new BasicPattern()));
 
 	mMissileNum.insert(pair<PatternNum, int>(PatternNum::normal,	1));
 	mMissileNum.insert(pair<PatternNum, int>(PatternNum::boomerang,	16));
@@ -38,7 +39,7 @@ void BoomerangFactory::Init()
 	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::rightRain,	150.0f));
 	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::topRain,	150.0f));
 
-	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::normal, 20.0f));
+	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::normal, 1.0f));
 	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::boomerang, NULL));
 	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::leftRain, NULL));
 	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::rightRain, NULL));
@@ -51,10 +52,10 @@ void BoomerangFactory::Init()
 	mPhase2Duration.insert(pair<PatternNum, float>(PatternNum::topRain, NULL));
 
 	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::normal, NULL));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::boomerang, NULL));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::leftRain, NULL));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::rightRain, NULL));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::topRain, NULL));
+	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::boomerang, 600.0f));
+	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::leftRain, 300.0f));
+	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::rightRain, 320.0f));
+	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::topRain, 450.0f));
 
 }
 
@@ -106,7 +107,7 @@ void BoomerangFactory::Fire(Unit* lpUnit)
 		if (imsiDeltaTime >= 1.0f) {
 			imsiDeltaTime -= 1.0f;
 		}
-		timer += imsiDeltaTime;
+		timer += imsiDeltaTime; 
 		if (timer>= phaseTimeSet)
 		{
 			isFirst = true;
@@ -159,11 +160,9 @@ void BoomerangFactory::FireBoomerang(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::boomerang]; i++)//부메랑패턴
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = lpUnit->pos;
-		lpMissile->angle = 2 * PI * i / mMissileNum[BoomerangFactory::boomerang]+ changeAngle;
-		lpMissile->speed = mMissileSpeed[BoomerangFactory::boomerang];
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->SetMissile("MISSILE_01", lpUnit->pos,
+			2 * PI * i / mMissileNum[BoomerangFactory::boomerang] + changeAngle,
+			mMissileSpeed[BoomerangFactory::boomerang],10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::boomerang]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
@@ -174,11 +173,9 @@ void BoomerangFactory::FireNormal(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::normal]; i++)//일반 미사일
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = lpUnit->pos;
-		lpMissile->angle = lpUnit->angle+ changeAngle;
-		lpMissile->speed = mMissileSpeed[BoomerangFactory::normal];
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->SetMissile("MISSILE_01", lpUnit->pos,
+			lpUnit->angle + changeAngle,
+			mMissileSpeed[BoomerangFactory::normal], 10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::normal]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
@@ -189,7 +186,7 @@ void BoomerangFactory::FireLeftRain(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::leftRain]; i++)// 미사일 ->
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = { 0.0f,(float)WINSIZE_HEIGHT * (float)i / mMissileNum[BoomerangFactory::leftRain] };
+		lpMissile->pos = { 0.0f,(float)(WINSIZE_HEIGHT + 100) * (float)i / mMissileNum[BoomerangFactory::leftRain]  };
 		lpMissile->angle = 0.0f;
 		lpMissile->speed = mMissileSpeed[BoomerangFactory::leftRain];
 		lpMissile->elapsedTime = 0;
@@ -204,7 +201,7 @@ void BoomerangFactory::FireRightRain(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::rightRain]; i++)// 미사일 <-
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = { (float)WINSIZE_WIDTH,(float)WINSIZE_HEIGHT * (float)i / mMissileNum[BoomerangFactory::rightRain] };
+		lpMissile->pos = { (float)WINSIZE_WIDTH,(float)(WINSIZE_HEIGHT+200) * (float)i / mMissileNum[BoomerangFactory::rightRain] };
 		lpMissile->angle = PI;
 		lpMissile->speed = mMissileSpeed[BoomerangFactory::rightRain];
 		lpMissile->elapsedTime = 0;
@@ -233,10 +230,10 @@ void BoomerangFactory::FirePhase1(void)
 {
 	CheckFire();
 	missile1Timer += imsiDeltaTime;
-	changeAngle += imsiDeltaTime * changeAngleSpeed;
-	while (missile1Timer >= mPhase2Duration[BoomerangFactory::normal])
+	changeAngle =(rand()%(int)(2*PI*1000))/1000.0f;
+	if (missile1Timer >= mPhase1Duration[BoomerangFactory::normal])
 	{
-		missile1Timer -= mPhase2Duration[BoomerangFactory::normal];
+		missile1Timer -= mPhase1Duration[BoomerangFactory::normal];
 		isShoot = false;
 	}
 	if (changeAngle > (2 * PI))
@@ -259,7 +256,7 @@ void BoomerangFactory::FirePhase2(void)
 	CheckFire();
 	missile2Timer += imsiDeltaTime;
 	changeAngle += imsiDeltaTime * changeAngleSpeed;
-	while (missile2Timer >= mPhase2Duration[BoomerangFactory::boomerang])
+	if (missile2Timer >= mPhase2Duration[BoomerangFactory::boomerang])
 	{
 		missile2Timer -= mPhase2Duration[BoomerangFactory::boomerang];
 		isShoot = false;
@@ -282,12 +279,55 @@ void BoomerangFactory::FirePhase2(void)
 void BoomerangFactory::FirePhase3(void)
 {
 	CheckFire();
-	patternNum = PatternNum::end;
+	PatternNum patNum= PatternNum::end;
+	missile1Timer += imsiDeltaTime;
+	missile2Timer += imsiDeltaTime;
+	missile3Timer += imsiDeltaTime;
+	missile4Timer += imsiDeltaTime;
+	changeAngle += imsiDeltaTime * changeAngleSpeed;
+	if (missile1Timer >= mPhase3Duration[BoomerangFactory::boomerang])
+	{
+		missile1Timer -= mPhase3Duration[BoomerangFactory::boomerang];
+		patNum = PatternNum::boomerang;
+		isShoot = false;
+	}
+	if (missile2Timer >= mPhase3Duration[BoomerangFactory::rightRain])
+	{
+		missile2Timer -= mPhase3Duration[BoomerangFactory::rightRain];
+		patNum = PatternNum::rightRain;
+		isShoot = false;
+	}
+	if (missile3Timer >= mPhase3Duration[BoomerangFactory::leftRain])
+	{
+		missile3Timer -= mPhase3Duration[BoomerangFactory::leftRain];
+		patNum = PatternNum::leftRain;
+		isShoot = false;
+	}
+	if (missile4Timer >= mPhase3Duration[BoomerangFactory::topRain])
+	{
+		missile4Timer -= mPhase3Duration[BoomerangFactory::topRain];
+		patNum = PatternNum::topRain;
+		isShoot = false;
+	}
+	if (changeAngle > (2 * PI))
+	{
+		changeAngle -= (2 * PI);
+	}
+	if (!isShoot)
+	{
+		patternNum = patNum;
+		isShoot = true;
+	}
+	else
+	{
+		patternNum = PatternNum::end;
+	}
 }
 
 void BoomerangFactory::CheckFire(void)
 {
 	if (isFirst) {
+		srand(time(NULL));
 		missile1Timer = 0.0f;
 		missile5Timer = 0.0f;
 		missile4Timer = 0.0f;
