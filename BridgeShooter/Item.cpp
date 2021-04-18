@@ -57,7 +57,7 @@ void Item::Update(float deltaTime)
 
 	elapsedTime += deltaTime;
 
-	collider.SetHitBox(pos, 100, 100);
+	collider.SetHitBox(pos, { 0,0 },100, 100);
 }
 
 void Item::Render(HDC hdc)

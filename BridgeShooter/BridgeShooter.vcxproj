@@ -162,6 +162,7 @@
     <ClCompile Include="Planet_KMS.cpp" />
     <ClCompile Include="Planet_SSJ.cpp" />
     <ClCompile Include="ReflectPattern.cpp" />
+    <ClCompile Include="ReverseSinePattern.cpp" />
     <ClCompile Include="ReverseSpiralPattern.cpp" />
     <ClCompile Include="SineFactory.cpp" />
     <ClCompile Include="SinePattern.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Planet_KMS.h" />
     <ClInclude Include="Planet_SSJ.h" />
     <ClInclude Include="ReflectPattern.h" />
+    <ClInclude Include="ReverseSinePattern.h" />
     <ClInclude Include="ReverseSpiralPattern.h" />
     <ClInclude Include="SineFactory.h" />
     <ClInclude Include="SinePattern.h" />

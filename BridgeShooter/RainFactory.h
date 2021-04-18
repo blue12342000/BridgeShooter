@@ -10,6 +10,10 @@ private:
 	{
 		RFCP_BASIC,
 		RFCP_RAIN,
+		RFCP_SPIRAL,
+		RFCP_RSPIRAL,
+		RFCP_SINE,
+		RFCP_RSINE,
 		RFCP_NONE
 	};
 private:
