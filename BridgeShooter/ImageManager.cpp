@@ -28,7 +28,7 @@ HRESULT ImageManager::Init()
     mLpImageDatas["MISSILE_02"]->RotateInit("Image/Missile/Missile_02.bmp", 40 / 2, 40 / 2, 1, 1, 1, 36);
 
     mLpImageDatas.insert(make_pair("MISSILE_03", new Image()));
-    mLpImageDatas["MISSILE_03"]->Init("Image/Missile/Missile_03.bmp", 14, 17, 1, 1, 1, true);
+    mLpImageDatas["MISSILE_03"]->RotateInit("Image/Missile/Missile_03.bmp", 14, 17, 1, 1, 1, 36);
 
     mLpImageDatas.insert(make_pair("PLANET_SSJ", new Image()));
     mLpImageDatas["PLANET_SSJ"]->Init("Image/Unit/Planet/Planet_SSJ.bmp", 20000, 266, 50, 1, 50, true, RGB(255, 0, 255));
