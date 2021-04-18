@@ -10,7 +10,7 @@ MoveInfo RainPattern::Move(float deltaTime, GameObject* lpObject)
 	if (lpObject)
 	{
 		//왼쪽으로 얼마나 나가서 멈추느냐
-		if (lpObject->elapsedTime < 4.0f)
+		if (lpObject->elapsedTime < 4.5f)
 		{
 			lpObject->pos.x -= cosf(lpObject->angle) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4;
 			lpObject->pos.y -= sinf(lpObject->angle) * lpObject->speed * deltaTime * lpObject->elapsedTime / 4; // elapsedTime 은 비율. delltaTime의 역할이 아님.
@@ -18,6 +18,7 @@ MoveInfo RainPattern::Move(float deltaTime, GameObject* lpObject)
 
 		if (lpObject->elapsedTime > 5.0f)
 		{
+			//현세씨 코드랑 머지하고 나서 SetPattern으로 수정할것
 			lpObject->angle = PI / 2;
 			lpObject->pos.x += cos(lpObject->angle) * lpObject->speed * deltaTime / 3;
 			lpObject->pos.y += sin(lpObject->angle) * lpObject->speed * deltaTime / 3;

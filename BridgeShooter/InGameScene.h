@@ -17,6 +17,8 @@ private:
 
 	Unit* lpJinHwang;
 
+	Item* lpItem;		// 아이템은 어디에 속하는가.
+
 	Image* lpBackBuffer;
 	Image* lpBackImage;		//배경
 	Image* lpBackImage2;	//스크롤용 배경

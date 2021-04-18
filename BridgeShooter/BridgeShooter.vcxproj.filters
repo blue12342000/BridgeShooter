@@ -126,11 +126,9 @@
     <ClCompile Include="JinHwang.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-
     <ClCompile Include="Planet04Factory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-
     <ClCompile Include="ReflectPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -143,15 +141,12 @@
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-
     <ClCompile Include="ReverseSpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-
     <ClCompile Include="JinHwangFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -256,7 +251,6 @@
     <ClInclude Include="SSJFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
-
     <ClInclude Include="ReverseSpiralPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
@@ -265,8 +259,6 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
-
     </ClInclude>
->>>>>>> main
   </ItemGroup>
 </Project>
