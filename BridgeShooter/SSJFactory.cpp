@@ -9,15 +9,19 @@
 #include "SinePattern.h"
 #include "ReflectPattern.h"
 #include "DelayBasicPattern.h"
+#include "BridgeShooter.h"
+
 
 void SSJFactory::Init()
 {
-	lpPattern1 = new BasicPattern();
-	lpPattern2 = new SpiralPattern();
-	lpPattern3 = new ReverseSpiralPattern();
-	lpPattern4 = new SinePattern();
-	lpPattern5 = new ReflectPattern();
-	lpPattern6 = new DelayBasicPattern(); 
+	vLpPatterns.resize(CREATE_PATTERN::SFCP_NONE);
+	vLpPatterns[CREATE_PATTERN::SFCP_BASIC] = new BasicPattern();
+	vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL] = new SpiralPattern();
+	vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL] = new ReverseSpiralPattern();
+	vLpPatterns[CREATE_PATTERN::SFCP_SINE] = new SinePattern();
+	vLpPatterns[CREATE_PATTERN::SFCP_REFLECT] = new ReflectPattern();
+	vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC] = new DelayBasicPattern();
+
 	createLine = 0;
 	delayTime_0 = 0;
 
@@ -27,12 +31,11 @@ void SSJFactory::Init()
 
 void SSJFactory::Release()
 {
-	if (lpPattern1) delete lpPattern1; lpPattern1 = nullptr;
-	if (lpPattern2) delete lpPattern2; lpPattern2 = nullptr;
-	if (lpPattern3) delete lpPattern3; lpPattern3 = nullptr;
-	if (lpPattern4) delete lpPattern4; lpPattern4 = nullptr;
-	if (lpPattern5) delete lpPattern5; lpPattern5 = nullptr;
-	if (lpPattern6) delete lpPattern6; lpPattern6 = nullptr;
+	for (auto& lpPattern : vLpPatterns)
+	{
+		delete lpPattern;
+	}
+	vLpPatterns.clear();
 }
 
 void SSJFactory::Fire(Unit* lpUnit)
@@ -53,17 +56,10 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 36; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->pos = lpUnit->pos;
+				lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle, 200, 14);
 				lpMissile->angle = lpUnit->angle - 2 * PI / 36 * i;
-				lpMissile->speed = 200;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern1);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 
@@ -74,17 +70,10 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 8; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->pos = lpUnit->pos;
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 300, 14);
 				lpMissile->angle = lpUnit->angle - 2 * PI / 8 * i;
-				lpMissile->speed = 300;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern2);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				
 			}
@@ -92,17 +81,10 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 8; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->pos = lpUnit->pos;
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 300, 14);
 				lpMissile->angle = lpUnit->angle - 2 * PI / 8 * i;
-				lpMissile->speed = 300;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern3);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL]);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
@@ -118,89 +100,60 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->pos = lpUnit->pos;
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 500, 14);
+				//lpMissile->pos = lpUnit->pos;
 				lpMissile->angle = lpUnit->angle - 2 * PI / 6 * i;
-				lpMissile->speed = 500;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern4);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 500, 14);
 				lpMissile->pos.x = lpUnit->pos.x + 300;
 				lpMissile->pos.y = lpUnit->pos.y - 300;
 				lpMissile->angle = lpUnit->angle - 2 * PI / 6 * i;
-				lpMissile->speed = 500;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern4);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
 				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 500, 14);
 				lpMissile->pos.x = lpUnit->pos.x - 300;
 				lpMissile->pos.y = lpUnit->pos.y - 300;
 				lpMissile->angle = lpUnit->angle - 2 * PI / 6 * i;
-				lpMissile->speed = 500;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern4);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 500, 14);
 				lpMissile->pos.x = lpUnit->pos.x - 300;
 				lpMissile->pos.y = lpUnit->pos.y + 300;
 				lpMissile->angle = lpUnit->angle - 2 * PI / 6 * i;
-				lpMissile->speed = 500;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern4);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 500, 14);
 				lpMissile->pos.x = lpUnit->pos.x + 300;
 				lpMissile->pos.y = lpUnit->pos.y + 300;
 				lpMissile->angle = lpUnit->angle - 2 * PI / 6 * i;
-				lpMissile->speed = 500;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(lpPattern4);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->collider.width = 14;
-				lpMissile->collider.height = 14;
-				lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
@@ -209,34 +162,20 @@ void SSJFactory::Fire(Unit* lpUnit)
 		if(delayTime_0 % 51 == 0)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->pos = lpUnit->pos;
+			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle, 500, 14);
 			lpMissile->angle = lpUnit->angle - 2 * PI / 5*4;
-			lpMissile->speed = 500;
-			lpMissile->elapsedTime = 0;
-			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_03");
-			lpMissile->deltaMove.deltaPos = { 0,  0 };
-			lpMissile->SetPattern(lpPattern5);
+			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REFLECT]);
 			lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-			lpMissile->collider.width = 14;
-			lpMissile->collider.height = 14;
-			lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
 		//반사 레이저
 		else if (delayTime_0 % 71 == 0)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->pos = lpUnit->pos;
+			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle, 500, 14);
 			lpMissile->angle = lpUnit->angle - 2 * PI / 5 * 1;
-			lpMissile->speed = 500;
-			lpMissile->elapsedTime = 0;
-			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_03");
-			lpMissile->deltaMove.deltaPos = { 0,  0 };
-			lpMissile->SetPattern(lpPattern5);
+			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REFLECT]);
 			lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-			lpMissile->collider.width = 14;
-			lpMissile->collider.height = 14;
-			lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
 	}
@@ -244,7 +183,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 	//3페이즈
 	else if (createLine == 2)
 	{
-		if (delayTime_0 % 1000 == 0)
+		if (delayTime_0 % 2000 == 0)
 		{
 			for (int j = 0; j < 10; ++j)
 			{
@@ -253,18 +192,11 @@ void SSJFactory::Fire(Unit* lpUnit)
 					if (patternArray[i + j * 20] == 1)
 					{
 						Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-						lpMissile->pos = lpUnit->pos;
-						lpMissile->angle = lpUnit->angle - PI*4/5 - 0.06 * i;
-						lpMissile->speed = 200;
-						lpMissile->elapsedTime = 0;
-						lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-						lpMissile->deltaMove.deltaPos = { 0,  0 };
-						lpMissile->SetPattern(lpPattern6);
-						lpMissile->SetDelayTime(0.3f * j);
+						lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle, 200, 14);
+						lpMissile->angle = lpUnit->angle - PI*4/5 - 0.05 * i;
+						lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC]);
+						lpMissile->SetDelayTime(0.07f * j);
 						lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-						lpMissile->collider.width = 14;
-						lpMissile->collider.height = 14;
-						lpMissile->collider.SetHitBox(lpMissile->pos, lpMissile->deltaMove.deltaPos, 14, 14);
 						MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 					}
 					else

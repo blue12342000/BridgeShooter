@@ -16,12 +16,12 @@ void Planet_SSJ::Init()
 
 void Planet_SSJ::Update(float deltaTime)
 {
-	//lpImage = ImageManager::GetSingleton()->FindImage("PLANET_SSJ");
-
 	Fire();
 
 	lpAnimation->Update(deltaTime);
 	elapsedTime += deltaTime;
+
+	collider.SetHitBox(pos, { 0,0 }, 100, 100);
 }
 
 void Planet_SSJ::Render(HDC hdc)

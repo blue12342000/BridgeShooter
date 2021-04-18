@@ -138,9 +138,6 @@
     <ClCompile Include="SpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="SSJFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="ReverseSpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -153,8 +150,12 @@
     <ClCompile Include="Animation.cpp">
       <Filter>소스 파일\Engine</Filter>
     </ClCompile>
+
     <ClCompile Include="ReverseSinePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SSJFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,8 @@ private:
 
 	float backgroundMover;
 	bool isOnlyPlayer;
-	bool isCollision;
+	bool isEnemyHitPlayer;
+	bool isPlayerHitEnemy;
 
 public:
 	HRESULT Init();
