@@ -17,21 +17,24 @@ private:
 
 	Unit* lpJinHwang;
 
-	Item* lpItem;		// 아이템은 어디에 속하는가.
+	Item* lpItem;		// ???????? ??? ????°?.
 
 	Image* lpBackBuffer;
-	Image* lpBackImage;		//배경
-	Image* lpBackImage2;	//스크롤용 배경
+	Image* lpBackImage;		//???
+	Image* lpBackImage2;	//?????? ???
 	int frame;
 	float elapsedTime;
 	
 
 	float backgroundMover;
+	bool isOnlyPlayer;
+	bool isCollision;
 
 public:
 	HRESULT Init();
 	void Release();
 	void Update(float deltaTime);
 	void Render(HDC hdc);
+	void CheckCollision();
 };
 
