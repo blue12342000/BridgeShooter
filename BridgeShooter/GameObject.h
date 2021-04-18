@@ -19,24 +19,24 @@ struct Collider
 	{
 		if (width > 0)
 		{
-			hitBox.left = pos.x - width / 2;
-			hitBox.right = pos.x + width / 2;
+			hitBox.left = (int)(pos.x - width / 2);
+			hitBox.right = (int)(pos.x + width / 2);
 		}
 		else
 		{
-			hitBox.left = pos.x;
-			hitBox.right = pos.x;
+			hitBox.left = (int)pos.x;
+			hitBox.right = (int)pos.x;
 		}
 
 		if (height > 0)
 		{
-			hitBox.top = pos.y - height / 2;
-			hitBox.bottom = pos.y + height / 2;
+			hitBox.top = (int)(pos.y - height / 2);
+			hitBox.bottom = (int)(pos.y + height / 2);
 		}
 		else
 		{
-			hitBox.left = pos.x;
-			hitBox.right = pos.x;
+			hitBox.left = (int)pos.x;
+			hitBox.right = (int)pos.x;
 		}
 	}
 };
