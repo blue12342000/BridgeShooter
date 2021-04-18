@@ -145,6 +145,7 @@
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
+    <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
