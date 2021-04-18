@@ -1,30 +1,16 @@
 #pragma once
 #include"GameObject.h"
 
-enum class UNIT_STATE
-{
-	IDLE,
-	MOVE_LEFT,
-	MOVE_RIGHT,
-	NONE
-};
-
-class Image;
+class Animation;
 class Factory;
 class Unit : public GameObject
 {
 protected:
-	UNIT_STATE state;
-	int frame;
-
-	float motionTimer;
-	float motionSpeed;
-
-	Image* lpImage;
+	Animation* lpAnimation;
 	Factory* lpFactory;
 
 public:
-	Unit(): GameObject(), frame(0), lpImage(nullptr), lpFactory(nullptr) {}
+	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr) {}
 	virtual ~Unit() {}
 
 	virtual void Init() override;

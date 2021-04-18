@@ -258,7 +258,7 @@ HRESULT Image::Reverse(const Image& target)
     {
         for (int x = 0; x < lpImageInfo->maxFrameX; ++x)
         {
-            StretchBlt(lpImageInfo->vHMemDC[0], (x + 1) * lpImageInfo->width, y * lpImageInfo->height, -lpImageInfo->width, lpImageInfo->height,
+            StretchBlt(lpImageInfo->vHMemDC[0], (x + 1) * lpImageInfo->width - 1, y * lpImageInfo->height, -lpImageInfo->width, lpImageInfo->height,
                 target.lpImageInfo->vHMemDC[0], x * lpImageInfo->width, y * lpImageInfo->height, lpImageInfo->width, lpImageInfo->height, SRCCOPY);
         }
     }

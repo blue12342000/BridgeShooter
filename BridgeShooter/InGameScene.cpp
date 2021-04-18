@@ -113,7 +113,7 @@ void InGameScene::Render(HDC hdc)
 
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
-    if (lpJinHwang) lpJinHwang->Render(hBackDC);
+    //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);

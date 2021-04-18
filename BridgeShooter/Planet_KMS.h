@@ -7,7 +7,6 @@ private:
 public:
 	virtual void Init() ;
 	virtual void Update(float deltaTime) ;
-	virtual void Release() ;
 	virtual void Render(HDC hdc) ;
 };
 
