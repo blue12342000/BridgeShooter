@@ -1,4 +1,4 @@
-#include "Planet04.h"	//배용진 행성
+#include "Planet04.h"	//????? ??
 #include "Planet04Factory.h"
 #include "Animation.h"
 
@@ -23,7 +23,7 @@ void Planet04::Update(float deltaTime)
 	}
 
 	lpAnimation->Update(deltaTime);
-	collider.SetHitBox(pos, 180, 180);
+	//collider.SetHitBox(pos, 180, 180);
 	elapsedTime += deltaTime;
 }
 

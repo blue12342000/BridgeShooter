@@ -6,6 +6,7 @@
 #include "JinHwang.h"
 #include "Planet_KMS.h"
 #include "Item.h"
+#include "Missile.h"
 
 HRESULT InGameScene::Init()
 {
@@ -36,6 +37,7 @@ HRESULT InGameScene::Init()
     elapsedTime = 0;
         
     backgroundMover = 0;
+    isCollision = false;
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
@@ -90,17 +92,32 @@ void InGameScene::Release()
 
 void InGameScene::Update(float deltaTime)
 {
+    if (KeyManager::GetSingleton()->IsKeyDownOne('M'))
+    {
+        isOnlyPlayer = !isOnlyPlayer;
+    }
+
+
+    CheckCollision();
+
     if (lpPlayer) lpPlayer->Update(deltaTime);
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+      if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
-    backgroundMover += 0.1f;
+    
+    
+    
+
+    backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
+
+
 }
 
 void InGameScene::Render(HDC hdc)
@@ -112,14 +129,41 @@ void InGameScene::Render(HDC hdc)
 
     if (lpPlayer) lpPlayer->Render(hBackDC);
 
-    if (lpPlanet04) lpPlanet04->Render(hBackDC);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
+    if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
+    //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
 
     MissileManager::GetSingleton()->Render(hBackDC);
+    
+    if (isCollision)
+        lpJinHwang->Render(hBackDC);
 
     lpBackBuffer->Render(hdc);
+   
+}
+
+void InGameScene::CheckCollision()
+{
+    isCollision = false;
+    vector<Missile*>& vlpMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+    
+    float distance = 100.0f;
+    float dX = 0;
+    float dY = 0;
+
+    for (int i = 0; i < vlpMissile.size(); ++i)
+    {
+        dX = vlpMissile[i]->pos.x - lpPlayer->pos.x;
+        dY = vlpMissile[i]->pos.y - lpPlayer->pos.y;
+        distance = sqrt(dX * dX + dY * dY);
+
+        if (distance <= vlpMissile[i]->collider.width/2 + lpPlayer->collider.width/2)
+        {
+            isCollision = true;
+        }
+    }
+
 }

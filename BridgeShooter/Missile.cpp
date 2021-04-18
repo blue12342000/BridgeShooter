@@ -14,7 +14,7 @@ void Missile::Update(float deltaTime)
 {
 	Move(deltaTime);
 
-	collider.SetHitBox(pos);
+	collider.SetHitBox(pos, this->deltaMove.deltaPos);
 
 	elapsedTime += deltaTime;
 }
@@ -25,7 +25,11 @@ void Missile::Release()
 
 void Missile::Render(HDC hdc)
 {
+	
 	if (lpImage) lpImage->RotateRender(hdc, pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y, deltaMove.angle);
+	if(isDebugMode)
+		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);
+	
 }
 
 void Missile::Move(float deltaTime)
@@ -33,7 +37,7 @@ void Missile::Move(float deltaTime)
 	if (lpPattern) deltaMove = lpPattern->Move(deltaTime, this);
 }
 
-void Missile::SetMissile(string ImageKey, POINTFLOAT pos, float angle, float speed, int size, float delayTime)
+void Missile::SetMissile(string ImageKey, POINTFLOAT pos, POINTFLOAT deltaPos, float angle, float speed, int size, float delayTime)
 {
 	this->isActive = true;
 	this->elapsedTime = 0;
@@ -42,7 +46,7 @@ void Missile::SetMissile(string ImageKey, POINTFLOAT pos, float angle, float spe
 	this->pos = pos;
 	this->angle = angle;
 	this->speed = speed;
-	this->deltaMove = { 0, 0 };
-	collider.SetHitBox(pos, size, size);
+	collider.SetHitBox(pos, deltaPos, size, size);
+	
 	lpPattern = nullptr;
 }

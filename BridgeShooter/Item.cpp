@@ -54,9 +54,10 @@ void Item::Update(float deltaTime)
             lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
     }
 
+
 	elapsedTime += deltaTime;
 
-	collider.SetHitBox(pos, 50, 50);
+	collider.SetHitBox(pos, 100, 100);
 }
 
 void Item::Render(HDC hdc)
@@ -68,7 +69,7 @@ void Item::Render(HDC hdc)
 	}
 }
 
-//ReflectPattern을 때려박아서 만듬
+//ReflectPattern
 void Item::Move(float deltaTime)
 {
 

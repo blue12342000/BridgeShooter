@@ -15,28 +15,32 @@ struct Collider
 	int height;
 	RECT hitBox;
 
-	void SetHitBox(POINTFLOAT pos, int width = -1, int height = -1)
+	void SetHitBox(POINTFLOAT pos, POINTFLOAT deltaPos = { 0,0 }, int width = -1, int height = -1)
 	{
+		//width 값 갱신 this에 있는 내 width 값으로
 		if (width > 0)
 		{
-			hitBox.left = (int)(pos.x - width / 2);
-			hitBox.right = (int)(pos.x + width / 2);
+			this->width = width;
+			hitBox.left = (int)(pos.x + deltaPos.x - width / 2);
+			hitBox.right = (int)(pos.x + deltaPos.x + width / 2);
 		}
 		else
 		{
-			hitBox.left = (int)pos.x;
-			hitBox.right = (int)pos.x;
+			hitBox.left = (int)(pos.x  + deltaPos.x - this->width / 2);
+			hitBox.right = (int)(pos.x  + deltaPos.x + this->width / 2);
 		}
 
 		if (height > 0)
 		{
-			hitBox.top = (int)(pos.y - height / 2);
-			hitBox.bottom = (int)(pos.y + height / 2);
+			this->height = height;
+			hitBox.top = (int)(pos.y + deltaPos.y - height / 2);
+			hitBox.bottom = (int)(pos.y + deltaPos.y + height / 2);
 		}
 		else
 		{
-			hitBox.left = (int)pos.x;
-			hitBox.right = (int)pos.x;
+			
+			hitBox.top = (int)(pos.y + deltaPos.y - this->height / 2);
+			hitBox.bottom = (int)(pos.y + deltaPos.y + this->height / 2);
 		}
 	}
 };
