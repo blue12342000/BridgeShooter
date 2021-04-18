@@ -27,6 +27,7 @@ private:
 	
 
 	float backgroundMover;
+	bool isOnlyPlayer;
 
 public:
 	HRESULT Init();
