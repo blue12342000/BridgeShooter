@@ -5,9 +5,14 @@ HRESULT Image::Init(int width, int height)
     HDC hdc = GetDC(g_hWnd);
 
     lpImageInfo = new ImageInfo();
+
+    splitAngle = 1;
+    lpImageInfo->vHMemDC.resize(splitAngle);
+    lpImageInfo->vHBitmap.resize(splitAngle);
+
     lpImageInfo->resID = 0;
-    lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
-    lpImageInfo->hBitmap = CreateCompatibleBitmap(hdc, width, height);
+    lpImageInfo->vHMemDC[0] = CreateCompatibleDC(hdc);
+    lpImageInfo->vHBitmap[0] = CreateCompatibleBitmap(hdc, width, height);
     lpImageInfo->width = width;
     lpImageInfo->height = height;
     lpImageInfo->loadType = IMAGE_LOAD_TYPE::EMPTY;
@@ -16,10 +21,10 @@ HRESULT Image::Init(int width, int height)
     lpImageInfo->maxFrameY = 1;
     lpImageInfo->totalFrame = 1;
 
-    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
+    DeleteObject(SelectObject(lpImageInfo->vHMemDC[0], lpImageInfo->vHBitmap[0]));
     ReleaseDC(g_hWnd, hdc);
 
-    if (lpImageInfo->hBitmap == NULL)
+    if (lpImageInfo->vHBitmap[0] == NULL)
     {
         Release();
         return E_FAIL;
@@ -30,6 +35,7 @@ HRESULT Image::Init(int width, int height)
 
     lpBlendInfo = nullptr;
 
+
     return S_OK;
 }
 
@@ -39,8 +45,13 @@ HRESULT Image::Init(string fileName, int width, int height, bool isTransparent, 
 
     lpImageInfo = new ImageInfo();
     lpImageInfo->resID = 0;
-    lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
-    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+
+    splitAngle = 1;
+    lpImageInfo->vHMemDC.resize(splitAngle);
+    lpImageInfo->vHBitmap.resize(splitAngle);
+
+    lpImageInfo->vHMemDC[0] = CreateCompatibleDC(hdc);
+    lpImageInfo->vHBitmap[0] = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
     lpImageInfo->width = width;
     lpImageInfo->height = height;
     lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
@@ -49,10 +60,10 @@ HRESULT Image::Init(string fileName, int width, int height, bool isTransparent, 
     lpImageInfo->maxFrameY = 1;
     lpImageInfo->totalFrame = 1;
 
-    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
+    DeleteObject(SelectObject(lpImageInfo->vHMemDC[0], lpImageInfo->vHBitmap[0]));
     ReleaseDC(g_hWnd, hdc);
 
-    if (lpImageInfo->hBitmap == NULL)
+    if (lpImageInfo->vHBitmap[0] == NULL)
     {
         Release();
         return E_FAIL;
@@ -76,8 +87,13 @@ HRESULT Image::Init(string fileName, int width, int height, int maxFrameX, int m
 
     lpImageInfo = new ImageInfo();
     lpImageInfo->resID = 0;
-    lpImageInfo->hMemDC = CreateCompatibleDC(hdc);
-    lpImageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+
+    splitAngle = 1;
+    lpImageInfo->vHMemDC.resize(splitAngle);
+    lpImageInfo->vHBitmap.resize(splitAngle);
+
+    lpImageInfo->vHMemDC[0] = CreateCompatibleDC(hdc);
+    lpImageInfo->vHBitmap[0] = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
     lpImageInfo->width = width / maxFrameX;
     lpImageInfo->height = height / maxFrameY;
     lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
@@ -86,10 +102,10 @@ HRESULT Image::Init(string fileName, int width, int height, int maxFrameX, int m
     lpImageInfo->maxFrameY = maxFrameY;
     lpImageInfo->totalFrame = totalFrame;
 
-    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
+    DeleteObject(SelectObject(lpImageInfo->vHMemDC[0], lpImageInfo->vHBitmap[0]));
     ReleaseDC(g_hWnd, hdc);
 
-    if (lpImageInfo->hBitmap == NULL)
+    if (lpImageInfo->vHBitmap[0] == NULL)
     {
         Release();
         return E_FAIL;
@@ -107,12 +123,105 @@ HRESULT Image::Init(string fileName, int width, int height, int maxFrameX, int m
     return S_OK;
 }
 
+HRESULT Image::RotateInit(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, int splitAngle)
+{
+    HDC hdc = GetDC(g_hWnd);
+
+    int reSize = (int)ceil(sqrt(width / maxFrameX * width / maxFrameX + height / maxFrameY * height / maxFrameY));
+
+    lpImageInfo = new ImageInfo();
+    lpImageInfo->resID = 0;
+    lpImageInfo->width = width / maxFrameX;
+    lpImageInfo->height = height / maxFrameY;
+    lpImageInfo->loadType = IMAGE_LOAD_TYPE::FILE;
+
+    lpImageInfo->maxFrameX = maxFrameX;
+    lpImageInfo->maxFrameY = maxFrameY;
+    lpImageInfo->totalFrame = totalFrame;
+
+    this->splitAngle = splitAngle;
+    lpImageInfo->vHMemDC.resize(splitAngle);
+    lpImageInfo->vHBitmap.resize(splitAngle);
+
+    HDC hTempDC = CreateCompatibleDC(hdc);
+    HBITMAP hTempBitmap = (HBITMAP)LoadImage(g_hInstance, fileName.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+    HBRUSH hTempBrush = CreateSolidBrush(RGB(255, 0, 255));
+    DeleteObject(SelectObject(hTempDC, hTempBitmap));
+    XFORM xForm, xOldForm;
+    float angle = 0;
+    for (int i = 0; i < splitAngle; ++i)
+    {
+        lpImageInfo->vHMemDC[i] = CreateCompatibleDC(hTempDC);
+        lpImageInfo->vHBitmap[i] = CreateCompatibleBitmap(hTempDC, reSize * maxFrameX, reSize * maxFrameY);
+        DeleteObject(SelectObject(lpImageInfo->vHMemDC[i], lpImageInfo->vHBitmap[i]));
+        DeleteObject(SelectObject(lpImageInfo->vHMemDC[i], hTempBrush));
+
+        PatBlt(lpImageInfo->vHMemDC[i], 0, 0, reSize * maxFrameX, reSize * maxFrameY, PATCOPY);
+
+        angle = PI * 2 / splitAngle * i;
+        xForm.eM11 = cosf(angle); xForm.eM12 = sinf(angle);
+        xForm.eM21 = -sinf(angle); xForm.eM22 = cosf(angle);
+        xForm.eDx = (reSize - cos(angle) * lpImageInfo->width + sin(angle) * lpImageInfo->height) / 2;
+        xForm.eDy = (reSize - cos(angle) * lpImageInfo->height - sin(angle) * lpImageInfo->width) / 2;
+
+        SetGraphicsMode(lpImageInfo->vHMemDC[i], GM_ADVANCED);
+        GetWorldTransform(lpImageInfo->vHMemDC[i], &xOldForm);
+        SetWorldTransform(lpImageInfo->vHMemDC[i], &xForm);
+
+        StretchBlt(
+            lpImageInfo->vHMemDC[i],
+            0, 0,
+            lpImageInfo->width,
+            lpImageInfo->height,
+            hTempDC,
+            0,
+            0,
+            lpImageInfo->width,
+            lpImageInfo->height,
+            SRCCOPY
+        );
+
+        SetWorldTransform(lpImageInfo->vHMemDC[i], &xOldForm);
+        SetGraphicsMode(lpImageInfo->vHMemDC[i], GM_COMPATIBLE);
+    }
+    DeleteObject(hTempBrush);
+    DeleteObject(hTempBitmap);
+    DeleteDC(hTempDC);
+
+    lpImageInfo->width = reSize;
+    lpImageInfo->height = reSize;
+
+    ReleaseDC(g_hWnd, hdc);
+
+    if (lpImageInfo->vHBitmap[0] == NULL)
+    {
+        Release();
+        return E_FAIL;
+    }
+
+    lpImageInfo->isTransparent = true;
+    lpImageInfo->transColor = RGB(255, 0, 255);
+
+    lpBlendInfo = new BlendInfo();
+    lpBlendInfo->blendFunc.AlphaFormat = 0;
+    lpBlendInfo->blendFunc.BlendFlags = 0;
+    lpBlendInfo->blendFunc.BlendOp = AC_SRC_OVER;
+    lpBlendInfo->blendFunc.SourceConstantAlpha = 255;
+
+    return S_OK;
+}
+
 HRESULT Image::Reverse(const Image& target)
 {
     lpImageInfo = new ImageInfo();
     lpImageInfo->resID = target.lpImageInfo->resID;
-    lpImageInfo->hMemDC = CreateCompatibleDC(target.lpImageInfo->hMemDC);
-    lpImageInfo->hBitmap = CreateCompatibleBitmap(target.lpImageInfo->hMemDC, target.lpImageInfo->width * target.lpImageInfo->maxFrameX, target.lpImageInfo->height * target.lpImageInfo->maxFrameY);
+
+    splitAngle = target.splitAngle;
+    lpImageInfo->vHMemDC.resize(splitAngle);
+    lpImageInfo->vHBitmap.resize(splitAngle);
+
+    lpImageInfo->vHMemDC[0] = CreateCompatibleDC(target.lpImageInfo->vHMemDC[0]);
+    lpImageInfo->vHBitmap[0] = CreateCompatibleBitmap(target.lpImageInfo->vHMemDC[0], target.lpImageInfo->width * target.lpImageInfo->maxFrameX, target.lpImageInfo->height * target.lpImageInfo->maxFrameY);
     lpImageInfo->width = target.lpImageInfo->width;
     lpImageInfo->height = target.lpImageInfo->height;
     lpImageInfo->loadType = target.lpImageInfo->loadType;
@@ -121,9 +230,9 @@ HRESULT Image::Reverse(const Image& target)
     lpImageInfo->maxFrameY = target.lpImageInfo->maxFrameY;
     lpImageInfo->totalFrame = target.lpImageInfo->totalFrame;
 
-    DeleteObject(SelectObject(lpImageInfo->hMemDC, lpImageInfo->hBitmap));
+    DeleteObject(SelectObject(lpImageInfo->vHMemDC[0], lpImageInfo->vHBitmap[0]));
 
-    if (lpImageInfo->hBitmap == NULL)
+    if (lpImageInfo->vHBitmap[0] == NULL)
     {
         Release();
         return E_FAIL;
@@ -149,8 +258,8 @@ HRESULT Image::Reverse(const Image& target)
     {
         for (int x = 0; x < lpImageInfo->maxFrameX; ++x)
         {
-            StretchBlt(lpImageInfo->hMemDC, (x + 1) * lpImageInfo->width, y * lpImageInfo->height, -lpImageInfo->width, lpImageInfo->height,
-                target.lpImageInfo->hMemDC, x * lpImageInfo->width, y * lpImageInfo->height, lpImageInfo->width, lpImageInfo->height, SRCCOPY);
+            StretchBlt(lpImageInfo->vHMemDC[0], (x + 1) * lpImageInfo->width, y * lpImageInfo->height, -lpImageInfo->width, lpImageInfo->height,
+                target.lpImageInfo->vHMemDC[0], x * lpImageInfo->width, y * lpImageInfo->height, lpImageInfo->width, lpImageInfo->height, SRCCOPY);
         }
     }
 
@@ -170,12 +279,12 @@ void Image::Render(HDC hdc, int destX, int destY, int frame, UINT uFlag)
     if (lpImageInfo->isTransparent)
     {
         GdiTransparentBlt(hdc, destX, destY,lpImageInfo->width, lpImageInfo->height,
-            lpImageInfo->hMemDC, lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
+            lpImageInfo->vHMemDC[0], lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
     }
     else
     {
         BitBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
-            lpImageInfo->hMemDC, lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), SRCCOPY);
+            lpImageInfo->vHMemDC[0], lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), SRCCOPY);
     }
 }
 
@@ -184,18 +293,45 @@ void Image::AlphaRender(HDC hdc, int destX, int destY)
     BitBlt(lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height, hdc, destX, destY, SRCCOPY);
 
     GdiTransparentBlt(lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height,
-        lpImageInfo->hMemDC, 0, 0, lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
+        lpImageInfo->vHMemDC[0], 0, 0, lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
 
     AlphaBlend(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
         lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height, lpBlendInfo->blendFunc);
+}
+
+void Image::RotateRender(HDC hdc, int destX, int destY, float angle)
+{
+    destX -= lpImageInfo->width / 2;
+    destY -= lpImageInfo->height / 2;
+
+    int degree = angle * 180 / PI;
+    while (degree < 0) degree += 360;
+    degree += 180 / splitAngle;
+    degree %= 360;
+
+    int index = degree / (360 / splitAngle);
+
+    if (lpImageInfo->isTransparent)
+    {
+        GdiTransparentBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
+            lpImageInfo->vHMemDC[index], 0, 0, lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
+    }
+    else
+    {
+        BitBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
+            lpImageInfo->vHMemDC[index], lpImageInfo->width * 0, 0, SRCCOPY);
+    }
 }
 
 void Image::Release()
 {
     if (lpImageInfo)
     {
-        DeleteObject(lpImageInfo->hBitmap);
-        DeleteDC(lpImageInfo->hMemDC);
+        for (int i = 0; i < splitAngle; ++i)
+        {
+            DeleteObject(lpImageInfo->vHBitmap[i]);
+            DeleteDC(lpImageInfo->vHMemDC[i]);
+        }
         delete lpImageInfo;
         lpImageInfo = nullptr;
 

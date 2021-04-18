@@ -15,8 +15,10 @@ public:
 	struct ImageInfo
 	{
 		DWORD resID;
-		HDC hMemDC;
-		HBITMAP hBitmap;
+
+		vector<HDC> vHMemDC;
+		vector<HBITMAP> vHBitmap;
+
 		int width;
 		int height;
 		BYTE loadType;
@@ -31,8 +33,6 @@ public:
 		ImageInfo()
 		{
 			resID = 0;
-			hMemDC = NULL;
-			hBitmap = NULL;
 			width = 0;
 			height = 0;
 			loadType = IMAGE_LOAD_TYPE::EMPTY;
@@ -54,6 +54,7 @@ public:
 	};
 
 private:
+	int splitAngle;
 	ImageInfo* lpImageInfo;
 	BlendInfo* lpBlendInfo;
 
@@ -61,14 +62,16 @@ public:
 	HRESULT Init(int width, int height);
 	HRESULT Init(string fileName, int width, int height, bool isTransparent = false, COLORREF transColor = RGB(255, 0, 255));
 	HRESULT Init(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, bool isTransparent = false, COLORREF transColor = RGB(255, 0, 255));
+	HRESULT RotateInit(string fileName, int width, int height, int maxFrameX, int maxFrameY, int totalFrame, int splitAngle);
 
 	HRESULT Reverse(const Image& target);
 
 	void Render(HDC hdc, int destX = 0, int destY = 0, int frame = 0, UINT uFlag = U_IA_DEFAULT);
 	void AlphaRender(HDC hdc, int destX, int destY);
+	void RotateRender(HDC hdc, int destX, int destY, float angle);
 	
 	void Release();
 
-	inline HDC GetMemDC() { return (lpImageInfo) ? lpImageInfo->hMemDC : NULL; }
+	inline HDC GetMemDC() { return (lpImageInfo) ? lpImageInfo->vHMemDC[0] : NULL; }
 	inline int GetTotalFrame() { return (lpImageInfo) ? lpImageInfo->totalFrame : 1; }
 };

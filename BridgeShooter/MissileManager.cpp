@@ -26,19 +26,22 @@ void MissileManager::Release()
 
 void MissileManager::Update(float deltaTime)
 {
-	vector<Missile*>& vLpMissile = mvLpMissiles[UNIT_KIND::PLAYER];
-	for (int i = 0; i < vLpMissile.size();)
+	for (auto& pair : mvLpMissiles)
 	{
-		if (vLpMissile[i]->pos.x + vLpMissile[i]->deltaMove.deltaPos.x < WINSIZE_LEFT || vLpMissile[i]->pos.y + vLpMissile[i]->deltaMove.deltaPos.y < WINSIZE_TOP
-			|| vLpMissile[i]->pos.x + vLpMissile[i]->deltaMove.deltaPos.x > WINSIZE_RIGHT || vLpMissile[i]->pos.y + vLpMissile[i]->deltaMove.deltaPos.y > WINSIZE_BOTTOM)
+		vector<Missile*>& vLpMissile = pair.second;
+		for (int i = 0; i < vLpMissile.size();)
 		{
-			vLpDeactive.push_back(vLpMissile[i]);
-			vLpMissile.erase(vLpMissile.begin() + i);
-		}
-		else
-		{
-			vLpMissile[i]->Update(deltaTime);
-			++i;
+			if (vLpMissile[i]->pos.x + vLpMissile[i]->deltaMove.deltaPos.x < WINSIZE_LEFT || vLpMissile[i]->pos.y + vLpMissile[i]->deltaMove.deltaPos.y < WINSIZE_TOP
+				|| vLpMissile[i]->pos.x + vLpMissile[i]->deltaMove.deltaPos.x > WINSIZE_RIGHT || vLpMissile[i]->pos.y + vLpMissile[i]->deltaMove.deltaPos.y > WINSIZE_BOTTOM)
+			{
+				vLpDeactive.push_back(vLpMissile[i]);
+				vLpMissile.erase(vLpMissile.begin() + i);
+			}
+			else
+			{
+				vLpMissile[i]->Update(deltaTime);
+				++i;
+			}
 		}
 	}
 }

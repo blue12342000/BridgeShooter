@@ -22,10 +22,10 @@ HRESULT ImageManager::Init()
     mLpImageDatas["JINHWANG"]->Init("Image/Unit/JinHwang/JinHwang.bmp", 5000 / 2, 2754 / 2, 10, 9, 90, true);
 
     mLpImageDatas.insert(make_pair("MISSILE_01", new Image()));
-    mLpImageDatas["MISSILE_01"]->Init("Image/Missile/Missile_01.bmp", 58 / 2, 58 / 2, 1, 1, 1, true);
+    mLpImageDatas["MISSILE_01"]->RotateInit("Image/Missile/Missile_01.bmp", 58 / 2, 58 / 2, 1, 1, 1, 36);
 
     mLpImageDatas.insert(make_pair("MISSILE_02", new Image()));
-    mLpImageDatas["MISSILE_02"]->Init("Image/Missile/Missile_02.bmp", 40 / 2, 40 / 2, 1, 1, 1, true);
+    mLpImageDatas["MISSILE_02"]->RotateInit("Image/Missile/Missile_02.bmp", 40 / 2, 40 / 2, 1, 1, 1, 36);
 
     mLpImageDatas.insert(make_pair("MISSILE_03", new Image()));
     mLpImageDatas["MISSILE_03"]->Init("Image/Missile/Missile_03.bmp", 14, 17, 1, 1, 1, true);

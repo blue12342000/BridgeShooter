@@ -17,7 +17,6 @@ MoveInfo SinePattern::Move(float deltaTime, GameObject* lpObject)
 			ratio = -ratio - 0.0000001f;
 		}
 
-		moveInfo.angle = PI / 2;
 		moveInfo.deltaPos = { (int)lpObject->elapsedTime * cosf(lpObject->angle) * lpObject->speed, (int)lpObject->elapsedTime * sinf(lpObject->angle) * lpObject->speed };
 
 		POINTFLOAT p1, p2, p3;
@@ -46,6 +45,7 @@ MoveInfo SinePattern::Move(float deltaTime, GameObject* lpObject)
 
 		moveInfo.deltaPos.x += p3.x;
 		moveInfo.deltaPos.y += p3.y;
+		moveInfo.angle = atan2(p3.y, p3.x);
 
 		//lpObject->pos.x += lpObject->speed * deltaTime * cos(lpObject->angle);
 		//lpObject->pos.y += lpObject->speed * deltaTime * sin(lpObject->angle);
