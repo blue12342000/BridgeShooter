@@ -39,7 +39,7 @@ void Planet04::Update(float deltaTime)
 	}
 	elapsedTime += deltaTime;
 
-	collider.SetHitBox(pos, 180, 180);
+	//collider.SetHitBox(pos, 180, 180);
 }
 
 void Planet04::Release()

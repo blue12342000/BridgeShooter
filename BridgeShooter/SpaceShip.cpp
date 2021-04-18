@@ -102,7 +102,7 @@ void SpaceShip::Update(float deltaTime)
 	}
 	elapsedTime += deltaTime;
 
-	collider.SetHitBox(pos, 30, 30);
+	collider.SetHitBox(pos, { 0,0 }, 30, 30);
 }
 
 void SpaceShip::Release()

@@ -14,7 +14,7 @@ void Planet_SSJ::Init()
 	lpFactory = new SSJFactory();	
 	lpFactory->Init();
 	frame = 50;
-	fireTimer = 0;
+
 }
 
 void Planet_SSJ::Update(float deltaTime)
@@ -22,12 +22,7 @@ void Planet_SSJ::Update(float deltaTime)
 	state = UNIT_STATE::IDLE;
 	lpImage = ImageManager::GetSingleton()->FindImage("PLANET_SSJ");
 
-	fireTimer += deltaTime;
-	if (fireTimer >= 0.1f)
-	{
-		Fire();
-		fireTimer = 0;
-	}
+	Fire();
 
 	if (lpImage)
 	{
