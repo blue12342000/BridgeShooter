@@ -1,16 +1,24 @@
 #pragma once
 #include "Factory.h"
+#include "BridgeShooter.h"
 
 class Pattern;
 class SSJFactory : public Factory
 {
 private:
-	Pattern* lpPattern1;
-	Pattern* lpPattern2;
-	Pattern* lpPattern3;
-	Pattern* lpPattern4;
-	Pattern* lpPattern5;
-	Pattern* lpPattern6;
+	enum CREATE_PATTERN
+	{
+		SFCP_BASIC,
+		SFCP_SPIRAL,
+		SFCP_REVERSE_SPIRAL,
+		SFCP_SINE,
+		SFCP_REFLECT,
+		SFCP_DELAYBASIC,
+		SFCP_NONE
+	};
+
+private:
+	vector<Pattern*> vLpPatterns;
 
 	int delayTime_0;
 

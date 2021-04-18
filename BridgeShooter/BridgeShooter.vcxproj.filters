@@ -138,9 +138,6 @@
     <ClCompile Include="SpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="SSJFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="ReverseSpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -155,6 +152,13 @@
     </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
+    </ClCompile>
+
+    <ClCompile Include="ReverseSinePattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SSJFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +211,6 @@
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="SinePattern.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="BridgeShooter.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="BoomerangPattern.h">
@@ -274,6 +275,12 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>소스 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="BridgeShooter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseSinePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

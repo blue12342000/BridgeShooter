@@ -18,8 +18,9 @@ MoveInfo DelayBasicPattern::Move(float deltaTime, GameObject* lpObject)
             lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
         }
         
-        moveInfo.angle = lpObject->angle;
+       
     }
-    
+    moveInfo.angle = lpObject->angle;
+
     return moveInfo;
 }

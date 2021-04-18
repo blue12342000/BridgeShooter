@@ -37,7 +37,8 @@ HRESULT InGameScene::Init()
     elapsedTime = 0;
         
     backgroundMover = 0;
-    isCollision = false;
+    isEnemyHitPlayer = false;
+    isPlayerHitEnemy = false;
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
@@ -103,10 +104,9 @@ void InGameScene::Update(float deltaTime)
     if (lpPlayer) lpPlayer->Update(deltaTime);
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
-    //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+      if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
@@ -139,8 +139,11 @@ void InGameScene::Render(HDC hdc)
 
     MissileManager::GetSingleton()->Render(hBackDC);
     
-    if (isCollision)
+    if (isEnemyHitPlayer)
         lpJinHwang->Render(hBackDC);
+    if(isPlayerHitEnemy)
+        lpPlanetKMS->Render(hBackDC);
+
 
     lpBackBuffer->Render(hdc);
    
@@ -148,23 +151,42 @@ void InGameScene::Render(HDC hdc)
 
 void InGameScene::CheckCollision()
 {
-    isCollision = false;
-    vector<Missile*>& vlpMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+    isEnemyHitPlayer = false;
+    isPlayerHitEnemy = false;
+    vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+    vector<Missile*>& vLpPlayerMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::PLAYER);
     
     float distance = 100.0f;
     float dX = 0;
     float dY = 0;
 
-    for (int i = 0; i < vlpMissile.size(); ++i)
+    for (int i = 0; i < vLpEnemyMissile.size(); ++i)
     {
-        dX = vlpMissile[i]->pos.x - lpPlayer->pos.x;
-        dY = vlpMissile[i]->pos.y - lpPlayer->pos.y;
+        dX = vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x - lpPlayer->pos.x;
+        dY = vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y - lpPlayer->pos.y;
         distance = sqrt(dX * dX + dY * dY);
 
-        if (distance <= vlpMissile[i]->collider.width/2 + lpPlayer->collider.width/2)
+        if (distance <= vLpEnemyMissile[i]->collider.width / 2 + lpPlayer->collider.width / 2)
         {
-            isCollision = true;
+            isEnemyHitPlayer = true;
         }
     }
+
+    float distance2 = 100.0f;
+    float dX2 = 0;
+    float dY2 = 0;
+
+    for (int i = 0; i < vLpPlayerMissile.size(); ++i)
+    {
+        dX2 = vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x - lpPlanetSSJ->pos.x;
+        dY2 = vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y - lpPlanetSSJ->pos.y;
+        distance2 = sqrt(dX2 * dX2 + dY2 * dY2);
+        if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
+        {
+            isPlayerHitEnemy = true;
+        }
+    }
+
+
 
 }

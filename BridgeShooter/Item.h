@@ -21,6 +21,7 @@ private:
 
 	float motionTimer;
 	float motionSpeed;
+	float delayTime;
 
 	bool isItemAlive;
 	
