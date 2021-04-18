@@ -92,7 +92,7 @@ void InGameScene::Update(float deltaTime)
 {
     if (lpPlayer) lpPlayer->Update(deltaTime);
 
-    if (lpPlanet04) lpPlanet04->Update(deltaTime);
+    //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
@@ -112,8 +112,8 @@ void InGameScene::Render(HDC hdc)
 
     if (lpPlayer) lpPlayer->Render(hBackDC);
 
-    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     if (lpPlanet04) lpPlanet04->Render(hBackDC);
+    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 

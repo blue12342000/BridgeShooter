@@ -10,6 +10,7 @@ void Item::Init()
 	motionTimer = 0.0f;
 	motionSpeed = 4;
     count = 0;
+    delayTime = 0;
     isItemAlive = true;
 }
 
@@ -20,17 +21,38 @@ void Item::Release()
 void Item::Update(float deltaTime)
 {
 	Move(deltaTime);
-	
+    
     if (lpImage)    //이미지 호출이오면
-	{
-		motionTimer += (deltaTime * motionSpeed);
-		if (motionTimer > 1)
-		{
-			frame += (int)motionTimer;
-			frame %= lpImage->GetTotalFrame();
-			motionTimer -= (int)motionTimer;
-		}
-	}
+    {
+        ++count;
+        motionTimer += (deltaTime * motionSpeed);
+        if (motionTimer > 1)
+        {
+            frame += (int)motionTimer;
+            frame %= lpImage->GetTotalFrame();
+            motionTimer -= (int)motionTimer;
+        }
+
+
+        if (elapsedTime < 27.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+        if (elapsedTime < 24.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+        if (elapsedTime < 21.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+        if (elapsedTime < 18.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+        if (elapsedTime < 15.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+        if (elapsedTime < 12.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+        if (elapsedTime < 9.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+        if (elapsedTime < 6.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+        if (elapsedTime < 3.0f)
+            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+    }
 
 	elapsedTime += deltaTime;
 
@@ -49,7 +71,7 @@ void Item::Render(HDC hdc)
 //ReflectPattern을 때려박아서 만듬
 void Item::Move(float deltaTime)
 {
-    ++count;
+
     if (isItemAlive)
     {
         pos.x += cos(angle) * speed * deltaTime / 3;
@@ -57,8 +79,8 @@ void Item::Move(float deltaTime)
 
         while (angle > PI * 2) angle -= PI * 2;
         while (angle < 0) angle += PI * 2;
-
-        if (elapsedTime < 10)
+        
+        if (elapsedTime < 60)
         {
             if (pos.x < 0)
             {
@@ -103,4 +125,5 @@ void Item::Move(float deltaTime)
             }
         }
     }
+
 }
