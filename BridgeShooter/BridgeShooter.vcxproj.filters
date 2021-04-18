@@ -138,13 +138,14 @@
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-
     <ClCompile Include="ReverseSpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="JinHwangFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
-
+    </ClCompile>
+    <ClCompile Include="NormalPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,16 +248,17 @@
     <ClInclude Include="SSJFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
-
     <ClInclude Include="ReverseSpiralPattern.h">
       <Filter>소스 파일\Pattern</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="JinHwangFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
-
+    </ClInclude>
+    <ClInclude Include="NormalPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

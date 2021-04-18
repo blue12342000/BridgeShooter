@@ -147,6 +147,7 @@
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
+    <ClCompile Include="NormalPattern.cpp" />
     <ClCompile Include="RainFactory.cpp" />
     <ClCompile Include="RainPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="BoomerangPattern.h" />
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="JinHwangFactory.h" />
+    <ClInclude Include="NormalPattern.h" />
     <ClInclude Include="RainFactory.h" />
     <ClInclude Include="RainPattern.h" />
     <ClInclude Include="MissileManager.h" />

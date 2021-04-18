@@ -10,13 +10,16 @@ MoveInfo BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
         if (typeid(*lpObject)== typeid(Missile))
         {
             Missile* lpMissile = (Missile*)lpObject;
+            if ((lpObject->elapsedTime>=0.000f)&& (lpObject->elapsedTime <= 0.01f)) {
+                lpMissile->SetDelayTime(-10);//-·Î
+            }
             
             if (lpMissile->delayTime >= 0.001f) 
             {
                 lpMissile->delayTime -= deltaTime;
-                if (lpMissile->delayTime < stopTime) {
+                
                     lpObject->angle = atan2((WINSIZE_HEIGHT / 2) -lpObject->pos.y , (WINSIZE_WIDTH / 2)-lpObject->pos.x  );
-                }
+                
             }
             if (lpMissile->delayTime < 0.001f)
             {

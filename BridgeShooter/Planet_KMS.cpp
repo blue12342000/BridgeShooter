@@ -12,7 +12,7 @@ void Planet_KMS::Init()
 	elapsedTime = 0;
 	motionTimer = 0;
 	motionSpeed = 12;
-	angle = -PI / 2;
+	angle = PI / 2;
 	lpFactory = new BoomerangFactory();
 	lpFactory->Init();
 	frame = 0;
@@ -31,8 +31,8 @@ void Planet_KMS::Update(float deltaTime)
 		//this->Update(deltaTime);
 		motionTimer += (deltaTime * motionSpeed);
 		attack1Timer += deltaTime;
-		if (attack1Timer >= timeset.attack1) {
-			attack1Timer -= timeset.attack1;
+		if (attack1Timer >= deltaTime) {
+			attack1Timer -= deltaTime;
 			this->Fire();
 		}
 		if (motionTimer > 1.0f)
