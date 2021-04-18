@@ -11,6 +11,7 @@ HRESULT MainGame::Init()
     ImageManager::GetSingleton()->Init();
     MissileManager::GetSingleton()->Init();
 
+
     hdc = GetDC(g_hWnd);
     
     lpTimer = new Timer();

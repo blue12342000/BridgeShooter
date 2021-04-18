@@ -39,13 +39,12 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Planet_KMS", new Image()));
     mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 134*10,134, 10, 1, 10, true, RGB(0, 0, 0));
 
-    /*
     mLpImageDatas.insert(make_pair("Item_Power", new Image()));
-    mLpImageDatas["Item_PowerUP"]->Init("Image/Item/Item_Power.bmp", 266 , 32, 6, 1, 6, true, RGB(255, 0, 255));
+    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 266 , 32, 6, 1, 6, true, RGB(255, 0, 255));
 
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
     mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true, RGB(255, 0, 255));
-    */
+    
 
     return S_OK;
 }
