@@ -2,44 +2,24 @@
 #include"BasicFactory.h"
 #include"BoomerangFactory.h"
 #include"SineFactory.h"
-#include"Image.h"
+#include"Animation.h"
 #include"Missile.h"
 void Planet_KMS::Init()
 {
-	state = UNIT_STATE::IDLE;
-	lpImage = ImageManager::GetSingleton()->FindImage("Planet_KMS");
+	lpAnimation = new Animation();
+	lpAnimation->Change("Planet_KMS", 50, true);
 	speed = 0;
 	elapsedTime = 0;
-	motionTimer = 0;
-	motionSpeed = 12;
 	angle = PI / 2;
 	lpFactory = new BoomerangFactory();
 	lpFactory->Init();
-	frame = 0;
 	attack1Timer = 0.0;
 }
 
 void Planet_KMS::Update(float deltaTime)
 {
-	if (lpImage&&this)
-	{
-			this->Fire();
-
-		if (motionTimer > 1.0f)
-		{
-			frame += (int)motionTimer;
-			frame %= lpImage->GetTotalFrame();
-			motionTimer -= (int)motionTimer;
-		}
-		
-	}
+	lpAnimation->Update(deltaTime);
 	elapsedTime += deltaTime;
-
-}
-
-void Planet_KMS::Release()
-{
-	
 }
 
 void Planet_KMS::Render(HDC hdc)
