@@ -58,8 +58,13 @@ void BoomerangFactory::Release()
 void BoomerangFactory::Fire(Unit* lpUnit)
 {
 	if (lpUnit) {
+		changeAngle = lpUnit->angle;
 		if ((!changePattern)&&(((int)lpUnit->elapsedTime% phaseTimeSet >= 0)&& ((int)lpUnit->elapsedTime % phaseTimeSet <= 1))) {
 			changePattern = true;
+		}
+		
+		if (phase==1) {
+			//changeAngle= 
 		}
 		switch (patternNum)
 		{
@@ -82,7 +87,6 @@ void BoomerangFactory::Fire(Unit* lpUnit)
 			break;
 		}
 		
-		
 	}
 	
 }
@@ -93,7 +97,7 @@ void BoomerangFactory::FireBoomerang(Unit* lpUnit)
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 		lpMissile->pos = lpUnit->pos;
-		lpMissile->angle = 2 * PI * i / mMissileNum[BoomerangFactory::boomerang];
+		lpMissile->angle = 2 * PI * i / mMissileNum[BoomerangFactory::boomerang]+ changeAngle;
 		lpMissile->speed = mMissileSpeed[BoomerangFactory::boomerang];
 		lpMissile->elapsedTime = 0;
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");

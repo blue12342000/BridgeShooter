@@ -27,13 +27,12 @@ void Planet_KMS::Update(float deltaTime)
 	TimeSet timeset;
 	if (lpImage&&this)
 	{
-		//this->Fire();
 		//this->Update(deltaTime);
 		motionTimer += (deltaTime * motionSpeed);
 		attack1Timer += deltaTime;
 		if (attack1Timer >= deltaTime) {
 			attack1Timer -= deltaTime;
-			//this->Fire();
+			this->Fire();
 		}
 		if (motionTimer > 1.0f)
 		{

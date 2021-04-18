@@ -10,6 +10,7 @@ private:
 	
 private:
 	PatternNum patternNum;
+	float changeAngle;
 	int phase;
 	int phaseTimeSet=20;
 	bool changePattern;
