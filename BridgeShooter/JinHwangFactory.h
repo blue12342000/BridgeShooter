@@ -6,6 +6,14 @@ class Pattern;
 class JinHwangFactory : public Factory
 {
 private:
+	struct BluePrint
+	{
+		float angle;
+		float speed;
+		string imageKey;
+
+	};
+
 	enum CREATE_PATTERN
 	{
 		JFCP_BASIC,

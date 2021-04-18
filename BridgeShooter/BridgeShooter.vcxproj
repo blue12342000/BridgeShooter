@@ -147,6 +147,7 @@
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
+    <ClCompile Include="Factory.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />

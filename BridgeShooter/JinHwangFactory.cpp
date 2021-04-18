@@ -17,8 +17,13 @@ void JinHwangFactory::Init()
 	vLpPatterns[CREATE_PATTERN::JFCP_REVERSE_SPIRAL] = new ReverseSpiralPattern();
 	vLpPatterns[CREATE_PATTERN::JFCP_BOOMERANG] = new BoomerangPattern();
 
-	createLine = 0;
+	createLine = 2;
 	maxCreateLIne = 3;
+
+	// 1ÃÊ 1000 
+	SetCheckTime(100);
+	SetCheckTime(200);
+	SetCheckTime(300);
 }
 
 void JinHwangFactory::Release()
@@ -34,7 +39,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 {
 	if (createLine == 0)
 	{
-		if ((((int)lpUnit->elapsedTime) % 20) < 10)
+		if (IsCheckTime(100) && GetTimeMod(10000) < 5000)
 		{
 			for (int i = 0; i < 8; ++i)
 			{
@@ -44,7 +49,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
-		else
+		else if (IsCheckTime(100) && GetTimeMod(10000) >= 5000)
 		{
 			for (int i = 0; i < 16; ++i)
 			{
@@ -57,7 +62,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 	}
 	else if (createLine == 1)
 	{
-		if ((((int)lpUnit->elapsedTime) % 20) < 10)
+		if (IsCheckTime(200) && GetTimeMod(10000) < 5000)
 		{
 			for (int i = 0; i < 8; ++i)
 			{
@@ -67,7 +72,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
-		else
+		else if (IsCheckTime(200))
 		{
 			for (int i = 0; i < 8; ++i)
 			{
@@ -78,7 +83,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 			}
 		}
 
-		if ((((int)lpUnit->elapsedTime) % 20) == 0)
+		if (IsCheckTime(200))
 		{
 			for (int i = -1; i < 2; i += 2)
 			{
@@ -94,7 +99,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 	}
 	else if (createLine == 2)
 	{
-		if ((((int)lpUnit->elapsedTime) % 5) < 1)
+		if (IsCheckTime(300) && GetTimeMod(10000) < 5000)
 		{
 			float splitY = WINSIZE_HEIGHT / 8;
 			for (float y = 0; y <= WINSIZE_HEIGHT; y += splitY)

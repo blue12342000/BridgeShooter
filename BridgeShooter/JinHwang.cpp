@@ -11,19 +11,18 @@ void JinHwang::Init()
 	angle = PI / 2;
 	lpFactory = new JinHwangFactory();
 	lpFactory->Init();
+	collider.SetHitBox(pos, { 0, 0 }, 100, 100);
 }
 
 void JinHwang::Update(float deltaTime)
 {
 	Fire();
 
+	lpFactory->Update(deltaTime);
 	lpAnimation->Update(deltaTime);
-	//collider.SetHitBox(pos, 100, 100);
+	collider.SetHitBox(pos);
 	elapsedTime += deltaTime;
-
 }
-
-
 
 void JinHwang::Render(HDC hdc)
 {
