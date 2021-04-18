@@ -11,17 +11,14 @@ void Planet_SSJ::Init()
 	angle = -PI / 2;
 	lpFactory = new SSJFactory();	
 	lpFactory->Init();
-	fireTimer = 0;
+
 }
 
 void Planet_SSJ::Update(float deltaTime)
 {
-	fireTimer += deltaTime;
-	if (fireTimer >= 0.1f)
-	{
-		Fire();
-		fireTimer = 0;
-	}
+	//lpImage = ImageManager::GetSingleton()->FindImage("PLANET_SSJ");
+
+	Fire();
 
 	lpAnimation->Update(deltaTime);
 	elapsedTime += deltaTime;

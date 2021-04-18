@@ -5,16 +5,15 @@ class Pattern;
 class SSJFactory : public Factory
 {
 private:
-	Pattern* pattern1;
-	Pattern* pattern2;
-	Pattern* pattern3;
-	Pattern* pattern4;
-	Pattern* pattern5;
-	Pattern* pattern6;
+	Pattern* lpPattern1;
+	Pattern* lpPattern2;
+	Pattern* lpPattern3;
+	Pattern* lpPattern4;
+	Pattern* lpPattern5;
+	Pattern* lpPattern6;
 
-	float delayTime_0;
-	float delayTime_1;
-	int delayTime_2;
+	int delayTime_0;
+
 	bool patternArray[200] = { 1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,
 								1,1,1,0,0,0,1,1,1,1,1,1,0,0,1,0,0,1,1,1,
 								1,1,1,1,0,0,0,0,1,1,1,1,0,0,1,1,0,0,1,1,
@@ -24,7 +23,7 @@ private:
 								1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,
 								1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,
 								1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,
-								1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1};
+								1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,0,1};
 	int phaseChanger;
 
 public:

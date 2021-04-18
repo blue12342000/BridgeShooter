@@ -13,12 +13,13 @@ MoveInfo DelayBasicPattern::Move(float deltaTime, GameObject* lpObject)
         lpMissile->delayTime -= deltaTime;
         if (lpMissile->delayTime < 0.001f)
         {
+           
             lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
             lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
         }
         
-
+        moveInfo.angle = lpObject->angle;
     }
-
+    
     return moveInfo;
 }

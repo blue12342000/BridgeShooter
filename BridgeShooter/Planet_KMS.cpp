@@ -19,12 +19,11 @@ void Planet_KMS::Init()
 void Planet_KMS::Update(float deltaTime)
 {
 	lpAnimation->Update(deltaTime);
+	Fire();
 	elapsedTime += deltaTime;
 }
 
 void Planet_KMS::Render(HDC hdc)
 {
-	if (this) {
-		Unit::Render(hdc);
-	}
+	Unit::Render(hdc);
 }

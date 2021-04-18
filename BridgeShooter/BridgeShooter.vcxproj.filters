@@ -147,9 +147,6 @@
     <ClCompile Include="JinHwangFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="NormalPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="DelayBasicPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -265,9 +262,6 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalPattern.h">
-      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="BridgeShooter.h">
       <Filter>소스 파일\Pattern</Filter>

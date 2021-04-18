@@ -105,10 +105,15 @@ void SpaceShip::Update(float deltaTime)
 		Fire();
 	}
 
+	collider.SetHitBox(pos, { 0,0 }, 30, 30);
 	lpAnimation->Update(deltaTime);
-	collider.SetHitBox(pos, 30, 30);
+	//collider.SetHitBox(pos, 30, 30);
 	elapsedTime += deltaTime;
+
 }
+
+
+	
 
 void SpaceShip::Render(HDC hdc)
 {

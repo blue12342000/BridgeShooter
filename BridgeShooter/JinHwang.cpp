@@ -18,9 +18,12 @@ void JinHwang::Update(float deltaTime)
 	Fire();
 
 	lpAnimation->Update(deltaTime);
-	collider.SetHitBox(pos, 100, 100);
+	//collider.SetHitBox(pos, 100, 100);
 	elapsedTime += deltaTime;
+
 }
+
+
 
 void JinHwang::Render(HDC hdc)
 {
