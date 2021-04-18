@@ -15,12 +15,29 @@ struct Collider
 	int height;
 	RECT hitBox;
 
-	void SetHitBox(POINTFLOAT pos, int width, int height)
+	void SetHitBox(POINTFLOAT pos, int width = -1, int height = -1)
 	{
-		hitBox.left = pos.x - width / 2;
-		hitBox.right = pos.x + width / 2;
-		hitBox.top = pos.y - height / 2;
-		hitBox.bottom = pos.y + height / 2;
+		if (width > 0)
+		{
+			hitBox.left = (int)(pos.x - width / 2);
+			hitBox.right = (int)(pos.x + width / 2);
+		}
+		else
+		{
+			hitBox.left = (int)pos.x;
+			hitBox.right = (int)pos.x;
+		}
+
+		if (height > 0)
+		{
+			hitBox.top = (int)(pos.y - height / 2);
+			hitBox.bottom = (int)(pos.y + height / 2);
+		}
+		else
+		{
+			hitBox.left = (int)pos.x;
+			hitBox.right = (int)pos.x;
+		}
 	}
 };
 
