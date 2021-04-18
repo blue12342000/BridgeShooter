@@ -153,12 +153,14 @@
     <ClCompile Include="Factory.cpp">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
     </ClCompile>
-
     <ClCompile Include="ReverseSinePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="ReverseSinePattern.h">
       <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>소스 파일\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

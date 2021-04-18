@@ -10,6 +10,7 @@ HRESULT MainGame::Init()
     KeyManager::GetSingleton()->Init();
     ImageManager::GetSingleton()->Init();
     MissileManager::GetSingleton()->Init();
+    EffectManager::GetSingleton()->Init();
 
 
     hdc = GetDC(g_hWnd);
@@ -44,6 +45,7 @@ void MainGame::Release()
     KeyManager::GetSingleton()->ReleaseSingleton();
     ImageManager::GetSingleton()->Release();
     ImageManager::GetSingleton()->ReleaseSingleton();
+    EffectManager::GetSingleton()->ReleaseSingleton();
 
     ReleaseDC(g_hWnd, hdc);
 }
