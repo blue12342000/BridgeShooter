@@ -121,7 +121,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 			}
 		}
 	}
-
+	//1~3 페이즈때 보스 카운트가 3000 넘으면 초기화후 2페이즈
 	if (isPattern01 && bossCount >= 3000)
 	{
 		bossCount = 0;
