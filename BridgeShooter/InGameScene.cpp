@@ -4,7 +4,8 @@
 #include "Planet_SSJ.h"
 #include "Planet04.h"
 #include "JinHwang.h"
-#include"Planet_KMS.h"
+#include "Planet_KMS.h"
+#include "Item.h"
 
 HRESULT InGameScene::Init()
 {
@@ -24,6 +25,9 @@ HRESULT InGameScene::Init()
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
+    lpItem = new Item();
+    lpItem->Init();
+    lpItem->SetPos({ (float)WINSIZE_WIDTH *3/4, (float)WINSIZE_HEIGHT *7/8  });
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -48,7 +52,6 @@ void InGameScene::Release()
         delete lpPlayer;
         lpPlayer = nullptr;
     }
-
 
     if (lpPlanetSSJ)
     {
@@ -75,6 +78,13 @@ void InGameScene::Release()
         lpJinHwang->Release();
         delete lpJinHwang;
         lpJinHwang = nullptr;
+    }
+
+    if (lpItem)
+    {
+        lpItem->Release();
+        delete lpItem;
+        lpItem = nullptr;
     }
 }
 
@@ -105,6 +115,8 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
+
+    if (lpItem) lpItem->Render(hBackDC);
 
     MissileManager::GetSingleton()->Render(hBackDC);
 

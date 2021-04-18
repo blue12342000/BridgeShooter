@@ -126,11 +126,9 @@
     <ClCompile Include="JinHwang.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-
     <ClCompile Include="Planet04Factory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-
     <ClCompile Include="ReflectPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -143,13 +141,18 @@
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-
     <ClCompile Include="ReverseSpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-
     <ClCompile Include="JinHwangFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+
+    <ClCompile Include="NormalPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="DelayBasicPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
 
   </ItemGroup>
@@ -198,9 +201,6 @@
     </ClInclude>
     <ClInclude Include="InGameScene.h">
       <Filter>소스 파일\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="BridgeShooter.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="BasicFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
@@ -256,7 +256,6 @@
     <ClInclude Include="SSJFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
-
     <ClInclude Include="ReverseSpiralPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
@@ -265,7 +264,17 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
-
     </ClInclude>
+
+    <ClInclude Include="NormalPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BridgeShooter.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="DelayBasicPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+
   </ItemGroup>
 </Project>
