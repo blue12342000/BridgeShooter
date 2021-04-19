@@ -11,8 +11,9 @@ private:
 	Image* lpImage;
 
 public:
-	void Change(string imageKey, int fps, bool isLoop = true);
+	void Change(string imageKey, int fps, bool isLoop = true, bool isReset = false);
 	void Update(float deltaTime);
 	void Render(HDC hdc, int destX, int destY);
+	void Render(HDC hdc, int destX, int destY, float angle);
 };
 

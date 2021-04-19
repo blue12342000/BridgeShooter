@@ -17,7 +17,7 @@ void JinHwangFactory::Init()
 	vLpPatterns[CREATE_PATTERN::JFCP_REVERSE_SPIRAL] = new ReverseSpiralPattern();
 	vLpPatterns[CREATE_PATTERN::JFCP_BOOMERANG] = new BoomerangPattern();
 
-	createLine = 2;
+	createLine = 1;
 	maxCreateLIne = 3;
 
 	// 1√  1000 
@@ -96,7 +96,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int l = 0; l < 6; ++l)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle + PI * 2 / 5 * i, 400, 20, 0.02f * i);
+					lpMissile->SetMissile("MISSILE_06", lpUnit->pos, lpUnit->angle + PI * 2 / 5 * i, 400, 20, 0.02f * i);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_REFLECT]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}

@@ -1,7 +1,7 @@
 #pragma once
 #include "Unit.h"
 
-enum class INPUT_TYPE
+enum class INPUT_TYPE2
 {
 	LEFT,
 	UP,
@@ -13,7 +13,7 @@ enum class INPUT_TYPE
 class SpaceShip : public Unit
 {
 private:
-	INPUT_TYPE input;
+	INPUT_TYPE2 input;
 	float fireTimer;
 	int power;
 

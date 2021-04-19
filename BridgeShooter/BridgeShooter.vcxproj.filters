@@ -46,6 +46,9 @@
     <Filter Include="소스 파일\Bridge\Factory\Super">
       <UniqueIdentifier>{26cbf9f6-215a-4be5-aeda-baa085185fe3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Controller">
+      <UniqueIdentifier>{25bbd98c-65be-454f-8371-90b9939b95fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,6 +165,12 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="SpaceShipFactory.cpp">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -269,9 +278,6 @@
     <ClInclude Include="Factory.h">
       <Filter>소스 파일\Bridge\Factory\Super</Filter>
     </ClInclude>
-    <ClInclude Include="BridgeShooter.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="DelayBasicPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
@@ -286,6 +292,15 @@
     </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShipFactory.h">
+      <Filter>소스 파일\Bridge\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="BridgeShooter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>소스 파일\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

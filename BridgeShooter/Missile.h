@@ -1,22 +1,16 @@
 #pragma once
 #include "GameObject.h"
 
-enum class MISSILE_TYPE
-{
-	BASIC,
-	NONE
-};
-
 class Pattern;
+class Animation;
 class Image;
 class Missile : public GameObject
 {
 public:
 	bool isActive;
 	Pattern* lpPattern;
-	int frame;
 	Image* lpImage;
-
+	Animation* lpAnimation;
 	float delayTime;
 	MoveInfo deltaMove;
 
