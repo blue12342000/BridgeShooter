@@ -21,7 +21,7 @@ HRESULT SceneManager::Init()
 			break;
 		case (int)SCENE_STATE::INGAME:
 			scenes[i] = new InGameScene();
-			scenes[i]->Init();
+			//scenes[i]->Init();
 			break;
 		case (int)SCENE_STATE::NONE:
 			break;
@@ -66,6 +66,7 @@ void SceneManager::ChangeScene()
 	else if (currScene == SCENE_STATE::SELECT)
 	{
 		currScene = SCENE_STATE::INGAME;
+		scenes[(int)currScene]->Init();
 		
 	}
 		

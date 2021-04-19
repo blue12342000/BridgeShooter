@@ -11,6 +11,9 @@ private:
 
 	vector<Image*> vLpPlayerImg; 
 	
+	RECT selectBox;
+	int selectIndex;
+	bool hasSelected;
 
 public:
 	HRESULT Init();
