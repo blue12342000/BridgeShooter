@@ -9,6 +9,7 @@ void Planet_KMS::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet_KMS", 50, true);
 	speed = 0;
+	hp = 500;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new BoomerangFactory();

@@ -6,8 +6,6 @@
 #include<ctime>
 #include "Unit.h"
 
-
-
 struct TimeSet
 {
 	const int phase = 10000;
@@ -20,7 +18,6 @@ void BoomerangFactory::Init()
 	TimeSet timeset;
 	patternNum = PatternNum::boomerang;
 	phase = 1;
-
 
 	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::normal, new BasicPattern()));
 	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::boomerang, new BoomerangPattern()));

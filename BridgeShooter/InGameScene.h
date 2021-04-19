@@ -22,6 +22,7 @@ private:
 
 	Item* lpItem;
 
+
 	Image* lpBackBuffer;
 	Image* lpBackImage;	
 	Image* lpBackImage2;	
@@ -37,12 +38,14 @@ private:
 	bool isOnlyPlayer;
 	bool isEnemyHitPlayer;
 	bool isPlayerHitEnemy;
+	bool isPlayerHitItem;
+	bool isItemAlive;
 
 public:
 	virtual HRESULT Init();
 	virtual void Release();
 	virtual void Update(float deltaTime);
 	virtual void Render(HDC hdc);
-	void CheckCollision();
+	void CheckCollision( );
 };
 

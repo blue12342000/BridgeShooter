@@ -43,6 +43,8 @@ HRESULT InGameScene::Init()
     backgroundMover = 0;
     isEnemyHitPlayer = false;
     isPlayerHitEnemy = false;
+    isPlayerHitItem = false;
+    isItemAlive = false;
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
@@ -50,7 +52,7 @@ HRESULT InGameScene::Init()
 
     lpHpGauge = new HpGauge();
     lpHpGauge->Init();
-    lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 20 });
+    //lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 20 });
 
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
@@ -137,11 +139,8 @@ void InGameScene::Update(float deltaTime)
 
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
 
-    if (lpPlanet04) lpPlanet04->Update(deltaTime);
+    //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-
-    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
@@ -190,11 +189,13 @@ void InGameScene::Render(HDC hdc)
 
 void InGameScene::CheckCollision()
 {
+
     isEnemyHitPlayer = false;
     isPlayerHitEnemy = false;
+    isPlayerHitItem = false;
     vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
     vector<Missile*>& vLpPlayerMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::PLAYER);
-    
+
     float distance = 100.0f;
     float dX = 0;
     float dY = 0;
@@ -240,6 +241,20 @@ void InGameScene::CheckCollision()
         }
     }
 
+    float distance3 = 100.0f;
+    float dX3 = 0;
+    float dY3 = 0;
 
+    dX3 = lpPlayer->pos.x - lpItem->pos.x;
+    dY3 = lpPlayer->pos.y - lpItem->pos.y;
+    distance3 = sqrt(dX3 * dX3 + dY3 * dY3);
+    if (distance3 <= lpItem->collider.width / 2 + lpPlayer->collider.width / 2)
+    {
+        EffectManager::GetSingleton()->PlayImage({ lpPlayer->pos.x , lpPlayer->pos.y }, "EFFECT_01", 10);
+        //lpItem->Release();   isItemdisabled = true;
+        //아이템 충돌판정 및 활동 중지
+        //isPlayerHitItem = true;
+        lpHpGauge->BombCount(true);
+    }
 
 }

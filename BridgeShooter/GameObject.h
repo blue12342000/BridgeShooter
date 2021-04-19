@@ -69,9 +69,9 @@ public:
 	Collider collider;
 	float elapsedTime;
 	int hp;
-
+	
 public:
-	GameObject() :pos({ 0,0 }), angle(0), speed(0), collider(Collider()), elapsedTime(0) {}
+	GameObject() :pos({ 0,0 }), angle(0), speed(0), collider(Collider()), elapsedTime(0), hp(0) {}
 	virtual ~GameObject() {}
 
 	virtual void Init() {}

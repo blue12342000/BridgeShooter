@@ -7,6 +7,7 @@ void Planet_SSJ::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("PLANET_SSJ", 50, true);
 	speed = 200;
+	hp = 500;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	lpFactory = new SSJFactory();	

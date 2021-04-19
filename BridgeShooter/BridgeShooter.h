@@ -32,6 +32,7 @@ enum class UNIT_KIND
 {
 	PLAYER,
 	ENEMY,
+	ITEM,
 	NONE
 };
 

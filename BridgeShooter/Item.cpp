@@ -11,53 +11,58 @@ void Item::Init()
 	motionSpeed = 4;
     count = 0;
     delayTime = 0;
-    isItemAlive = true;
+    isPlayerHitItem = false;
 }
 
 void Item::Release()
 {
+ 
 }
 
 void Item::Update(float deltaTime)
 {
-	Move(deltaTime);
-    
-    if (lpImage)    //이미지 호출이오면
+    if (isPlayerHitItem == false)
     {
-        ++count;
-        motionTimer += (deltaTime * motionSpeed);
-        if (motionTimer > 1)
+
+        Move(deltaTime);
+
+        if (lpImage)    //이미지 호출이오면
         {
-            frame += (int)motionTimer;
-            frame %= lpImage->GetTotalFrame();
-            motionTimer -= (int)motionTimer;
+
+            ++count;
+            motionTimer += (deltaTime * motionSpeed);
+            if (motionTimer > 1)
+            {
+                frame += (int)motionTimer;
+                frame %= lpImage->GetTotalFrame();
+                motionTimer -= (int)motionTimer;
+            }
+
+            if (elapsedTime < 27.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+            if (elapsedTime < 24.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+            if (elapsedTime < 21.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+            if (elapsedTime < 18.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+            if (elapsedTime < 15.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+            if (elapsedTime < 12.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+            if (elapsedTime < 9.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+            if (elapsedTime < 6.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
+            if (elapsedTime < 3.0f)
+                lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+
         }
 
+        elapsedTime += deltaTime;
 
-        if (elapsedTime < 27.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
-        if (elapsedTime < 24.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
-        if (elapsedTime < 21.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
-        if (elapsedTime < 18.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
-        if (elapsedTime < 15.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
-        if (elapsedTime < 12.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
-        if (elapsedTime < 9.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
-        if (elapsedTime < 6.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Bomb");
-        if (elapsedTime < 3.0f)
-            lpImage = ImageManager::GetSingleton()->FindImage("Item_Power");
+        collider.SetHitBox(pos, { 0,0 }, 100, 100);
     }
-
-
-	elapsedTime += deltaTime;
-
-	collider.SetHitBox(pos, { 0,0 },100, 100);
 }
 
 void Item::Render(HDC hdc)
@@ -73,58 +78,59 @@ void Item::Render(HDC hdc)
 void Item::Move(float deltaTime)
 {
 
-    if (isItemAlive)
+    pos.x += cos(angle) * speed * deltaTime / 3;
+    pos.y += sin(angle) * speed * deltaTime / 3;
+
+    while (angle > PI * 2) angle -= PI * 2;
+    while (angle < 0) angle += PI * 2;
+
+    if (elapsedTime < 60)
     {
-        pos.x += cos(angle) * speed * deltaTime / 3;
-        pos.y += sin(angle) * speed * deltaTime / 3;
-
-        while (angle > PI * 2) angle -= PI * 2;
-        while (angle < 0) angle += PI * 2;
-        
-        if (elapsedTime < 60)
+        if (pos.x < 0)
         {
-            if (pos.x < 0)
+            pos.x = 0;
+            if (angle > PI)
             {
-                pos.x = 0;
-                if (angle > PI)
-                {
-                    angle = PI * 3 - angle;
-                }
-                else
-                {
-                    angle = PI - angle;
-                }
+                angle = PI * 3 - angle;
             }
-
-            else if (pos.x > WINSIZE_WIDTH)
+            else
             {
-                pos.x = WINSIZE_WIDTH;
-                if (angle > PI)
-                {
-                    angle = 3 * PI - angle;
-                }
-                else
-                {
-                    angle = PI - angle;
-                }
-            }
-
-            if (pos.y < 0)
-            {
-                pos.y = 0;
-                angle = PI * 2 - angle;
-            }
-            else if (pos.y > WINSIZE_HEIGHT)
-            {
-                pos.y = WINSIZE_HEIGHT;
-                if (angle > PI / 2)
-                {
-                    angle = PI * 2 - angle;
-                }
-                else
-                    angle = -angle;
+                angle = PI - angle;
             }
         }
-    }
 
+        else if (pos.x > WINSIZE_WIDTH)
+        {
+            pos.x = WINSIZE_WIDTH;
+            if (angle > PI)
+            {
+                angle = 3 * PI - angle;
+            }
+            else
+            {
+                angle = PI - angle;
+            }
+        }
+
+        if (pos.y < 0)
+        {
+            pos.y = 0;
+            angle = PI * 2 - angle;
+        }
+        else if (pos.y > WINSIZE_HEIGHT)
+        {
+            pos.y = WINSIZE_HEIGHT;
+            if (angle > PI / 2)
+            {
+                angle = PI * 2 - angle;
+            }
+            else
+                angle = -angle;
+        }
+    }
+}
+
+void Item::IsPlayerHitItem()
+{
+    isPlayerHitItem = true;
 }

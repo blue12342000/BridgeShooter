@@ -23,7 +23,8 @@ private:
 	float motionSpeed;
 	float delayTime;
 
-	bool isItemAlive;
+	bool isPlayerHitItem;
+	Item* lpItem;
 	
 public:
 	ITEM_TYPE type;
@@ -36,7 +37,7 @@ public:
 	void Release() override;
 	void Update(float deltaTime) override;
 	void Render(HDC hdc) override;
-
+	void IsPlayerHitItem( );
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 
 	void Move(float deltaTime);

@@ -5,15 +5,18 @@
 
 void HpGauge::Init()
 {
-	pos.x = 0;
-	pos.y = 0;
 	//lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
 	playerMaxHp = 200;
 	bossMaxHp = 500;
 	isBossAlive = true;
 	lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
-
+	hp =0;
+	hpCount = 0;
+	bombCount = 0;
+	nowMissile = 0;
+	fcukingManual = 0;
 }
+
 void HpGauge::Release()
 {
 
@@ -25,8 +28,6 @@ void HpGauge::Update(float deltaTime)
 	{
 		PlayerHpGaugeData(deltaTime);
 		if (isBossAlive) BossHpGaugeData(deltaTime);
-
-		elapsedTime += deltaTime;
 	}
 }
 
@@ -34,12 +35,13 @@ void HpGauge::Render(HDC hdc)
 {
 	if (lpImage)
 	{
+		
 		Rectangle(hdc, playerHpGauge.left, playerHpGauge.top, playerHpGauge.right, playerHpGauge.bottom);
 	// 체력에 따라서 체력바 색상이 달라지게 하고싶다. 어떻게 할까
 		if (isBossAlive)
 		{
 			Rectangle(hdc, bossHpGauge.left, bossHpGauge.top, bossHpGauge.right, bossHpGauge.bottom);
-			lpImage->Render(hdc, pos.x, pos.y, 0, U_IA_CENTER);
+			lpImage->Render(hdc, WINSIZE_WIDTH/2, WINSIZE_HEIGHT/20, 0, U_IA_CENTER);
 		}
 	}
 }
@@ -52,6 +54,7 @@ void HpGauge::PlayerHpGaugeData(float deltaTime)
 	if (playerMaxHp <= 0)
 	{
 		playerMaxHp = 200;
+
 	}
 }
 
@@ -65,6 +68,25 @@ void HpGauge::BossHpGaugeData(float deltaTime)
 		bossMaxHp = 500;
 		isBossAlive = false;
 	}
+}
+
+void HpGauge::HpCount(float deltaTime)
+{
+
+}
+
+void HpGauge::BombCount(float deltaTime)
+{
+	
+	bombCount++;
+}
+
+void HpGauge::NowMissile(float deltaTime)
+{
+}
+
+void HpGauge::FcukingManual(float deltaTime)
+{
 }
 
 

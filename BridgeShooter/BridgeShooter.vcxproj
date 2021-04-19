@@ -156,7 +156,6 @@
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
     <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="RainFactory.cpp" />
     <ClCompile Include="RainPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
@@ -203,7 +202,6 @@
     <ClInclude Include="Planet04Factory.h" />
     <ClInclude Include="JinHwangFactory.h" />
     <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RainFactory.h" />
     <ClInclude Include="RainPattern.h" />
     <ClInclude Include="MissileManager.h" />
