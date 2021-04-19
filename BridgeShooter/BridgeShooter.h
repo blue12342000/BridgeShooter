@@ -41,3 +41,4 @@ enum class UNIT_KIND
 #include "EffectManager.h"
 #include "MissileManager.h"
 #include "SceneManager.h"
+#include "DataManager.h"

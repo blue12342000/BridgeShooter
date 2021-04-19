@@ -147,6 +147,8 @@
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
@@ -189,6 +191,7 @@
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
