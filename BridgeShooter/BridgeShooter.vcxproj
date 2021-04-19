@@ -147,6 +147,7 @@
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="HPgauge.cpp" />
     <ClCompile Include="JinHwang.cpp" />
@@ -167,6 +168,8 @@
     <ClCompile Include="ReflectPattern.cpp" />
     <ClCompile Include="ReverseSinePattern.cpp" />
     <ClCompile Include="ReverseSpiralPattern.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SelectPlayer.cpp" />
     <ClCompile Include="SineFactory.cpp" />
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
@@ -174,6 +177,7 @@
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,10 +186,12 @@
     <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="DelayBasicPattern.h" />
+    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
     <ClInclude Include="HPgauge.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="Planet04Factory.h" />
     <ClInclude Include="JinHwangFactory.h" />
@@ -204,6 +210,8 @@
     <ClInclude Include="ReflectPattern.h" />
     <ClInclude Include="ReverseSinePattern.h" />
     <ClInclude Include="ReverseSpiralPattern.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SelectPlayer.h" />
     <ClInclude Include="SineFactory.h" />
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
@@ -211,6 +219,7 @@
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="SSJFactory.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>

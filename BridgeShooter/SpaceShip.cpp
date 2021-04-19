@@ -17,6 +17,7 @@ void SpaceShip::Init()
 	angle = -PI / 2;
 	power = 0;
 	SetFactory(new BasicFactory());
+	collider.SetHitBox(pos, { 0,0 }, 30, 30);
 }
 
 void SpaceShip::Update(float deltaTime)
@@ -105,15 +106,11 @@ void SpaceShip::Update(float deltaTime)
 		Fire();
 	}
 
-	collider.SetHitBox(pos, { 0,0 }, 30, 30);
+	collider.SetHitBox(pos);
+	lpFactory->Update(deltaTime);
 	lpAnimation->Update(deltaTime);
-	//collider.SetHitBox(pos, 30, 30);
 	elapsedTime += deltaTime;
-
 }
-
-
-	
 
 void SpaceShip::Render(HDC hdc)
 {

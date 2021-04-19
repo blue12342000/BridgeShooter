@@ -8,6 +8,7 @@
 #include "Item.h"
 #include "Missile.h"
 #include "HPgauge.h"
+#include "GameScene.h"
 
 HRESULT InGameScene::Init()
 {
@@ -110,16 +111,23 @@ void InGameScene::Update(float deltaTime)
     {
         isOnlyPlayer = !isOnlyPlayer;
     }
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene();
+    }
 
+    if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
+    {
+        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 10, 20, 20);
+    }
 
     CheckCollision();
 
     if (lpPlayer) lpPlayer->Update(deltaTime);
 
-    if (!isOnlyPlayer && lpPlanet04) lpPlanet04->Update(deltaTime);
-    if (lpPlanet04) lpPlanet04->Update(deltaTime);
-    //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    //if (lpPlanet04) lpPlanet04->Update(deltaTime);
+    if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
@@ -127,6 +135,7 @@ void InGameScene::Update(float deltaTime)
     if (lpHpGauge) lpHpGauge->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
     
+    EffectManager::GetSingleton()->Update(deltaTime);
 
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
@@ -149,9 +158,10 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
-    if (lpHpGauge) lpHpGauge->Render(hBackDC);
 
+    if (lpHpGauge) lpHpGauge->Render(hBackDC);
     if (lpHpGuageImage) lpHpGuageImage->Render(hBackDC);
+    EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
     if (isEnemyHitPlayer)

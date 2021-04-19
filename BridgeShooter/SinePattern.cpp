@@ -6,9 +6,6 @@ MoveInfo SinePattern::Move(float deltaTime, GameObject* lpObject)
 	MoveInfo moveInfo = { 0, 0 };
 	if (lpObject)
 	{
-		//사인처럼 움직이게 각도값을 계속 변경...할수가있나? 값 계산 방법 고민
-		//sin 미분 -> cos , cos 미분 -> -sin 인걸로 1차함수 그래프 만들어봄
-		
 		//lpObject->angle += (PI / 4  - lpObject->elapsedTime * deltaTime);
 		float angle = PI / 5;
 		float ratio = lpObject->elapsedTime - (int)lpObject->elapsedTime;

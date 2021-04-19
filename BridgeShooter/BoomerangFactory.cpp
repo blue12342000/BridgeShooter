@@ -6,20 +6,21 @@
 #include<ctime>
 #include "Unit.h"
 
-//enum PatternNum{ normal,boomerang,leftRain,rightRain,topRain,end }; <- Âü°í¿ë
+
+
+struct TimeSet
+{
+	const int phase = 10000;
+	const int boomerang = 2000;
+	const int rain = 3000;
+	const int normal = 2;
+};
 void BoomerangFactory::Init()
 {
+	TimeSet timeset;
 	patternNum = PatternNum::boomerang;
 	phase = 1;
-	imsiDeltaTime = 0.0;
-	timer = 0.0;
-	isFirst = true;
-	missile1Timer=0.0;
-	missile2Timer = 0.0;
-	missile3Timer = 0.0;
-	missile4Timer = 0.0;
-	missile5Timer = 0.0;
-	isShoot = false;
+
 
 	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::normal, new BasicPattern()));
 	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::boomerang, new BoomerangPattern()));
@@ -39,24 +40,10 @@ void BoomerangFactory::Init()
 	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::rightRain,	150.0f));
 	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::topRain,	150.0f));
 
-	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::normal, 1.0f));
-	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::boomerang, NULL));
-	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::leftRain, NULL));
-	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::rightRain, NULL));
-	mPhase1Duration.insert(pair<PatternNum, float>(PatternNum::topRain, NULL));
-
-	mPhase2Duration.insert(pair<PatternNum, float>(PatternNum::normal, NULL));
-	mPhase2Duration.insert(pair<PatternNum, float>(PatternNum::boomerang, 200.0f));
-	mPhase2Duration.insert(pair<PatternNum, float>(PatternNum::leftRain, NULL));
-	mPhase2Duration.insert(pair<PatternNum, float>(PatternNum::rightRain, NULL));
-	mPhase2Duration.insert(pair<PatternNum, float>(PatternNum::topRain, NULL));
-
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::normal, NULL));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::boomerang, 600.0f));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::leftRain, 300.0f));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::rightRain, 320.0f));
-	mPhase3Duration.insert(pair<PatternNum, float>(PatternNum::topRain, 450.0f));
-
+	SetCheckTime(timeset.phase);
+	SetCheckTime(timeset.boomerang);
+	SetCheckTime(timeset.rain);
+	SetCheckTime(timeset.normal);
 }
 
 void BoomerangFactory::Release()
@@ -80,75 +67,32 @@ void BoomerangFactory::Release()
 			i=mLpMissilePattern.erase(i);
 		}
 	}
-	if (mPhase1Duration.size()) {
-		for (std::map<PatternNum, float>::iterator i = mPhase1Duration.begin(); i != mPhase1Duration.end();)
-		{
-			i = mPhase1Duration.erase(i);
-		}
-	}
-	if (mPhase2Duration.size()) {
-		for (std::map<PatternNum, float>::iterator i = mPhase2Duration.begin(); i != mPhase2Duration.end();)
-		{
-			i = mPhase2Duration.erase(i);
-		}
-	}
-	if (mPhase3Duration.size()) {
-		for (std::map<PatternNum, float>::iterator i = mPhase3Duration.begin(); i != mPhase3Duration.end();)
-		{
-			i = mPhase3Duration.erase(i);
-		}
-	}
+	
 }
 
 void BoomerangFactory::Fire(Unit* lpUnit)
 {
 	if (lpUnit) {
-		imsiDeltaTime+=0.001f;
-		if (imsiDeltaTime >= 1.0f) {
-			imsiDeltaTime -= 1.0f;
-		}
-		timer += imsiDeltaTime; 
-		if (timer>= phaseTimeSet)
-		{
-			isFirst = true;
-			timer -= phaseTimeSet;
-			++phase;
-			if (phase>3)
-			{
+		TimeSet timeset;
+		if (IsCheckTime(timeset.phase)) {
+			phase++;
+			if (phase > 3) {
 				phase = 1;
 			}
 		}
 		changeAngle = lpUnit->angle;
 		if (phase == 1)
 		{
-			FirePhase1();
+			FirePhase1(lpUnit);
 			
 		}
 		else if (phase==2)
 		{
-			FirePhase2();
+			FirePhase2(lpUnit);
 		}
 		else if (phase == 3)
 		{
-			FirePhase3();
-		}
-		switch (patternNum)
-		{
-		case BoomerangFactory::normal:
-			FireNormal(lpUnit);
-			break;
-		case BoomerangFactory::boomerang:
-			FireBoomerang(lpUnit);
-			break;
-		case BoomerangFactory::leftRain:
-			FireLeftRain(lpUnit);
-			break;
-		case BoomerangFactory::rightRain:
-			FireRightRain(lpUnit);
-			break;
-		case BoomerangFactory::topRain:
-			FireTopRain(lpUnit);
-			break;
+			FirePhase3(lpUnit);
 		}
 		
 	}
@@ -164,6 +108,7 @@ void BoomerangFactory::FireBoomerang(Unit* lpUnit)
 			2 * PI * i / mMissileNum[BoomerangFactory::boomerang] + changeAngle,
 			mMissileSpeed[BoomerangFactory::boomerang],10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::boomerang]);
+		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
 }
@@ -177,6 +122,7 @@ void BoomerangFactory::FireNormal(Unit* lpUnit)
 			lpUnit->angle + changeAngle,
 			mMissileSpeed[BoomerangFactory::normal], 10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::normal]);
+		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
 }
@@ -192,6 +138,7 @@ void BoomerangFactory::FireLeftRain(Unit* lpUnit)
 		lpMissile->elapsedTime = 0;
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::leftRain]);
+		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
 }
@@ -207,6 +154,7 @@ void BoomerangFactory::FireRightRain(Unit* lpUnit)
 		lpMissile->elapsedTime = 0;
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::rightRain]);
+		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
 }
@@ -222,118 +170,51 @@ void BoomerangFactory::FireTopRain(Unit* lpUnit)
 		lpMissile->elapsedTime = 0;
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::topRain]);
+		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
 }
 
-void BoomerangFactory::FirePhase1(void)
+void BoomerangFactory::FirePhase1(Unit* lpUnit)
 {
-	CheckFire();
-	missile1Timer += imsiDeltaTime;
-	changeAngle =(rand()%(int)(2*PI*1000))/1000.0f;
-	if (missile1Timer >= mPhase1Duration[BoomerangFactory::normal])
+	TimeSet timeset;
+	changeAngle = (rand() % (int)(2 * PI * 1000)) / 1000.0f;
+	if (IsCheckTime(timeset.normal)) 
 	{
-		missile1Timer -= mPhase1Duration[BoomerangFactory::normal];
-		isShoot = false;
-	}
-	if (changeAngle > (2 * PI))
-	{
-		changeAngle -= (2 * PI);
-	}
-	if (!isShoot)
-	{
-		patternNum = PatternNum::normal;
-		isShoot = true;
-	}
-	else
-	{
-		patternNum = PatternNum::end;
+		FireNormal(lpUnit);
 	}
 }
 
-void BoomerangFactory::FirePhase2(void)
+void BoomerangFactory::FirePhase2(Unit* lpUnit)
 {
-	CheckFire();
-	missile2Timer += imsiDeltaTime;
-	changeAngle += imsiDeltaTime * changeAngleSpeed;
-	if (missile2Timer >= mPhase2Duration[BoomerangFactory::boomerang])
-	{
-		missile2Timer -= mPhase2Duration[BoomerangFactory::boomerang];
-		isShoot = false;
-	}
-	if (changeAngle > (2 * PI))
-	{
+	TimeSet timeset;
+	changeAngle += PI/8.0f;
+	if (changeAngle >= (2 * PI)) {
 		changeAngle -= (2 * PI);
 	}
-	if (!isShoot)
+	if (IsCheckTime(timeset.boomerang))
 	{
-		patternNum = PatternNum::boomerang;
-		isShoot = true;
+		FireBoomerang(lpUnit);
 	}
-	else
-	{
-		patternNum = PatternNum::end;
-	}
+	
 }
 
-void BoomerangFactory::FirePhase3(void)
+void BoomerangFactory::FirePhase3(Unit* lpUnit)
 {
-	CheckFire();
-	PatternNum patNum= PatternNum::end;
-	missile1Timer += imsiDeltaTime;
-	missile2Timer += imsiDeltaTime;
-	missile3Timer += imsiDeltaTime;
-	missile4Timer += imsiDeltaTime;
-	changeAngle += imsiDeltaTime * changeAngleSpeed;
-	if (missile1Timer >= mPhase3Duration[BoomerangFactory::boomerang])
-	{
-		missile1Timer -= mPhase3Duration[BoomerangFactory::boomerang];
-		patNum = PatternNum::boomerang;
-		isShoot = false;
-	}
-	if (missile2Timer >= mPhase3Duration[BoomerangFactory::rightRain])
-	{
-		missile2Timer -= mPhase3Duration[BoomerangFactory::rightRain];
-		patNum = PatternNum::rightRain;
-		isShoot = false;
-	}
-	if (missile3Timer >= mPhase3Duration[BoomerangFactory::leftRain])
-	{
-		missile3Timer -= mPhase3Duration[BoomerangFactory::leftRain];
-		patNum = PatternNum::leftRain;
-		isShoot = false;
-	}
-	if (missile4Timer >= mPhase3Duration[BoomerangFactory::topRain])
-	{
-		missile4Timer -= mPhase3Duration[BoomerangFactory::topRain];
-		patNum = PatternNum::topRain;
-		isShoot = false;
-	}
-	if (changeAngle > (2 * PI))
-	{
+	TimeSet timeset;
+	changeAngle += PI / 8.0f;
+	if (changeAngle >= (2 * PI)) {
 		changeAngle -= (2 * PI);
 	}
-	if (!isShoot)
+	if (IsCheckTime(timeset.boomerang))
 	{
-		patternNum = patNum;
-		isShoot = true;
+		FireBoomerang(lpUnit);
 	}
-	else
+	if (IsCheckTime(timeset.rain))
 	{
-		patternNum = PatternNum::end;
+		FireLeftRain(lpUnit);
+		FireRightRain(lpUnit);
+		FireTopRain(lpUnit);
 	}
-}
 
-void BoomerangFactory::CheckFire(void)
-{
-	if (isFirst) {
-		srand(time(NULL));
-		missile1Timer = 0.0f;
-		missile5Timer = 0.0f;
-		missile4Timer = 0.0f;
-		missile3Timer = 0.0f;
-		missile2Timer = 0.0f;
-		changeAngle = 0.0f;
-		isFirst = false;
-	}
 }

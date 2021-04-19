@@ -57,6 +57,12 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("HpGauge_In", new Image()));
     mLpImageDatas["HpGauge_In"]->Init("Image/UI/HpGauge3.bmp", 1010, 76, 1, 1, 1, true);
 
+    mLpImageDatas.insert(make_pair("TITLE", new Image()));
+    mLpImageDatas["TITLE"]->Init("Image/UI/Title.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, false);
+
+    mLpImageDatas.insert(make_pair("TITLE_PRESSKEY", new Image()));
+    mLpImageDatas["TITLE_PRESSKEY"]->Init("Image/UI/Title_presskey.bmp", 500, 108, false);
+
     return S_OK;
 }
 
