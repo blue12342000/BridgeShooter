@@ -143,10 +143,10 @@ void InGameScene::Render(HDC hdc)
     EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
-    if (isEnemyHitPlayer)
-        lpJinHwang->Render(hBackDC);
-    if(isPlayerHitEnemy)
-        lpPlanetKMS->Render(hBackDC);
+    //if (isEnemyHitPlayer)
+    //    lpJinHwang->Render(hBackDC);
+    //if(isPlayerHitEnemy)
+    //    lpPlanetKMS->Render(hBackDC);
 
 
     lpBackBuffer->Render(hdc);
@@ -164,7 +164,7 @@ void InGameScene::CheckCollision()
     float dX = 0;
     float dY = 0;
 
-    for (int i = 0; i < vLpEnemyMissile.size(); ++i)
+    for (int i = 0; i < vLpEnemyMissile.size();)
     {
         dX = vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x - lpPlayer->pos.x;
         dY = vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y - lpPlayer->pos.y;
@@ -172,7 +172,13 @@ void InGameScene::CheckCollision()
 
         if (distance <= vLpEnemyMissile[i]->collider.width / 2 + lpPlayer->collider.width / 2)
         {
+            EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "Effect_01", 10);
+            MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
             isEnemyHitPlayer = true;
+        }
+        else
+        {
+            ++i;
         }
     }
 
@@ -180,14 +186,20 @@ void InGameScene::CheckCollision()
     float dX2 = 0;
     float dY2 = 0;
 
-    for (int i = 0; i < vLpPlayerMissile.size(); ++i)
+    for (int i = 0; i < vLpPlayerMissile.size();)
     {
         dX2 = vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x - lpPlanetSSJ->pos.x;
         dY2 = vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y - lpPlanetSSJ->pos.y;
         distance2 = sqrt(dX2 * dX2 + dY2 * dY2);
         if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
         {
+            EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "Effect_01", 10);
+            MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             isPlayerHitEnemy = true;
+        }
+        else
+        {
+            ++i;
         }
     }
 

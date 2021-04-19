@@ -19,5 +19,6 @@ public:
 	
 	inline vector<Missile*>& GetLpMissiles(UNIT_KIND kind) { return mvLpMissiles[kind]; }
 	inline void AddMissile(UNIT_KIND userKind, Missile* lpMissile) { mvLpMissiles[userKind].push_back(lpMissile); }
+	inline vector<Missile*>::iterator DisableMissile(UNIT_KIND kind, int index) { vLpDeactive.push_back(*(mvLpMissiles[kind].begin() + index)); return mvLpMissiles[kind].erase(mvLpMissiles[kind].begin() + index); }
 };
 

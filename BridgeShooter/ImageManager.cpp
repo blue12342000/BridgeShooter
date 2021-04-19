@@ -45,6 +45,8 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
     mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true, RGB(255, 0, 255));
     
+    mLpImageDatas.insert(make_pair("Effect_01", new Image()));
+    mLpImageDatas["Effect_01"]->Init("Image/Unit/Planet/planet_KMS.bmp", 800, 80, 10, 1, 10, true, RGB(0, 0, 0));
 
     return S_OK;
 }
