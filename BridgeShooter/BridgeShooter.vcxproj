@@ -148,7 +148,6 @@
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DataManager.cpp" />
-    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
