@@ -25,8 +25,8 @@ void EffectManager::Update(float deltaTime)
 		{
 			for (auto& split : vEffects[i].vSplitPos)
 			{
-				split.angle += (split.destAngle - split.angle) * deltaTime * vEffects[i].frameTime;
-				split.speed += split.speed * 1.3f * deltaTime;
+				split.angle += (split.destAngle - split.angle) * sqrt(split.speed) * deltaTime;
+				split.speed += split.speed * vEffects[i].frameTime * deltaTime;
 				split.pos.x += cosf(split.angle) * split.speed * deltaTime;
 				split.pos.y += sinf(split.angle) * split.speed * deltaTime;
 			}
@@ -35,7 +35,7 @@ void EffectManager::Update(float deltaTime)
 		if (vEffects[i].type == EFFECT_TYPE::EXPLOSION
 			|| vEffects[i].type == EFFECT_TYPE::BLACKHOLE)
 		{
-			if (vEffects[i].frameTime >= 15)
+			if (vEffects[i].frameTime >= 8)
 			{
 				vEffects.erase(vEffects.begin() + i);
 			}
@@ -69,6 +69,7 @@ void EffectManager::Render(HDC hdc)
 		case EFFECT_TYPE::FILELOAD:
 			vEffects[i].lpImage->Render(hdc, vEffects[i].pos.x, vEffects[i].pos.y, vEffects[i].frame, U_IA_CENTER);
 			break;
+		case EFFECT_TYPE::BLACKHOLE:
 		case EFFECT_TYPE::EXPLOSION:
 			for (int l = 0; l < vEffects[i].vSplitPos.size(); ++l)
 			{
@@ -161,7 +162,7 @@ void EffectManager::Blackhole(POINTFLOAT pos, Image* lpImage, int frame, int fps
 			effect.vSplitPos[splitX * y + x] = { pos.x - width / 2 + width / splitX * x, pos.y - height / 2 + height / splitY * y };
 			effect.vSplitPos[splitX * y + x].angle = atan2(effect.vSplitPos[splitX * y + x].pos.y - offset.y, effect.vSplitPos[splitX * y + x].pos.x - offset.x);
 			effect.vSplitPos[splitX * y + x].destAngle = effect.vSplitPos[splitX * y + x].angle + PI;
-			effect.vSplitPos[splitX * y + x].speed = 20;
+			effect.vSplitPos[splitX * y + x].speed = fps;
 		}
 	}
 
