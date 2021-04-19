@@ -71,7 +71,7 @@ void SceneManager::ChangeScene()
 		
 	else if (currScene == SCENE_STATE::INGAME)
 	{
-		currScene = SCENE_STATE::INGAME;
+		currScene = SCENE_STATE::TITLE;
 		
 	}
 		

@@ -5,9 +5,11 @@ class Image;
 class SelectPlayer : public GameScene
 {
 private:
+
 	Image* lpBackImage;
-	
 	Image* lpBackBuffer;
+
+	vector<Image*> vLpPlayerImg; 
 	
 
 public:
