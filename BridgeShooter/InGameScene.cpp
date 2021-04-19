@@ -103,6 +103,11 @@ void InGameScene::Update(float deltaTime)
         SceneManager::GetSingleton()->ChangeScene();
     }
 
+    if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
+    {
+        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 10, 20, 20);
+    }
+
     CheckCollision();
 
     if (lpPlayer) lpPlayer->Update(deltaTime);
@@ -117,7 +122,7 @@ void InGameScene::Update(float deltaTime)
     MissileManager::GetSingleton()->Update(deltaTime);
     
     
-    
+    EffectManager::GetSingleton()->Update(deltaTime);
 
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
@@ -140,7 +145,7 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
-
+    EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
     if (isEnemyHitPlayer)

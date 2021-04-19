@@ -323,6 +323,31 @@ void Image::RotateRender(HDC hdc, int destX, int destY, float angle)
     }
 }
 
+void Image::SplitRender(HDC hdc, POINT dest, int splitX, int splitY, int splitIndex, int frame, UINT uFlag)
+{
+    int width = lpImageInfo->width / splitX;
+    int height = lpImageInfo->height / splitY;
+
+    switch (uFlag)
+    {
+    case U_IA_CENTER:
+        dest.x -= width / 2;
+        dest.y -= height / 2;
+        break;
+    }
+
+    if (lpImageInfo->isTransparent)
+    {
+        GdiTransparentBlt(hdc, dest.x, dest.y, width, height,
+            lpImageInfo->vHMemDC[0], lpImageInfo->width * (frame % lpImageInfo->maxFrameX) + width * (splitIndex % splitX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX) + height * (splitIndex / splitX), width, height, lpImageInfo->transColor);
+    }
+    else
+    {
+        StretchBlt(hdc, dest.x, dest.y, width, height,
+            lpImageInfo->vHMemDC[0], lpImageInfo->width * (frame % lpImageInfo->maxFrameX) + width * (splitIndex % splitX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX) + height * (splitIndex / splitX), width, height, SRCCOPY);
+    }
+}
+
 void Image::Release()
 {
     if (lpImageInfo)

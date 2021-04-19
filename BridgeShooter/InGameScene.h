@@ -33,10 +33,10 @@ private:
 	bool isPlayerHitEnemy;
 
 public:
-	HRESULT Init();
-	void Release();
-	void Update(float deltaTime);
-	void Render(HDC hdc);
+	virtual HRESULT Init();
+	virtual void Release();
+	virtual void Update(float deltaTime);
+	virtual void Render(HDC hdc);
 	void CheckCollision();
 };
 
