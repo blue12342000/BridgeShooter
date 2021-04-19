@@ -68,6 +68,7 @@ public:
 	float speed;
 	Collider collider;
 	float elapsedTime;
+	int hp;
 
 public:
 	GameObject() :pos({ 0,0 }), angle(0), speed(0), collider(Collider()), elapsedTime(0) {}

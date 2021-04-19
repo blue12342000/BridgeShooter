@@ -69,7 +69,7 @@ void SpaceShip::Update(float deltaTime)
 
 	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
 	{
-		SetFactory(new RainFactory());
+		SetFactory(new BasicFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
 	{
@@ -77,7 +77,7 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-//있다가 1번으로 수정이동	//SetFactory(new BasicFactory());
+		SetFactory(new RainFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
 	{

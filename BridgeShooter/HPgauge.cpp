@@ -8,8 +8,8 @@ void HpGauge::Init()
 	pos.x = 0;
 	pos.y = 0;
 	//lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
-	playerMaxHp = 20000;
-	bossMaxHp = 100000;
+	playerMaxHp = 200;
+	bossMaxHp = 500;
 	isBossAlive = true;
 	lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
 
@@ -46,23 +46,23 @@ void HpGauge::Render(HDC hdc)
 
 void HpGauge::PlayerHpGaugeData(float deltaTime)
 {
-	playerHpGauge = GetRectToCenter(playerMaxHp/2 / 100 + 50, 100, playerMaxHp/100, 18);
+	playerHpGauge = GetRectToCenter(playerMaxHp/2 + 50, 100, playerMaxHp, 18);
 
 	//HP가 0되면 값 고정
 	if (playerMaxHp <= 0)
 	{
-		playerMaxHp = 20000;
+		playerMaxHp = 200;
 	}
 }
 
 void HpGauge::BossHpGaugeData(float deltaTime)
 {
-	bossHpGauge = GetRectToCenter(bossMaxHp / 2 / 200 + 50, 50, bossMaxHp / 200, 18);
+	bossHpGauge = GetRectToCenter(bossMaxHp / 2 + 50, 50, bossMaxHp, 18);
 
 	//HP가 0되면 값 고정
 	if (bossMaxHp <= 0)
 	{
-		bossMaxHp = 100000;
+		bossMaxHp = 500;
 		isBossAlive = false;
 	}
 }

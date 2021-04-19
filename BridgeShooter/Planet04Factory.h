@@ -22,8 +22,8 @@ private:
 	int bossCount;
 
 private:
-	virtual void Init() final;
+	virtual void Init();
 	virtual void Release() ;
-	virtual void Fire(Unit* lpUnit) final;
+	virtual void Fire(Unit* lpUnit);
 };
 
