@@ -50,10 +50,10 @@ void SSJFactory::Fire(Unit* lpUnit)
 	if (phaseChanger >= 3000) createLine = 1;
 	if (phaseChanger >= 6000) createLine = 2;
 
-	//1??????
+	//1페이즈
 	if (createLine == 0)
 	{
-		//36???????? ????? ???
+		//36방향으로 원처럼 발사
 		if (IsCheckTime(1000))
 		{
 			for (int i = 0; i < 36; ++i)
@@ -94,12 +94,12 @@ void SSJFactory::Fire(Unit* lpUnit)
 
 	}
 		
-	//2??????
+	//2페이즈
 	else if (createLine == 1)
 	{
 		if (IsCheckTime(100))
 		{
-			//???δ? ???
+			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -110,7 +110,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//???δ? ???
+			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -123,7 +123,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//???δ? ???
+			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -135,7 +135,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//???δ? ???
+			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -147,7 +147,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//???δ? ???
+			//가두는 그물
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -161,7 +161,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			}
 		}
 		
-		//??? ??????
+		//반사 레이저
 		if(IsCheckTime(200))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -171,7 +171,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
-		//??? ??????
+		//반사 레이저
 		else if (IsCheckTime(300))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -183,7 +183,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 		}
 	}
 
-	//3??????
+	//3페이즈
 	else if (createLine == 2)
 	{
 		if (IsCheckTime(3000))
