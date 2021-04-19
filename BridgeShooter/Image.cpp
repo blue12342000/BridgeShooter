@@ -149,14 +149,24 @@ HRESULT Image::RotateInit(string fileName, int width, int height, int maxFrameX,
     DeleteObject(SelectObject(hTempDC, hTempBitmap));
     XFORM xForm, xOldForm;
     float angle = 0;
+
     for (int i = 0; i < splitAngle; ++i)
     {
         lpImageInfo->vHMemDC[i] = CreateCompatibleDC(hTempDC);
         lpImageInfo->vHBitmap[i] = CreateCompatibleBitmap(hTempDC, reSize * maxFrameX, reSize * maxFrameY);
         DeleteObject(SelectObject(lpImageInfo->vHMemDC[i], lpImageInfo->vHBitmap[i]));
-        DeleteObject(SelectObject(lpImageInfo->vHMemDC[i], hTempBrush));
 
-        PatBlt(lpImageInfo->vHMemDC[i], 0, 0, reSize * maxFrameX, reSize * maxFrameY, PATCOPY);
+
+        HDC hTempFrameDC1 = CreateCompatibleDC(hdc);
+        HBITMAP hTempFrameBitmap1 = CreateCompatibleBitmap(hdc, lpImageInfo->width, lpImageInfo->height);
+        DeleteObject(SelectObject(hTempFrameDC1, hTempFrameBitmap1));
+
+        HDC hTempFrameDC2 = CreateCompatibleDC(hdc);
+        HBITMAP hTempFrameBitmap2 = CreateCompatibleBitmap(hdc, reSize, reSize);
+        DeleteObject(SelectObject(hTempFrameDC2, hTempFrameBitmap2));
+        DeleteObject(SelectObject(hTempFrameDC2, hTempBrush));
+        GetWorldTransform(hTempFrameDC2, &xOldForm);
+        PatBlt(hTempFrameDC2, 0, 0, reSize, reSize, PATCOPY);
 
         angle = PI * 2 / splitAngle * i;
         xForm.eM11 = cosf(angle); xForm.eM12 = sinf(angle);
@@ -164,32 +174,45 @@ HRESULT Image::RotateInit(string fileName, int width, int height, int maxFrameX,
         xForm.eDx = (reSize - cos(angle) * lpImageInfo->width + sin(angle) * lpImageInfo->height) / 2;
         xForm.eDy = (reSize - cos(angle) * lpImageInfo->height - sin(angle) * lpImageInfo->width) / 2;
 
-        SetGraphicsMode(lpImageInfo->vHMemDC[i], GM_ADVANCED);
-        GetWorldTransform(lpImageInfo->vHMemDC[i], &xOldForm);
-        SetWorldTransform(lpImageInfo->vHMemDC[i], &xForm);
+        SetGraphicsMode(hTempFrameDC2, GM_ADVANCED);
+        for (int y = 0; y < maxFrameY; ++y)
+        {
+            for (int x = 0; x < maxFrameX; ++x)
+            {
+                BitBlt(hTempFrameDC1, 0, 0, lpImageInfo->width, lpImageInfo->height, hTempDC, lpImageInfo->width * x, lpImageInfo->width * y, SRCCOPY);
 
-        StretchBlt(
-            lpImageInfo->vHMemDC[i],
-            0, 0,
-            lpImageInfo->width,
-            lpImageInfo->height,
-            hTempDC,
-            0,
-            0,
-            lpImageInfo->width,
-            lpImageInfo->height,
-            SRCCOPY
-        );
+                SetWorldTransform(hTempFrameDC2, &xForm);
+                StretchBlt(
+                    hTempFrameDC2,
+                    0, 0,
+                    lpImageInfo->width,
+                    lpImageInfo->height,
+                    hTempFrameDC1,
+                    0, 0,
+                    lpImageInfo->width,
+                    lpImageInfo->height,
+                    SRCCOPY
+                );
+                SetWorldTransform(hTempFrameDC2, &xOldForm);
 
-        SetWorldTransform(lpImageInfo->vHMemDC[i], &xOldForm);
-        SetGraphicsMode(lpImageInfo->vHMemDC[i], GM_COMPATIBLE);
+                BitBlt(lpImageInfo->vHMemDC[i], reSize * x, reSize * y, reSize, reSize, hTempFrameDC2, 0, 0, SRCCOPY);
+            }
+        }
+
+        SetGraphicsMode(hTempFrameDC2, GM_COMPATIBLE);
+        DeleteObject(hTempFrameBitmap1);
+        DeleteDC(hTempFrameDC1);
+        DeleteObject(hTempFrameBitmap2);
+        DeleteDC(hTempFrameDC2);
     }
+
     DeleteObject(hTempBrush);
     DeleteObject(hTempBitmap);
     DeleteDC(hTempDC);
 
     lpImageInfo->width = reSize;
     lpImageInfo->height = reSize;
+
 
     ReleaseDC(g_hWnd, hdc);
 
@@ -299,27 +322,26 @@ void Image::AlphaRender(HDC hdc, int destX, int destY)
         lpBlendInfo->hBlendDC, 0, 0, lpImageInfo->width, lpImageInfo->height, lpBlendInfo->blendFunc);
 }
 
-void Image::RotateRender(HDC hdc, int destX, int destY, float angle)
+void Image::RotateRender(HDC hdc, int destX, int destY, float angle, int frame)
 {
     destX -= lpImageInfo->width / 2;
     destY -= lpImageInfo->height / 2;
+    frame %= lpImageInfo->totalFrame;
 
     int degree = angle * 180 / PI;
     while (degree < 0) degree += 360;
     degree += 180 / splitAngle;
     degree %= 360;
-
-    int index = degree / (360 / splitAngle);
-
+    int index = (degree / (360 / splitAngle));
     if (lpImageInfo->isTransparent)
     {
         GdiTransparentBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
-            lpImageInfo->vHMemDC[index], 0, 0, lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
+            lpImageInfo->vHMemDC[index], lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), lpImageInfo->width, lpImageInfo->height, lpImageInfo->transColor);
     }
     else
     {
         BitBlt(hdc, destX, destY, lpImageInfo->width, lpImageInfo->height,
-            lpImageInfo->vHMemDC[index], lpImageInfo->width * 0, 0, SRCCOPY);
+            lpImageInfo->vHMemDC[index], lpImageInfo->width * (frame % lpImageInfo->maxFrameX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX), SRCCOPY);
     }
 }
 

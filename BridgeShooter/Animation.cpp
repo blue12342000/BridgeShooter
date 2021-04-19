@@ -1,36 +1,46 @@
 #include "Animation.h"
 #include "Image.h"
 
-void Animation::Change(string imageKey, int fps, bool isLoop)
+void Animation::Change(string imageKey, int fps, bool isLoop, bool isReset)
 {
-	if (lpImage)
-	{
-		Image* lpTempImage = ImageManager::GetSingleton()->FindImage(imageKey);
-		if (lpImage != lpTempImage)
-		{
-			lpImage = lpTempImage;
-			this->isLoop = isLoop;
-			this->fps = fps;
-			frame = 0;
-		}
-	}
-	else
+	if (isReset)
 	{
 		lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
 		this->isLoop = isLoop;
 		this->fps = fps;
 		frame = 0;
 	}
+	else
+	{
+		if (lpImage)
+		{
+			Image* lpTempImage = ImageManager::GetSingleton()->FindImage(imageKey);
+			if (lpImage != lpTempImage)
+			{
+				lpImage = lpTempImage;
+				this->isLoop = isLoop;
+				this->fps = fps;
+				frame = 0;
+			}
+		}
+		else
+		{
+			lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
+			this->isLoop = isLoop;
+			this->fps = fps;
+			frame = 0;
+		}
+	}
 }
 
 void Animation::Update(float deltaTime)
 {
-	frame += (deltaTime * fps);
-	if ((int)frame >= lpImage->GetTotalFrame())
+	frame += deltaTime * (float)fps;
+	if (frame >= lpImage->GetTotalFrame())
 	{
 		if (isLoop)
 		{
-			frame -= ((int)(frame / lpImage->GetTotalFrame())) * lpImage->GetTotalFrame();
+			frame -= ((int)(frame / lpImage->GetTotalFrame()) * lpImage->GetTotalFrame());
 		}
 		else
 		{
@@ -42,4 +52,9 @@ void Animation::Update(float deltaTime)
 void Animation::Render(HDC hdc, int destX, int destY)
 {
 	lpImage->Render(hdc, destX, destY, ((int)frame), U_IA_CENTER);
+}
+
+void Animation::Render(HDC hdc, int destX, int destY, float angle)
+{
+	lpImage->RotateRender(hdc, destX, destY, angle, ((int)frame));
 }

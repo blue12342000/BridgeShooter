@@ -1,6 +1,7 @@
 #pragma once
 #include "Unit.h"
 
+class Pattern;
 class JinHwang : public Unit
 {
 public:

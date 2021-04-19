@@ -6,6 +6,7 @@
 #include "SpiralPattern.h"
 #include "Missile.h"
 #include "Unit.h"
+#include "Factory.h"
 
 void Planet04Factory::Init()
 {
@@ -17,7 +18,11 @@ void Planet04Factory::Init()
 	
 	createLine = 0;
 	maxCreateLIne = 3;
+	bossCount = 0;
+
 	SetCheckTime(30);
+	SetCheckTime(50);
+
 	SetCheckTime(100);
 	SetCheckTime(1000);
 }
@@ -37,27 +42,31 @@ void Planet04Factory::Fire(Unit* lpUnit)
 	//델타 타임으로 변경 예정
 
 	bossCount++;
-	if (bossCount >= 1500) createLine = 1;
-	if (bossCount >= 2000) createLine = 2;
+	if (bossCount >= 10000) createLine = 1;
+	if (bossCount >= 12500) createLine = 2;
 	//1페이즈
 	if (createLine == 0)
 	{
-		if (IsCheckTime(100) && GetTimeMod(10000) < 5000)
+		if (IsCheckTime(30) && GetTimeMod(100) < 10000)
 		{
 			for (int i = -1; i < 2; ++i)	//한번에 여러개 나가게 하기
 			{
-				++count;
+				count -= 2;
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->pos = lpUnit->pos;
-				lpMissile->angle = lpUnit->angle - (PI / 16 * i) + count;
-				lpMissile->speed = 150;
+				lpMissile->angle = lpUnit->angle - (PI / 16*i)-(count+bossCount);
+				lpMissile->speed = 200;
 				lpMissile->elapsedTime = 0;
 				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
 				lpMissile->deltaMove.deltaPos = { 0,  0 };
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
-				//if (count >= 200) count *= -1;
+				if (count % 400 <= 200)
+				{
+					count = 0;
+				}
 			}
+		
 		}
 	}
 

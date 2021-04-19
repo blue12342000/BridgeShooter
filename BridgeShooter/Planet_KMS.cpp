@@ -1,6 +1,6 @@
 #include "Planet_KMS.h"
 #include"BasicFactory.h"
-#include"BoomerangFactory.h"
+#include"Planet_KMS_Factory.h"
 #include"SineFactory.h"
 #include"Animation.h"
 #include"Missile.h"
@@ -8,10 +8,10 @@ void Planet_KMS::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet_KMS", 50, true);
-	speed = 0;
+	speed = 374;
 	elapsedTime = 0;
 	angle = PI / 2;
-	lpFactory = new BoomerangFactory();
+	lpFactory = new Planet_KMS_Factory();
 	lpFactory->Init();
 	collider.SetHitBox(pos, { 0, 0 }, 100, 100);
 

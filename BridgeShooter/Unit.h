@@ -8,9 +8,10 @@ class Unit : public GameObject
 protected:
 	Animation* lpAnimation;
 	Factory* lpFactory;
+	Unit* lpTarget;
 
 public:
-	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr) {}
+	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr) {}
 	virtual ~Unit() {}
 
 	virtual void Init() override;
@@ -18,9 +19,12 @@ public:
 	virtual void Release() override;
 	virtual void Render(HDC hdc) override;
 
-	virtual void SetFactory(Factory* lpFactory) final;
-	virtual void Fire(void) final;
+	virtual void Fire() final;
+	virtual void Translate(POINTFLOAT delta);
 
+	virtual void SetFactory(Factory* lpFactory) final;
+
+	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 };
 

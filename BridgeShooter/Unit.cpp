@@ -10,10 +10,12 @@ void Unit::Init()
 	lpAnimation = nullptr;
 	lpFactory = nullptr;
 }
+
 void Unit::Update(float deltaTime)
 {
 	elapsedTime += deltaTime;
 }
+
 void Unit::Release()
 {
 	if (lpAnimation)
@@ -26,6 +28,7 @@ void Unit::Release()
 		delete lpFactory;
 	}
 }
+
 void Unit::Render(HDC hdc)
 {
 	if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y);
@@ -34,6 +37,16 @@ void Unit::Render(HDC hdc)
 		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);
 	}
 }
+
+void Unit::Fire(void)
+{
+	if (lpFactory) lpFactory->Fire(this);
+}
+
+void Unit::Translate(POINTFLOAT delta)
+{
+}
+
 void Unit::SetFactory(Factory* lpFactory)
 {
 	if (this->lpFactory)
@@ -44,8 +57,4 @@ void Unit::SetFactory(Factory* lpFactory)
 
 	this->lpFactory = lpFactory;
 	this->lpFactory->Init();
-}
-void Unit::Fire(void)
-{
-	if (lpFactory) lpFactory->Fire(this);
 }

@@ -27,7 +27,6 @@ private:
 	Image* lpBackImage2;	
 
 	HpGauge* lpHpGauge;
-	Image* lpHpGuageImage;
 
 	int frame;
 	float elapsedTime;

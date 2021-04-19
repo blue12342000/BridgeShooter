@@ -30,6 +30,15 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("MISSILE_03", new Image()));
     mLpImageDatas["MISSILE_03"]->RotateInit("Image/Missile/Missile_03.bmp", 14, 17, 1, 1, 1, 36);
 
+    mLpImageDatas.insert(make_pair("MISSILE_04", new Image()));
+    mLpImageDatas["MISSILE_04"]->RotateInit("Image/Missile/Missile_04.bmp", 47 / 2, 47 / 2, 1, 1, 1, 36);
+
+    mLpImageDatas.insert(make_pair("MISSILE_05", new Image()));
+    mLpImageDatas["MISSILE_05"]->RotateInit("Image/Missile/Missile_05.bmp", 45 / 2, 45 / 2, 1, 1, 1, 36);
+
+    mLpImageDatas.insert(make_pair("MISSILE_06", new Image()));
+    mLpImageDatas["MISSILE_06"]->RotateInit("Image/Missile/Missile_06.bmp", 132 / 2, 33 / 2, 4, 1, 4, 36);
+
     mLpImageDatas.insert(make_pair("PLANET_SSJ", new Image()));
     mLpImageDatas["PLANET_SSJ"]->Init("Image/Unit/Planet/Planet_SSJ.bmp", 20000, 266, 50, 1, 50, true, RGB(255, 0, 255));
 
@@ -46,7 +55,7 @@ HRESULT ImageManager::Init()
     mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true);
 
     mLpImageDatas.insert(make_pair("BossHpGauge", new Image()));
-    mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 1010, 76, 1, 1, 1, true);
+    mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 600, 76, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("HpGauge_Default", new Image()));
     mLpImageDatas["HpGauge_Default"]->Init("Image/UI/HpGauge.bmp", 1010, 76, 1, 1, 1, true);
@@ -71,6 +80,18 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
     mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("EFFECT_01", new Image()));
+    mLpImageDatas["EFFECT_01"]->Init("Image/Effect/Effect_01.bmp", 108, 36, 3, 1, 3, true);
+    
+    mLpImageDatas.insert(make_pair("SELECT_YELLOW", new Image()));
+    mLpImageDatas["SELECT_YELLOW"]->Init("Image/UI/Select_Yellow.bmp", 125, 171, false);
+
+    mLpImageDatas.insert(make_pair("SELECT_RED", new Image()));
+    mLpImageDatas["SELECT_RED"]->Init("Image/UI/Select_Red.bmp", 145, 166, false);
+
+    mLpImageDatas.insert(make_pair("SELECT_GRAY", new Image()));
+    mLpImageDatas["SELECT_GRAY"]->Init("Image/UI/Select_Gray.bmp", 131, 161, false);
 
     return S_OK;
 }

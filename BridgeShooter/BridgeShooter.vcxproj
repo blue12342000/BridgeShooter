@@ -144,8 +144,10 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
-    <ClCompile Include="BoomerangFactory.cpp" />
+    <ClCompile Include="Planet_KMS_Factory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EnemyGroup.cpp" />
@@ -175,6 +177,7 @@
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Planet04.cpp" />
+    <ClCompile Include="SpaceShipFactory.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -184,8 +187,10 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
-    <ClInclude Include="BoomerangFactory.h" />
+    <ClInclude Include="Planet_KMS_Factory.h" />
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="EnemyGroup.h" />
@@ -218,6 +223,7 @@
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Planet04.h" />
+    <ClInclude Include="SpaceShipFactory.h" />
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="SSJFactory.h" />
     <ClInclude Include="UI.h" />

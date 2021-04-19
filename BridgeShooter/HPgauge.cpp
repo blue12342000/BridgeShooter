@@ -9,24 +9,39 @@ void HpGauge::Init()
 	pos.y = 0;
 	//lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
 	playerMaxHp = 20000;
-	bossMaxHp = 500000;
+	bossMaxHp = 100000;
 	isBossAlive = true;
+	lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
+
+}
+void HpGauge::Release()
+{
+
 }
 
 void HpGauge::Update(float deltaTime)
 {
-	PlayerHpGaugeData(deltaTime);
-	if (isBossAlive) BossHpGaugeData(deltaTime);
+	if (lpImage)
+	{
+		PlayerHpGaugeData(deltaTime);
+		if (isBossAlive) BossHpGaugeData(deltaTime);
 
-	elapsedTime += deltaTime;
+		elapsedTime += deltaTime;
+	}
 }
 
 void HpGauge::Render(HDC hdc)
 {
-	Rectangle(hdc, playerHpGauge.left, playerHpGauge.top, playerHpGauge.right, playerHpGauge.bottom);
-	if(isBossAlive)
-	Rectangle(hdc, bossHpGauge.left, bossHpGauge.top, bossHpGauge.right, bossHpGauge.bottom);
-	UI::Render(hdc);
+	if (lpImage)
+	{
+		Rectangle(hdc, playerHpGauge.left, playerHpGauge.top, playerHpGauge.right, playerHpGauge.bottom);
+	// 체력에 따라서 체력바 색상이 달라지게 하고싶다. 어떻게 할까
+		if (isBossAlive)
+		{
+			Rectangle(hdc, bossHpGauge.left, bossHpGauge.top, bossHpGauge.right, bossHpGauge.bottom);
+			lpImage->Render(hdc, pos.x, pos.y, 0, U_IA_CENTER);
+		}
+	}
 }
 
 void HpGauge::PlayerHpGaugeData(float deltaTime)
@@ -36,18 +51,18 @@ void HpGauge::PlayerHpGaugeData(float deltaTime)
 	//HP가 0되면 값 고정
 	if (playerMaxHp <= 0)
 	{
-		playerMaxHp = 0;
+		playerMaxHp = 20000;
 	}
 }
 
 void HpGauge::BossHpGaugeData(float deltaTime)
 {
-	bossHpGauge = GetRectToCenter(bossMaxHp / 2 / 1000 + 50, 50, bossMaxHp / 1000, 18);
+	bossHpGauge = GetRectToCenter(bossMaxHp / 2 / 200 + 50, 50, bossMaxHp / 200, 18);
 
 	//HP가 0되면 값 고정
-	if (playerMaxHp <= 0)
+	if (bossMaxHp <= 0)
 	{
-		playerMaxHp = 0;
+		bossMaxHp = 100000;
 		isBossAlive = false;
 	}
 }
