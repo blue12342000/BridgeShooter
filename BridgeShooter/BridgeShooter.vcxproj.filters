@@ -55,6 +55,9 @@
     <Filter Include="소스 파일\Controller">
       <UniqueIdentifier>{25bbd98c-65be-454f-8371-90b9939b95fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Controller\Super">
+      <UniqueIdentifier>{c34292eb-07ee-4ebb-b058-5e869c9de9e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -198,7 +201,10 @@
     <ClCompile Include="SpaceShipFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="AIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -353,7 +359,13 @@
     <ClInclude Include="BridgeShooter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
     <ClInclude Include="Controller.h">
+      <Filter>소스 파일\Controller\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="AIController.h">
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
     <ClInclude Include="DataManager.h">
