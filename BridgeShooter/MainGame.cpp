@@ -13,6 +13,7 @@ HRESULT MainGame::Init()
     MissileManager::GetSingleton()->Init();
     EffectManager::GetSingleton()->Init();
     SceneManager::GetSingleton()->Init();
+    DataManager::GetSingleton()->Init();
 
     hdc = GetDC(g_hWnd);
     
@@ -39,6 +40,7 @@ void MainGame::Release()
     SceneManager::GetSingleton()->Release();
     SceneManager::GetSingleton()->ReleaseSingleton();
     EffectManager::GetSingleton()->ReleaseSingleton();
+    DataManager::GetSingleton()->ReleaseSingleton();
 
     ReleaseDC(g_hWnd, hdc);
 }
@@ -53,6 +55,7 @@ void MainGame::Update()
     lpTimer->Tick();
 
     SceneManager::GetSingleton()->Update(lpTimer->GetDeltaTime());
+    //datamanager
 }
 
 void MainGame::Render()
@@ -60,6 +63,7 @@ void MainGame::Render()
     lpTimer->Render(hdc);
 
     SceneManager::GetSingleton()->Render(hdc);
+
     
 }
 

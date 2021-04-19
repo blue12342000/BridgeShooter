@@ -174,6 +174,9 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -309,6 +312,9 @@
       <Filter>소스 파일\Scene</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
+      <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
   </ItemGroup>
