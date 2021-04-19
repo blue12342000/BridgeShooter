@@ -204,6 +204,9 @@
     <ClCompile Include="AIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="GuidePattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

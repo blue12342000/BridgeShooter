@@ -140,8 +140,8 @@ void InGameScene::Update(float deltaTime)
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
 
-    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
+    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
