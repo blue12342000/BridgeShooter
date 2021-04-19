@@ -12,6 +12,7 @@ void Planet_SSJ::Init()
 	lpFactory = new SSJFactory();	
 	lpFactory->Init();
 	collider.SetHitBox(pos, { 0,0 }, 100, 100);
+
 }
 
 void Planet_SSJ::Update(float deltaTime)

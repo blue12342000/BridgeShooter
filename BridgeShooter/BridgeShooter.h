@@ -39,3 +39,5 @@ enum class UNIT_KIND
 #include "ImageManager.h"
 #include "MissileManager.h"
 #include "EffectManager.h"
+#include "MissileManager.h"
+#include "SceneManager.h"

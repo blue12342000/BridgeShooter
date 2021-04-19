@@ -6,12 +6,11 @@ class BoomerangFactory :public Factory
 {
 private:
 
-	enum PatternNum{ normal,boomerang,leftRain,rightRain,topRain,end };
+	enum PatternNum{ NORMAL,BOOMERANG,L_RAIN,R_RAIN,T_RAIN,END };
 	
 private:
 	PatternNum patternNum;
 	float changeAngle;
-	int phase;
 	float timer;
 private:
 	std::map<PatternNum, int>mMissileNum;

@@ -24,7 +24,7 @@ void EnemyGroup::Init()
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
-	enemyKinds = 3; 
+	enemyKinds = 1; 
 	switch (enemyKinds)
 	{
 	case 1:

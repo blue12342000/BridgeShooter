@@ -2,6 +2,7 @@
 #include "BridgeShooter.h"
 #include "Timer.h"
 #include "InGameScene.h"
+#include "Title.h"
 
 HRESULT MainGame::Init()
 {
@@ -11,16 +12,13 @@ HRESULT MainGame::Init()
     ImageManager::GetSingleton()->Init();
     MissileManager::GetSingleton()->Init();
     EffectManager::GetSingleton()->Init();
-
+    SceneManager::GetSingleton()->Init();
 
     hdc = GetDC(g_hWnd);
     
     lpTimer = new Timer();
     lpTimer->Init();
   
-    lpScene = new InGameScene();
-    lpScene->Init();
-
     return S_OK;
 }
 
@@ -32,19 +30,14 @@ void MainGame::Release()
         delete lpTimer;
         lpTimer = nullptr;
     }
-
-    if (lpScene)
-    {
-        lpScene->Release();
-        delete lpScene;
-        lpScene = nullptr;
-    }
-  
+ 
     MissileManager::GetSingleton()->Release();
     MissileManager::GetSingleton()->ReleaseSingleton();
     KeyManager::GetSingleton()->ReleaseSingleton();
     ImageManager::GetSingleton()->Release();
     ImageManager::GetSingleton()->ReleaseSingleton();
+    SceneManager::GetSingleton()->Release();
+    SceneManager::GetSingleton()->ReleaseSingleton();
     EffectManager::GetSingleton()->ReleaseSingleton();
 
     ReleaseDC(g_hWnd, hdc);
@@ -58,13 +51,16 @@ void MainGame::Update()
     }
 
     lpTimer->Tick();
-    if (lpScene) lpScene->Update(lpTimer->GetDeltaTime());
+
+    SceneManager::GetSingleton()->Update(lpTimer->GetDeltaTime());
 }
 
 void MainGame::Render()
 {
-    if (lpScene) lpScene->Render(hdc);
     lpTimer->Render(hdc);
+
+    SceneManager::GetSingleton()->Render(hdc);
+    
 }
 
 LRESULT MainGame::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

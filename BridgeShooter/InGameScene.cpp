@@ -7,8 +7,9 @@
 #include "Planet_KMS.h"
 #include "Item.h"
 #include "Missile.h"
-#include"EnemyGroup.h"
-#include"BasicFactory.h"
+#include "HPgauge.h"
+#include "GameScene.h"
+#include "EnemyGroup.h"
 
 HRESULT InGameScene::Init()
 {
@@ -38,6 +39,7 @@ HRESULT InGameScene::Init()
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
     lpBackImage2 = ImageManager::GetSingleton()->FindImage("SPACE");
+
     frame = 0;
     elapsedTime = 0;
         
@@ -49,6 +51,10 @@ HRESULT InGameScene::Init()
     lpJinHwang->Init();
     lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
+    lpHpGauge = new HpGauge();
+    lpHpGauge->Init();
+    lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+    lpHpGuageImage = ImageManager::GetSingleton()->FindImage("HpGauge_Blank");
     return S_OK;
 }
 
@@ -99,6 +105,13 @@ void InGameScene::Release()
         delete lpItem;
         lpItem = nullptr;
     }
+
+    if (lpHpGauge)
+    {
+        lpHpGauge->Release();
+        delete lpHpGauge;
+        lpHpGauge = nullptr;
+    }
 }
 
 void InGameScene::Update(float deltaTime)
@@ -106,6 +119,10 @@ void InGameScene::Update(float deltaTime)
     if (KeyManager::GetSingleton()->IsKeyDownOne('M'))
     {
         isOnlyPlayer = !isOnlyPlayer;
+    }
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene();
     }
 
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
@@ -124,9 +141,9 @@ void InGameScene::Update(float deltaTime)
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
     if (lpMob1) lpMob1->Update(deltaTime);
 
-    //if (lpItem) lpItem->Update(deltaTime);
+    if (lpItem) lpItem->Update(deltaTime);
+    if (lpHpGauge) lpHpGauge->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
-    
     
     EffectManager::GetSingleton()->Update(deltaTime);
 
@@ -145,13 +162,16 @@ void InGameScene::Render(HDC hdc)
 
     if (lpPlayer) lpPlayer->Render(hBackDC);
 
-    if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
-    //if (lpPlanet04) lpPlanet04->Render(hBackDC);
+    if (lpPlanet04) lpPlanet04->Render(hBackDC);
+    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
     if (lpMob1)lpMob1->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
+
+    if (lpHpGauge) lpHpGauge->Render(hBackDC);
+    if (lpHpGuageImage) lpHpGuageImage->Render(hBackDC);
     EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
@@ -185,6 +205,7 @@ void InGameScene::CheckCollision()
         if (distance <= vLpEnemyMissile[i]->collider.width / 2 + lpPlayer->collider.width / 2)
         {
             isEnemyHitPlayer = true;
+            lpHpGauge->SetPlayerMaxHp(lpHpGauge->GetPlayerMaxHp() - 1);
         }
     }
 
@@ -200,6 +221,7 @@ void InGameScene::CheckCollision()
         if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
         {
             isPlayerHitEnemy = true;
+            lpHpGauge->SetEnemyMaxHp(lpHpGauge->GetEnemyMaxHp() - 1);
         }
     }
 

@@ -28,7 +28,7 @@ void BasicFactory::Release()
 
 void BasicFactory::Fire(Unit* lpUnit)
 {
-	if (createLine == 0)
+	if (createLine == 1)
 	{
 		// ±‚∫ª≈∫
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -36,7 +36,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}
-	else if (createLine == 1)
+	else if (createLine == 2)
 	{
 		// ªÍ≈∫
 		for (int i = 0; i < 20; ++i)
@@ -47,7 +47,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
 	}
-	else if (createLine == 2)
+	else if (createLine == 3)
 	{
 		// π›ªÁ
 		for (int i = -3; i < 4; i += 2)

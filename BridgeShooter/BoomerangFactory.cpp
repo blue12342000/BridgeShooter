@@ -18,27 +18,27 @@ struct TimeSet
 void BoomerangFactory::Init()
 {
 	TimeSet timeset;
-	patternNum = PatternNum::boomerang;
-	phase = 1;
+	patternNum = PatternNum::BOOMERANG;
+	createLine = 1;
+	maxCreateLIne = 3;
 
+	mLpMissilePattern.insert(make_pair(PatternNum::NORMAL, new BasicPattern()));
+	mLpMissilePattern.insert(make_pair(PatternNum::BOOMERANG, new BoomerangPattern()));
+	mLpMissilePattern.insert(make_pair(PatternNum::L_RAIN, new BasicPattern()));
+	mLpMissilePattern.insert(make_pair(PatternNum::rightRain, new BasicPattern()));
+	mLpMissilePattern.insert(make_pair(PatternNum::topRain, new BasicPattern()));
 
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::normal, new BasicPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::boomerang, new BoomerangPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::leftRain, new BasicPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::rightRain, new BasicPattern()));
-	mLpMissilePattern.insert(pair<PatternNum, Pattern*>(PatternNum::topRain, new BasicPattern()));
+	mMissileNum.insert(make_pair(PatternNum::normal,	1));
+	mMissileNum.insert(make_pair(PatternNum::boomerang,	16));
+	mMissileNum.insert(make_pair(PatternNum::leftRain,	20));
+	mMissileNum.insert(make_pair(PatternNum::rightRain,	20));
+	mMissileNum.insert(make_pair(PatternNum::topRain,	20));
 
-	mMissileNum.insert(pair<PatternNum, int>(PatternNum::normal,	1));
-	mMissileNum.insert(pair<PatternNum, int>(PatternNum::boomerang,	16));
-	mMissileNum.insert(pair<PatternNum, int>(PatternNum::leftRain,	20));
-	mMissileNum.insert(pair<PatternNum, int>(PatternNum::rightRain,	20));
-	mMissileNum.insert(pair<PatternNum, int>(PatternNum::topRain,	20));
-
-	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::normal,	300.0f));
-	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::boomerang,	170.0f));
-	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::leftRain,	150.0f));
-	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::rightRain,	150.0f));
-	mMissileSpeed.insert(pair<PatternNum, float>(PatternNum::topRain,	150.0f));
+	mMissileSpeed.insert(make_pair(PatternNum::normal,	300.0f));
+	mMissileSpeed.insert(make_pair(PatternNum::boomerang,	170.0f));
+	mMissileSpeed.insert(make_pair(PatternNum::leftRain,	150.0f));
+	mMissileSpeed.insert(make_pair(PatternNum::rightRain,	150.0f));
+	mMissileSpeed.insert(make_pair(PatternNum::topRain,	150.0f));
 
 	SetCheckTime(timeset.phase);
 	SetCheckTime(timeset.boomerang);
@@ -75,22 +75,22 @@ void BoomerangFactory::Fire(Unit* lpUnit)
 	if (lpUnit) {
 		TimeSet timeset;
 		if (IsCheckTime(timeset.phase)) {
-			phase++;
-			if (phase > 3) {
-				phase = 1;
+			createLine++;
+			if (createLine > 3) {
+				createLine = 1;
 			}
 		}
 		changeAngle = lpUnit->angle;
-		if (phase == 1)
+		if (createLine == 1)
 		{
 			FirePhase1(lpUnit);
 			
 		}
-		else if (phase==2)
+		else if (createLine ==2)
 		{
 			FirePhase2(lpUnit);
 		}
-		else if (phase == 3)
+		else if (createLine == 3)
 		{
 			FirePhase3(lpUnit);
 		}
@@ -109,7 +109,7 @@ void BoomerangFactory::FireBoomerang(Unit* lpUnit)
 			mMissileSpeed[BoomerangFactory::boomerang],10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::boomerang]);
 		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 	}
 }
 
@@ -122,8 +122,7 @@ void BoomerangFactory::FireNormal(Unit* lpUnit)
 			lpUnit->angle + changeAngle,
 			mMissileSpeed[BoomerangFactory::normal], 10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::normal]);
-		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 	}
 }
 
@@ -132,14 +131,10 @@ void BoomerangFactory::FireLeftRain(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::leftRain]; i++)// 미사일 ->
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = { 0.0f,(float)(WINSIZE_HEIGHT + 100) * (float)i / mMissileNum[BoomerangFactory::leftRain]  };
-		lpMissile->angle = 0.0f;
-		lpMissile->speed = mMissileSpeed[BoomerangFactory::leftRain];
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->SetMissile("MISSILE_01", { 0.0f,(float)(WINSIZE_HEIGHT + 100) * (float)i / mMissileNum[BoomerangFactory::leftRain] },
+			{ 0,0 }, 0.0f, mMissileSpeed[BoomerangFactory::leftRain], 10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::leftRain]);
-		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 	}
 }
 
@@ -148,14 +143,10 @@ void BoomerangFactory::FireRightRain(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::rightRain]; i++)// 미사일 <-
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = { (float)WINSIZE_WIDTH,(float)(WINSIZE_HEIGHT+200) * (float)i / mMissileNum[BoomerangFactory::rightRain] };
-		lpMissile->angle = PI;
-		lpMissile->speed = mMissileSpeed[BoomerangFactory::rightRain];
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->SetMissile("MISSILE_01", { (float)WINSIZE_WIDTH,(float)(WINSIZE_HEIGHT + 200) * (float)i / mMissileNum[BoomerangFactory::rightRain] },
+			{0,0}, PI, mMissileSpeed[BoomerangFactory::rightRain], 10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::rightRain]);
-		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 	}
 }
 
@@ -164,14 +155,10 @@ void BoomerangFactory::FireTopRain(Unit* lpUnit)
 	for (int i = 0; i < mMissileNum[BoomerangFactory::topRain]; i++)// 미사일 아래로
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = { (float)WINSIZE_WIDTH * (float)i / mMissileNum[BoomerangFactory::topRain] ,0.0f};
-		lpMissile->angle = PI/2.0f;
-		lpMissile->speed = mMissileSpeed[BoomerangFactory::topRain];
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
+		lpMissile->SetMissile("MISSILE_01", { (float)WINSIZE_WIDTH * (float)i / mMissileNum[BoomerangFactory::topRain] ,0.0f },
+			{ 0,0 }, PI / 2.0f, mMissileSpeed[BoomerangFactory::topRain], 10);
 		lpMissile->SetPattern(mLpMissilePattern[BoomerangFactory::topRain]);
-		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 	}
 }
 
@@ -189,9 +176,7 @@ void BoomerangFactory::FirePhase2(Unit* lpUnit)
 {
 	TimeSet timeset;
 	changeAngle += PI/8.0f;
-	if (changeAngle >= (2 * PI)) {
-		changeAngle -= (2 * PI);
-	}
+	
 	if (IsCheckTime(timeset.boomerang))
 	{
 		FireBoomerang(lpUnit);
@@ -203,9 +188,7 @@ void BoomerangFactory::FirePhase3(Unit* lpUnit)
 {
 	TimeSet timeset;
 	changeAngle += PI / 8.0f;
-	if (changeAngle >= (2 * PI)) {
-		changeAngle -= (2 * PI);
-	}
+	
 	if (IsCheckTime(timeset.boomerang))
 	{
 		FireBoomerang(lpUnit);

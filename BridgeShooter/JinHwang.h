@@ -3,9 +3,6 @@
 
 class JinHwang : public Unit
 {
-private:
-	float fireTimer;
-
 public:
 	virtual void Init() override;
 	virtual void Update(float deltaTime) override;
