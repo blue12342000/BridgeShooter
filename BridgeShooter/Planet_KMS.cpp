@@ -14,12 +14,15 @@ void Planet_KMS::Init()
 	lpFactory = new BoomerangFactory();
 	lpFactory->Init();
 	attack1Timer = 0.0;
+	collider.SetHitBox(pos, { 0, 0 }, 100, 100);
 }
 
 void Planet_KMS::Update(float deltaTime)
 {
-	lpAnimation->Update(deltaTime);
 	Fire();
+	lpFactory->Update(deltaTime);
+	lpAnimation->Update(deltaTime);
+	collider.SetHitBox(pos);
 	elapsedTime += deltaTime;
 }
 
