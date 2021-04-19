@@ -1,10 +1,10 @@
 #include "Missile.h"
 #include "Pattern.h"
-#include "Image.h"
+#include "Animation.h"
 
 void Missile::Init()
 {
-	lpImage = nullptr;
+	lpAnimation = new Animation();
 	isActive = false;
 	elapsedTime = 0;
 
@@ -14,8 +14,8 @@ void Missile::Update(float deltaTime)
 {
 	Move(deltaTime);
 
+	lpAnimation->Update(deltaTime);
 	collider.SetHitBox(pos, this->deltaMove.deltaPos);
-
 	elapsedTime += deltaTime;
 }
 
@@ -26,7 +26,7 @@ void Missile::Release()
 void Missile::Render(HDC hdc)
 {
 	
-	if (lpImage) lpImage->RotateRender(hdc, pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y, deltaMove.angle);
+	if (lpAnimation) lpAnimation->Render(hdc, pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y, deltaMove.angle);
 	if(isDebugMode)
 		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);
 	
@@ -42,7 +42,7 @@ void Missile::SetMissile(string ImageKey, POINTFLOAT pos, POINTFLOAT deltaPos, f
 	this->isActive = true;
 	this->elapsedTime = 0;
 	this->delayTime = delayTime;
-	this->lpImage = ImageManager::GetSingleton()->FindImage(ImageKey);
+	this->lpAnimation->Change(ImageKey, 10, true, true);
 	this->pos = pos;
 	this->angle = angle;
 	this->speed = speed;
@@ -57,7 +57,7 @@ void Missile::SetMissile(string ImageKey, POINTFLOAT pos, float angle, float spe
 	this->isActive = true;
 	this->elapsedTime = 0;
 	this->delayTime = delayTime;
-	this->lpImage = ImageManager::GetSingleton()->FindImage(ImageKey);
+	this->lpAnimation->Change(ImageKey, 10, true, true);
 	this->pos = pos;
 	this->angle = angle;
 	this->speed = speed;

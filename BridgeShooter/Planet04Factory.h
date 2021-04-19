@@ -18,14 +18,8 @@ private:
 private:
 	vector<Pattern*> vLpPatterns;
 
-	int rnd;
 	int count;
 	int bossCount;
-
-	bool isPattern01;
-	bool isPattern02;
-	bool isPattern03;
-
 
 private:
 	virtual void Init() final;

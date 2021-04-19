@@ -3,20 +3,18 @@
 #include "BridgeShooter.h"
 
 class Pattern;
-class RainFactory : public Factory
+class SpaceShipFactory : public Factory
 {
 private:
 	enum CREATE_PATTERN
 	{
-		RFCP_BASIC,
-		RFCP_RAIN,
-		RFCP_RSINE,
-		RFCP_NONE
+		SFCP_BASIC,
+		SFCP_REFLECT,
+		SFCP_NONE
 	};
+
 private:
 	vector<Pattern*> vLpPatterns;
-
-	int rnd;
 
 private:
 	virtual void Init() final;

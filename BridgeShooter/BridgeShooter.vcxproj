@@ -147,12 +147,15 @@
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="HPgauge.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="RainFactory.cpp" />
     <ClCompile Include="RainPattern.cpp" />
     <ClCompile Include="MissileManager.cpp" />
@@ -173,8 +176,10 @@
     <ClCompile Include="SinePattern.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Planet04.cpp" />
+    <ClCompile Include="SpaceShipFactory.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
@@ -184,15 +189,18 @@
     <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="DataManager.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
+    <ClInclude Include="HPgauge.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="Planet04Factory.h" />
     <ClInclude Include="JinHwangFactory.h" />
+    <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RainFactory.h" />
     <ClInclude Include="RainPattern.h" />
     <ClInclude Include="MissileManager.h" />
@@ -213,8 +221,10 @@
     <ClInclude Include="SinePattern.h" />
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Planet04.h" />
+    <ClInclude Include="SpaceShipFactory.h" />
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="SSJFactory.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>

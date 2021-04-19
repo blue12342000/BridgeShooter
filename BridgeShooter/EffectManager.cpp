@@ -21,15 +21,41 @@ void EffectManager::Update(float deltaTime)
 				split.pos.y += sinf(split.angle) * split.speed * deltaTime;
 			}
 		}
-
-		if (vEffects[i].frameTime >= vEffects[i].lpImage->GetTotalFrame())
+		else if (vEffects[i].type == EFFECT_TYPE::BLACKHOLE)
 		{
-			vEffects.erase(vEffects.begin() + i);
+			for (auto& split : vEffects[i].vSplitPos)
+			{
+				split.angle += (split.destAngle - split.angle) * deltaTime * vEffects[i].frameTime;
+				split.speed += split.speed * 1.3f * deltaTime;
+				split.pos.x += cosf(split.angle) * split.speed * deltaTime;
+				split.pos.y += sinf(split.angle) * split.speed * deltaTime;
+			}
+		}
+
+		if (vEffects[i].type == EFFECT_TYPE::EXPLOSION
+			|| vEffects[i].type == EFFECT_TYPE::BLACKHOLE)
+		{
+			if (vEffects[i].frameTime >= 15)
+			{
+				vEffects.erase(vEffects.begin() + i);
+			}
+			else
+			{
+				vEffects[i].frameTime += deltaTime;
+				++i;
+			}
 		}
 		else
 		{
-			vEffects[i].frameTime += deltaTime * vEffects[i].fps;
-			++i;
+			if (vEffects[i].frameTime >= vEffects[i].lpImage->GetTotalFrame())
+			{
+				vEffects.erase(vEffects.begin() + i);
+			}
+			else
+			{
+				vEffects[i].frameTime += deltaTime * vEffects[i].fps;
+				++i;
+			}
 		}
 	}
 }
@@ -72,6 +98,7 @@ void EffectManager::PlayImage(POINTFLOAT pos, string imageKey, int fps)
 	effect.frameTime = 0;
 	effect.fps = fps;
 	effect.lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
+	effect.imageKey = imageKey;
 	vEffects.push_back(effect);
 }
 
@@ -100,6 +127,40 @@ void EffectManager::Explosion(POINTFLOAT pos, Image* lpImage, int frame, int fps
 
 			effect.vSplitPos[splitX * y + x] = { pos.x - width / 2 + width / splitX * x, pos.y - height / 2 + height / splitY * y };
 			effect.vSplitPos[splitX * y + x].angle = atan2(effect.vSplitPos[splitX * y + x].pos.y - offset.y, effect.vSplitPos[splitX * y + x].pos.x - offset.x);
+			effect.vSplitPos[splitX * y + x].destAngle = effect.vSplitPos[splitX * y + x].angle + PI;
+			effect.vSplitPos[splitX * y + x].speed = 20;
+		}
+	}
+
+	vEffects.push_back(effect);
+}
+
+void EffectManager::Blackhole(POINTFLOAT pos, Image* lpImage, int frame, int fps, int splitX, int splitY)
+{
+	Effect effect;
+	effect.type = EFFECT_TYPE::BLACKHOLE;
+	effect.pos = pos;
+	effect.frame = frame;
+	effect.frameTime = 0;
+	effect.fps = fps;
+	effect.lpImage = lpImage;
+	effect.vSplitPos.resize(splitX * splitY);
+	effect.splitX = splitX;
+	effect.splitY = splitY;
+
+	int width = lpImage->GetWidth();
+	int height = lpImage->GetHeight();
+	POINTFLOAT offset;
+	for (int y = 0; y < splitY; ++y)
+	{
+		for (int x = 0; x < splitX; ++x)
+		{
+			offset.x = pos.x + rand() % (width / splitX) - (width / splitX);
+			offset.y = pos.y + rand() % (height / splitY) - (height / splitY);;
+
+			effect.vSplitPos[splitX * y + x] = { pos.x - width / 2 + width / splitX * x, pos.y - height / 2 + height / splitY * y };
+			effect.vSplitPos[splitX * y + x].angle = atan2(effect.vSplitPos[splitX * y + x].pos.y - offset.y, effect.vSplitPos[splitX * y + x].pos.x - offset.x);
+			effect.vSplitPos[splitX * y + x].destAngle = effect.vSplitPos[splitX * y + x].angle + PI;
 			effect.vSplitPos[splitX * y + x].speed = 20;
 		}
 	}

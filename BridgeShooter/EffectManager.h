@@ -10,6 +10,7 @@ enum class EFFECT_TYPE
 {
 	FILELOAD,
 	EXPLOSION,
+	BLACKHOLE,
 	FADEOUT,
 	NONE
 };
@@ -18,6 +19,7 @@ struct SplitBox
 {
 	POINTFLOAT pos;
 	float angle;
+	float destAngle;
 	int speed;
 };
 
@@ -29,6 +31,7 @@ struct Effect
 	int frame;
 	float frameTime;
 	Image* lpImage;
+	string imageKey;
 	POINTFLOAT pos;
 
 	int splitX;
@@ -48,6 +51,7 @@ public:
 
 	void PlayImage(POINTFLOAT pos, string imageKey, int fps);
 	void Explosion(POINTFLOAT pos, Image* lpImage, int frame, int fps, int splitX, int splitY);
+	void Blackhole(POINTFLOAT pos, Image* lpImage, int frame, int fps, int splitX, int splitY);
 	void FadeOut(POINTFLOAT pos, Image* lpImage, int frame, int fps, int splitX, int splitY);
 };
 

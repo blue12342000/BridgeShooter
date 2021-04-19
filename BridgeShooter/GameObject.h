@@ -51,7 +51,16 @@ struct MoveInfo
 	POINTFLOAT deltaPos;
 };
 
-class GameObject
+interface GameEvent
+{
+public:
+	virtual void Init() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Release() = 0;
+	virtual void Render(HDC hdc) = 0;
+};
+
+class GameObject : public GameEvent
 {
 public:
 	POINTFLOAT pos;

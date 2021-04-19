@@ -60,7 +60,13 @@ void MissileManager::Render(HDC hdc)
 
 Missile* MissileManager::CreateMissile()
 {
-	if (vLpDeactive.empty()) return new Missile();
+	Missile* lpMissile;
+	if (vLpDeactive.empty())
+	{
+		lpMissile = new Missile();
+		lpMissile->Init();
+		return lpMissile;
+	}
 	else
 	{
 		Missile* lpMissile = vLpDeactive.back();

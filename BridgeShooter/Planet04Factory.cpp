@@ -6,6 +6,7 @@
 #include "SpiralPattern.h"
 #include "Missile.h"
 #include "Unit.h"
+#include "Factory.h"
 
 void Planet04Factory::Init()
 {
@@ -14,13 +15,16 @@ void Planet04Factory::Init()
 	vLpPatterns[CREATE_PATTERN::PLANET04_RAIN] = new RainPattern();
 	vLpPatterns[CREATE_PATTERN::PLANET04_REFLECT] = new ReflectPattern();
 	vLpPatterns[CREATE_PATTERN::PLANET04_SPRIAL] = new SpiralPattern();
+	
+	createLine = 0;
+	maxCreateLIne = 3;
+	bossCount = 0;
 
-	isPattern01 = true;
-	isPattern02 = false;
-	isPattern03 = false;
+	SetCheckTime(30);
+	SetCheckTime(50);
 
-	maxCreateLIne = 0;
-	count = 0;
+	SetCheckTime(100);
+	SetCheckTime(1000);
 }
 
 void Planet04Factory::Release()
@@ -35,31 +39,39 @@ void Planet04Factory::Release()
 
 void Planet04Factory::Fire(Unit* lpUnit)
 {
-	++bossCount;	//200 되면 다음 페이즈 전환 테스트용
+	//델타 타임으로 변경 예정
+
+	bossCount++;
+	if (bossCount >= 10000) createLine = 1;
+	if (bossCount >= 12500) createLine = 2;
 	//1페이즈
-	if (isPattern01 && bossCount < 3000)
+	if (createLine == 0)
 	{
-		if ((int)(lpUnit->elapsedTime * 10) % 12 == 0)	//타이머
+		if (IsCheckTime(30) && GetTimeMod(100) < 10000)
 		{
 			for (int i = -1; i < 2; ++i)	//한번에 여러개 나가게 하기
 			{
-				++count;
+				count -= 2;
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->pos = lpUnit->pos;
-				lpMissile->angle = lpUnit->angle - (PI / 16 * i) +count;
-				lpMissile->speed = 150;
+				lpMissile->angle = lpUnit->angle - (PI / 16*i)-(count+bossCount);
+				lpMissile->speed = 200;
 				lpMissile->elapsedTime = 0;
 				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
 				lpMissile->deltaMove.deltaPos = { 0,  0 };
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
-				//if (count >= 200) count *= -1;
+				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				if (count % 400 <= 200)
+				{
+					count = 0;
+				}
 			}
+		
 		}
 	}
 
 	//2페이즈
-	if (isPattern02 && bossCount < 3000)
+	if (createLine == 1)
 	{
 		++count;
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -71,10 +83,10 @@ void Planet04Factory::Fire(Unit* lpUnit)
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 		lpMissile->deltaMove.deltaPos = { 0,  0 };
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		if (count >= 9) count *= -1;
-
-		if ((int)(lpUnit->elapsedTime * 10) % 6 == 0)
+	
+		if (IsCheckTime(30) && GetTimeMod(10000) < 5000)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->pos = lpUnit->pos;
@@ -84,12 +96,13 @@ void Planet04Factory::Fire(Unit* lpUnit)
 			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
 			lpMissile->deltaMove.deltaPos = { 0,  0 };
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
-			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
 	}
 
 	//3페이즈
-	if (isPattern03 && bossCount < 3000)
+
+	if (createLine == 2)
 	{
 		++count;
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -101,11 +114,11 @@ void Planet04Factory::Fire(Unit* lpUnit)
 		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
 		lpMissile->deltaMove.deltaPos = { 0,  0 };
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
-		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		if (count >= 9) count *= -1;
 
 
-		if ((int)(lpUnit->elapsedTime * 10) % 3 == 0)
+		if (IsCheckTime(30) && GetTimeMod(10000) < 5000)
 		{
 			for (int i = -1; i < 2; ++i)
 			{
@@ -117,26 +130,8 @@ void Planet04Factory::Fire(Unit* lpUnit)
 				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
 				lpMissile->deltaMove.deltaPos = { 0,  0 };
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
-	}
-	//1~3 페이즈때 보스 카운트가 3000 넘으면 초기화후 2페이즈
-	if (isPattern01 && bossCount >= 3000)
-	{
-		bossCount = 0;
-		isPattern01 = false;
-		isPattern02 = true;
-	}
-	else if (isPattern01 == false && isPattern02 && bossCount >= 3000)
-	{
-		bossCount = 0;
-		isPattern02 = false;
-		isPattern03 = true;
-	}
-	else if (isPattern03 && bossCount >= 3000)
-	{
-		bossCount = 0;
-		isPattern03 = false;
 	}
 }

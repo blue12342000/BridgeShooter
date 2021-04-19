@@ -3,6 +3,7 @@
 #include <vector>
 #include "GameScene.h"
 
+class HpGauge;
 class Unit;
 class Item;
 class Image;
@@ -18,11 +19,14 @@ private:
 
 	Unit* lpJinHwang;
 
-	Item* lpItem;		
+	Item* lpItem;
 
 	Image* lpBackBuffer;
-	Image* lpBackImage;		
+	Image* lpBackImage;	
 	Image* lpBackImage2;	
+
+	HpGauge* lpHpGauge;
+
 	int frame;
 	float elapsedTime;
 	

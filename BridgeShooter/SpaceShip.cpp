@@ -7,6 +7,7 @@
 #include "BoomerangPattern.h"
 #include "SSJFactory.h"
 #include "JinHwangFactory.h"
+#include "SpaceShipFactory.h"
 
 void SpaceShip::Init()
 {
@@ -16,59 +17,59 @@ void SpaceShip::Init()
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 0;
-	SetFactory(new BasicFactory());
+	SetFactory(new SpaceShipFactory());
 	collider.SetHitBox(pos, { 0,0 }, 30, 30);
 }
 
 void SpaceShip::Update(float deltaTime)
 {
-	input = INPUT_TYPE::NONE;
+	input = INPUT_TYPE2::NONE;
 	if (KeyManager::GetSingleton()->IsKeyDownStay('W'))
 	{
 		pos.y -= speed * deltaTime;
-		input = INPUT_TYPE::UP;
+		input = INPUT_TYPE2::UP;
 	}
 
 	if (KeyManager::GetSingleton()->IsKeyDownStay('S'))
 	{
 		pos.y += speed * deltaTime;
-		input = INPUT_TYPE::DOWN;
+		input = INPUT_TYPE2::DOWN;
 	}
 
 	if (KeyManager::GetSingleton()->IsKeyDownOne('A'))
 	{
 		lpAnimation->Change("SPACESHIP_LEFT", 20, true);
-		input = INPUT_TYPE::LEFT;
+		input = INPUT_TYPE2::LEFT;
 	}
 	else if (KeyManager::GetSingleton()->IsKeyDownStay('A'))
 	{
-		input = INPUT_TYPE::LEFT;
+		input = INPUT_TYPE2::LEFT;
 		pos.x -= speed * deltaTime;
 	}
 
 	if (KeyManager::GetSingleton()->IsKeyDownOne('D'))
 	{
-		input = INPUT_TYPE::RIGHT;
+		input = INPUT_TYPE2::RIGHT;
 		lpAnimation->Change("SPACESHIP_RIGHT", 20, true);
 	}
 	else if (KeyManager::GetSingleton()->IsKeyDownStay('D'))
 	{
-		input = INPUT_TYPE::RIGHT;
+		input = INPUT_TYPE2::RIGHT;
 		pos.x += speed * deltaTime;
 	}
 
 	switch (input)
 	{
-	case INPUT_TYPE::UP:
-	case INPUT_TYPE::DOWN:
-	case INPUT_TYPE::NONE:
+	case INPUT_TYPE2::UP:
+	case INPUT_TYPE2::DOWN:
+	case INPUT_TYPE2::NONE:
 		lpAnimation->Change("SPACESHIP_IDLE", 20, true);
 		break;
 	}
 
 	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
 	{
-		SetFactory(new BasicFactory());
+		SetFactory(new RainFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
 	{
@@ -76,7 +77,7 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-		SetFactory(new RainFactory());
+//있다가 1번으로 수정이동	//SetFactory(new BasicFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
 	{
