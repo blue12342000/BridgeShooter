@@ -30,8 +30,6 @@ HRESULT InGameScene::Init()
 
     lpMob1 = new EnemyGroup();
     lpMob1->Init();
-    lpMob1->SetPos({  (float)0,(float)WINSIZE_HEIGHT / 2.0f });
-    lpMob1->SetFactory(new BasicFactory());
 
     lpItem = new Item();
     lpItem->Init();

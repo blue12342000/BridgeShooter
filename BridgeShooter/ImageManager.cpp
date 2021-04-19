@@ -45,6 +45,14 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
     mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true, RGB(255, 0, 255));
     
+    mLpImageDatas.insert(make_pair("Enemy_1", new Image()));
+    mLpImageDatas["Enemy_1"]->Init("Image/Unit/Mob/mob1_sprite.bmp", 50 * 4, 50, 4, 1, 4, true, RGB(255, 0, 255));
+    mLpImageDatas.insert(make_pair("Enemy_2", new Image()));
+    mLpImageDatas["Enemy_2"]->Init("Image/Unit/Mob/mob2_sprite.bmp", 50 * 4, 50, 4, 1, 4, true, RGB(255, 0, 255));
+    mLpImageDatas.insert(make_pair("Enemy_3", new Image()));
+    mLpImageDatas["Enemy_3"]->Init("Image/Unit/Mob/mob3_sprite.bmp", 50 * 4, 50, 4, 1, 4, true, RGB(255, 0, 255));
+    mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
+    mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true, RGB(255, 0, 255));
 
     return S_OK;
 }

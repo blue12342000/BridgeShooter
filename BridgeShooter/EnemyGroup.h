@@ -8,6 +8,8 @@ private:
 private:
 	float moveAngle;
 	float shootAngle;
+	int	  enemyKinds;
+	int	  shootDuration;
 public:
 	virtual void Init() override;
 	virtual void Update(float deltaTime)override;
