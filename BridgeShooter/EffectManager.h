@@ -31,6 +31,7 @@ struct Effect
 	int frame;
 	float frameTime;
 	Image* lpImage;
+	string imageKey;
 	POINTFLOAT pos;
 
 	int splitX;

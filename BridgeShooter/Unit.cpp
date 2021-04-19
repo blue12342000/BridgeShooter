@@ -43,6 +43,10 @@ void Unit::Fire(void)
 	if (lpFactory) lpFactory->Fire(this);
 }
 
+void Unit::Translate(POINTFLOAT delta)
+{
+}
+
 void Unit::SetFactory(Factory* lpFactory)
 {
 	if (this->lpFactory)

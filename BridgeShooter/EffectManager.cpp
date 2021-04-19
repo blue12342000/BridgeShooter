@@ -98,6 +98,7 @@ void EffectManager::PlayImage(POINTFLOAT pos, string imageKey, int fps)
 	effect.frameTime = 0;
 	effect.fps = fps;
 	effect.lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
+	effect.imageKey = imageKey;
 	vEffects.push_back(effect);
 }
 
