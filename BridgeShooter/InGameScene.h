@@ -1,11 +1,13 @@
 #pragma once
 #include "BridgeShooter.h"
 #include <vector>
+#include "GameScene.h"
 
+class HpGauge;
 class Unit;
 class Item;
 class Image;
-class InGameScene
+class InGameScene : public GameScene
 {
 private:
 	vector<Unit*> vEnemys;
@@ -17,11 +19,14 @@ private:
 
 	Unit* lpJinHwang;
 
-	Item* lpItem;		
+	Item* lpItem;
 
 	Image* lpBackBuffer;
-	Image* lpBackImage;		
+	Image* lpBackImage;	
 	Image* lpBackImage2;	
+
+	HpGauge* lpHpGauge;
+
 	int frame;
 	float elapsedTime;
 	
@@ -32,10 +37,10 @@ private:
 	bool isPlayerHitEnemy;
 
 public:
-	HRESULT Init();
-	void Release();
-	void Update(float deltaTime);
-	void Render(HDC hdc);
+	virtual HRESULT Init();
+	virtual void Release();
+	virtual void Update(float deltaTime);
+	virtual void Render(HDC hdc);
 	void CheckCollision();
 };
 

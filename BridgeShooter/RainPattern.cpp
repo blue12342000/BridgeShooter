@@ -19,7 +19,6 @@ MoveInfo RainPattern::Move(float deltaTime, GameObject* lpObject)
 
 		if (lpObject->elapsedTime > 4.5f)
 		{
-			//현세씨 코드랑 머지하고 나서 SetPattern으로 수정할것
 			lpObject->angle = PI / 2;
 			
 			moveInfo.angle = lpObject->angle;

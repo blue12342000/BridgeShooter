@@ -3,7 +3,6 @@
 
 class Planet_SSJ : public Unit
 {
-
 public:
 	void Init() override;
 	void Update(float deltaTime) override;
