@@ -82,7 +82,7 @@ HRESULT ImageManager::Init()
     mLpImageDatas["TITLE"]->Init("Image/UI/Title.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, false);
 
     mLpImageDatas.insert(make_pair("TITLE_PRESSKEY", new Image()));
-    mLpImageDatas["TITLE_PRESSKEY"]->Init("Image/UI/Title_presskey.bmp", 500, 108, false);
+    mLpImageDatas["TITLE_PRESSKEY"]->Init("Image/UI/Title_presskey.bmp", 600, 800, true);
 
     mLpImageDatas.insert(make_pair("EFFECT_01", new Image()));
     mLpImageDatas["EFFECT_01"]->Init("Image/Effect/Effect_01.bmp", 108, 36, 3, 1, 3, true);

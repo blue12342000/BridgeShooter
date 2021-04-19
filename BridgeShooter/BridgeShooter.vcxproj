@@ -179,6 +179,8 @@
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Planet04.cpp" />
     <ClCompile Include="SpaceShipFactory.cpp" />
+    <ClCompile Include="SpaceShip_Gray.cpp" />
+    <ClCompile Include="SpaceShip_Red.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -227,6 +229,8 @@
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Planet04.h" />
     <ClInclude Include="SpaceShipFactory.h" />
+    <ClInclude Include="SpaceShip_Gray.h" />
+    <ClInclude Include="SpaceShip_Red.h" />
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="SSJFactory.h" />
     <ClInclude Include="UI.h" />

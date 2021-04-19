@@ -14,14 +14,14 @@ public:
 	};
 
 private:
-	CHARACTER_CODE selectedCharacter;
+	int selectedCharacter;
 	float playTime;
 
 public:
 	HRESULT Init();
 	void Update(float deltaTime);
-	inline void SetCharacter(CHARACTER_CODE characterCode) { this->selectedCharacter = characterCode; }
-	inline CHARACTER_CODE GetSelectedCharacter() { return this->selectedCharacter; }
+	inline void SetCharacter(CHARACTER_CODE characterCode) { this->selectedCharacter = (int)characterCode; }
+	inline int GetSelectedCharacter() { return selectedCharacter; }
 	inline void SetPlayTime(float playTime) { this->playTime = playTime; }
 	inline float GetPlayTime() { return this->playTime; }
 };

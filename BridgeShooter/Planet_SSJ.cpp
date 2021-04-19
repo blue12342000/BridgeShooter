@@ -17,7 +17,7 @@ void Planet_SSJ::Init()
 
 void Planet_SSJ::Update(float deltaTime)
 {
-	//Fire();
+	Fire();
 	//lpFactory->Update(deltaTime);
 	Unit::Update(deltaTime);
 }

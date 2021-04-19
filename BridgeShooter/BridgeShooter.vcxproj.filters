@@ -204,6 +204,12 @@
     <ClCompile Include="AIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="SpaceShip_Red.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="SpaceShip_Gray.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
     <ClCompile Include="GuidePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
@@ -370,6 +376,12 @@
     </ClInclude>
     <ClInclude Include="GuidePattern.h">
       <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip_Gray.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip_Red.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
