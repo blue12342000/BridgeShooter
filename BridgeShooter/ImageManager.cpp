@@ -44,6 +44,12 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
     mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true, RGB(255, 0, 255));
+
+    mLpImageDatas.insert(make_pair("TITLE", new Image()));
+    mLpImageDatas["TITLE"]->Init("Image/UI/Title.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, false);
+
+    mLpImageDatas.insert(make_pair("TITLE_PRESSKEY", new Image()));
+    mLpImageDatas["TITLE_PRESSKEY"]->Init("Image/UI/Title_presskey.bmp", 500, 108, false);
     
 
     return S_OK;

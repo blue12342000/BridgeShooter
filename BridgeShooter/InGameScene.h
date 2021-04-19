@@ -1,11 +1,12 @@
 #pragma once
 #include "BridgeShooter.h"
 #include <vector>
+#include "GameScene.h"
 
 class Unit;
 class Item;
 class Image;
-class InGameScene
+class InGameScene : public GameScene
 {
 private:
 	vector<Unit*> vEnemys;

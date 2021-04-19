@@ -7,6 +7,7 @@
 #include "Planet_KMS.h"
 #include "Item.h"
 #include "Missile.h"
+#include "GameScene.h"
 
 HRESULT InGameScene::Init()
 {
@@ -97,7 +98,10 @@ void InGameScene::Update(float deltaTime)
     {
         isOnlyPlayer = !isOnlyPlayer;
     }
-
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene();
+    }
 
     CheckCollision();
 
