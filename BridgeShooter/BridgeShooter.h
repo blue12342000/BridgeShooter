@@ -38,3 +38,4 @@ enum class UNIT_KIND
 #include "KeyManager.h"
 #include "ImageManager.h"
 #include "MissileManager.h"
+#include "EffectManager.h"

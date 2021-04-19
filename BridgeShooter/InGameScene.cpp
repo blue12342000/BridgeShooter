@@ -98,6 +98,10 @@ void InGameScene::Update(float deltaTime)
         isOnlyPlayer = !isOnlyPlayer;
     }
 
+    if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
+    {
+        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 10, 20, 20);
+    }
 
     CheckCollision();
 
@@ -105,7 +109,7 @@ void InGameScene::Update(float deltaTime)
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-      if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
@@ -113,7 +117,7 @@ void InGameScene::Update(float deltaTime)
     MissileManager::GetSingleton()->Update(deltaTime);
     
     
-    
+    EffectManager::GetSingleton()->Update(deltaTime);
 
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
@@ -130,13 +134,13 @@ void InGameScene::Render(HDC hdc)
 
     if (lpPlayer) lpPlayer->Render(hBackDC);
 
-    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
+    if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
-
+    EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
     if (isEnemyHitPlayer)
