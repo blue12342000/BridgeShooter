@@ -2,36 +2,18 @@
 #include "GameObject.h"
 #include <functional>
 
-enum class INPUT_TYPE
-{
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
-	ATTACK,
-	NONE
-};
-
 class Unit;
 class Controller : public GameEvent
 {
-private:
-	struct UnitEvent
-	{
-		int key;
-		function<void()> lpCmd;
-	};
-
-private:
+protected:
 	Unit* lpUnit;
-	map<INPUT_TYPE, UnitEvent> mKeyMap;
 
 public:
-	void Init() override;
-	void Release() override;
-	void Update(float deltaTime) override;
-	void Render(HDC hdc) override;
+	virtual void Init() = 0;
+	virtual void Release() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Render(HDC hdc) = 0;
 
-	void SetController(Unit* lpUnit);
+	virtual void SetController(Unit* lpUnit) = 0;
 };
 
