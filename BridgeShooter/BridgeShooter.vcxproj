@@ -141,12 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIController.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="BoomerangFactory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
-    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="RainFactory.cpp" />
     <ClCompile Include="RainPattern.cpp" />
@@ -183,10 +185,12 @@
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIController.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="BoomerangFactory.h" />
     <ClInclude Include="BridgeShooter.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
@@ -198,6 +202,7 @@
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="Planet04Factory.h" />
     <ClInclude Include="JinHwangFactory.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RainFactory.h" />
     <ClInclude Include="RainPattern.h" />

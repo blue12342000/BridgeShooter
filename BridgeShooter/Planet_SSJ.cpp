@@ -17,6 +17,7 @@ void Planet_SSJ::Init()
 void Planet_SSJ::Update(float deltaTime)
 {
 	Fire();
+
 	lpFactory->Update(deltaTime);
 	lpAnimation->Update(deltaTime);
 	elapsedTime += deltaTime;

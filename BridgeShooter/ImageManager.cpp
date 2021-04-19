@@ -74,6 +74,15 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("EFFECT_01", new Image()));
     mLpImageDatas["EFFECT_01"]->Init("Image/Effect/Effect_01.bmp", 108, 36, 3, 1, 3, true);
+    
+    mLpImageDatas.insert(make_pair("SELECT_YELLOW", new Image()));
+    mLpImageDatas["SELECT_YELLOW"]->Init("Image/UI/Select_Yellow.bmp", 125, 171, false);
+
+    mLpImageDatas.insert(make_pair("SELECT_RED", new Image()));
+    mLpImageDatas["SELECT_RED"]->Init("Image/UI/Select_Red.bmp", 145, 166, false);
+
+    mLpImageDatas.insert(make_pair("SELECT_GRAY", new Image()));
+    mLpImageDatas["SELECT_GRAY"]->Init("Image/UI/Select_Gray.bmp", 131, 161, false);
 
     return S_OK;
 }
