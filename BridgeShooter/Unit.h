@@ -9,6 +9,7 @@ protected:
 	Animation* lpAnimation;
 	Factory* lpFactory;
 	Unit* lpTarget;
+	POINT force;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr) {}
@@ -20,7 +21,7 @@ public:
 	virtual void Render(HDC hdc) override;
 
 	virtual void Fire() final;
-	virtual void Translate(POINTFLOAT delta);
+	virtual void Translate(POINT force) final;
 
 	virtual void SetFactory(Factory* lpFactory) final;
 
