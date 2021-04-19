@@ -39,6 +39,18 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("MISSILE_06", new Image()));
     mLpImageDatas["MISSILE_06"]->RotateInit("Image/Missile/Missile_06.bmp", 132 / 2, 33 / 2, 4, 1, 4, 36);
 
+    mLpImageDatas.insert(make_pair("MISSILE_07", new Image()));
+    mLpImageDatas["MISSILE_07"]->RotateInit("Image/Missile/Missile_07.bmp", 144 / 2, 36 / 2, 4, 1, 4, 36);
+
+    mLpImageDatas.insert(make_pair("MISSILE_08", new Image()));
+    mLpImageDatas["MISSILE_08"]->RotateInit("Image/Missile/Missile_08.bmp", 144 / 2, 36 / 2, 4, 1, 4, 36);
+
+    mLpImageDatas.insert(make_pair("MISSILE_09", new Image()));
+    mLpImageDatas["MISSILE_09"]->RotateInit("Image/Missile/Missile_09.bmp", 156 / 2, 39 / 2, 4, 1, 4, 36);
+
+    mLpImageDatas.insert(make_pair("MISSILE_10", new Image()));
+    mLpImageDatas["MISSILE_10"]->RotateInit("Image/Missile/Missile_10.bmp", 144 / 2, 48 / 2, 2, 1, 2, 36);
+
     mLpImageDatas.insert(make_pair("PLANET_SSJ", new Image()));
     mLpImageDatas["PLANET_SSJ"]->Init("Image/Unit/Planet/Planet_SSJ.bmp", 20000, 266, 50, 1, 50, true, RGB(255, 0, 255));
 
@@ -69,17 +81,8 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("TITLE", new Image()));
     mLpImageDatas["TITLE"]->Init("Image/UI/Title.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, false);
 
-    mLpImageDatas.insert(make_pair("Enemy_1", new Image()));
-    mLpImageDatas["Enemy_1"]->Init("Image/Unit/Mob/mob1_sprite.bmp", 50*4, 50, 4, 1, 4, true);
-
-    mLpImageDatas.insert(make_pair("Enemy_2", new Image()));
-    mLpImageDatas["Enemy_2"]->Init("Image/Unit/Mob/mob2_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
-
-    mLpImageDatas.insert(make_pair("Enemy_3", new Image()));
-    mLpImageDatas["Enemy_3"]->Init("Image/Unit/Mob/mob3_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
-
-    mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
-    mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+    mLpImageDatas.insert(make_pair("TITLE_PRESSKEY", new Image()));
+    mLpImageDatas["TITLE_PRESSKEY"]->Init("Image/UI/Title_presskey.bmp", 600, 800, true);
 
     mLpImageDatas.insert(make_pair("EFFECT_01", new Image()));
     mLpImageDatas["EFFECT_01"]->Init("Image/Effect/Effect_01.bmp", 108, 36, 3, 1, 3, true);
@@ -92,6 +95,19 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("SELECT_GRAY", new Image()));
     mLpImageDatas["SELECT_GRAY"]->Init("Image/UI/Select_Gray.bmp", 131, 161, false);
+
+    mLpImageDatas.insert(make_pair("Enemy_1", new Image()));
+    mLpImageDatas["Enemy_1"]->Init("Image/Unit/Mob/mob1_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("Enemy_2", new Image()));
+    mLpImageDatas["Enemy_2"]->Init("Image/Unit/Mob/mob2_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("Enemy_3", new Image()));
+    mLpImageDatas["Enemy_3"]->Init("Image/Unit/Mob/mob3_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
+    mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+
 
     return S_OK;
 }

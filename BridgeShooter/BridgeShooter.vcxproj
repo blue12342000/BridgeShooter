@@ -152,6 +152,7 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EnemyGroup.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="GuidePattern.cpp" />
     <ClCompile Include="HPgauge.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
@@ -179,6 +180,8 @@
     <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="Planet04.cpp" />
     <ClCompile Include="SpaceShipFactory.cpp" />
+    <ClCompile Include="SpaceShip_Gray.cpp" />
+    <ClCompile Include="SpaceShip_Red.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -199,6 +202,7 @@
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
+    <ClInclude Include="GuidePattern.h" />
     <ClInclude Include="HPgauge.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="JinHwang.h" />
@@ -227,6 +231,8 @@
     <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="Planet04.h" />
     <ClInclude Include="SpaceShipFactory.h" />
+    <ClInclude Include="SpaceShip_Gray.h" />
+    <ClInclude Include="SpaceShip_Red.h" />
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="SSJFactory.h" />
     <ClInclude Include="UI.h" />

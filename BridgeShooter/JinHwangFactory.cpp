@@ -72,7 +72,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int i = 0; i < 8; ++i)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle + lpUnit->elapsedTime * 1.5f + PI / 4 * i, 100, 20);
+					lpMissile->SetMissile("MISSILE_07", lpUnit->pos, lpUnit->angle + lpUnit->elapsedTime * 1.5f + PI / 4 * i, 100, 20);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}
@@ -82,7 +82,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int i = 0; i < 8; ++i)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle + lpUnit->elapsedTime * 1.5f + PI / 4 * i, 100, 20);
+					lpMissile->SetMissile("MISSILE_08", lpUnit->pos, lpUnit->angle + lpUnit->elapsedTime * 1.5f + PI / 4 * i, 100, 20);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_REVERSE_SPIRAL]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}
@@ -111,7 +111,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 			for (float y = 0; y <= WINSIZE_HEIGHT; y += splitY)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_01", { 0, y }, 0, 300, 20, 0.1f * (int)(y / splitY));
+				lpMissile->SetMissile("MISSILE_10", { 0, y }, 0, 300, 20, 0.1f * (int)(y / splitY));
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
@@ -119,7 +119,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 			for (float y = WINSIZE_HEIGHT + splitY / 2; y >= 0; y -= splitY)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_01", { WINSIZE_WIDTH, y }, PI, 300, 20, 0.1f * (int)(y / splitY));
+				lpMissile->SetMissile("MISSILE_10", { WINSIZE_WIDTH, y }, PI, 300, 20, 0.1f * (int)(y / splitY));
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}

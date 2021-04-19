@@ -53,7 +53,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 		for (int i = -3; i < 4; i += 2)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle + PI / 24 * i, 400, 20);
+			lpMissile->SetMissile("MISSILE_07", lpUnit->pos, lpUnit->angle + PI / 24 * i, 400, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_REFLECT]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
