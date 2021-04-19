@@ -23,11 +23,15 @@ void SSJFactory::Init()
 	vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC] = new DelayBasicPattern();
 
 	createLine = 0;
-	delayTime_0 = 0;
+	maxCreateLIne = 3;
 
 	phaseChanger = 0;
 
 	SetCheckTime(100);
+	SetCheckTime(200);
+	SetCheckTime(300);
+	SetCheckTime(1000);
+	SetCheckTime(3000);
 }
 
 void SSJFactory::Release()
@@ -41,18 +45,16 @@ void SSJFactory::Release()
 
 void SSJFactory::Fire(Unit* lpUnit)
 {
-	//델타 타임으로 변경 예정
-	delayTime_0 += 1;
 
 	phaseChanger++;
-	if (phaseChanger >= 2000) createLine = 1;
-	if (phaseChanger >= 4000) createLine = 2;
+	if (phaseChanger >= 3000) createLine = 1;
+	if (phaseChanger >= 6000) createLine = 2;
 
-	//1페이즈
+	//1??????
 	if (createLine == 0)
 	{
-		//36방향으로 원처럼 발사
-		if (IsCheckTime(100))
+		//36???????? ????? ???
+		if (IsCheckTime(1000))
 		{
 			for (int i = 0; i < 36; ++i)
 			{
@@ -65,39 +67,39 @@ void SSJFactory::Fire(Unit* lpUnit)
 			}
 
 		}
-		//if (delayTime_0 % 30 == 0)
-		//{
-		//	//꽃모양 만드는 스파이럴
-		//	for (int i = 0; i < 8; ++i)
-		//	{
-		//		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		//		lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 300, 14);
-		//		lpMissile->angle = lpUnit->angle - 2 * PI / 8 * i;
-		//		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		//		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
-		//		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
-		//		
-		//	}
-		//	//꽃모양 만드는 역스파이럴
-		//	for (int i = 0; i < 8; ++i)
-		//	{
-		//		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		//		lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 300, 14);
-		//		lpMissile->angle = lpUnit->angle - 2 * PI / 8 * i;
-		//		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL]);
-		//		lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-		//		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
-		//	}
-		//}
+		if (IsCheckTime(200))
+		{
+			//꽃모양 만드는 스파이럴
+			for (int i = 0; i < 8; ++i)
+			{
+				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 300, 14);
+				lpMissile->angle = lpUnit->angle - 2 * PI / 8 * i;
+				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
+				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				
+			}
+			//꽃모양 만드는 역스파이럴
+			for (int i = 0; i < 8; ++i)
+			{
+				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 300, 14);
+				lpMissile->angle = lpUnit->angle - 2 * PI / 8 * i;
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL]);
+				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+			}
+		}
 
 	}
 		
-	//2페이즈
+	//2??????
 	else if (createLine == 1)
 	{
-		if (delayTime_0 % 30 == 0)
+		if (IsCheckTime(100))
 		{
-			//가두는 그물
+			//???δ? ???
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -108,7 +110,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//가두는 그물
+			//???δ? ???
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -121,7 +123,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//가두는 그물
+			//???δ? ???
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -133,7 +135,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//가두는 그물
+			//???δ? ???
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -145,7 +147,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
-			//가두는 그물
+			//???δ? ???
 			for (int i = 0; i < 6; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -159,8 +161,8 @@ void SSJFactory::Fire(Unit* lpUnit)
 			}
 		}
 		
-		//반사 레이저
-		if(delayTime_0 % 51 == 0)
+		//??? ??????
+		if(IsCheckTime(200))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle, 500, 14);
@@ -169,8 +171,8 @@ void SSJFactory::Fire(Unit* lpUnit)
 			lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
-		//반사 레이저
-		else if (delayTime_0 % 71 == 0)
+		//??? ??????
+		else if (IsCheckTime(300))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle, 500, 14);
@@ -181,10 +183,10 @@ void SSJFactory::Fire(Unit* lpUnit)
 		}
 	}
 
-	//3페이즈
+	//3??????
 	else if (createLine == 2)
 	{
-		if (delayTime_0 % 2000 == 0)
+		if (IsCheckTime(3000))
 		{
 			for (int j = 0; j < 10; ++j)
 			{

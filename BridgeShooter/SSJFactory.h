@@ -20,8 +20,6 @@ private:
 private:
 	vector<Pattern*> vLpPatterns;
 
-	int delayTime_0;
-
 	bool patternArray[200] = { 1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,
 								1,1,1,0,0,0,1,1,1,1,1,1,0,0,1,0,0,1,1,1,
 								1,1,1,1,0,0,0,0,1,1,1,1,0,0,1,1,0,0,1,1,

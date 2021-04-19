@@ -11,18 +11,19 @@ void Planet_SSJ::Init()
 	angle = -PI / 2;
 	lpFactory = new SSJFactory();	
 	lpFactory->Init();
-
+	collider.SetHitBox(pos, { 0,0 }, 100, 100);
 }
 
 void Planet_SSJ::Update(float deltaTime)
 {
 	Fire();
+	lpFactory->Update(deltaTime);
 
 	lpFactory->Update(deltaTime);
 	lpAnimation->Update(deltaTime);
 	elapsedTime += deltaTime;
 
-	collider.SetHitBox(pos, { 0,0 }, 100, 100);
+	collider.SetHitBox(pos);
 }
 
 void Planet_SSJ::Render(HDC hdc)

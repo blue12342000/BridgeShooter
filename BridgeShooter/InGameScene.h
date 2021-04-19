@@ -17,11 +17,11 @@ private:
 
 	Unit* lpJinHwang;
 
-	Item* lpItem;
+	Item* lpItem;		
 
 	Image* lpBackBuffer;
-	Image* lpBackImage;
-	Image* lpBackImage2;
+	Image* lpBackImage;		
+	Image* lpBackImage2;	
 	int frame;
 	float elapsedTime;
 	
