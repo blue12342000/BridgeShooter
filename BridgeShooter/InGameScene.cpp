@@ -9,6 +9,7 @@
 #include "Missile.h"
 #include "HPgauge.h"
 #include "GameScene.h"
+#include "PlayerController.h"
 #include "SpaceShip_Red.h"
 #include "SpaceShip_Gray.h"
 
@@ -69,6 +70,11 @@ HRESULT InGameScene::Init()
     lpHpGauge = new HpGauge();
     lpHpGauge->Init();
     lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 20 });
+
+    lpPlayerController = new PlayerController();
+    lpPlayerController->Init();
+    lpPlayerController->SetController(lpPlayer);
+
      return S_OK;
 }
 
@@ -121,6 +127,13 @@ void InGameScene::Release()
         delete lpHpGauge;
         lpHpGauge = nullptr;
     }
+
+    if (lpPlayerController)
+    {
+        lpPlayerController->Release();
+        delete lpPlayerController;
+        lpPlayerController = nullptr;
+    }
 }
 
 void InGameScene::Update(float deltaTime)
@@ -141,7 +154,7 @@ void InGameScene::Update(float deltaTime)
 
     CheckCollision();
 
-    if (lpPlayer) lpPlayer->Update(deltaTime);
+    if (lpPlayerController) lpPlayerController->Update(deltaTime);
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
@@ -168,7 +181,7 @@ void InGameScene::Render(HDC hdc)
     if (lpBackImage) lpBackImage->Render(hBackDC, 0, backgroundMover);
     if (lpBackImage2) lpBackImage2->Render(hBackDC, 0, -800+backgroundMover);
 
-    if (lpPlayer) lpPlayer->Render(hBackDC);
+    if (lpPlayerController) lpPlayerController->Render(hBackDC);
 
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);

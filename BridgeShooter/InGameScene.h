@@ -7,6 +7,7 @@ class HpGauge;
 class Unit;
 class Item;
 class Image;
+class Controller;
 class InGameScene : public GameScene
 {
 private:
@@ -30,6 +31,7 @@ private:
 	int frame;
 	float elapsedTime;
 	
+	Controller* lpPlayerController;
 
 	float backgroundMover;
 	bool isOnlyPlayer;
