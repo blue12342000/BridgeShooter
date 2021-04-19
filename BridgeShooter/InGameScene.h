@@ -2,6 +2,7 @@
 #include "BridgeShooter.h"
 #include <vector>
 
+class HpGauge;
 class Unit;
 class Item;
 class Image;
@@ -22,6 +23,10 @@ private:
 	Image* lpBackBuffer;
 	Image* lpBackImage;	
 	Image* lpBackImage2;	
+
+	HpGauge* lpHpGauge;
+	Image* lpHpGuageImage;
+
 	int frame;
 	float elapsedTime;
 	

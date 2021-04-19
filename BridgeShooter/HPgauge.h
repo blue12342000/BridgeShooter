@@ -1,39 +1,59 @@
 #pragma once
-#include <Windows.h>
+#include "UI.h"
 #include "BridgeShooter.h"
 
-class HpGauge
+class Image;
+class HpGauge : public UI
 {
 private:
-	POINTFLOAT pos;
+	//POINTFLOAT pos;
 
 	RECT playerHpGauge;
-	RECT enemyHpGauge;
+	RECT bossHpGauge;
 
-	float size1;
-	float size2;
+	float playerMaxHp;
+	float bossMaxHp;
 
-	bool isPlayerAlive;
-	bool isEnemyAlive;
+	Image* lpImage;
+
+	bool isBossAlive;
 
 public:
-	HRESULT Init();
-	void Release();
-	void Update();
-	void Render(HDC hdc);
 
-	void HpBarData();
+	virtual void Init() override;
+	virtual void Update(float deltaTime) override;
+	virtual void Render(HDC hdc) override;
 
-	void SetHpBar1(RECT hpBar1) { this->playerHpGauge = playerHpGauge; }
-	void SetHpBar2(RECT hpBar2) { this->enemyHpGauge = enemyHpGauge; }
-	void SetSize1(int size1) { this->size1 = size1; }
-	void SetSize2(int size2) { this->size2 = size2; }
+
+	void PlayerHpGaugeData(float deltaTime);
+	void EnemyHpGaugeData(float deltaTime);
+	void BossHpGaugeData(float deltaTime);
+
+	void SetPlayerHpGauge(RECT playerHpGauge) { this->playerHpGauge = playerHpGauge; }
+	void SetEnemyHpGauge(RECT enemyHpGauge) { this->bossHpGauge = enemyHpGauge; }
+
+	void SetPlayerMaxHp(int playerMaxHp) { this->playerMaxHp = playerMaxHp; }
+	void SetEnemyMaxHp(int enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
 	void SetPos(POINTFLOAT pos) { this->pos = pos; }
 
 	inline POINTFLOAT GetPos() { return this->pos; }
 
-	inline float GetSize1() { return this->size1; }
-	inline float GetSize2() { return this->size2; }
-	inline RECT GetHpBar1() { return this->playerHpGauge; }
+	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
+	inline float GetEnemyMaxHp() { return this->bossMaxHp; }
+	inline RECT GetPlayerHpGauge() { return this->playerHpGauge; }
+	inline RECT GetEnemyHpGauge() { return this->bossHpGauge; }
 
+
+	inline void RenderRectToCenter(HDC hdc, int x, int y, int width, int height)
+	{
+		Rectangle(hdc,
+			x - (width / 2), y - (height / 2),
+			x + (width / 2), y + (height / 2));
+	}
+
+	inline RECT GetRectToCenter(int posX, int posY, int width, int height)
+	{
+		RECT rc{ posX - (width / 2), posY - (height / 2), posX + (width / 2), posY + (height / 2) };
+		return rc;
+	}
 };

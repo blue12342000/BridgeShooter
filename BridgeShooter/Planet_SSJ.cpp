@@ -11,7 +11,6 @@ void Planet_SSJ::Init()
 	angle = -PI / 2;
 	lpFactory = new SSJFactory();	
 	lpFactory->Init();
-
 }
 
 void Planet_SSJ::Update(float deltaTime)

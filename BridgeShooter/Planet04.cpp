@@ -16,13 +16,9 @@ void Planet04::Init()
 
 void Planet04::Update(float deltaTime)
 {
-	fireTimer += deltaTime;
-	if (fireTimer > 0.001f)
-	{
-		fireTimer = 0;
-		Fire();
-	}
+	Fire();
 
+	lpFactory->Update(deltaTime);
 	lpAnimation->Update(deltaTime);
 	collider.SetHitBox(pos);	//업데이트에서 수치
 	elapsedTime += deltaTime;

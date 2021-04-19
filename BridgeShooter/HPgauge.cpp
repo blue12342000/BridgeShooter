@@ -1,46 +1,55 @@
 #include "HpGauge.h"
 #include "InGameScene.h"
+#include "Animation.h"
+#include "Image.h"
 
-HRESULT HpGauge::Init()
+void HpGauge::Init()
 {
 	pos.x = 0;
 	pos.y = 0;
-
-	isEnemyAlive = true;
-	isPlayerAlive = false;
-
-	size1 = 1000;
-	size2 = 1000;
-
-	return S_OK;
+	//lpImage = ImageManager::GetSingleton()->FindImage("BossHpGauge");
+	playerMaxHp = 20000;
+	bossMaxHp = 500000;
+	isBossAlive = true;
 }
 
-void HpGauge::Release()
+void HpGauge::Update(float deltaTime)
 {
-}
+	PlayerHpGaugeData(deltaTime);
+	if (isBossAlive) BossHpGaugeData(deltaTime);
 
-void HpGauge::Update()
-{
-	HpBarData();
+	elapsedTime += deltaTime;
 }
 
 void HpGauge::Render(HDC hdc)
 {
 	Rectangle(hdc, playerHpGauge.left, playerHpGauge.top, playerHpGauge.right, playerHpGauge.bottom);
-	Rectangle(hdc, enemyHpGauge.left, enemyHpGauge.top, enemyHpGauge.right, enemyHpGauge.bottom);
+	if(isBossAlive)
+	Rectangle(hdc, bossHpGauge.left, bossHpGauge.top, bossHpGauge.right, bossHpGauge.bottom);
+	UI::Render(hdc);
 }
 
-void HpGauge::HpBarData()
+void HpGauge::PlayerHpGaugeData(float deltaTime)
 {
-	//playerHpGauge = GetRectToCenter(pos.x + 294, pos.y + 42, size1 / 4, 50);
-	//enemyHpGauge = GetRectToCenter(pos.x + 825, pos.y + 39, size2 / 4, 50);
+	playerHpGauge = GetRectToCenter(playerMaxHp/2 / 100 + 50, 100, playerMaxHp/100, 18);
 
-	if (size1 <= 0)
+	//HP가 0되면 값 고정
+	if (playerMaxHp <= 0)
 	{
-		size1 = 0;
-	}
-	if (size2 <= 0)
-	{
-		size2 = 0;
+		playerMaxHp = 0;
 	}
 }
+
+void HpGauge::BossHpGaugeData(float deltaTime)
+{
+	bossHpGauge = GetRectToCenter(bossMaxHp / 2 / 1000 + 50, 50, bossMaxHp / 1000, 18);
+
+	//HP가 0되면 값 고정
+	if (playerMaxHp <= 0)
+	{
+		playerMaxHp = 0;
+		isBossAlive = false;
+	}
+}
+
+

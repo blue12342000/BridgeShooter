@@ -46,6 +46,9 @@
     <Filter Include="소스 파일\Bridge\Factory\Super">
       <UniqueIdentifier>{26cbf9f6-215a-4be5-aeda-baa085185fe3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Bridge\UI">
+      <UniqueIdentifier>{e00253a7-9ecc-4581-8cca-41affee43eea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -159,7 +162,13 @@
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>소스 파일\Bridge\UI</Filter>
+    </ClCompile>
     <ClCompile Include="HPgauge.cpp">
+      <Filter>소스 파일\Bridge\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -284,8 +293,14 @@
     <ClInclude Include="ReverseSinePattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>소스 파일\Bridge\UI</Filter>
+    </ClInclude>
     <ClInclude Include="HPgauge.h">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Bridge\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,19 +32,30 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("PLANET_SSJ", new Image()));
     mLpImageDatas["PLANET_SSJ"]->Init("Image/Unit/Planet/Planet_SSJ.bmp", 20000, 266, 50, 1, 50, true, RGB(255, 0, 255));
- 
+
     mLpImageDatas.insert(make_pair("Planet04", new Image()));
-    mLpImageDatas["Planet04"]->Init("Image/Unit/Planet/Planet_04_square2.bmp", 2800 , 3840, 10, 12, 120, true);
+    mLpImageDatas["Planet04"]->Init("Image/Unit/Planet/Planet_04_square2.bmp", 2800, 3840, 10, 12, 120, true);
 
     mLpImageDatas.insert(make_pair("Planet_KMS", new Image()));
-    mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 134*10,134, 10, 1, 10, true, RGB(0, 0, 0));
+    mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 134 * 10, 134, 10, 1, 10, true, RGB(0, 0, 0));
 
     mLpImageDatas.insert(make_pair("Item_Power", new Image()));
-    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 266 , 32, 6, 1, 6, true, RGB(255, 0, 255));
+    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 266, 32, 6, 1, 6, true);
 
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
-    mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true, RGB(255, 0, 255));
-    
+    mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("BossHpGauge", new Image()));
+    mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 1010, 76, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("HpGauge_Default", new Image()));
+    mLpImageDatas["HpGauge_Default"]->Init("Image/UI/HpGauge.bmp", 1010, 76, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("HpGauge_Blank", new Image()));
+    mLpImageDatas["HpGauge_Blank"]->Init("Image/UI/HpGauge2.bmp", 1010, 76, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("HpGauge_In", new Image()));
+    mLpImageDatas["HpGauge_In"]->Init("Image/UI/HpGauge3.bmp", 1010, 76, 1, 1, 1, true);
 
     return S_OK;
 }
