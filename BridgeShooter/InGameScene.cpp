@@ -49,9 +49,8 @@ HRESULT InGameScene::Init()
 
     lpHpGauge = new HpGauge();
     lpHpGauge->Init();
-    lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
-    lpHpGuageImage = ImageManager::GetSingleton()->FindImage("HpGauge_Blank");
-    return S_OK;
+    lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 20 });
+     return S_OK;
 }
 
 void InGameScene::Release()
@@ -126,9 +125,9 @@ void InGameScene::Update(float deltaTime)
     if (lpPlayer) lpPlayer->Update(deltaTime);
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
-    if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
+    //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
@@ -152,7 +151,7 @@ void InGameScene::Render(HDC hdc)
 
     if (lpPlayer) lpPlayer->Render(hBackDC);
 
-    if (lpPlanet04) lpPlanet04->Render(hBackDC);
+    //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
@@ -160,7 +159,6 @@ void InGameScene::Render(HDC hdc)
     if (lpItem) lpItem->Render(hBackDC);
 
     if (lpHpGauge) lpHpGauge->Render(hBackDC);
-    if (lpHpGuageImage) lpHpGuageImage->Render(hBackDC);
     EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
@@ -210,7 +208,7 @@ void InGameScene::CheckCollision()
         if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
         {
             isPlayerHitEnemy = true;
-            lpHpGauge->SetEnemyMaxHp(lpHpGauge->GetEnemyMaxHp() - 1);
+            lpHpGauge->SetbossMaxHp(lpHpGauge->GetbossMaxHp() - 1);
         }
     }
 

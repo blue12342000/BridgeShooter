@@ -46,7 +46,7 @@ HRESULT ImageManager::Init()
     mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true);
 
     mLpImageDatas.insert(make_pair("BossHpGauge", new Image()));
-    mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 1010, 76, 1, 1, 1, true);
+    mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 600, 76, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("HpGauge_Default", new Image()));
     mLpImageDatas["HpGauge_Default"]->Init("Image/UI/HpGauge.bmp", 1010, 76, 1, 1, 1, true);

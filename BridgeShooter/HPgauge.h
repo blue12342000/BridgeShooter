@@ -21,27 +21,28 @@ private:
 public:
 
 	virtual void Init() override;
+	virtual void Release() override;
 	virtual void Update(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
 
 	void PlayerHpGaugeData(float deltaTime);
-	void EnemyHpGaugeData(float deltaTime);
+	//void EnemyHpGaugeData(float deltaTime);
 	void BossHpGaugeData(float deltaTime);
 
 	void SetPlayerHpGauge(RECT playerHpGauge) { this->playerHpGauge = playerHpGauge; }
-	void SetEnemyHpGauge(RECT enemyHpGauge) { this->bossHpGauge = enemyHpGauge; }
+	void SetbossHpGauge(RECT enemyHpGauge) { this->bossHpGauge = enemyHpGauge; }
 
 	void SetPlayerMaxHp(int playerMaxHp) { this->playerMaxHp = playerMaxHp; }
-	void SetEnemyMaxHp(int enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
-	void SetPos(POINTFLOAT pos) { this->pos = pos; }
+	void SetbossMaxHp(int enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
+	//void SetPos(POINTFLOAT pos) { this->pos = pos; }
 
-	inline POINTFLOAT GetPos() { return this->pos; }
+	//inline POINTFLOAT GetPos() { return this->pos; }
 
 	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
-	inline float GetEnemyMaxHp() { return this->bossMaxHp; }
+	inline float GetbossMaxHp() { return this->bossMaxHp; }
 	inline RECT GetPlayerHpGauge() { return this->playerHpGauge; }
-	inline RECT GetEnemyHpGauge() { return this->bossHpGauge; }
+	inline RECT GetbossHpGauge() { return this->bossHpGauge; }
 
 
 	inline void RenderRectToCenter(HDC hdc, int x, int y, int width, int height)
