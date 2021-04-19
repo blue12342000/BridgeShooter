@@ -3,7 +3,7 @@
 #include "BasicFactory.h"
 #include "SineFactory.h"
 #include "RainFactory.h"
-#include "BoomerangFactory.h"
+#include "Planet_KMS_Factory.h"
 #include "BoomerangPattern.h"
 #include "SSJFactory.h"
 #include "JinHwangFactory.h"
@@ -38,7 +38,7 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
 	{
-		SetFactory(new BoomerangFactory());
+		SetFactory(new Planet_KMS_Factory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
 	{

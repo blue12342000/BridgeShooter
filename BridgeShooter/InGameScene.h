@@ -17,6 +17,7 @@ private:
 	Unit* lpPlanet04;
 	Unit* lpPlanetSSJ;
 	Unit* lpPlanetKMS;
+	Unit* lpMob1;
 
 	Unit* lpJinHwang;
 

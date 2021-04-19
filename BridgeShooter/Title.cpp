@@ -20,7 +20,7 @@ void Title::Update(float deltaTime)
 {
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_SPACE))
     {
-        SceneManager::GetSingleton()->ChangeScene();
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::SELECT);
     }
 }
 

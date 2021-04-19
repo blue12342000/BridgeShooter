@@ -10,13 +10,33 @@
 #include "HPgauge.h"
 #include "GameScene.h"
 #include "PlayerController.h"
+#include "SpaceShip_Red.h"
+#include "SpaceShip_Gray.h"
+#include "EnemyGroup.h"
 
 HRESULT InGameScene::Init()
 {
-    lpPlayer = new SpaceShip();
-    lpPlayer->Init();
-    lpPlayer->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT});
-
+    
+    switch (DataManager::GetSingleton()->GetSelectedCharacter())
+    {
+    case (int)DataManager::CHARACTER_CODE::YELLOW:
+        lpPlayer = new SpaceShip();
+        lpPlayer->Init();
+        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
+        break;
+    case (int)DataManager::CHARACTER_CODE::RED:
+        lpPlayer = new SpaceShip();
+        lpPlayer->Init();
+        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
+        break;
+    case (int)DataManager::CHARACTER_CODE::GRAY:
+        lpPlayer = new SpaceShip_Gray();
+        lpPlayer->Init();
+        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
+        break;
+    }
+    
+   
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
     lpPlanet04->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 });
@@ -28,6 +48,9 @@ HRESULT InGameScene::Init()
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+
+    //lpMob1 = new EnemyGroup();
+    //lpMob1->Init();
 
     lpItem = new Item();
     lpItem->Init();
@@ -52,8 +75,7 @@ HRESULT InGameScene::Init()
 
     lpHpGauge = new HpGauge();
     lpHpGauge->Init();
-    //lpHpGauge->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 20 });
-
+ 
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
@@ -63,6 +85,8 @@ HRESULT InGameScene::Init()
 
 void InGameScene::Release()
 {
+    MissileManager::GetSingleton()->Release();
+
     if (lpPlayer)
     {
         lpPlayer->Release();
@@ -89,7 +113,12 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
-
+    /*if (lpMob1)
+    {
+        lpMob1->Release();
+        delete lpMob1;
+        lpMob1 = nullptr;
+    }*/
     if (lpJinHwang)
     {
         lpJinHwang->Release();
@@ -127,7 +156,7 @@ void InGameScene::Update(float deltaTime)
     }
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
-        SceneManager::GetSingleton()->ChangeScene();
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
 
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
@@ -143,7 +172,8 @@ void InGameScene::Update(float deltaTime)
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
-    //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
+    if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
+    //if (lpMob1) lpMob1->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
     if (lpHpGauge) lpHpGauge->Update(deltaTime);
@@ -170,6 +200,7 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
+    if (lpMob1)lpMob1->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
 

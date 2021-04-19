@@ -126,7 +126,7 @@
     <ClCompile Include="Planet04.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="BoomerangFactory.cpp">
+    <ClCompile Include="Planet_KMS_Factory.cpp">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Planet_KMS.cpp">
@@ -189,6 +189,9 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyGroup.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
@@ -200,6 +203,15 @@
     </ClCompile>
     <ClCompile Include="AIController.cpp">
       <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SpaceShip_Red.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="SpaceShip_Gray.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidePattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,7 +287,7 @@
     <ClInclude Include="Planet04.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="BoomerangFactory.h">
+    <ClInclude Include="Planet_KMS_Factory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Planet_KMS.h">
@@ -341,6 +353,9 @@
     <ClInclude Include="EffectManager.h">
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyGroup.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
     <ClInclude Include="SpaceShipFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
@@ -358,6 +373,15 @@
     </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip_Gray.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip_Red.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

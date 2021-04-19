@@ -11,6 +11,10 @@ private:
 
 	vector<Image*> vLpPlayerImg; 
 	
+	RECT selectBox;
+	int selectIndex;
+	int maxIndex;
+	bool hasSelected;
 
 public:
 	HRESULT Init();

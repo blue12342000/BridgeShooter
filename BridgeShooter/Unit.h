@@ -27,5 +27,6 @@ public:
 
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
+	inline void SetAngle(float angle) { this->angle = angle; }
 };
 
