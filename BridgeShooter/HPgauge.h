@@ -18,6 +18,12 @@ private:
 
 	bool isBossAlive;
 
+	int hp;
+	int hpCount;
+	int bombCount;
+	int nowMissile;
+	int fcukingManual;
+
 public:
 
 	virtual void Init() override;
@@ -29,6 +35,14 @@ public:
 	void PlayerHpGaugeData(float deltaTime);
 	//void EnemyHpGaugeData(float deltaTime);
 	void BossHpGaugeData(float deltaTime);
+
+	void HpCount(float deltaTime);
+	void BombCount(float deltaTime);
+	void NowMissile(float deltaTime);
+	void FcukingManual(float deltaTime);
+
+
+
 
 	void SetPlayerHpGauge(RECT playerHpGauge) { this->playerHpGauge = playerHpGauge; }
 	void SetbossHpGauge(RECT enemyHpGauge) { this->bossHpGauge = enemyHpGauge; }

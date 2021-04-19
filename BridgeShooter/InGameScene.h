@@ -17,10 +17,12 @@ private:
 	Unit* lpPlanet04;
 	Unit* lpPlanetSSJ;
 	Unit* lpPlanetKMS;
+	Unit* lpMob1;
 
 	Unit* lpJinHwang;
 
 	Item* lpItem;
+
 
 	Image* lpBackBuffer;
 	Image* lpBackImage;	
@@ -37,12 +39,14 @@ private:
 	bool isOnlyPlayer;
 	bool isEnemyHitPlayer;
 	bool isPlayerHitEnemy;
+	bool isPlayerHitItem;
+	bool isItemAlive;
 
 public:
 	virtual HRESULT Init();
 	virtual void Release();
 	virtual void Update(float deltaTime);
 	virtual void Render(HDC hdc);
-	void CheckCollision();
+	void CheckCollision( );
 };
 
