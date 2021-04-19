@@ -26,6 +26,8 @@ HRESULT SelectPlayer::Init()
 	}
 
 	selectBox = { 50, 500, 150, 600 };
+	selectIndex = 0;
+	maxIndex = vLpPlayerImg.size()-1;
 	hasSelected = false;
 
 	return S_OK;
@@ -43,55 +45,58 @@ void SelectPlayer::Release()
 
 void SelectPlayer::Update(float deltaTime)
 {
+	if (hasSelected == false)
+	{
+		if (KeyManager::GetSingleton()->IsKeyDownOne('A'))
+		{
+			selectBox.left -= 200;
+			selectBox.right -= 200;
+			if (selectBox.left <= 50)
+			{
+				selectBox.left = 50;
+				selectBox.right = 150;
+			}
+			selectIndex--;
+			if (selectIndex <= 0) selectIndex = 0;
+
+		}
+		if (KeyManager::GetSingleton()->IsKeyDownOne('D'))
+		{
+			selectBox.left += 200;
+			selectBox.right += 200;
+			if (selectBox.left >= 450)
+			{
+				selectBox.left = 450;
+				selectBox.right = 550;
+			}
+			selectIndex++;
+			if (selectIndex >= maxIndex) selectIndex = maxIndex;
+		}
+		if (KeyManager::GetSingleton()->IsKeyDownOne('S'))
+		{
+			if (selectIndex == 0)
+			{
+				DataManager::GetSingleton()->SetCharacter(DataManager::CHARACTER_CODE::YELLOW);
+				hasSelected = true;
+			}
+			if (selectIndex == 1)
+			{
+				DataManager::GetSingleton()->SetCharacter(DataManager::CHARACTER_CODE::RED);
+				hasSelected = true;
+			}
+			if (selectIndex == 2)
+			{
+				DataManager::GetSingleton()->SetCharacter(DataManager::CHARACTER_CODE::GRAY);
+				hasSelected = true;
+			}
+		}
+	}
+	
 	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_SPACE))
 	{
 		if (hasSelected == true)
 		{
-  			SceneManager::GetSingleton()->ChangeScene();
-		}
-			
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('A'))
-	{
-		selectBox.left -= 200;
-		selectBox.right -= 200;
-		if (selectBox.left <= 50)
-		{
-			selectBox.left = 50;
-			selectBox.right = 150;
-		}
-		selectIndex--;
-		if (selectIndex <= 0) selectIndex = 0;
-		
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('D'))
-	{
-		selectBox.left += 200;
-		selectBox.right += 200;
-		if (selectBox.left >= 450)
-		{
-			selectBox.left = 450;
-			selectBox.right = 550;
-		}	
-		selectIndex++;
-		if (selectIndex >= 2) selectIndex = 2;
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('S'))
-	{
-		if (selectIndex == 0)
-		{
-			DataManager::GetSingleton()->SetCharacter(DataManager::CHARACTER_CODE::YELLOW);
-			hasSelected = true;
-		}
-		if (selectIndex == 1)
-		{
-			DataManager::GetSingleton()->SetCharacter(DataManager::CHARACTER_CODE::RED);
-			hasSelected = true;
-		}
-		if (selectIndex == 2)
-		{
-			DataManager::GetSingleton()->SetCharacter(DataManager::CHARACTER_CODE::GRAY);
-			hasSelected = true;
+			SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::INGAME);
 		}
 	}
 }

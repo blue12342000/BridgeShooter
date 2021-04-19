@@ -17,12 +17,13 @@ public:
 private:
 	GameScene* scenes[(int)SCENE_STATE::NONE];
 	SCENE_STATE currScene;
+	SCENE_STATE lastScene;
 
 public:
 	HRESULT Init();
 	void Release();
 	void Update(float deltaTime);
 	void Render(HDC hdc);
-	void ChangeScene();
+	void ChangeScene(SCENE_STATE scene);
 
 };

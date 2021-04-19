@@ -13,6 +13,7 @@ private:
 	
 	RECT selectBox;
 	int selectIndex;
+	int maxIndex;
 	bool hasSelected;
 
 public:

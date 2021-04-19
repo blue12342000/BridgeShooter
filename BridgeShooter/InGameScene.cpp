@@ -80,6 +80,8 @@ HRESULT InGameScene::Init()
 
 void InGameScene::Release()
 {
+    MissileManager::GetSingleton()->Release();
+
     if (lpPlayer)
     {
         lpPlayer->Release();
@@ -144,7 +146,7 @@ void InGameScene::Update(float deltaTime)
     }
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
-        SceneManager::GetSingleton()->ChangeScene();
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
 
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))

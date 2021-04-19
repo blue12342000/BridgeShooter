@@ -13,22 +13,21 @@ HRESULT SceneManager::Init()
 		{
 		case (int)SCENE_STATE::TITLE:
 			scenes[i] = new Title();
-			scenes[i]->Init();
 			break;
 		case (int)SCENE_STATE::SELECT:
 			scenes[i] = new SelectPlayer();
-			scenes[i]->Init();
 			break;
 		case (int)SCENE_STATE::INGAME:
 			scenes[i] = new InGameScene();
-			//scenes[i]->Init();
 			break;
 		case (int)SCENE_STATE::NONE:
 			break;
 		}
 	}
 
-	currScene = SCENE_STATE::TITLE;
+	currScene = SCENE_STATE::NONE;
+	ChangeScene(SCENE_STATE::TITLE);
+	
 	return S_OK;
 }
 
@@ -55,25 +54,16 @@ void SceneManager::Render(HDC hdc)
 	scenes[(int)currScene]->Render(hdc);
 }
 
-void SceneManager::ChangeScene()
+void SceneManager::ChangeScene(SCENE_STATE scene)
 {
-	if (currScene == SCENE_STATE::TITLE)
-	{
-		currScene = SCENE_STATE::SELECT;
+	//nullptr이면 init, 이미 생성되어있으면 씬만 바꾸기 ->reset함수호출
+	//씬리셋해주는 함수 - 각씬마다. ->동적할당 없어야함(꼭필요하면 넣고 릴리즈)
 
-	}
-		
-	else if (currScene == SCENE_STATE::SELECT)
-	{
-		currScene = SCENE_STATE::INGAME;
-		scenes[(int)currScene]->Init();
-		
-	}
-		
-	else if (currScene == SCENE_STATE::INGAME)
-	{
-		currScene = SCENE_STATE::TITLE;
-		
-	}
-		
+	lastScene = currScene;
+	currScene = scene;
+	
+	if(lastScene != SCENE_STATE::NONE)
+		scenes[(int)lastScene]->Release();
+	scenes[(int)currScene]->Init();
+
 }

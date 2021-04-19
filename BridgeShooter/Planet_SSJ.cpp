@@ -19,11 +19,11 @@ void Planet_SSJ::Update(float deltaTime)
 {
 	Fire();
 	//lpFactory->Update(deltaTime);
-
-	lpAnimation->Update(deltaTime);
+	Unit::Update(deltaTime);
+	/*lpAnimation->Update(deltaTime);
 	elapsedTime += deltaTime;
 
-	collider.SetHitBox(pos);
+	collider.SetHitBox(pos);*/
 }
 
 void Planet_SSJ::Render(HDC hdc)
