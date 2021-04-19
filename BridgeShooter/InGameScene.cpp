@@ -7,6 +7,8 @@
 #include "Planet_KMS.h"
 #include "Item.h"
 #include "Missile.h"
+#include"EnemyGroup.h"
+#include"BasicFactory.h"
 
 HRESULT InGameScene::Init()
 {
@@ -25,6 +27,11 @@ HRESULT InGameScene::Init()
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+
+    lpMob1 = new EnemyGroup();
+    lpMob1->Init();
+    lpMob1->SetPos({  (float)0,(float)WINSIZE_HEIGHT / 2.0f });
+    lpMob1->SetFactory(new BasicFactory());
 
     lpItem = new Item();
     lpItem->Init();
@@ -75,7 +82,12 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
-
+    if (lpMob1)
+    {
+        lpMob1->Release();
+        delete lpMob1;
+        lpMob1 = nullptr;
+    }
     if (lpJinHwang)
     {
         lpJinHwang->Release();
@@ -112,8 +124,9 @@ void InGameScene::Update(float deltaTime)
     if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
+    if (lpMob1) lpMob1->Update(deltaTime);
 
-    if (lpItem) lpItem->Update(deltaTime);
+    //if (lpItem) lpItem->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
     
     
@@ -138,6 +151,7 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
+    if (lpMob1)lpMob1->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
     EffectManager::GetSingleton()->Render(hBackDC);

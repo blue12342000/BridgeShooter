@@ -148,6 +148,7 @@
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EnemyGroup.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="EnemyGroup.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
