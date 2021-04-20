@@ -7,14 +7,12 @@ class Image;
 class Missile : public GameObject
 {
 private:
-	bool isActive;
 	Pattern* lpPattern;
-	Image* lpImage;
 	Animation* lpAnimation;
-	MoveInfo deltaMove;
 
 public:
 	float delayTime;
+	MoveInfo deltaMove;
 
 public:	
 	void Init() override;
