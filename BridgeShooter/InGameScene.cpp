@@ -10,6 +10,7 @@
 #include "HPgauge.h"
 #include "GameScene.h"
 #include "PlayerController.h"
+#include "JinHwangAIContoller.h"
 #include "SpaceShip_Red.h"
 #include "SpaceShip_Gray.h"
 #include "EnemyGroup.h"
@@ -79,6 +80,10 @@ HRESULT InGameScene::Init()
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
+
+    lpEnemyController = new JinHwangAIContoller();
+    lpEnemyController->Init();
+    lpEnemyController->SetController(lpJinHwang);
 
      return S_OK;
 }
@@ -163,6 +168,7 @@ void InGameScene::Update(float deltaTime)
     CheckCollision();
 
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
+    if (lpEnemyController) lpEnemyController->Update(deltaTime);
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
@@ -194,12 +200,13 @@ void InGameScene::Render(HDC hdc)
     if (lpBackImage2) lpBackImage2->Render(hBackDC, 0, -800+backgroundMover);
 
     if (lpPlayerController) lpPlayerController->Render(hBackDC);
+    if (lpEnemyController) lpEnemyController->Render(hBackDC);
 
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
-    if (lpMob1)lpMob1->Render(hBackDC);
+    //if (lpMob1)lpMob1->Render(hBackDC);
 
     if (lpItem) lpItem->Render(hBackDC);
 
