@@ -13,9 +13,9 @@ void Unit::Init()
 
 void Unit::Update(float deltaTime)
 {
-	if (force.x || force.y)
+	if (force.force > 0.000001f)
 	{
-		float dir = atan2(force.y, force.x);
+		float dir = atan2(force.dir.y, force.dir.y);
 		pos.x += cos(dir) * speed * deltaTime;
 		pos.y += sin(dir) * speed * deltaTime;
 	}
@@ -23,8 +23,7 @@ void Unit::Update(float deltaTime)
 	collider.SetHitBox(pos);
 	if (lpFactory) lpFactory->Update(deltaTime);
 	if (lpAnimation) lpAnimation->Update(deltaTime);
-	force.x = 0;
-	force.y = 0;
+	force.force = 0;
 	elapsedTime += deltaTime;
 }
 
@@ -55,16 +54,16 @@ void Unit::Fire(void)
 	if (lpFactory) lpFactory->Fire(this);
 }
 
-void Unit::Translate(POINT force)
+void Unit::Translate(Force force)
 {
-	if (force.x || force.y)
-	{
-		this->force.x += force.x;
-		this->force.y += force.y;
-
-		if (this->force.x) this->force.x /= abs(this->force.x);
-		if (this->force.y) this->force.y /= abs(this->force.y);
-	}
+	//if (force.force > 0.0000001f)
+	//{
+	//	this->force.x += force.x;
+	//	this->force.y += force.y;
+	//
+	//	if (this->force.x) this->force.x /= abs(this->force.x);
+	//	if (this->force.y) this->force.y /= abs(this->force.y);
+	//}
 }
 
 void Unit::SetFactory(Factory* lpFactory)

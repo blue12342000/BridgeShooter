@@ -49,8 +49,8 @@ HRESULT InGameScene::Init()
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
-    //lpMob1 = new EnemyGroup();
-    //lpMob1->Init();
+    lpMob1 = new EnemyGroup();
+    lpMob1->Init();
 
     lpItem = new Item();
     lpItem->Init();
@@ -78,7 +78,7 @@ HRESULT InGameScene::Init()
  
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
-    lpPlayerController->SetController(lpJinHwang);
+    lpPlayerController->SetController(lpMob1);
 
      return S_OK;
 }
@@ -154,14 +154,10 @@ void InGameScene::Update(float deltaTime)
     {
         isOnlyPlayer = !isOnlyPlayer;
     }
-    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
-    {
-        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
-    }
 
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
     {
-        EffectManager::GetSingleton()->Blackhole(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 80, 20, 20);
+        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("Enemy_2"), 0, 80, 5, 5);
     }
 
     CheckCollision();
@@ -171,7 +167,7 @@ void InGameScene::Update(float deltaTime)
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    if (lpJinHwang) lpJinHwang->Update(deltaTime);
+    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
@@ -184,6 +180,10 @@ void InGameScene::Update(float deltaTime)
     if (backgroundMover >= 800) backgroundMover = 0;
 
 
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+    }
 }
 
 void InGameScene::Render(HDC hdc)
