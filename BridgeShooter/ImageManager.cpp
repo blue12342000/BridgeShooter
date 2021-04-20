@@ -108,6 +108,8 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
     mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
 
+    mLpImageDatas.insert(make_pair("MOVING_CAT", new Image()));
+    mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1004/2, 251/2, 4, 1, 4, true);
 
     return S_OK;
 }

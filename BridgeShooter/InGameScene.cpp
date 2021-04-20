@@ -78,7 +78,7 @@ HRESULT InGameScene::Init()
  
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
-    lpPlayerController->SetController(lpJinHwang);
+    lpPlayerController->SetController(lpPlayer);
 
      return S_OK;
 }
@@ -154,10 +154,7 @@ void InGameScene::Update(float deltaTime)
     {
         isOnlyPlayer = !isOnlyPlayer;
     }
-    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
-    {
-        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
-    }
+
 
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
     {
@@ -170,8 +167,8 @@ void InGameScene::Update(float deltaTime)
 
     //if (lpPlanet04) lpPlanet04->Update(deltaTime);
     //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    if (lpJinHwang) lpJinHwang->Update(deltaTime);
+    if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
+    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
@@ -183,7 +180,10 @@ void InGameScene::Update(float deltaTime)
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
 
-
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+    }
 }
 
 void InGameScene::Render(HDC hdc)
@@ -196,7 +196,7 @@ void InGameScene::Render(HDC hdc)
     if (lpPlayerController) lpPlayerController->Render(hBackDC);
 
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
+    if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
     if (lpMob1)lpMob1->Render(hBackDC);
