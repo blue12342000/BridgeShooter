@@ -80,7 +80,7 @@ HRESULT InGameScene::Init()
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
-
+    lpPlayer->SetTarget(lpJinHwang);
     lpEnemyController = new JinHwangAIContoller();
     lpEnemyController->Init();
     lpEnemyController->SetController(lpJinHwang);

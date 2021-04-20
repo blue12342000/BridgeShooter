@@ -10,6 +10,7 @@ private:
 	{
 		SFCP_BASIC,
 		SFCP_REFLECT,
+		SFCP_GUIDE,
 		SFCP_NONE
 	};
 
