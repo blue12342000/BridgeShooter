@@ -13,20 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Manager">
-      <UniqueIdentifier>{637018d1-1087-4b77-9f9d-ac63975506f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Engine">
       <UniqueIdentifier>{f764d7e1-208f-44e0-8294-8b69db1b7d50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Bridge">
-      <UniqueIdentifier>{b31905a5-04ce-457c-8204-ff33b01daf19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Bridge\Unit">
-      <UniqueIdentifier>{719e516d-9771-4642-b73d-cdf504531c24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Bridge\Factory">
-      <UniqueIdentifier>{ffdaf051-7293-4f09-89fd-4c4abeeaecaf}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\GameObject">
       <UniqueIdentifier>{75976b39-36e5-45d7-b253-5d63d6873468}</UniqueIdentifier>
@@ -43,12 +31,6 @@
     <Filter Include="소스 파일\Scene">
       <UniqueIdentifier>{e906b2e7-aa15-4a3d-8f33-51794057335d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Bridge\Factory\Super">
-      <UniqueIdentifier>{26cbf9f6-215a-4be5-aeda-baa085185fe3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Bridge\UI">
-      <UniqueIdentifier>{e00253a7-9ecc-4581-8cca-41affee43eea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Scene\Super">
       <UniqueIdentifier>{409939e0-5fc0-4ba0-9f32-8f28765dd082}</UniqueIdentifier>
     </Filter>
@@ -58,34 +40,49 @@
     <Filter Include="소스 파일\Controller\Super">
       <UniqueIdentifier>{c34292eb-07ee-4ebb-b058-5e869c9de9e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\GameObject\Unit">
+      <UniqueIdentifier>{719e516d-9771-4642-b73d-cdf504531c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Factory">
+      <UniqueIdentifier>{ffdaf051-7293-4f09-89fd-4c4abeeaecaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Factory\Super">
+      <UniqueIdentifier>{26cbf9f6-215a-4be5-aeda-baa085185fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\UI">
+      <UniqueIdentifier>{e00253a7-9ecc-4581-8cca-41affee43eea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Engine\Manager">
+      <UniqueIdentifier>{637018d1-1087-4b77-9f9d-ac63975506f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ImageManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>소스 파일\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="SpaceShip.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Missile.cpp">
       <Filter>소스 파일\GameObject</Filter>
@@ -97,10 +94,10 @@
       <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MissileManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="BasicFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="InGameScene.cpp">
       <Filter>소스 파일\Scene</Filter>
@@ -112,7 +109,7 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="SineFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="RainPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -121,25 +118,25 @@
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClCompile>
     <ClCompile Include="RainFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Planet04.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Planet_KMS_Factory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Planet_KMS.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Planet_SSJ.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="JinHwang.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Planet04Factory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="ReflectPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -154,7 +151,7 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="JinHwangFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="DelayBasicPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -163,37 +160,37 @@
       <Filter>소스 파일\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Factory.cpp">
-      <Filter>소스 파일\Bridge\Factory\Super</Filter>
+      <Filter>소스 파일\Factory\Super</Filter>
     </ClCompile>
     <ClCompile Include="ReverseSinePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="SSJFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
-      <Filter>소스 파일\Bridge\UI</Filter>
+      <Filter>소스 파일\UI</Filter>
     </ClCompile>
-    <ClCompile Include="HPgauge.cpp">
-      <Filter>소스 파일\Bridge\UI</Filter>
+    <ClCompile Include="UIobject.cpp">
+      <Filter>소스 파일\UI</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>소스 파일\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SelectPlayer.cpp">
       <Filter>소스 파일\Scene</Filter>
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="DataManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SpaceShipFactory.cpp">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>소스 파일\Controller</Filter>
@@ -202,10 +199,10 @@
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
     <ClCompile Include="SpaceShip_Red.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="SpaceShip_Gray.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="GuidePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -217,16 +214,16 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="AlienBlue.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="AlienYellow.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="AlienGreen.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="AlienRed.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Planet04AIController.cpp">
       <Filter>소스 파일\Controller</Filter>
@@ -243,28 +240,28 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>소스 파일\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="MainGame.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="KeyManager.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="SpaceShip.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Missile.h">
       <Filter>소스 파일\GameObject</Filter>
@@ -282,13 +279,13 @@
       <Filter>소스 파일\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="MissileManager.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="InGameScene.h">
       <Filter>소스 파일\Scene</Filter>
     </ClInclude>
     <ClInclude Include="BasicFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="SinePattern.h">
       <Filter>소스 파일\Pattern</Filter>
@@ -297,10 +294,10 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Planet_SSJ.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="SineFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="RainPattern.h">
       <Filter>소스 파일\Pattern</Filter>
@@ -309,25 +306,25 @@
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
     <ClInclude Include="RainFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Planet04.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Planet_KMS_Factory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Planet_KMS.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Planet_SSJ.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
     <ClInclude Include="JinHwang.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Planet04Factory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="ReflectPattern.h">
       <Filter>소스 파일\Pattern</Filter>
@@ -336,16 +333,16 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="SSJFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="ReverseSpiralPattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="JinHwangFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
-      <Filter>소스 파일\Bridge\Factory\Super</Filter>
+      <Filter>소스 파일\Factory\Super</Filter>
     </ClInclude>
     <ClInclude Include="DelayBasicPattern.h">
       <Filter>소스 파일\Pattern</Filter>
@@ -360,10 +357,10 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
-      <Filter>소스 파일\Bridge\UI</Filter>
+      <Filter>소스 파일\UI</Filter>
     </ClInclude>
-    <ClInclude Include="HPgauge.h">
-      <Filter>소스 파일\Bridge\UI</Filter>
+    <ClInclude Include="UIobject.h">
+      <Filter>소스 파일\UI</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>소스 파일\Scene</Filter>
@@ -372,16 +369,16 @@
       <Filter>소스 파일\Scene\Super</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SelectPlayer.h">
       <Filter>소스 파일\Scene</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SpaceShipFactory.h">
-      <Filter>소스 파일\Bridge\Factory</Filter>
+      <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="BridgeShooter.h">
       <Filter>헤더 파일</Filter>
@@ -396,16 +393,16 @@
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
     <ClInclude Include="DataManager.h">
-      <Filter>소스 파일\Manager</Filter>
+      <Filter>소스 파일\Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="GuidePattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="SpaceShip_Gray.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="SpaceShip_Red.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="JinHwangAIContoller.h">
       <Filter>소스 파일\Controller</Filter>
@@ -414,16 +411,16 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="AlienBlue.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="AlienYellow.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="AlienGreen.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="AlienRed.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
+      <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Planet04AIController.h">
       <Filter>소스 파일\Controller</Filter>

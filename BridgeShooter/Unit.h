@@ -1,7 +1,7 @@
 #pragma once
 #include"GameObject.h"
 
-class HpGauge;
+class UIobject;
 class Animation;
 class Factory;
 class Pattern;
@@ -10,12 +10,11 @@ class Unit : public GameObject
 protected:
 	Animation* lpAnimation;
 	Factory* lpFactory;
-	Pattern* lpPattern;
 	Unit* lpTarget;
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
-	HpGauge* lpHpGauge;
+	UIobject* lpUIobject;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false){}
@@ -37,8 +36,8 @@ public:
 	virtual void SetFactoryLine(int factoryLine) final;
 
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
+	inline Unit*& GetTarget() { return lpTarget; }
 	inline void SetInetia(bool isInertia) { this->isInertia = isInertia; }
-	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
 
 };
 

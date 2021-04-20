@@ -60,19 +60,26 @@ public:
 	virtual void Render(HDC hdc) = 0;
 };
 
+class Pattern;
 class GameObject : public GameEvent
 {
 public:
+	POINTFLOAT origin;
 	POINTFLOAT pos;
+	float originAngle;
 	float angle;
 	float speed;
+	float period;
+	float amplitude;
 	Collider collider;
 	float elapsedTime;
 	MoveInfo deltaMove;
 	int hp;
 	
+	Pattern* lpPattern;
+
 public:
-	GameObject() :pos({ 0,0 }), angle(0), speed(0), collider(Collider()), elapsedTime(0), hp(0) {}
+	GameObject() :pos({ 0,0 }), angle(0), speed(0), period(0), amplitude(0), collider(Collider()), elapsedTime(0), hp(0), lpPattern(nullptr) {}
 	virtual ~GameObject() {}
 
 	virtual void Init() {}
@@ -80,8 +87,8 @@ public:
 	virtual void Release() {}
 	virtual void Render(HDC hdc) {}
 
+	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	inline void SetAngle(float angle) { this->angle = angle; }
 	inline void SetElapsedTime(float elapsedTime) { this->elapsedTime = elapsedTime; }
-	inline POINTFLOAT GetPos() { return { pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y }; }
 };

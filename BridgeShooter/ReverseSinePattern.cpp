@@ -14,11 +14,11 @@ MoveInfo ReverseSinePattern::Move(float deltaTime, GameObject* lpObject)
 		moveInfo.deltaPos.x = cosf(lpObject->angle  ) * lpObject->elapsedTime * lpObject->speed;
 		moveInfo.deltaPos.y = sinf(lpObject->angle + lpObject->elapsedTime) * lpObject->elapsedTime * lpObject->speed;
 		*/
-		++count;
-		moveInfo.angle = lpObject->angle+= PI/64* elapsedTime;
-		moveInfo.deltaPos.x = cosf(lpObject->angle) * lpObject->elapsedTime * lpObject->speed;
-		moveInfo.deltaPos.y = sinf(lpObject->angle) * lpObject->elapsedTime * lpObject->speed;
-		if (count <= 5) count *= -6;
+		//++count;
+		///moveInfo.angle = lpObject->angle+= PI/64* elapsedTime;
+		//moveInfo.deltaPos.x = cosf(lpObject->angle) * lpObject->elapsedTime * lpObject->speed;
+		//moveInfo.deltaPos.y = sinf(lpObject->angle) * lpObject->elapsedTime * lpObject->speed;
+		//if (count <= 5) count *= -6;
 	}
 	return moveInfo;
 }

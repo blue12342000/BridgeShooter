@@ -161,7 +161,7 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GuidePattern.cpp" />
-    <ClCompile Include="HPgauge.cpp" />
+    <ClCompile Include="UIobject.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
@@ -219,7 +219,7 @@
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
     <ClInclude Include="GuidePattern.h" />
-    <ClInclude Include="HPgauge.h" />
+    <ClInclude Include="UIobject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="Planet04Factory.h" />

@@ -8,7 +8,8 @@
 #include "JinHwangFactory.h"
 #include "SpaceShipFactory.h"
 #include "Planet_KMS_Factory.h"
-#include "HPgauge.h"
+
+#include "UIobject.h"
 
 void SpaceShip_Red::Init()
 {
