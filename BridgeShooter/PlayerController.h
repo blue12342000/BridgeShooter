@@ -8,6 +8,9 @@ enum class INPUT_COMMAND
 	UP,
 	DOWN,
 	ATTACK,
+	DOWNGRADE,
+	UPGRADE,
+	INERTIA,
 	NONE
 };
 
@@ -29,6 +32,7 @@ private:
 	};
 
 private:
+	bool isInetia;
 	map<INPUT_COMMAND, UnitEvent> mKeyMap;
 
 private:
