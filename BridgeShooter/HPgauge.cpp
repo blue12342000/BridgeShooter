@@ -9,8 +9,8 @@ void HpGauge::Init()
 	playerMaxHp = 200;
 	bossMaxHp = 500;
 	
-	isBossAlive=true;
-	isBombUsed = false;
+	isBossAlive= true;
+	isBombUsed = true;
 	isBombLeft = true;
 	isHpLeft = true;
 	isNowMissile1 = true;
@@ -44,10 +44,7 @@ void HpGauge::Update(float deltaTime)
 	{
 		PlayerHpGaugeData(deltaTime);
 		if (isBossAlive) BossHpGaugeData(deltaTime);
-		if (isBombUsed)
-		{
-			BombCount(deltaTime);
-		}
+		BombCount(deltaTime);
 		//이미지 출력 하나 제거
 		if (isNowMissile1)
 		{
@@ -128,15 +125,19 @@ void HpGauge::HpCount(float deltaTime)
 
 void HpGauge::BombCount(float deltaTime)
 {
-	bombCount--;
-	isBombUsed = false;
-	if (bombCount < 0)
-		bombCount = 0;
+	if (isBombUsed)
+	{
+		bombCount--;
+
+		if (bombCount < 0)
+			bombCount = 0;
+		isBombUsed = false;
+	}
 }
 
 void HpGauge::IsBombUsed(float deltaTime)
 {
-	isBombUsed = true;
+	
 }
 
 
