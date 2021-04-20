@@ -8,7 +8,7 @@ void JinHwang::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("JINHWANG", 50, true);
 	speed = 420;
-	hp = 1000;
+	hp = 100;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new JinHwangFactory();

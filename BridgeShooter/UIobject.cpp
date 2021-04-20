@@ -33,13 +33,15 @@ void UIobject::Init()
 
 	lpFcukingManual = ImageManager::GetSingleton()->FindImage("Manual");
 	isBossAlive = true;
+	isplayerAlive = true;
 	isBombUsed = false;
 	isBombLeft = true;
 	isHpLeft = true;
-	isNowMissile = true;
-	isPushedManualButton = true;
-
+	isSetPlayerHp = true;
+	isSetBossHp = true;
+	playerCurrentHp = 0;
 	playerMaxHp = 0;
+	bossCurrentHp = 0;
 	bossMaxHp = 0;	
 	//hp =0;
 	hpCount = 3;
@@ -47,17 +49,21 @@ void UIobject::Init()
 	bombAmount = 3;
 	fcukingManual = 0;
 	index = 0;
+	
 
 	//lpPlayer = new SpaceShip();
-	lpPlayer = nullptr;
+	//lpPlayer = nullptr;
+	//lpPlayer->Init();
 
 	lpPlanet04 = new Planet04();
 	lpPlanet04->Init();
 
-	lpJinHwang = new Planet_SSJ();
+	lpJinHwang = new JinHwang();
 	lpJinHwang->Init();
-	lpPlanetSSJ;
-	lpPlanetKMS;
+	lpPlanetSSJ = new Planet_SSJ();;
+	lpPlanetSSJ->Init();
+	lpPlanetKMS = new Planet_KMS();
+	lpPlanetKMS->Init();
 	//lpEnemyGroup = new EnemyGroup();
 	//lpEnemyGroup->Init();
 	lpSpaceShip = new SpaceShip();
@@ -68,6 +74,12 @@ void UIobject::Init()
 
 	lpSpaceShip_Red = new SpaceShip_Red();
 	lpSpaceShip_Red->Init();
+
+	lpPlayerController = new PlayerController();
+	lpPlayerController->Init();
+
+	lpEnemyController = new JinHwangAIContoller();
+	lpEnemyController->Init();
 
 }
 
@@ -89,26 +101,34 @@ void UIobject::Release()
 
 void UIobject::Update(float deltaTime)
 {
-	if (isHpLeft)
-	{				//보스가 될 대상을 바꾸고
-		SetbossMaxHp(lpJinHwang->hp);
-					// 플레이어가될 대상을 바꾸면 값을 따와서 게이지 만듬
-		SetPlayerMaxHp(lpSpaceShip->hp);
-		isHpLeft = false;
+	if (isSetPlayerHp)
+	{
+		if (lpSpaceShip)
+		{
+			SetPlayerMaxHp(lpSpaceShip->hp);
+			SetPlayerCurrentHp(lpSpaceShip->hp);
+		}
+		isSetPlayerHp = false;
 	}
+	if (isSetBossHp)
+	{
+		if (lpJinHwang)
+		{
+			SetbossMaxHp(lpJinHwang->hp);
+			SetbossCurrentHp(lpJinHwang->hp);
+		}
+		isSetBossHp = false;
+	}
+
+	//if(isSetPlayerHp)CopyPlayerHp();
+	//if(isSetBossHp)CopyBossHp();
 	
-	PlayerUIobjectData();
-	BossUIobjectData();
-	if(lpSpaceShip)
+	if(isplayerAlive)PlayerHpBar();
+	BossHpBar();
 	if (index < 0) index = 2;
 	if (index > 2) index = 0;
-
-	
-			
 	
 		//이미지 출력 하나 제거
-		
-	
 }
 
 
@@ -154,31 +174,123 @@ void UIobject::Render(HDC hdc)
 	}
 }
 
-void UIobject::PlayerUIobjectData()
+void UIobject::CopyPlayerHp()
 {
-	playerUIobject = GetRectToCenter(playerMaxHp/2 + 50, 100, playerMaxHp, 18);
+	if (isSetPlayerHp)
+	{/*
+		if (lpPlanet04)
+		{
+ 			SetPlayerMaxHp(lpPlanet04->hp);
+			SetPlayerCurrentHp(lpPlanet04->hp);
+		}
+		 if (lpJinHwang)
+		{
+			SetPlayerMaxHp(lpJinHwang->hp);
+			SetPlayerCurrentHp(lpJinHwang->hp);
+		}
+		 if (lpPlanetSSJ)
+		{
+			SetPlayerMaxHp(lpPlanetSSJ->hp);
+			SetPlayerCurrentHp(lpPlanetSSJ->hp);
+		}
+		 if (lpPlanetKMS)
+		{
+			SetPlayerMaxHp(lpPlanetKMS->hp);
+			SetPlayerCurrentHp(lpPlanetKMS->hp);
+		}
+		 */
+		 if (lpSpaceShip == lpPlayer)
+		{
+			SetPlayerMaxHp(lpSpaceShip->hp);
+			SetPlayerCurrentHp(lpSpaceShip->hp);
+		}
+		 if (lpSpaceShip_Red == lpPlayer)
+		{
+			SetPlayerMaxHp(lpSpaceShip_Red->hp);
+			SetPlayerCurrentHp(lpSpaceShip_Red->hp);
+		}
+		 if (lpSpaceShip_Gray == lpPlayer)
+		{
+			SetPlayerMaxHp(lpSpaceShip_Gray->hp);
+			SetPlayerCurrentHp(lpSpaceShip_Gray->hp);
+		}
+		isSetPlayerHp = false;
+	}
+}
+
+void UIobject::CopyBossHp()
+{
+	if (isSetBossHp)
+	{
+		
+		if (lpPlanet04)
+		{
+			SetbossMaxHp(lpPlanet04->hp);
+			SetbossCurrentHp(lpPlanet04->hp);
+		}
+		
+		
+		if (lpJinHwang)
+		{
+			SetbossMaxHp(lpJinHwang->hp);
+			SetbossCurrentHp(lpJinHwang->hp);
+		}
+		if (lpPlanetKMS)
+		{
+			SetbossMaxHp(lpPlanetSSJ->hp);
+			SetbossCurrentHp(lpPlanetSSJ->hp);
+		}
+		if (lpPlanetSSJ)
+		{
+			SetbossMaxHp(lpPlanetKMS->hp);
+			SetbossCurrentHp(lpPlanetKMS->hp);
+		}
+		if (lpSpaceShip)
+		{
+			SetbossMaxHp(lpSpaceShip->hp);
+			SetbossCurrentHp(lpSpaceShip->hp);
+		}
+		if (lpSpaceShip_Red)
+		{
+			SetbossMaxHp(lpSpaceShip_Red->hp);
+			SetbossCurrentHp(lpSpaceShip_Red->hp);
+		}
+		if (lpSpaceShip_Gray)
+		{
+			SetbossMaxHp(lpSpaceShip_Gray->hp);
+			SetbossCurrentHp(lpSpaceShip_Gray->hp);
+		}
+		isSetBossHp = false;
+	}
+}
+
+void UIobject::PlayerHpBar()
+{
+	playerUIobject = GetRectToCenter(playerCurrentHp /2 + 50, 100, playerCurrentHp, 18);
 
 	//HP가 0되면 값 고정
-	if (playerMaxHp <= 0)
+	if (playerCurrentHp <= 0)
 	{
-		playerMaxHp = 200;
+		playerCurrentHp = playerMaxHp;
 		hpCount--;
+
 		if (hpCount < 0)
 		{
 			hpCount = 0;
-			playerMaxHp = 200;
+			playerCurrentHp = 0;
+			isplayerAlive = false;
 		}
 	}
 }
 
-void UIobject::BossUIobjectData()
+void UIobject::BossHpBar()
 {
-	bossUIobject = GetRectToCenter(bossMaxHp / 2 + 50, 50, bossMaxHp, 18);
+	bossUIobject = GetRectToCenter(bossCurrentHp / 2 + 50, 50, bossCurrentHp, 18);
 
 	//HP가 0되면 값 고정
-	if (bossMaxHp <= 0)
+	if (bossCurrentHp <= 0)
 	{
-		bossMaxHp = 500;
+		bossCurrentHp = bossMaxHp;
 		isBossAlive = false;
 	}
 }
