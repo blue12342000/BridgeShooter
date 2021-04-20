@@ -1,6 +1,7 @@
 #pragma once
 #include"GameObject.h"
 
+class HpGauge;
 class Animation;
 class Factory;
 class Pattern;
@@ -14,6 +15,7 @@ protected:
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
+	HpGauge* lphpGauge;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false){}
