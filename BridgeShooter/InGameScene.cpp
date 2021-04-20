@@ -78,7 +78,7 @@ HRESULT InGameScene::Init()
  
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
-    lpPlayerController->SetController(lpPlayer);
+    lpPlayerController->SetController(lpJinHwang);
 
      return S_OK;
 }
@@ -161,7 +161,7 @@ void InGameScene::Update(float deltaTime)
 
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
     {
-        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 10, 20, 20);
+        EffectManager::GetSingleton()->Blackhole(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 80, 20, 20);
     }
 
     CheckCollision();
@@ -196,7 +196,7 @@ void InGameScene::Render(HDC hdc)
 
     if (lpPlayerController) lpPlayerController->Render(hBackDC);
 
-    if (lpPlanet04) lpPlanet04->Render(hBackDC);
+    //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
