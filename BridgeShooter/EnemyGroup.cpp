@@ -24,7 +24,7 @@ void EnemyGroup::Init()
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
-	enemyKinds = 2; 
+	enemyKinds = 3; 
 	switch (enemyKinds)
 	{
 	case 1:
@@ -32,19 +32,21 @@ void EnemyGroup::Init()
 		lpFactory = new BasicFactory();
 		lpPattern = new ReflectPattern();
 		speed = 80.0;
+		hp = 500;
 		moveAngle = 0;
 		shootAngle = PI / 2.0f;
-		pos = { WINSIZE_WIDTH / 2,WINSIZE_HEIGHT / 2 };
+		pos = { 0-100,0-100 };
 		shootDuration = 500;
 		break;
 	case 2:
 		lpAnimation->Change("Enemy_2", 4, true);
 		lpFactory = new BasicFactory();
 		lpPattern = new BasicPattern();
-		speed = 50.0f;
+		speed = 80.0f;
+		hp = 500;
 		moveAngle =	 PI / 2.0f;
 		shootAngle = PI / 2.0f;
-		pos = { WINSIZE_WIDTH/2,WINSIZE_HEIGHT /2};
+		pos = { (float)(rand()%((WINSIZE_WIDTH-50)-50-1)+50),0.0f-100.0f};
 		shootDuration = 500;
 		break;
 	case 3:
@@ -52,6 +54,7 @@ void EnemyGroup::Init()
 		lpFactory = new BasicFactory();
 		lpPattern = new SpiralPattern();
 		speed = 80.0;
+		hp = 500;
 		moveAngle = 0;
 		shootAngle = PI / 2.0f;
 		pos = { WINSIZE_WIDTH / 2,WINSIZE_HEIGHT / 2 };
@@ -62,49 +65,39 @@ void EnemyGroup::Init()
 		lpFactory = new SineFactory();
 		lpPattern = new SinePattern();
 		speed = 1.0f;
+		hp = 500;
 		moveAngle = PI / 3.0f;
 		shootAngle = PI / 2.0f;
 		pos = { WINSIZE_WIDTH / 2,WINSIZE_HEIGHT / 2 };
 		shootDuration = 500;
 		break;
 	}
+	
 	lpFactory->Init();
 	lpFactory->SetCheckTime(shootDuration);
+	lpFactory->SetCreateLine(1);
 }
 
 void EnemyGroup::Update(float deltaTime)
 {
-	if (lpFactory)
+	if (lpFactory&& lpFactory->IsCheckTime(shootDuration))
 	{
-		//angle = shootAngle;
-		//if (lpFactory->IsCheckTime(shootDuration)) 
-		//{
-		//	Fire();
-		//}
 		
-		//lpFactory->Update(deltaTime);
-		//shootAngle = angle;
+		angle = shootAngle;
+		Fire();
+		shootAngle = angle;
 	}
 	if (lpAnimation) 
 	{
-		//lpAnimation->Update(deltaTime);
+		lpAnimation->Update(deltaTime);
 	}
-	//if (lpPattern)
-	//{
-	//	MoveInfo moveinfo;
-	//	angle = moveAngle;
-	//	moveinfo=lpPattern->Move(deltaTime, this);
-	//	angle = moveinfo.angle;
-	//	moveAngle = angle;
-	//	if ((moveinfo.deltaPos.x)|| (moveinfo.deltaPos.y))
-	//	{
-	//		pos.x += moveinfo.deltaPos.x;
-	//		pos.y += moveinfo.deltaPos.y;
-	//	}
-	//}
-	//collider.SetHitBox(pos);
-	//elapsedTime += deltaTime;
-	Unit::Update(deltaTime);
+	if (lpPattern)
+	{
+		angle = moveAngle;
+		Unit::Update(deltaTime);
+		lpPattern->Move(deltaTime, this);
+		moveAngle = angle;
+	}
 }
 
 void EnemyGroup::Render(HDC hdc)

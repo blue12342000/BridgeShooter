@@ -113,12 +113,12 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
-    /*if (lpMob1)
+    if (lpMob1)
     {
         lpMob1->Release();
         delete lpMob1;
         lpMob1 = nullptr;
-    }*/
+    }
     if (lpJinHwang)
     {
         lpJinHwang->Release();
@@ -169,6 +169,7 @@ void InGameScene::Update(float deltaTime)
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
+    if (lpMob1) lpMob1->Update(deltaTime);
 
     if (lpItem) lpItem->Update(deltaTime);
     if (lpHpGauge) lpHpGauge->Update(deltaTime);

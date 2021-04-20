@@ -23,12 +23,6 @@ void Planet_KMS::Update(float deltaTime)
 	Fire();
 
 	Unit::Update(deltaTime);
-	//lpFactory->Update(deltaTime);
-	//lpAnimation->Update(deltaTime);
-	//collider.SetHitBox(pos);
-	//elapsedTime += deltaTime;
-	//
-	//collider.SetHitBox(pos, { 0,0 }, 100, 100);
 }
 
 void Planet_KMS::Render(HDC hdc)
