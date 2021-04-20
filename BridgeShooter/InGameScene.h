@@ -1,6 +1,5 @@
 #pragma once
 #include "BridgeShooter.h"
-#include <vector>
 #include "GameScene.h"
 
 class HpGauge;
@@ -34,6 +33,7 @@ private:
 	float elapsedTime;
 	
 	Controller* lpPlayerController;
+	Controller* lpEnemyController;
 
 	float backgroundMover;
 	bool isOnlyPlayer;

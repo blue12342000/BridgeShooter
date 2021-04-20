@@ -78,4 +78,8 @@ public:
 	virtual void Update(float deltaTime) {}
 	virtual void Release() {}
 	virtual void Render(HDC hdc) {}
+
+	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
+	inline void SetAngle(float angle) { this->angle = angle; }
+	inline void SetElapsedTime(float elapsedTime) { this->elapsedTime = elapsedTime; }
 };

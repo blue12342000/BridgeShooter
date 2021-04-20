@@ -11,11 +11,11 @@ protected:
 
 public:
 
-	virtual void Init() = 0;
-	virtual void Release() = 0;
-	virtual void Update(float deltaTime) = 0;
-	virtual void Render(HDC hdc) = 0;
+	virtual void Init() {};
+	virtual void Release() {};
+	virtual void Update(float deltaTime) {};
+	virtual void Render(HDC hdc) {};
 
-	virtual void SetController(Unit* lpUnit) final { this->lpUnit = lpUnit; };
+	virtual void SetController(Unit* lpUnit) final;
 };
 
