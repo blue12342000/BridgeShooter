@@ -35,12 +35,7 @@ HRESULT SelectPlayer::Init()
 
 void SelectPlayer::Release()
 {
-	//이 부분 없어도 릴리즈 다 되는걸까
-	for (int i = 0; i < vLpPlayerImg.size(); ++i)
-	{
-		vLpPlayerImg[i] = nullptr;
-	}
-	vLpPlayerImg.clear();
+
 }
 
 void SelectPlayer::Update(float deltaTime)
