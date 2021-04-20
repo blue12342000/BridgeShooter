@@ -34,7 +34,7 @@ void KmsAIController::Update(float deltaTime)
 	{
 		if (lpUnit->hp <= 0) 
 		{
-			this->elapsedTime;
+			
 		}
 		else 
 		{

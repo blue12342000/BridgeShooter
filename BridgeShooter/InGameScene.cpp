@@ -13,7 +13,11 @@
 #include "JinHwangAIContoller.h"
 #include "SpaceShip_Red.h"
 #include "SpaceShip_Gray.h"
-#include "EnemyGroup.h"
+#include "AlienBlue.h"
+#include "AlienGreen.h"
+#include "AlienRed.h"
+#include "AlienYellow.h"
+#include "AlienAIController.h"
 #include "KmsAIController.h"
 
 HRESULT InGameScene::Init()
@@ -51,8 +55,15 @@ HRESULT InGameScene::Init()
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
-    lpMob1 = new EnemyGroup();
-    lpMob1->Init();
+    vEnemys.push_back(new AlienBlue());
+    vEnemys.push_back(new AlienGreen());
+    vEnemys.push_back(new AlienRed());
+    vEnemys.push_back(new AlienYellow());
+
+    for (int i = 0; i < vEnemys.size();i++)
+    {
+        vEnemys[i]->Init();
+    }
 
     lpItem = new Item();
     lpItem->Init();
@@ -123,11 +134,13 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
-    if (lpMob1)
+    if (!vEnemys.empty()) 
     {
-        lpMob1->Release();
-        delete lpMob1;
-        lpMob1 = nullptr;
+        for (int i = 0; i < vEnemys.size();i++)
+        {
+            vEnemys[i]->Release();
+            delete vEnemys[i];
+        }
     }
     if (lpJinHwang)
     {
@@ -180,7 +193,11 @@ void InGameScene::Update(float deltaTime)
     //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
-    if (lpMob1) lpMob1->Update(deltaTime);
+
+    for (int i =0; i <vEnemys.size(); i++)
+    {
+        vEnemys[i]->Update(deltaTime);
+    }
 
     if (lpItem) lpItem->Update(deltaTime);
     if (lpHpGauge) lpHpGauge->Update(deltaTime);
@@ -211,7 +228,10 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
-    if (lpMob1)lpMob1->Render(hBackDC);
+    for (int i = 0; i < vEnemys.size(); i++)
+    {
+        vEnemys[i]->Render(hBackDC);
+    }
 
     if (lpItem) lpItem->Render(hBackDC);
 
