@@ -1,6 +1,12 @@
 #pragma once
 #include"GameObject.h"
 
+struct Force
+{
+	float force;
+	POINT dir;
+};
+
 class Animation;
 class Factory;
 class Unit : public GameObject
@@ -9,7 +15,7 @@ protected:
 	Animation* lpAnimation;
 	Factory* lpFactory;
 	Unit* lpTarget;
-	POINT force;
+	Force force;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr) {}
@@ -21,7 +27,7 @@ public:
 	virtual void Render(HDC hdc) override;
 
 	virtual void Fire() final;
-	virtual void Translate(POINT force) final;
+	virtual void Translate(Force force) final;
 
 	virtual void SetFactory(Factory* lpFactory) final;
 

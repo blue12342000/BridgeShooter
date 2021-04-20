@@ -24,7 +24,7 @@ void EnemyGroup::Init()
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
-	enemyKinds = 1; 
+	enemyKinds = 2; 
 	switch (enemyKinds)
 	{
 	case 1:
@@ -76,34 +76,35 @@ void EnemyGroup::Update(float deltaTime)
 {
 	if (lpFactory)
 	{
-		angle = shootAngle;
-		if (lpFactory->IsCheckTime(shootDuration)) 
-		{
-			Fire();
-		}
+		//angle = shootAngle;
+		//if (lpFactory->IsCheckTime(shootDuration)) 
+		//{
+		//	Fire();
+		//}
 		
-		lpFactory->Update(deltaTime);
-		shootAngle = angle;
+		//lpFactory->Update(deltaTime);
+		//shootAngle = angle;
 	}
 	if (lpAnimation) 
 	{
-		lpAnimation->Update(deltaTime);
+		//lpAnimation->Update(deltaTime);
 	}
-	if (lpPattern)
-	{
-		MoveInfo moveinfo;
-		angle = moveAngle;
-		moveinfo=lpPattern->Move(deltaTime, this);
-		angle = moveinfo.angle;
-		moveAngle = angle;
-		if ((moveinfo.deltaPos.x)|| (moveinfo.deltaPos.y))
-		{
-			pos.x += moveinfo.deltaPos.x;
-			pos.y += moveinfo.deltaPos.y;
-		}
-	}
-	collider.SetHitBox(pos);
-	elapsedTime += deltaTime;
+	//if (lpPattern)
+	//{
+	//	MoveInfo moveinfo;
+	//	angle = moveAngle;
+	//	moveinfo=lpPattern->Move(deltaTime, this);
+	//	angle = moveinfo.angle;
+	//	moveAngle = angle;
+	//	if ((moveinfo.deltaPos.x)|| (moveinfo.deltaPos.y))
+	//	{
+	//		pos.x += moveinfo.deltaPos.x;
+	//		pos.y += moveinfo.deltaPos.y;
+	//	}
+	//}
+	//collider.SetHitBox(pos);
+	//elapsedTime += deltaTime;
+	Unit::Update(deltaTime);
 }
 
 void EnemyGroup::Render(HDC hdc)
