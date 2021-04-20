@@ -107,6 +107,25 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
     mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
+    //이하 테스트용 더미 이미지
+    mLpImageDatas.insert(make_pair("BombCount", new Image()));
+    mLpImageDatas["BombCount"]->Init("Image/UI/BombCount.bmp", 54, 57, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("HpCount", new Image()));
+    mLpImageDatas["HpCount"]->Init("Image/UI/HpCount.bmp", 54, 57, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("NowMissile_1", new Image()));
+    mLpImageDatas["NowMissile_1"]->Init("Image/UI/NowMissile_1.bmp", 122, 76, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("NowMissile_2", new Image()));
+    mLpImageDatas["NowMissile_2"]->Init("Image/UI/NowMissile_2.bmp", 116 ,76, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("NowMissile_3", new Image()));
+    mLpImageDatas["NowMissile_3"]->Init("Image/UI/NowMissile_3.bmp", 92, 57, 1, 1, 1, true);
+    
+    mLpImageDatas.insert(make_pair("Manual", new Image()));
+    mLpImageDatas["Manual"]->Init("Image/UI/Manual.bmp", 115, 109, 1, 1, 1, true);
+
 
 
     return S_OK;

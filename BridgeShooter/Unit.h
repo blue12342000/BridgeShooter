@@ -7,6 +7,7 @@ struct Force
 	POINT dir;
 };
 
+class HpGauge;
 class Animation;
 class Factory;
 class Unit : public GameObject
@@ -16,6 +17,7 @@ protected:
 	Factory* lpFactory;
 	Unit* lpTarget;
 	Force force;
+	HpGauge* lpHpGauge;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr) {}
