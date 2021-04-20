@@ -13,3 +13,13 @@ void Factory::Update(float deltaTime)
 	}
 	elapsedTime += deltaTime;
 }
+
+void Factory::ResetTimer()
+{
+	elapsedTime = 0;
+	for (auto& pair : mTimeCheck)
+	{
+		pair.second.nextTime = ((float)pair.first) / 1000.0f;
+		pair.second.isChanged = false;
+	}
+}
