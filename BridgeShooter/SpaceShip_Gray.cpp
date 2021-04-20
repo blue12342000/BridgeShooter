@@ -8,10 +8,8 @@
 #include "JinHwangFactory.h"
 #include "SpaceShipFactory.h"
 #include "Planet_KMS_Factory.h"
-<<<<<<< Updated upstream
-=======
+
 #include "UIobject.h"
->>>>>>> Stashed changes
 
 void SpaceShip_Gray::Init()
 {
@@ -27,6 +25,34 @@ void SpaceShip_Gray::Init()
 
 void SpaceShip_Gray::Update(float deltaTime)
 {
+
+	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
+	{
+		SetFactory(new BasicFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
+	{
+		SetFactory(new SineFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
+	{
+		//여기서 봄 키 입력 테스트 해보고 싶다.
+		//lphpGauge->IsBombUsed(deltaTime);
+		//SetFactory(new RainFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
+	{
+		SetFactory(new Planet_KMS_Factory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
+	{
+		SetFactory(new SSJFactory());
+	}
+	if (KeyManager::GetSingleton()->IsKeyDownOne('6'))
+	{
+		SetFactory(new JinHwangFactory());
+	}
+
 	Unit::Update(deltaTime);
 }
 

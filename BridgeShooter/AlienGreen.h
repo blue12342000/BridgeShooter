@@ -1,14 +1,12 @@
 #pragma once
 #include "Unit.h"
-class Pattern;
-class EnemyGroup :public Unit
+class AlienGreen :public Unit
 {
 private:
-	Pattern *lpPattern;
+	Pattern* lpPattern;
 private:
 	float moveAngle;
 	float shootAngle;
-	int	  enemyKinds;
 	int	  shootDuration;
 public:
 	virtual void Init() override;

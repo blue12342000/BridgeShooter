@@ -189,9 +189,6 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyGroup.cpp">
-      <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
@@ -219,7 +216,27 @@
     <ClCompile Include="CircleMovePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="AlienBlue.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienYellow.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienGreen.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienRed.cpp">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienAIController.cpp">
+    </ClCompile>
     <ClCompile Include="Planet04AIController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SSJAIController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="KmsAIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,9 +379,6 @@
     <ClInclude Include="EffectManager.h">
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyGroup.h">
-      <Filter>소스 파일\Bridge\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="SpaceShipFactory.h">
       <Filter>소스 파일\Bridge\Factory</Filter>
     </ClInclude>
@@ -398,7 +412,27 @@
     <ClInclude Include="CircleMovePattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="AlienBlue.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienYellow.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienGreen.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienRed.h">
+      <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienAIController.h">
+    </ClInclude>
     <ClInclude Include="Planet04AIController.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SSJAIController.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="KmsAIController.h">
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
   </ItemGroup>

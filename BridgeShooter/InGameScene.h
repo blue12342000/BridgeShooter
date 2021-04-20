@@ -10,18 +10,32 @@ class Controller;
 class InGameScene : public GameScene
 {
 private:
+	enum class STAGE_STATE
+	{
+		LOADING,
+		STAGE1,
+		STAGE2,
+		STAGE3,
+		STAGE4,
+		NONE
+	};
+
+private:
 	vector<Unit*> vEnemys;
 	vector<Item*> vItems;
+
 	Unit* lpPlayer;
 	Unit* lpPlanet04;
 	Unit* lpPlanetSSJ;
 	Unit* lpPlanetKMS;
-	Unit* lpMob1;
 
 	Unit* lpJinHwang;
 
 	Item* lpItem;
 
+	Controller* lpPlayerController;
+	Controller* lpEnemyController;
+	vector<Controller*> vLpMobController;
 
 	Image* lpBackBuffer;
 	Image* lpBackImage;
@@ -29,18 +43,8 @@ private:
 
 	UIobject* lpUIobject;
 
-	int frame;
 	float elapsedTime;
-	
-	Controller* lpPlayerController;
-	Controller* lpEnemyController;
-
 	float backgroundMover;
-	bool isOnlyPlayer;
-	bool isEnemyHitPlayer;
-	bool isPlayerHitEnemy;
-	bool isPlayerHitItem;
-	bool isItemAlive;
 
 public:
 	virtual HRESULT Init();

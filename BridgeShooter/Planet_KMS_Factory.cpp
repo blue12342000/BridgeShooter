@@ -12,11 +12,11 @@ void Planet_KMS_Factory::Init()
 	vLpPatterns[CREATE_PATTERN::KFCP_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::KFCP_BOOMERANG] = new BoomerangPattern();
 
-	createLine = 1;
+	createLine = 0;
 	maxCreateLIne = 3;
 	SetCheckTime(1001);
 	SetCheckTime(2000);
-	SetCheckTime(3000);
+	SetCheckTime(1500);
 	SetCheckTime(2);
 }	
 
@@ -33,7 +33,7 @@ void Planet_KMS_Factory::Release()
 
 void Planet_KMS_Factory::Fire(Unit* lpUnit)
 {
-	if (createLine == 1)
+	if (createLine == 0)
 	{
 		
 		if(IsCheckTime(1001))srand(time(NULL));
@@ -48,9 +48,9 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 			}
 		}
 	}
-	else if (createLine == 2)
+	else if (createLine == 1)
 	{
-		if (IsCheckTime(2000)) 
+		if (IsCheckTime(500)) 
 		{
 			for (int i = 0; i < 16; i++)// 호밍같은 부메랑 같은 미사일
 			{
@@ -61,7 +61,7 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 			}
 		}
 	}
-	else if (createLine == 3)
+	else if (createLine == 2)
 	{
 		if (IsCheckTime(2000))
 		{
@@ -73,7 +73,7 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
-		if (IsCheckTime(3000))
+		if (IsCheckTime(1500))
 		{
 			for (int i = 0; i < 20; i++)// 미사일 왼쪽에서
 			{
