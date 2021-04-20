@@ -31,7 +31,7 @@ void Unit::Update(float deltaTime)
 		}
 	}
 
-	collider.SetHitBox(pos);
+	collider.SetHitBox(pos, deltaMove.deltaPos);
 	if (lpFactory) lpFactory->Update(deltaTime);
 	if (lpAnimation) lpAnimation->Update(deltaTime);
 

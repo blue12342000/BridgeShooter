@@ -68,6 +68,7 @@ public:
 	float speed;
 	Collider collider;
 	float elapsedTime;
+	MoveInfo deltaMove;
 	int hp;
 	
 public:

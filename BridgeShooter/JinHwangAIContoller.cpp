@@ -25,15 +25,6 @@ void JinHwangAIContoller::Release()
 
 void JinHwangAIContoller::Update(float deltaTime)
 {
-	//if (state != UNIT_STATE::MOVE
-	//	&& state != UNIT_STATE::RETURN
-	//	&& state != UNIT_STATE::UPGRADE)
-	//{
-	//	// 컨트롤러의 패턴 주기와 유닛의 시간 동기화
-	//	elapsedTime += deltaTime;
-	//	lpUnit->SetElapsedTime(elapsedTime);
-	//}
-
 	if (lpUnit)
 	{
 		switch (state)
@@ -79,13 +70,20 @@ void JinHwangAIContoller::Update(float deltaTime)
 			}
 			else
 			{
-				elapsedTime = 0;
-				lpUnit->SetElapsedTime(elapsedTime);
-				state = UNIT_STATE::ATTACK;
+				if (rand() % 10 < 3)
+				{
+					state = UNIT_STATE::RETURN;
+				}
+				else
+				{
+					elapsedTime = 0;
+					lpUnit->SetElapsedTime(elapsedTime);
+					state = UNIT_STATE::ATTACK;
+				}
 			}
 			break;
 		case UNIT_STATE::MOVE_PATTERN:
-			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			if (elapsedTime > 3)
 			{
 				elapsedTime = 0;
@@ -94,7 +92,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			}
 			break;
 		case UNIT_STATE::PATTERN_ATTACK:
-			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			if (elapsedTime < 10)
 			{
 				lpUnit->Fire();
