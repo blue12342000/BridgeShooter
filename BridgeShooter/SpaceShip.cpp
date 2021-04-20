@@ -8,17 +8,17 @@
 #include "SSJFactory.h"
 #include "JinHwangFactory.h"
 #include "SpaceShipFactory.h"
-#include "HPgauge.h"
+#include "UIobject.h"
 
 void SpaceShip::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
 	speed = 200;
-	hp = 200;
+	hp = 50;
 	elapsedTime = 0;
 	angle = -PI / 2;
-	power = 0;
+	power = 1;
 	SetFactory(new SpaceShipFactory());
 	collider.SetHitBox(pos, { 0,0 }, 20, 20);
 }
@@ -62,6 +62,7 @@ void SpaceShip::Update(float deltaTime)
 	{
 		SetFactory(new JinHwangFactory());
 	}
+
 
 	Unit::Update(deltaTime);
 }

@@ -2,7 +2,7 @@
 #include "BridgeShooter.h"
 #include "GameScene.h"
 
-class HpGauge;
+class UIobject;
 class Unit;
 class Item;
 class Image;
@@ -27,7 +27,7 @@ private:
 	Image* lpBackImage;
 	Image* lpBackImage2;	
 
-	HpGauge* lpHpGauge;
+	UIobject* lpUIobject;
 
 	int frame;
 	float elapsedTime;
