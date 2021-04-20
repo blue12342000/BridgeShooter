@@ -78,7 +78,7 @@ HRESULT InGameScene::Init()
  
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
-    lpPlayerController->SetController(lpMob1);
+    lpPlayerController->SetController(lpPlayer);
 
      return S_OK;
 }

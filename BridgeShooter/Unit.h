@@ -1,24 +1,22 @@
 #pragma once
 #include"GameObject.h"
 
-struct Force
-{
-	float force;
-	POINT dir;
-};
-
 class Animation;
 class Factory;
+class Pattern;
 class Unit : public GameObject
 {
 protected:
 	Animation* lpAnimation;
 	Factory* lpFactory;
+	Pattern* lpPattern;
 	Unit* lpTarget;
-	Force force;
+	POINTFLOAT force;
+	int factoryLine;
+	bool isInertia;
 
 public:
-	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr) {}
+	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false){}
 	virtual ~Unit() {}
 
 	virtual void Init() override;
@@ -27,12 +25,16 @@ public:
 	virtual void Render(HDC hdc) override;
 
 	virtual void Fire() final;
-	virtual void Translate(Force force) final;
+	virtual void Translate(POINTFLOAT force) final;
+	virtual void ChangeFactoryLine(int delta) final;
+	virtual void ToggleInertia() final { isInertia = !isInertia; }
 
 	virtual void SetFactory(Factory* lpFactory) final;
+	virtual void SetFactoryLine(int factoryLine) final;
 
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	inline void SetAngle(float angle) { this->angle = angle; }
+	inline void SetInetia(bool isInertia) { this->isInertia = isInertia; }
 };
 

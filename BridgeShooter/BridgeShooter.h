@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include <ctime>
+#include <float.h>
 
 using namespace std;
 
