@@ -174,7 +174,7 @@
     <ClCompile Include="UI.cpp">
       <Filter>소스 파일\Bridge\UI</Filter>
     </ClCompile>
-    <ClCompile Include="HPgauge.cpp">
+    <ClCompile Include="UIobject.cpp">
       <Filter>소스 파일\Bridge\UI</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
@@ -361,7 +361,7 @@
     <ClInclude Include="UI.h">
       <Filter>소스 파일\Bridge\UI</Filter>
     </ClInclude>
-    <ClInclude Include="HPgauge.h">
+    <ClInclude Include="UIobject.h">
       <Filter>소스 파일\Bridge\UI</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
