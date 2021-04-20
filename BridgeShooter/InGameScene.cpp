@@ -174,10 +174,32 @@ void InGameScene::Update(float deltaTime)
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
 
+    
+    if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
+    {
+        lpHpGauge->SetBombAmount(lpHpGauge->GetBombAmount() - 1);
+    }
+    /*
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
+    {
+        //이전 이미지로
+        lpHpGauge->SetNowMissile(lpHpGauge->GetNowMissile() - 1);
+        if (lpHpGauge->index < 0)
+            lpHpGauge->SetNowMissile(lpHpGauge->index = 2);
+    }
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_6))
+    {
+        //다음 이미지로
+        lpHpGauge->SetNowMissile(lpHpGauge->GetNowMissile() + 1);
+        if (lpHpGauge->index > 2)
+            lpHpGauge->SetNowMissile(lpHpGauge->index = 0);
+    }
+    */
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
+   
 }
 
 void InGameScene::Render(HDC hdc)

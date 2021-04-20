@@ -20,10 +20,6 @@ void Planet04::Update(float deltaTime)
 	Fire();
 
 	Unit::Update(deltaTime);
-  //lpFactory->Update(deltaTime);
-  //lpAnimation->Update(deltaTime);
-  //collider.SetHitBox(pos);	//업데이트에서 수치
-  //elapsedTime += deltaTime;
 }
 
 void Planet04::Render(HDC hdc)

@@ -15,7 +15,7 @@ protected:
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
-	HpGauge* lphpGauge;
+	HpGauge* lpHpGauge;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false){}
@@ -31,10 +31,14 @@ public:
 	virtual void ChangeFactoryLine(int delta) final;
 	virtual void ToggleInertia() final { isInertia = !isInertia; }
 
+	virtual void ResetTimer() final;
+
 	virtual void SetFactory(Factory* lpFactory) final;
 	virtual void SetFactoryLine(int factoryLine) final;
 
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline void SetInetia(bool isInertia) { this->isInertia = isInertia; }
+	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
+
 };
 

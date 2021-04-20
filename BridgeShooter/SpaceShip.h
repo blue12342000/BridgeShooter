@@ -1,13 +1,13 @@
 #pragma once
 #include "Unit.h"
 
+class HpGauge;
 class SpaceShip : public Unit
 {
 private:
 	float fireTimer;
 	int power;
-
-	bool isBombUsed;
+	HpGauge* lpHpGauge;
 
 public:
 	virtual void Init() override;

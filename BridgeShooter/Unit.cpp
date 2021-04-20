@@ -15,26 +15,32 @@ void Unit::Init()
 
 void Unit::Update(float deltaTime)
 {
-	if (force.x > FLT_EPSILON || force.x < -FLT_EPSILON
-		|| force.y > FLT_EPSILON || force.y < -FLT_EPSILON)
+	if (!lpPattern)
 	{
-		float dir = atan2(force.y, force.x);
-		if (isInertia)
+		if (force.x > FLT_EPSILON || force.x < -FLT_EPSILON
+			|| force.y > FLT_EPSILON || force.y < -FLT_EPSILON)
 		{
-			pos.x += cos(dir) * speed * abs(force.x) / 10 * deltaTime;
-			pos.y += sin(dir) * speed * abs(force.y) / 10 * deltaTime;
+			float dir = atan2(force.y, force.x);
+			if (isInertia)
+			{
+				pos.x += cos(dir) * speed * abs(force.x) / 10 * deltaTime;
+				pos.y += sin(dir) * speed * abs(force.y) / 10 * deltaTime;
+			}
+			else
+			{
+				pos.x += cos(dir) * speed * deltaTime;
+				pos.y += sin(dir) * speed * deltaTime;
+			}
 		}
-		else
-		{
-			pos.x += cos(dir) * speed * deltaTime;
-			pos.y += sin(dir) * speed * deltaTime;
-		}
+	}
+	else
+	{
+		deltaMove = lpPattern->Move(deltaTime, this);
 	}
 
 	collider.SetHitBox(pos, deltaMove.deltaPos);
 	if (lpFactory) lpFactory->Update(deltaTime);
 	if (lpAnimation) lpAnimation->Update(deltaTime);
-
 	if (isInertia)
 	{
 		if (force.x > FLT_EPSILON)
@@ -81,7 +87,7 @@ void Unit::Release()
 
 void Unit::Render(HDC hdc)
 {
-	if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y);
+	if (lpAnimation) lpAnimation->Render(hdc, pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y);
 	if (isDebugMode)
 	{
 		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);
@@ -109,6 +115,12 @@ void Unit::Translate(POINTFLOAT force)
 void Unit::ChangeFactoryLine(int delta)
 {
 	SetFactoryLine(factoryLine + delta);
+}
+
+void Unit::ResetTimer()
+{
+	elapsedTime = 0;
+	if (lpFactory) lpFactory->ResetTimer();
 }
 
 void Unit::SetFactory(Factory* lpFactory)
