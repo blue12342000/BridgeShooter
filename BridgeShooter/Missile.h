@@ -7,11 +7,8 @@ class Image;
 class Missile : public GameObject
 {
 private:
-	bool isActive;
 	Pattern* lpPattern;
-	Image* lpImage;
 	Animation* lpAnimation;
-	
 
 public:
 	float delayTime;

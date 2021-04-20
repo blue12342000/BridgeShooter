@@ -5,7 +5,6 @@
 void Missile::Init()
 {
 	lpAnimation = new Animation();
-	isActive = false;
 	elapsedTime = 0;
 
 }

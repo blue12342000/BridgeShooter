@@ -49,8 +49,8 @@ HRESULT InGameScene::Init()
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
-    //lpMob1 = new EnemyGroup();
-    //lpMob1->Init();
+    lpMob1 = new EnemyGroup();
+    lpMob1->Init();
 
     lpItem = new Item();
     lpItem->Init();
@@ -155,10 +155,9 @@ void InGameScene::Update(float deltaTime)
         isOnlyPlayer = !isOnlyPlayer;
     }
 
-
     if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
     {
-        EffectManager::GetSingleton()->Blackhole(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("JINHWANG"), 0, 80, 20, 20);
+        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("Enemy_2"), 0, 80, 5, 5);
     }
 
     CheckCollision();
