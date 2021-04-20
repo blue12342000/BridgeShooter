@@ -63,10 +63,11 @@ HRESULT InGameScene::Init()
     vEnemys.push_back(new AlienGreen());
     vEnemys.push_back(new AlienRed());
     vEnemys.push_back(new AlienYellow());
-
-    for (int i = 0; i < vEnemys.size();i++)
+    for (int i = 0; i < vEnemys.size(); i++)
     {
-        vEnemys[i]->Init();
+        vLpMobController.push_back(new AlienAIController);
+        vLpMobController[i]->SetController(vEnemys[i]);
+        vLpMobController[i]->Init();
     }
 
     lpItem = new Item();
@@ -138,14 +139,27 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
+   
     if (!vEnemys.empty())
     {
-        for (int i = 0; i < vEnemys.size(); i++)
+
+        for (vector<Unit*>::iterator i = vEnemys.begin();i != vEnemys.end() ;)
         {
-            vEnemys[i]->Release();
-            delete vEnemys[i];
+            (*i)->Release();
+            i=vEnemys.erase(i);
+        }
+
+    }
+    if (!vLpMobController.empty()) 
+    {
+        for (vector<Controller*>::iterator i = vLpMobController.begin(); i != vLpMobController.end();)
+        {
+            (*i)->Release();
+            i = vLpMobController.erase(i);
         }
     }
+   
+   
     if (lpJinHwang)
     {
         lpJinHwang->Release();
@@ -188,10 +202,11 @@ void InGameScene::Update(float deltaTime)
     //if (lpJinHwang) lpJinHwang->Update(deltaTime);
     //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
 
-    for (int i =0; i <vEnemys.size(); i++)
+    for (int i = 0; i < vLpMobController.size();i++)
     {
-        vEnemys[i]->Update(deltaTime);
+        vLpMobController[i]->Update(deltaTime);
     }
+   
 
     if (lpItem) lpItem->Update(deltaTime);
     if (lpHpGauge) lpHpGauge->Update(deltaTime);
@@ -246,7 +261,7 @@ void InGameScene::Render(HDC hdc)
     if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
     for (int i = 0; i < vEnemys.size(); i++)
     {
-        vEnemys[i]->Render(hBackDC);
+        vLpMobController[i]->Render(hBackDC);
     }
 
     if (lpItem) lpItem->Render(hBackDC);

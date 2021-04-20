@@ -77,6 +77,7 @@ void AlienBlue::Release()
 	if (lpPattern)
 	{
 		delete lpPattern;
+		lpPattern = nullptr;
 	}
 }
 

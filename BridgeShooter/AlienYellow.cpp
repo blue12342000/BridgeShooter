@@ -76,6 +76,7 @@ void AlienYellow::Release()
 	if (lpPattern)
 	{
 		delete lpPattern;
+		lpPattern = nullptr;
 	}
 }
 
