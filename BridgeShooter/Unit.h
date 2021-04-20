@@ -15,7 +15,7 @@ protected:
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
-	HpGauge* lphpGauge;
+	HpGauge* lpHpGauge;
 
 public:
 	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false){}

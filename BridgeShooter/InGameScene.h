@@ -24,7 +24,7 @@ private:
 
 
 	Image* lpBackBuffer;
-	Image* lpBackImage;	
+	Image* lpBackImage;
 	Image* lpBackImage2;	
 
 	HpGauge* lpHpGauge;

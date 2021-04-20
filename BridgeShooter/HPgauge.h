@@ -2,6 +2,7 @@
 #include "UI.h"
 #include "BridgeShooter.h"
 
+class Bomb;
 class Image;
 class HpGauge : public UI
 {
@@ -15,9 +16,9 @@ private:
 	float bossMaxHp;
 
 	Image* lpImage;
-
 	Image* lpHpCount[3];
 	Image* lpBombCount[3];
+	Image* lpMissile[3];
 	Image* lpNowMissile;
 	Image* lpFcukingManual;
 
@@ -30,11 +31,12 @@ private:
 
 	int hp;
 	int hpCount;
-	int bombCount;
-	int nowMissile;
+	int bomb;
+	int bombAmount;
 	int fcukingManual;
 
 public:
+	int index;
 
 	virtual void Init() override;
 	virtual void Release() override;
@@ -47,11 +49,11 @@ public:
 	void BossHpGaugeData(float deltaTime);
 
 	void HpCount(float deltaTime);
-	void BombCount(float deltaTime);
+	void BombCount( );
 	void NowMissile(float deltaTime);
 	void FcukingManual(float deltaTime);
-	void IsBombUsed(float deltaTime);
-
+	void IsBombUsed();
+	void IndexControl();
 
 
 	void SetPlayerHpGauge(RECT playerHpGauge) { this->playerHpGauge = playerHpGauge; }
@@ -59,12 +61,18 @@ public:
 
 	void SetPlayerMaxHp(int playerMaxHp) { this->playerMaxHp = playerMaxHp; }
 	void SetbossMaxHp(int enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
+	void SetBombAmount(int bombAmount) { this->bombAmount = bombAmount; }
+	void SetNowMissile(int index) { this->index = index; }
+	
 	//void SetPos(POINTFLOAT pos) { this->pos = pos; }
 
 	//inline POINTFLOAT GetPos() { return this->pos; }
 
 	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
 	inline float GetbossMaxHp() { return this->bossMaxHp; }
+	inline float GetBombAmount() { return this->bombAmount; }
+	inline float GetNowMissile(){ return this->index; }
+
 	inline RECT GetPlayerHpGauge() { return this->playerHpGauge; }
 	inline RECT GetbossHpGauge() { return this->bossHpGauge; }
 

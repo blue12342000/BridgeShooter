@@ -19,7 +19,6 @@ void SpaceShip::Init()
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 0;
-	isBombUsed = false;
 	SetFactory(new SpaceShipFactory());
 	collider.SetHitBox(pos, { 0,0 }, 30, 30);
 }
@@ -36,9 +35,7 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-		//여기서 봄 키 입력 테스트 해보고 싶다.
-		lphpGauge->BombCount(deltaTime);
-		//SetFactory(new RainFactory());
+		SetFactory(new RainFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
 	{
