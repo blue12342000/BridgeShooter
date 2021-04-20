@@ -59,7 +59,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 36; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle - 2 * PI / 36 * i, 200, 14);
+				lpMissile->SetMissile("MISSILE_07", lpUnit->pos, lpUnit->angle - 2 * PI / 36 * i, 200, 14);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
@@ -72,7 +72,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 8; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle - 2 * PI / 8 * i, 300, 14);
+				lpMissile->SetMissile("MISSILE_08", lpUnit->pos, lpUnit->angle - 2 * PI / 8 * i, 300, 14);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
@@ -82,7 +82,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 8; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle - 2 * PI / 8 * i, 300, 14);
+				lpMissile->SetMissile("MISSILE_08", lpUnit->pos, lpUnit->angle - 2 * PI / 8 * i, 300, 14);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL]);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
@@ -147,7 +147,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 		if(IsCheckTime(200))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle - 2 * PI / 5 * 4, 500, 14);
+			lpMissile->SetMissile("MISSILE_10", lpUnit->pos, lpUnit->angle - 2 * PI / 5 * 4, 500, 14);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REFLECT]);
 			lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
@@ -156,7 +156,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 		else if (IsCheckTime(300))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle - 2 * PI / 5 * 1, 500, 14);
+			lpMissile->SetMissile("MISSILE_10", lpUnit->pos, lpUnit->angle - 2 * PI / 5 * 1, 500, 14);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REFLECT]);
 			lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
