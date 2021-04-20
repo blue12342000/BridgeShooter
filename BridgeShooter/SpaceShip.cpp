@@ -52,16 +52,6 @@ void SpaceShip::Update(float deltaTime)
 	{
 		SetFactory(new JinHwangFactory());
 	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
-	{
-		if (lpFactory) lpFactory->SetCreateLine(--power);
-		if (power < 0) power = 0;
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_6))
-	{
-		if (lpFactory) lpFactory->SetCreateLine(++power);
-		if (power < 0) power = 0;
-	}
 
 	Unit::Update(deltaTime);
 }
