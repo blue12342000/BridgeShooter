@@ -25,7 +25,7 @@ HRESULT InGameScene::Init()
         lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     case (int)DataManager::CHARACTER_CODE::RED:
-        lpPlayer = new SpaceShip();
+        lpPlayer = new SpaceShip_Red();
         lpPlayer->Init();
         lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;

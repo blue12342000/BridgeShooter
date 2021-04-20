@@ -4,8 +4,8 @@
 HRESULT SelectPlayer::Init()
 {
 	lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
-
 	lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
+	lpSelctInfo = ImageManager::GetSingleton()->FindImage("SELECT_INFO");
 
 	vLpPlayerImg.resize((int)DataManager::CHARACTER_CODE::NONE);
 	for (int i = 0; i < (int)DataManager::CHARACTER_CODE::NONE; ++i)
@@ -25,7 +25,7 @@ HRESULT SelectPlayer::Init()
 		
 	}
 
-	selectBox = { 50, 500, 150, 600 };
+	selectBox = { 30, 400, 180, 600 };
 	selectIndex = 0;
 	maxIndex = vLpPlayerImg.size()-1;
 	hasSelected = false;
@@ -46,10 +46,10 @@ void SelectPlayer::Update(float deltaTime)
 		{
 			selectBox.left -= 200;
 			selectBox.right -= 200;
-			if (selectBox.left <= 50)
+			if (selectBox.left <= 30)
 			{
-				selectBox.left = 50;
-				selectBox.right = 150;
+				selectBox.left = 30;
+				selectBox.right = 180;
 			}
 			selectIndex--;
 			if (selectIndex <= 0) selectIndex = 0;
@@ -59,10 +59,10 @@ void SelectPlayer::Update(float deltaTime)
 		{
 			selectBox.left += 200;
 			selectBox.right += 200;
-			if (selectBox.left >= 450)
+			if (selectBox.left >= 430)
 			{
-				selectBox.left = 450;
-				selectBox.right = 550;
+				selectBox.left = 430;
+				selectBox.right = 580;
 			}
 			selectIndex++;
 			if (selectIndex >= maxIndex) selectIndex = maxIndex;
@@ -100,12 +100,29 @@ void SelectPlayer::Render(HDC hdc)
 {
 	HDC hBackDC = lpBackBuffer->GetMemDC();
 	lpBackImage->Render(hBackDC);
+	lpSelctInfo->Render(hBackDC);
+
+	HPEN hPen;
+	HPEN hOldPen;
+	HBRUSH hBr = (HBRUSH)GetStockObject(NULL_BRUSH);
+	HBRUSH hOldBr = (HBRUSH)SelectObject(hBackDC, hBr);
+	hPen = CreatePen(PS_SOLID, 3, RGB(29, 247, 255));
+	hOldPen = (HPEN)::SelectObject(hBackDC, (HGDIOBJ)hPen);
+
+	Rectangle(hBackDC, selectBox.left, selectBox.top, selectBox.right, selectBox.bottom);
+
+	hPen = (HPEN)::SelectObject(hBackDC, hOldPen);
+	hBr = (HBRUSH)SelectObject(hBackDC, hOldBr);
+	DeleteObject(hPen);
+	DeleteObject(hBr);
+
 
 	for (int i = 0; i < vLpPlayerImg.size(); ++i)
 	{
-		vLpPlayerImg[i]->Render(hBackDC, 50 + i * 200, 500);
+		vLpPlayerImg[i]->Render(hBackDC, 10 + i * 200, 400);
 	}
-	Rectangle(hBackDC, selectBox.left, selectBox.top, selectBox.right, selectBox.bottom);
+
+
 
 	lpBackBuffer->Render(hdc);
 }

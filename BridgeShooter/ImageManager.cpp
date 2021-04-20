@@ -88,13 +88,13 @@ HRESULT ImageManager::Init()
     mLpImageDatas["EFFECT_01"]->Init("Image/Effect/Effect_01.bmp", 108, 36, 3, 1, 3, true);
     
     mLpImageDatas.insert(make_pair("SELECT_YELLOW", new Image()));
-    mLpImageDatas["SELECT_YELLOW"]->Init("Image/UI/Select_Yellow.bmp", 125, 171, false);
+    mLpImageDatas["SELECT_YELLOW"]->Init("Image/UI/Select_Yellow.bmp", 200, 200, true);
 
     mLpImageDatas.insert(make_pair("SELECT_RED", new Image()));
-    mLpImageDatas["SELECT_RED"]->Init("Image/UI/Select_Red.bmp", 145, 166, false);
+    mLpImageDatas["SELECT_RED"]->Init("Image/UI/Select_Red.bmp", 200, 200, true);
 
     mLpImageDatas.insert(make_pair("SELECT_GRAY", new Image()));
-    mLpImageDatas["SELECT_GRAY"]->Init("Image/UI/Select_Gray.bmp", 131, 161, false);
+    mLpImageDatas["SELECT_GRAY"]->Init("Image/UI/Select_Gray.bmp", 200, 200, true);
 
     mLpImageDatas.insert(make_pair("Enemy_1", new Image()));
     mLpImageDatas["Enemy_1"]->Init("Image/Unit/Mob/mob1_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
@@ -110,6 +110,15 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("MOVING_CAT", new Image()));
     mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1004/2, 251/2, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("SPACESHIP_RED", new Image()));
+    mLpImageDatas["SPACESHIP_RED"]->Init("Image/Unit/SpaceShip/SpaceShip_Red.bmp", 507/2, 218/2, 3, 1, 3, true, RGB(255,5,255));
+
+    mLpImageDatas.insert(make_pair("SPACESHIP_GRAY", new Image()));
+    mLpImageDatas["SPACESHIP_GRAY"]->Init("Image/Unit/SpaceShip/SpaceShip_Gray.bmp", 512/2, 217/2, 4, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("SELECT_INFO", new Image()));
+    mLpImageDatas["SELECT_INFO"]->Init("Image/UI/SelectInfo.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, 1, 1, 1, true);
 
     return S_OK;
 }
