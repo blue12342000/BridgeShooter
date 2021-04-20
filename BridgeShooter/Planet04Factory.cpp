@@ -6,7 +6,7 @@
 #include "SpiralPattern.h"
 #include "Missile.h"
 #include "Unit.h"
-#include "Factory.h"
+//#include "Factory.h"
 
 void Planet04Factory::Init()
 {
@@ -18,8 +18,9 @@ void Planet04Factory::Init()
 	
 	createLine = 0;
 	maxCreateLIne = 3;
-	bossCount = 0;
 
+
+	// 1ch 1000
 	SetCheckTime(30);
 	SetCheckTime(50);
 
@@ -39,49 +40,28 @@ void Planet04Factory::Release()
 
 void Planet04Factory::Fire(Unit* lpUnit)
 {
-	//델타 타임으로 변경 예정
-
-	bossCount++;
-	if (bossCount >= 10000) createLine = 1;
-	if (bossCount >= 12500) createLine = 2;
-	//1페이즈
+	//체력에 맞게 조절이 필요
+	
 	if (createLine == 0)
 	{
-		if (IsCheckTime(30) && GetTimeMod(100) < 10000)
+		if (IsCheckTime(30) && GetTimeMod(100) < 1000)
+
+		for (int i = 0; i < 4; ++i)	//한번에 여러개 나가게 하기
 		{
-			for (int i = -1; i < 2; ++i)	//한번에 여러개 나가게 하기
-			{
-				count -= 2;
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->pos = lpUnit->pos;
-				lpMissile->angle = lpUnit->angle - (PI / 16*i)-(count+bossCount);
-				lpMissile->speed = 200;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
-				if (count % 400 <= 200)
-				{
-					count = 0;
-				}
-			}
-		
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->SetMissile("MISSILE_03", lpUnit->pos, lpUnit->angle -= lpUnit->elapsedTime * (PI / 64 * i), 500, 20);
+			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
+			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
 	}
-
+	
 	//2페이즈
 	if (createLine == 1)
 	{
 		++count;
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = lpUnit->pos;
 		lpMissile->angle = PI / 2;
-		lpMissile->angle = lpUnit->angle += PI * count / 16;
-		lpMissile->speed = 150;
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-		lpMissile->deltaMove.deltaPos = { 0,  0 };
+		lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle += PI * count / 16 , 150, 20);
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		if (count >= 9) count *= -1;
@@ -89,12 +69,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 		if (IsCheckTime(30) && GetTimeMod(10000) < 5000)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->pos = lpUnit->pos;
-			lpMissile->angle = lpUnit->angle - PI / 32;
-			lpMissile->speed = 200;
-			lpMissile->elapsedTime = 0;
-			lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-			lpMissile->deltaMove.deltaPos = { 0,  0 };
+			lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle += - PI / 32, 200, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
@@ -106,13 +81,8 @@ void Planet04Factory::Fire(Unit* lpUnit)
 	{
 		++count;
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->pos = lpUnit->pos;
 		lpMissile->angle = PI / 2;
-		lpMissile->angle = lpUnit->angle += PI * count / 16;
-		lpMissile->speed = 150 + (8*count);
-		lpMissile->elapsedTime = 0;
-		lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_01");
-		lpMissile->deltaMove.deltaPos = { 0,  0 };
+		lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle += PI * count / 16, 150 + (8 * count), 20);
 		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		if (count >= 9) count *= -1;
@@ -123,12 +93,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 			for (int i = -1; i < 2; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->pos = lpUnit->pos;
-				lpMissile->angle = lpUnit->angle - PI / 64 * i;
-				lpMissile->speed = 200;
-				lpMissile->elapsedTime = 0;
-				lpMissile->lpImage = ImageManager::GetSingleton()->FindImage("MISSILE_02");
-				lpMissile->deltaMove.deltaPos = { 0,  0 };
+				lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle - PI / 64 * i, 200, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}

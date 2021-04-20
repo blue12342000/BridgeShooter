@@ -6,8 +6,9 @@ void Planet04::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet04", 50, true);
-	speed = 0.0f;
-	elapsedTime = 0.0f;
+	speed = 20;
+	hp = 500;
+	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new Planet04Factory();
 	lpFactory->Init();
@@ -18,10 +19,11 @@ void Planet04::Update(float deltaTime)
 {
 	Fire();
 
-	lpFactory->Update(deltaTime);
-	lpAnimation->Update(deltaTime);
-	collider.SetHitBox(pos);	//업데이트에서 수치
-	elapsedTime += deltaTime;
+	Unit::Update(deltaTime);
+  //lpFactory->Update(deltaTime);
+  //lpAnimation->Update(deltaTime);
+  //collider.SetHitBox(pos);	//업데이트에서 수치
+  //elapsedTime += deltaTime;
 }
 
 void Planet04::Render(HDC hdc)

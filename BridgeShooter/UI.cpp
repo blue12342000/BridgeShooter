@@ -6,12 +6,10 @@
 
 void UI::Init()
 {
-	elapsedTime = 0;
 	lpAnimation = nullptr;
 }
 void UI::Update(float deltaTime)
 {
-	elapsedTime += deltaTime;
 }
 void UI::Release()
 {
@@ -22,5 +20,5 @@ void UI::Release()
 }
 void UI::Render(HDC hdc)
 {
-	if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y);
+	//if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y);
 }

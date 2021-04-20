@@ -5,8 +5,8 @@
 HRESULT Title::Init()
 {
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
-    lpTitle = ImageManager::GetSingleton()->FindImage("TITLE");
     lpPressKey = ImageManager::GetSingleton()->FindImage("TITLE_PRESSKEY");
+    lpTitle = ImageManager::GetSingleton()->FindImage("TITLE");
 
     return S_OK;
 }

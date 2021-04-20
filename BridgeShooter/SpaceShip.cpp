@@ -3,7 +3,7 @@
 #include "BasicFactory.h"
 #include "SineFactory.h"
 #include "RainFactory.h"
-#include "BoomerangFactory.h"
+#include "Planet_KMS_Factory.h"
 #include "BoomerangPattern.h"
 #include "SSJFactory.h"
 #include "JinHwangFactory.h"
@@ -14,6 +14,7 @@ void SpaceShip::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
 	speed = 200;
+	hp = 200;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 0;
@@ -25,7 +26,7 @@ void SpaceShip::Update(float deltaTime)
 {
 	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
 	{
-		SetFactory(new RainFactory());
+		SetFactory(new BasicFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
 	{
@@ -33,11 +34,11 @@ void SpaceShip::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-//있다가 1번으로 수정이동	//SetFactory(new BasicFactory());
+		SetFactory(new RainFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
 	{
-		SetFactory(new BoomerangFactory());
+		SetFactory(new Planet_KMS_Factory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
 	{
