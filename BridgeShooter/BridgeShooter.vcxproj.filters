@@ -222,9 +222,6 @@
     <ClCompile Include="SSJAIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="FileManager.cpp">
-      <Filter>소스 파일\Manager</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -403,9 +400,6 @@
     </ClInclude>
     <ClInclude Include="SSJAIController.h">
       <Filter>소스 파일\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="FileManager.h">
-      <Filter>소스 파일\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

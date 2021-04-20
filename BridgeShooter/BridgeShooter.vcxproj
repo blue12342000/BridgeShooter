@@ -146,7 +146,6 @@
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="CircleMovePattern.cpp" />
-    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="JinHwangAIContoller.cpp" />
     <ClCompile Include="Planet_KMS_Factory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="CircleMovePattern.h" />
-    <ClInclude Include="FileManager.h" />
     <ClInclude Include="JinHwangAIContoller.h" />
     <ClInclude Include="Planet_KMS_Factory.h" />
     <ClInclude Include="BridgeShooter.h" />
