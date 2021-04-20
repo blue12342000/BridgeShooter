@@ -51,9 +51,9 @@ void PlayerController::SetController(Unit* lpUnit)
 	this->lpUnit = lpUnit;
 	this->lpUnit->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
 	this->lpUnit->SetAngle(PI * 3 / 2);
-	mKeyMap[INPUT_COMMAND::LEFT].lpCmd = bind(&Unit::Translate, lpUnit, POINT{ -10, 0 });
-	mKeyMap[INPUT_COMMAND::RIGHT].lpCmd = bind(&Unit::Translate, lpUnit, POINT{ 10, 0 });
-	mKeyMap[INPUT_COMMAND::UP].lpCmd = bind(&Unit::Translate, lpUnit, POINT{ 0, -10 });
-	mKeyMap[INPUT_COMMAND::DOWN].lpCmd = bind(&Unit::Translate, lpUnit, POINT{ 0, 10 });
+	mKeyMap[INPUT_COMMAND::LEFT].lpCmd = bind(&Unit::Translate, lpUnit, Force{ 1, { -1, 0 }});
+	mKeyMap[INPUT_COMMAND::RIGHT].lpCmd = bind(&Unit::Translate, lpUnit, Force{ 1, {1, 0} });
+	mKeyMap[INPUT_COMMAND::UP].lpCmd = bind(&Unit::Translate, lpUnit, Force{ 1, {0, -1} });
+	mKeyMap[INPUT_COMMAND::DOWN].lpCmd = bind(&Unit::Translate, lpUnit, Force{ 1, {0, 1} });
 	mKeyMap[INPUT_COMMAND::ATTACK].lpCmd = bind(&Unit::Fire, lpUnit);
 }
