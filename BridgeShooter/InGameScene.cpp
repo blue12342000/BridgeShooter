@@ -15,6 +15,7 @@
 #include "SpaceShip_Gray.h"
 #include "EnemyGroup.h"
 #include "SSJAIController.h"
+#include "Animation.h"
 
 HRESULT InGameScene::Init()
 {
@@ -44,7 +45,7 @@ HRESULT InGameScene::Init()
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
-    lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+    lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 });
 
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
@@ -65,11 +66,13 @@ HRESULT InGameScene::Init()
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
 
+    //lpEnemyController = new JinHwangAIContoller();
+    //lpEnemyController->Init();
+    //lpEnemyController->SetController(lpJinHwang);  
+
     lpEnemyController = new SSJAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ);  //스테이지에 따라 바뀜
-
-    //몹 컨트롤러 벡터
+    lpEnemyController->SetController(lpPlanetSSJ); 
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -77,10 +80,19 @@ HRESULT InGameScene::Init()
     backgroundMover = 0;
     
     elapsedTime = 0;
+
+    currStage = STAGE_STATE::LOADING;
+    nextStage = STAGE_STATE::STAGE1;
+    isBossAlive = false;
+    
+    lpLoadingCat = new Animation();
+    lpLoadingCat->Change("LOADING_CAT", 4, true, false);
+    catPos = { -50, 400 };
     
     lpHpGauge = new HpGauge();
     lpHpGauge->Init();
-     
+
+         
      return S_OK;
 }
 
@@ -155,16 +167,84 @@ void InGameScene::Release()
         lpEnemyController = nullptr;
     }
 
-    //몹 컨트롤러 릴리즈
 }
 
 void InGameScene::Update(float deltaTime)
 {
+    elapsedTime += deltaTime;
+
     CheckCollision();
+    //보스 체력 체크해서 죽었는지 판정
+    
+    if (!isBossAlive) //보스 사망시
+    {
+        switch (currStage)
+        {
+        case STAGE_STATE::LOADING:
+            if (elapsedTime > 10)
+            {                
+                currStage = nextStage;
+                isBossAlive = true; //확인용. 여기서 바꾸면 다음에 if문 못타서 세팅 불가
+            }
+            else
+            {
+                lpLoadingCat->Update(deltaTime);
+                catPos.x += deltaTime * 100;
+            }
+            break;
+        case STAGE_STATE::STAGE1:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE2;
+            isBossAlive = true;
+            lpEnemyController = new SSJAIController();   //스테이지 순서 - 박, 손, 배, 김
+            lpEnemyController->Init();
+            lpEnemyController->SetController(lpPlanetSSJ);
+            //잡몹 컨트롤러는?
 
+            //미사일 전체 해제
+            //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+            //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+            //{
+            //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
+            //}
+
+            elapsedTime = 0;
+            break;
+        case STAGE_STATE::STAGE2:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE3;
+            isBossAlive = true;
+            lpEnemyController->SetController(lpPlanetSSJ);
+            elapsedTime = 0;
+            break;
+        case STAGE_STATE::STAGE3:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE4;
+            isBossAlive = true;
+            lpEnemyController->SetController(lpPlanetSSJ);
+            elapsedTime = 0;
+            break;
+        case STAGE_STATE::STAGE4:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE4;    //여기는 어떻게하지?
+            isBossAlive = true;
+            lpEnemyController->SetController(lpPlanetSSJ); 
+
+            elapsedTime = 0;
+            break;
+             
+        }
+    }
+
+    //모든 보스 등장하는 상태 만들어줄 필요 있음(맵 밖에서 등장)
+    if (elapsedTime > 10 && isBossAlive == true)
+    {
+        if (lpEnemyController) lpEnemyController->Update(deltaTime);
+    }
+       
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
-    if (lpEnemyController) lpEnemyController->Update(deltaTime);
-
+    
+    //아이템 등장시점도 조절 필요
     if (lpItem) lpItem->Update(deltaTime);
     if (lpHpGauge) lpHpGauge->Update(deltaTime);
 
@@ -173,28 +253,12 @@ void InGameScene::Update(float deltaTime)
 
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
-
-    
+        
     if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
     {
         lpHpGauge->SetBombAmount(lpHpGauge->GetBombAmount() - 1);
     }
-    /*
-    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
-    {
-        //이전 이미지로
-        lpHpGauge->SetNowMissile(lpHpGauge->GetNowMissile() - 1);
-        if (lpHpGauge->index < 0)
-            lpHpGauge->SetNowMissile(lpHpGauge->index = 2);
-    }
-    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_6))
-    {
-        //다음 이미지로
-        lpHpGauge->SetNowMissile(lpHpGauge->GetNowMissile() + 1);
-        if (lpHpGauge->index > 2)
-            lpHpGauge->SetNowMissile(lpHpGauge->index = 0);
-    }
-    */
+
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
@@ -217,6 +281,12 @@ void InGameScene::Render(HDC hdc)
     EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
+    if (currStage == STAGE_STATE::LOADING)
+    {
+        lpLoadingCat->Render(hBackDC, catPos.x, catPos.y);
+    }
+        
+
     lpBackBuffer->Render(hdc);
    
 }
