@@ -1,7 +1,7 @@
 #pragma once
 #include "AIController.h"
 
-class JinHwangAIContoller : public AIController
+class Planet04AIcontroller : public AIController
 {
 private:
 	enum class USE_PATTERN
@@ -15,9 +15,7 @@ private:
 	{
 		IDLE,
 		MOVE,
-		MOVE_ING,
 		MOVE_PATTERN,
-		MOVE_PATTERN_ING,
 		PATTERN_ATTACK,
 		ATTACK,
 		UPGRADE,

@@ -9,7 +9,7 @@ MoveInfo ReflectPattern::Move(float deltaTime, GameObject* lpObject)
     if (typeid(*lpObject) == typeid(Missile))
     {
         Missile* lpMissile = (Missile*)lpObject;
-        if (lpMissile->delayTime > 0.000001f)
+        if (lpMissile->delayTime > 0)
         {
             lpMissile->delayTime -= deltaTime;
             return moveInfo;

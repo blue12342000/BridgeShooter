@@ -19,6 +19,7 @@
 #include "AlienYellow.h"
 #include "AlienAIController.h"
 #include "KmsAIController.h"
+#include "SSJAIController.h"
 
 HRESULT InGameScene::Init()
 {
@@ -41,8 +42,7 @@ HRESULT InGameScene::Init()
         lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     }
-    
-   
+       
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
     lpPlanet04->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 });
@@ -54,6 +54,10 @@ HRESULT InGameScene::Init()
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
     lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+
+    lpJinHwang = new JinHwang();
+    lpJinHwang->Init();
+    lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
     vEnemys.push_back(new AlienBlue());
     vEnemys.push_back(new AlienGreen());
@@ -69,23 +73,23 @@ HRESULT InGameScene::Init()
     lpItem->Init();
     lpItem->SetPos({ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  });
 
+    lpPlayerController = new PlayerController();
+    lpPlayerController->Init();
+    lpPlayerController->SetController(lpPlayer);
+
+    lpEnemyController = new SSJAIController();
+    lpEnemyController->Init();
+    lpEnemyController->SetController(lpPlanetSSJ);  //스테이지에 따라 바뀜
+
+    //몹 컨트롤러 벡터
+
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
     lpBackImage2 = ImageManager::GetSingleton()->FindImage("SPACE");
-
-    frame = 0;
-    elapsedTime = 0;
-        
     backgroundMover = 0;
-    isEnemyHitPlayer = false;
-    isPlayerHitEnemy = false;
-    isPlayerHitItem = false;
-    isItemAlive = false;
-
-    lpJinHwang = new JinHwang();
-    lpJinHwang->Init();
-    lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
-
+    
+    elapsedTime = 0;
+    
     lpHpGauge = new HpGauge();
     lpHpGauge->Init();
  
@@ -134,9 +138,9 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
-    if (!vEnemys.empty()) 
+    if (!vEnemys.empty())
     {
-        for (int i = 0; i < vEnemys.size();i++)
+        for (int i = 0; i < vEnemys.size(); i++)
         {
             vEnemys[i]->Release();
             delete vEnemys[i];
@@ -173,16 +177,6 @@ void InGameScene::Release()
 
 void InGameScene::Update(float deltaTime)
 {
-    if (KeyManager::GetSingleton()->IsKeyDownOne('M'))
-    {
-        isOnlyPlayer = !isOnlyPlayer;
-    }
-
-    if (KeyManager::GetSingleton()->IsKeyDownOne('N'))
-    {
-        EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, ImageManager::GetSingleton()->FindImage("Enemy_2"), 0, 80, 5, 5);
-    }
-
     CheckCollision();
 
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
@@ -201,17 +195,39 @@ void InGameScene::Update(float deltaTime)
 
     if (lpItem) lpItem->Update(deltaTime);
     if (lpHpGauge) lpHpGauge->Update(deltaTime);
+
     MissileManager::GetSingleton()->Update(deltaTime);
-    
     EffectManager::GetSingleton()->Update(deltaTime);
 
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
 
+    
+    if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
+    {
+        lpHpGauge->SetBombAmount(lpHpGauge->GetBombAmount() - 1);
+    }
+    /*
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
+    {
+        //이전 이미지로
+        lpHpGauge->SetNowMissile(lpHpGauge->GetNowMissile() - 1);
+        if (lpHpGauge->index < 0)
+            lpHpGauge->SetNowMissile(lpHpGauge->index = 2);
+    }
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_6))
+    {
+        //다음 이미지로
+        lpHpGauge->SetNowMissile(lpHpGauge->GetNowMissile() + 1);
+        if (lpHpGauge->index > 2)
+            lpHpGauge->SetNowMissile(lpHpGauge->index = 0);
+    }
+    */
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
+   
 }
 
 void InGameScene::Render(HDC hdc)
@@ -234,27 +250,16 @@ void InGameScene::Render(HDC hdc)
     }
 
     if (lpItem) lpItem->Render(hBackDC);
-
     if (lpHpGauge) lpHpGauge->Render(hBackDC);
     EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
-    //if (isEnemyHitPlayer)
-    //    lpJinHwang->Render(hBackDC);
-    //if(isPlayerHitEnemy)
-    //    lpPlanetKMS->Render(hBackDC);
-
-
     lpBackBuffer->Render(hdc);
    
 }
 
 void InGameScene::CheckCollision()
 {
-
-    isEnemyHitPlayer = false;
-    isPlayerHitEnemy = false;
-    isPlayerHitItem = false;
     vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
     vector<Missile*>& vLpPlayerMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::PLAYER);
     //플레이어의 체력과 행성의 체력을 가져온다.
@@ -274,7 +279,6 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            isEnemyHitPlayer = true;
             lpHpGauge->SetPlayerMaxHp(lpHpGauge->GetPlayerMaxHp() - 10);
         }
         else
@@ -297,7 +301,6 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
-            isPlayerHitEnemy = true;
             lpHpGauge->SetbossMaxHp(lpHpGauge->GetbossMaxHp() - 10);
         }
         else

@@ -216,9 +216,6 @@
     <ClCompile Include="CircleMovePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="KmsAIController.cpp">
-      <Filter>소스 파일\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="AlienBlue.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
@@ -232,6 +229,14 @@
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
     <ClCompile Include="AlienAIController.cpp">
+    </ClCompile>
+    <ClCompile Include="Planet04AIController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SSJAIController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="KmsAIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -407,9 +412,6 @@
     <ClInclude Include="CircleMovePattern.h">
       <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="KmsAIController.h">
-      <Filter>소스 파일\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="AlienBlue.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
@@ -423,6 +425,14 @@
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
     <ClInclude Include="AlienAIController.h">
+    </ClInclude>
+    <ClInclude Include="Planet04AIController.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SSJAIController.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="KmsAIController.h">
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
   </ItemGroup>

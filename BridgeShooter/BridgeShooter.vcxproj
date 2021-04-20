@@ -153,6 +153,7 @@
     <ClCompile Include="CircleMovePattern.cpp" />
     <ClCompile Include="JinHwangAIContoller.cpp" />
     <ClCompile Include="KmsAIController.cpp" />
+    <ClCompile Include="Planet04AIController.cpp" />
     <ClCompile Include="Planet_KMS_Factory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DataManager.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="SpaceShip_Gray.cpp" />
     <ClCompile Include="SpaceShip_Red.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
+    <ClCompile Include="SSJAIController.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -206,6 +208,7 @@
     <ClInclude Include="CircleMovePattern.h" />
     <ClInclude Include="JinHwangAIContoller.h" />
     <ClInclude Include="KmsAIController.h" />
+    <ClInclude Include="Planet04AIController.h" />
     <ClInclude Include="Planet_KMS_Factory.h" />
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="DataManager.h" />
@@ -246,6 +249,7 @@
     <ClInclude Include="SpaceShip_Gray.h" />
     <ClInclude Include="SpaceShip_Red.h" />
     <ClInclude Include="SpiralPattern.h" />
+    <ClInclude Include="SSJAIController.h" />
     <ClInclude Include="SSJFactory.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Title.h" />

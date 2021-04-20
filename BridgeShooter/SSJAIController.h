@@ -1,27 +1,20 @@
 #pragma once
 #include "AIController.h"
 
-class JinHwangAIContoller : public AIController
+class SSJAIController : public AIController 
 {
 private:
 	enum class USE_PATTERN
 	{
 		BASIC,
-		CIRCLE,
 		NONE
 	};
 
 	enum class UNIT_STATE
 	{
 		IDLE,
-		MOVE,
-		MOVE_ING,
-		MOVE_PATTERN,
-		MOVE_PATTERN_ING,
-		PATTERN_ATTACK,
 		ATTACK,
-		UPGRADE,
-		RETURN,
+		PATTERN_ATTACK,
 		NONE
 	};
 

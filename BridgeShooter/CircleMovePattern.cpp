@@ -5,8 +5,8 @@ MoveInfo CircleMovePattern::Move(float deltaTime, GameObject* lpObject)
 {
     MoveInfo moveInfo = { 0, 0 };
 
-    moveInfo.deltaPos.x = cosf(lpObject->angle + lpObject->elapsedTime * PI) * lpObject->speed;
-    moveInfo.deltaPos.y = sinf(lpObject->angle + lpObject->elapsedTime * PI) * lpObject->speed;
+    moveInfo.deltaPos.x = cosf(-PI / 2 + lpObject->elapsedTime * 2) * lpObject->speed / 2;
+    moveInfo.deltaPos.y = sinf(-PI / 2 + lpObject->elapsedTime * 2) * lpObject->speed / 2 + lpObject->speed / 2;
 
     return moveInfo;
 }

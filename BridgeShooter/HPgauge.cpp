@@ -9,7 +9,7 @@ void HpGauge::Init()
 	playerMaxHp = 200;
 	bossMaxHp = 500;
 	
-	isBossAlive=true;
+	isBossAlive= true;
 	isBombUsed = false;
 	isBombLeft = true;
 	isHpLeft = true;
@@ -22,15 +22,17 @@ void HpGauge::Init()
 	{
 		lpHpCount[i] = ImageManager::GetSingleton()->FindImage("HpCount");
 		lpBombCount[i] = ImageManager::GetSingleton()->FindImage("BombCount");
+		lpMissile[i] = ImageManager::GetSingleton()->FindImage("NowMissile_1");
 	}
-	lpNowMissile = ImageManager::GetSingleton()->FindImage("NowMissile_1");
 	lpFcukingManual = ImageManager::GetSingleton()->FindImage("Manual");
 
 	hp =0;
 	hpCount = 3;
-	bombCount = 3;
-	nowMissile = 0;
+	//bomb = 0;
+	bombAmount = 3;
 	fcukingManual = 0;
+	index = 0;
+	lpNowMissile = lpMissile[index];
 }
 
 void HpGauge::Release()
@@ -44,17 +46,16 @@ void HpGauge::Update(float deltaTime)
 	{
 		PlayerHpGaugeData(deltaTime);
 		if (isBossAlive) BossHpGaugeData(deltaTime);
-		if (isBombUsed)
-		{
-			BombCount(deltaTime);
-		}
+		
 		//이미지 출력 하나 제거
 		if (isNowMissile1)
 		{
 			//이미지 출력.
 		}
 	}
+	if (isBombUsed) BombCount();
 }
+
 
 void HpGauge::Render(HDC hdc)
 {
@@ -70,7 +71,7 @@ void HpGauge::Render(HDC hdc)
 		}
 		if (isBombLeft)
 		{
-			for (int i = 0; i < bombCount; i++)
+			for (int i = 0; i < bombAmount; i++)
 			{
 				lpBombCount[i]->Render(hdc, WINSIZE_WIDTH / 7 + 50*i, WINSIZE_HEIGHT / 8 + 100, 0, U_IA_CENTER);
 			}
@@ -126,19 +127,24 @@ void HpGauge::HpCount(float deltaTime)
 {
 }
 
-void HpGauge::BombCount(float deltaTime)
+void HpGauge::BombCount()
 {
-	bombCount--;
+
+	// 값을 낮춰준다
+	bombAmount--;
+	//0일때 예외
+	if (bombAmount < 0)
+	{
+		bombAmount = 0;
+	}
 	isBombUsed = false;
-	if (bombCount < 0)
-		bombCount = 0;
+
 }
 
-void HpGauge::IsBombUsed(float deltaTime)
+void HpGauge::IsBombUsed()
 {
 	isBombUsed = true;
 }
-
 
 void HpGauge::NowMissile(float deltaTime)
 {
@@ -148,4 +154,7 @@ void HpGauge::FcukingManual(float deltaTime)
 {
 }
 
+void HpGauge::IndexControl()
+{
 
+}

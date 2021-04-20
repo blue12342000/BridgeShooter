@@ -8,6 +8,7 @@
 #include "JinHwangFactory.h"
 #include "SpaceShipFactory.h"
 #include "Planet_KMS_Factory.h"
+#include "HPgauge.h"
 
 void SpaceShip_Gray::Init()
 {
@@ -23,53 +24,10 @@ void SpaceShip_Gray::Init()
 
 void SpaceShip_Gray::Update(float deltaTime)
 {
-	input = INPUT_TYPE4::NONE;
-	if (KeyManager::GetSingleton()->IsKeyDownStay('W'))
-	{
-		pos.y -= speed * deltaTime;
-		input = INPUT_TYPE4::UP;
-	}
-
-	if (KeyManager::GetSingleton()->IsKeyDownStay('S'))
-	{
-		pos.y += speed * deltaTime;
-		input = INPUT_TYPE4::DOWN;
-	}
-
-	if (KeyManager::GetSingleton()->IsKeyDownOne('A'))
-	{
-		lpAnimation->Change("SPACESHIP_GRAY", 20, true);
-		input = INPUT_TYPE4::LEFT;
-	}
-	else if (KeyManager::GetSingleton()->IsKeyDownStay('A'))
-	{
-		input = INPUT_TYPE4::LEFT;
-		pos.x -= speed * deltaTime;
-	}
-
-	if (KeyManager::GetSingleton()->IsKeyDownOne('D'))
-	{
-		input = INPUT_TYPE4::RIGHT;
-		lpAnimation->Change("SPACESHIP_GRAY", 20, true);
-	}
-	else if (KeyManager::GetSingleton()->IsKeyDownStay('D'))
-	{
-		input = INPUT_TYPE4::RIGHT;
-		pos.x += speed * deltaTime;
-	}
-
-	switch (input)
-	{
-	case INPUT_TYPE4::UP:
-	case INPUT_TYPE4::DOWN:
-	case INPUT_TYPE4::NONE:
-		lpAnimation->Change("SPACESHIP_GRAY", 20, true);
-		break;
-	}
 
 	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
 	{
-		SetFactory(new RainFactory());
+		SetFactory(new BasicFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
 	{
@@ -77,7 +35,9 @@ void SpaceShip_Gray::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-		//있다가 1번으로 수정이동	//SetFactory(new BasicFactory());
+		//여기서 봄 키 입력 테스트 해보고 싶다.
+		//lphpGauge->IsBombUsed(deltaTime);
+		//SetFactory(new RainFactory());
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
 	{
@@ -91,26 +51,8 @@ void SpaceShip_Gray::Update(float deltaTime)
 	{
 		SetFactory(new JinHwangFactory());
 	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_4))
-	{
-		if (lpFactory) lpFactory->SetCreateLine(--power);
-		if (power < 0) power = 0;
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_OEM_6))
-	{
-		if (lpFactory) lpFactory->SetCreateLine(++power);
-		if (power < 0) power = 0;
-	}
 
-	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_SPACE))
-	{
-		Fire();
-	}
-
-	collider.SetHitBox(pos);
-	lpFactory->Update(deltaTime);
-	lpAnimation->Update(deltaTime);
-	elapsedTime += deltaTime;
+	Unit::Update(deltaTime);
 }
 
 void SpaceShip_Gray::Render(HDC hdc)
