@@ -1,5 +1,6 @@
 #pragma once
 #include "Pattern.h"
+
 class GuidePattern : public Pattern
 {
 public:

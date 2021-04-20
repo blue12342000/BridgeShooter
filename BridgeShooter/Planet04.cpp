@@ -6,7 +6,7 @@ void Planet04::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet04", 50, true);
-	speed = 20;
+	speed = 50;
 	hp = 500;
 	elapsedTime = 0;
 	angle = PI / 2;

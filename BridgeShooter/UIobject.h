@@ -2,15 +2,33 @@
 #include "UI.h"
 #include "BridgeShooter.h"
 
-class Bomb;
+class Item;
+class SpaceShip;
+class Unit;
 class Image;
-class HpGauge : public UI
+class Controller;
+class UIobject : public UI
 {
 private:
-	//POINTFLOAT pos;
+	vector<Unit*> vEnemys;
+	vector<Item*> vItems;
+	Unit* lpPlayer;
+	Unit* lpPlanet04;
+	Unit* lpJinHwang;
+	Unit* lpPlanetSSJ;
+	Unit* lpPlanetKMS;
+	Unit* lpEnemyGroup;
+	Unit* lpSpaceShip;
+	Unit* lpSpaceShip_Gray;
+	Unit* lpSpaceShip_Red;
+	
 
-	RECT playerHpGauge;
-	RECT bossHpGauge;
+
+	Controller* lpPlayerController;
+	Controller* lpEnemyController;
+
+	RECT playerUIobject;
+	RECT bossUIobject;
 
 	float playerMaxHp;
 	float bossMaxHp;
@@ -19,14 +37,13 @@ private:
 	Image* lpHpCount[3];
 	Image* lpBombCount[3];
 	Image* lpMissile[3];
-	Image* lpNowMissile;
 	Image* lpFcukingManual;
 
 	bool isBossAlive;
 	bool isBombUsed;
 	bool isBombLeft;
 	bool isHpLeft;
-	bool isNowMissile1;
+	bool isNowMissile;
 	bool isPushedManualButton;
 
 	int hp;
@@ -34,9 +51,12 @@ private:
 	int bomb;
 	int bombAmount;
 	int fcukingManual;
+	int index;
+	int power;
+	int createLine;
+
 
 public:
-	int index;
 
 	virtual void Init() override;
 	virtual void Release() override;
@@ -44,25 +64,26 @@ public:
 	virtual void Render(HDC hdc) override;
 
 
-	void PlayerHpGaugeData(float deltaTime);
-	//void EnemyHpGaugeData(float deltaTime);
-	void BossHpGaugeData(float deltaTime);
+	void PlayerUIobjectData( );
+	//void EnemyUIobjectData(float deltaTime);
+	void BossUIobjectData( );
+	void IndexData();
 
-	void HpCount(float deltaTime);
+	void HpCount( );
 	void BombCount( );
-	void NowMissile(float deltaTime);
-	void FcukingManual(float deltaTime);
+	void NowMissile( );
+	void FcukingManual( );
 	void IsBombUsed();
-	void IndexControl();
+	void IndexControl(HDC hdc);
 
 
-	void SetPlayerHpGauge(RECT playerHpGauge) { this->playerHpGauge = playerHpGauge; }
-	void SetbossHpGauge(RECT enemyHpGauge) { this->bossHpGauge = enemyHpGauge; }
+	void SetPlayerUIobject(RECT playerUIobject) { this->playerUIobject = playerUIobject; }
+	void SetbossUIobject(RECT enemyUIobject) { this->bossUIobject = enemyUIobject; }
 
 	void SetPlayerMaxHp(int playerMaxHp) { this->playerMaxHp = playerMaxHp; }
 	void SetbossMaxHp(int enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
 	void SetBombAmount(int bombAmount) { this->bombAmount = bombAmount; }
-	void SetNowMissile(int index) { this->index = index; }
+	void SetFactoryLine(int createLine) { this->createLine = createLine; }
 	
 	//void SetPos(POINTFLOAT pos) { this->pos = pos; }
 
@@ -71,10 +92,11 @@ public:
 	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
 	inline float GetbossMaxHp() { return this->bossMaxHp; }
 	inline float GetBombAmount() { return this->bombAmount; }
-	inline float GetNowMissile(){ return this->index; }
+	inline float GetFactoryLine(){ return this->createLine; }
 
-	inline RECT GetPlayerHpGauge() { return this->playerHpGauge; }
-	inline RECT GetbossHpGauge() { return this->bossHpGauge; }
+
+	inline RECT GetPlayerUIobject() { return this->playerUIobject; }
+	inline RECT GetbossUIobject() { return this->bossUIobject; }
 
 
 	inline void RenderRectToCenter(HDC hdc, int x, int y, int width, int height)

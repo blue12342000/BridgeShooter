@@ -2,7 +2,7 @@
 #include "BridgeShooter.h"
 #include "GameScene.h"
 
-class HpGauge;
+class UIobject;
 class Unit;
 class Item;
 class Image;
@@ -29,9 +29,9 @@ private:
 	Unit* lpPlanet04;
 	Unit* lpPlanetSSJ;
 	Unit* lpPlanetKMS;
+
 	Unit* lpJinHwang;
-	Unit* lpMob1;
-		
+
 	Item* lpItem;
 
 	Controller* lpPlayerController;
@@ -41,7 +41,7 @@ private:
 	Image* lpBackImage;
 	Image* lpBackImage2;	
 
-	HpGauge* lpHpGauge;
+	UIobject* lpUIobject;
 
 	STAGE_STATE currStage;
 	STAGE_STATE nextStage;

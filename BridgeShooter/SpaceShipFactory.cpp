@@ -3,12 +3,14 @@
 #include "ReflectPattern.h"
 #include "Missile.h"
 #include "Unit.h"
+#include "GuidePattern.h"
 
 void SpaceShipFactory::Init()
 {
 	vLpPatterns.resize(CREATE_PATTERN::SFCP_NONE);
 	vLpPatterns[CREATE_PATTERN::SFCP_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_REFLECT] = new ReflectPattern();
+	vLpPatterns[CREATE_PATTERN::SFCP_GUIDE] = new GuidePattern();
 
 	createLine = 0;
 	maxCreateLIne = 4;
@@ -34,6 +36,7 @@ void SpaceShipFactory::Fire(Unit* lpUnit)
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_04", lpUnit->pos, lpUnit->angle, 500, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
+			lpMissile->SetLpTarget(&lpUnit->GetTarget());
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
 	}
@@ -85,8 +88,9 @@ void SpaceShipFactory::Fire(Unit* lpUnit)
 			for (int i = -1; i < 2; i += 2)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_04", { lpUnit->pos.x + i * 40, lpUnit->pos.y + 10 }, lpUnit->angle + (PI / 16) * i, 500, 20);
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
+				lpMissile->SetMissile("MISSILE_09", { lpUnit->pos.x + i * 40, lpUnit->pos.y + 10 }, lpUnit->angle + (PI / 16) * i, 500, 20);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_GUIDE]);
+				lpMissile->SetLpTarget(&lpUnit->GetTarget());
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 			}
 		}

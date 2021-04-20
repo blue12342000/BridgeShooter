@@ -142,21 +142,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIController.cpp" />
+    <ClCompile Include="AlienAIController.cpp" />
+    <ClCompile Include="AlienBlue.cpp" />
+    <ClCompile Include="AlienGreen.cpp" />
+    <ClCompile Include="AlienRed.cpp" />
+    <ClCompile Include="AlienYellow.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="CircleMovePattern.cpp" />
     <ClCompile Include="JinHwangAIContoller.cpp" />
+    <ClCompile Include="KmsAIController.cpp" />
     <ClCompile Include="Planet04AIController.cpp" />
     <ClCompile Include="Planet_KMS_Factory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
-    <ClCompile Include="EnemyGroup.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GuidePattern.cpp" />
-    <ClCompile Include="HPgauge.cpp" />
+    <ClCompile Include="UIobject.cpp" />
     <ClCompile Include="JinHwang.cpp" />
     <ClCompile Include="Planet04Factory.cpp" />
     <ClCompile Include="JinHwangFactory.cpp" />
@@ -193,10 +198,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIController.h" />
+    <ClInclude Include="AlienAIController.h" />
+    <ClInclude Include="AlienBlue.h" />
+    <ClInclude Include="AlienGreen.h" />
+    <ClInclude Include="AlienRed.h" />
+    <ClInclude Include="AlienYellow.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="CircleMovePattern.h" />
     <ClInclude Include="JinHwangAIContoller.h" />
+    <ClInclude Include="KmsAIController.h" />
     <ClInclude Include="Planet04AIController.h" />
     <ClInclude Include="Planet_KMS_Factory.h" />
     <ClInclude Include="BridgeShooter.h" />
@@ -204,12 +215,11 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
-    <ClInclude Include="EnemyGroup.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
     <ClInclude Include="BoomerangPattern.h" />
     <ClInclude Include="GuidePattern.h" />
-    <ClInclude Include="HPgauge.h" />
+    <ClInclude Include="UIobject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="JinHwang.h" />
     <ClInclude Include="Planet04Factory.h" />
