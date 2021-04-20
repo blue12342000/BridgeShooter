@@ -14,6 +14,7 @@
 #include "SpaceShip_Red.h"
 #include "SpaceShip_Gray.h"
 #include "EnemyGroup.h"
+#include "SSJAIController.h"
 
 HRESULT InGameScene::Init()
 {
@@ -81,9 +82,13 @@ HRESULT InGameScene::Init()
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
 
-    lpEnemyController = new JinHwangAIContoller();
+    //lpEnemyController = new JinHwangAIContoller();
+    //lpEnemyController->Init();
+    //lpEnemyController->SetController(lpJinHwang);
+
+    lpEnemyController = new SSJAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpJinHwang);
+    lpEnemyController->SetController(lpPlanetSSJ);
 
      return S_OK;
 }
