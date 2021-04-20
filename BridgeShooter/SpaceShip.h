@@ -7,6 +7,8 @@ private:
 	float fireTimer;
 	int power;
 
+	bool isBombUsed;
+
 public:
 	virtual void Init() override;
 	virtual void Update(float deltaTime) override;

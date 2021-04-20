@@ -12,7 +12,7 @@
 void SpaceShip_Gray::Init()
 {
 	lpAnimation = new Animation();
-	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
+	lpAnimation->Change("SPACESHIP_GRAY", 10, true);
 	speed = 200;
 	elapsedTime = 0;
 	angle = -PI / 2;
@@ -38,7 +38,7 @@ void SpaceShip_Gray::Update(float deltaTime)
 
 	if (KeyManager::GetSingleton()->IsKeyDownOne('A'))
 	{
-		lpAnimation->Change("SPACESHIP_LEFT", 20, true);
+		lpAnimation->Change("SPACESHIP_GRAY", 20, true);
 		input = INPUT_TYPE4::LEFT;
 	}
 	else if (KeyManager::GetSingleton()->IsKeyDownStay('A'))
@@ -50,7 +50,7 @@ void SpaceShip_Gray::Update(float deltaTime)
 	if (KeyManager::GetSingleton()->IsKeyDownOne('D'))
 	{
 		input = INPUT_TYPE4::RIGHT;
-		lpAnimation->Change("SPACESHIP_RIGHT", 20, true);
+		lpAnimation->Change("SPACESHIP_GRAY", 20, true);
 	}
 	else if (KeyManager::GetSingleton()->IsKeyDownStay('D'))
 	{
@@ -63,7 +63,7 @@ void SpaceShip_Gray::Update(float deltaTime)
 	case INPUT_TYPE4::UP:
 	case INPUT_TYPE4::DOWN:
 	case INPUT_TYPE4::NONE:
-		lpAnimation->Change("SPACESHIP_IDLE", 20, true);
+		lpAnimation->Change("SPACESHIP_GRAY", 20, true);
 		break;
 	}
 

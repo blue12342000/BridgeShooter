@@ -12,7 +12,6 @@ private:
 
 public:
 	float delayTime;
-	MoveInfo deltaMove;
 
 public:	
 	void Init() override;

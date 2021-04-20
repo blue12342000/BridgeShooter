@@ -2,12 +2,15 @@
 #include "GameScene.h"
 
 class Image;
+class Animation;
 class Title : public GameScene
 {
 private:
 	Image* lpBackBuffer;
 	Image* lpTitle;
 	Image* lpPressKey;
+	Animation* lpMovingCat;
+	POINTFLOAT catPos;
 
 public:
 	HRESULT Init();

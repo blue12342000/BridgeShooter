@@ -8,7 +8,7 @@ private:
 
 	Image* lpBackImage;
 	Image* lpBackBuffer;
-
+	Image* lpSelctInfo;
 	vector<Image*> vLpPlayerImg; 
 	
 	RECT selectBox;

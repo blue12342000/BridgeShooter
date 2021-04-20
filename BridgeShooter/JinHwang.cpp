@@ -18,7 +18,7 @@ void JinHwang::Init()
 
 void JinHwang::Update(float deltaTime)
 {
-	Fire();
+	//Fire();
 
 	Unit::Update(deltaTime);
 }
