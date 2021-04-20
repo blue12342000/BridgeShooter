@@ -11,7 +11,7 @@ void Planet_KMS::Init()
 	hp = 500;
 	speed = 374;
 	elapsedTime = 0;
-	angle = PI / 2;
+	angle =0;
 	lpFactory = new Planet_KMS_Factory();
 	lpFactory->Init();
 	collider.SetHitBox(pos, { 0, 0 }, 100, 100);
@@ -20,7 +20,6 @@ void Planet_KMS::Init()
 
 void Planet_KMS::Update(float deltaTime)
 {
-	Fire();
 
 	Unit::Update(deltaTime);
 }

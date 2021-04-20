@@ -213,6 +213,15 @@
     <ClCompile Include="GuidePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="JinHwangAIContoller.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleMovePattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="KmsAIController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageManager.h">
@@ -382,6 +391,15 @@
     </ClInclude>
     <ClInclude Include="SpaceShip_Red.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="JinHwangAIContoller.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleMovePattern.h">
+      <Filter>소스 파일\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="KmsAIController.h">
+      <Filter>소스 파일\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

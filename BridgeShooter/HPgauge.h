@@ -16,7 +16,17 @@ private:
 
 	Image* lpImage;
 
+	Image* lpHpCount[3];
+	Image* lpBombCount[3];
+	Image* lpNowMissile;
+	Image* lpFcukingManual;
+
 	bool isBossAlive;
+	bool isBombUsed;
+	bool isBombLeft;
+	bool isHpLeft;
+	bool isNowMissile1;
+	bool isPushedManualButton;
 
 	int hp;
 	int hpCount;
@@ -40,7 +50,7 @@ public:
 	void BombCount(float deltaTime);
 	void NowMissile(float deltaTime);
 	void FcukingManual(float deltaTime);
-
+	void IsBombUsed(float deltaTime);
 
 
 

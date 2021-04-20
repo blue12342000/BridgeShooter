@@ -15,7 +15,7 @@ void RainFactory::Init()
 	vLpPatterns[CREATE_PATTERN::RFCP_RSINE] = new ReverseSinePattern();
 	vLpPatterns[CREATE_PATTERN::RFCP_RAIN] = new RainPattern();
 	maxCreateLIne = 3;
-	srand(time(NULL));
+
 	SetCheckTime(3000);
 	
 }
