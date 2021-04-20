@@ -7,7 +7,6 @@ class Unit;
 class Missile : public GameObject
 {
 private:
-	Pattern* lpPattern;
 	Animation* lpAnimation;
 	Unit** lpLpTarget;
 
