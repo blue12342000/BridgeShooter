@@ -47,9 +47,10 @@ void SSJAIController::Update(float deltaTime)
 			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			lpUnit->Fire();			
 			lpUnit->Update(deltaTime);
-			if (lpUnit->pos.x > 600)
+			if (lpUnit->pos.x > 500)
 			{
 				lpUnit->SetAngle(PI);
+				lpUnit->Translate(POINTFLOAT{ -10, 0 });
 			}
 			else if (lpUnit->pos.x < 100)
 			{
