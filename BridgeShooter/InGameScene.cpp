@@ -66,11 +66,7 @@ HRESULT InGameScene::Init()
     elapsedTime = 0;
         
     backgroundMover = 0;
-    isEnemyHitPlayer = false;
-    isPlayerHitEnemy = false;
-    isPlayerHitItem = false;
-    isItemAlive = false;
-
+ 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
     lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
@@ -200,7 +196,12 @@ void InGameScene::Update(float deltaTime)
     {
         lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
     }
-
+    
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+    }
+   
 }
 
 void InGameScene::Render(HDC hdc)
@@ -260,7 +261,6 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            isEnemyHitPlayer = true;
             lpUIobject->SetPlayerMaxHp(lpUIobject->GetPlayerMaxHp() - 10);
         }
         else
@@ -283,7 +283,6 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
-            isPlayerHitEnemy = true;
             lpUIobject->SetbossMaxHp(lpUIobject->GetbossMaxHp() - 10);
         }
         else

@@ -8,6 +8,10 @@
 #include "JinHwangFactory.h"
 #include "SpaceShipFactory.h"
 #include "Planet_KMS_Factory.h"
+<<<<<<< Updated upstream
+=======
+#include "UIobject.h"
+>>>>>>> Stashed changes
 
 void SpaceShip_Red::Init()
 {

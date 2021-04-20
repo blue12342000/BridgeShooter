@@ -3,7 +3,6 @@
 #include "Image.h"
 #include "Unit.h""
 #include "PlayerController.h"
-#include "EnemyGroup.h"
 #include "SpaceShip.h"
 
 #include "Planet_SSJ.h"
@@ -59,8 +58,8 @@ void UIobject::Init()
 	lpJinHwang->Init();
 	lpPlanetSSJ;
 	lpPlanetKMS;
-	lpEnemyGroup = new EnemyGroup();
-	lpEnemyGroup->Init();
+	//lpEnemyGroup = new EnemyGroup();
+	//lpEnemyGroup->Init();
 	lpSpaceShip = new SpaceShip();
 	lpSpaceShip->Init();
 
