@@ -114,9 +114,6 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
     mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
     //이하 테스트용 더미 이미지
-    mLpImageDatas.insert(make_pair("BombCount", new Image()));
-    mLpImageDatas["BombCount"]->Init("Image/UI/Item_BombUI.bmp", 56/2, 32/2, 1, 1, 1, true);
-
     mLpImageDatas.insert(make_pair("HpCount", new Image()));
     mLpImageDatas["HpCount"]->Init("Image/UI/SpaceShip_mini.bmp.", 136/4, 174/4, 1, 1, 1, true);
 
@@ -142,7 +139,7 @@ HRESULT ImageManager::Init()
     mLpImageDatas["Manual"]->Init("Image/UI/Manual.bmp", 700/4, 586/4, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("MOVING_CAT", new Image()));
-    mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1004/2, 251/2, 4, 1, 4, true);
+    mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1456/2, 209/2, 8, 1, 8, true);
 
     mLpImageDatas.insert(make_pair("LOADING_CAT", new Image()));
     mLpImageDatas["LOADING_CAT"]->Init("Image/UI/LoadingCat.bmp", 1004, 251, 4, 1, 4, true);
@@ -158,6 +155,22 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("ENDING", new Image()));
     mLpImageDatas["ENDING"]->Init("Image/UI/Ending.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_01", new Image()));
+    mLpImageDatas["hp_01"]->Init("Image/UI/hp_01.bmp", 24, 12, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_02", new Image()));
+    mLpImageDatas["hp_02"]->Init("Image/UI/hp_02.bmp", 24, 12, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_03", new Image()));
+    mLpImageDatas["hp_03"]->Init("Image/UI/hp_03.bmp", 24, 12, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_04", new Image()));
+    mLpImageDatas["hp_04"]->Init("Image/UI/hp_04.bmp", 24, 12, 1, 1, 1, true);
+
+
+
+
 
     return S_OK;
 }

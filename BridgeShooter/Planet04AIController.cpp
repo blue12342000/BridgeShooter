@@ -5,11 +5,13 @@
 
 void Planet04AIcontroller::Init()
 {
+	
 	vLpPatterns.resize((int)USE_PATTERN::NONE);
 	vLpPatterns[(int)USE_PATTERN::BASIC] = new BasicPattern();
 	state = UNIT_STATE::IDLE;
 	currentPattern = USE_PATTERN::NONE;
 	elapsedTime = 0;
+
 }
 
 void Planet04AIcontroller::Release()
@@ -28,29 +30,32 @@ void Planet04AIcontroller::Update(float deltaTime)
 		switch (state)
 		{
 		case UNIT_STATE::IDLE:
-			currentPattern = USE_PATTERN::NONE;
-			if (elapsedTime > 1)
+			if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
+				|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
+			{lpUnit->ResetTimer();
+				state = UNIT_STATE::RETURN;
+			}
+			else
 			{
-				if (rand() % 100 < 10)
+				if (rand() % 2 == 0)
 				{
-					elapsedTime = 0;
 					lpUnit->ResetTimer();
+					lpUnit->elapsedTime = elapsedTime;
+					elapsedTime = 0;
 					state = UNIT_STATE::ATTACK;
 				}
 				else
-				{
-					elapsedTime = 0;
-					lpUnit->elapsedTime = elapsedTime;
 					state = UNIT_STATE::MOVE;
-				}
-				break;
+			}
+			break;
 		case UNIT_STATE::MOVE:
 			lpUnit->transform.speed = 400;
 			lpUnit->Translate(POINTFLOAT{ (float)((rand() % 150 + 60) - 135) / 10, (float)((rand() % 150 + 60) - 135) / 10 });
-			state = UNIT_STATE::MOVE_ING;
+			state = UNIT_STATE::MOVE_PATTERN;//MOVE_ING;
 			elapsedTime = 0;
 			break;
-		case UNIT_STATE::MOVE_ING:
+
+		/*case UNIT_STATE::MOVE_ING:
 			if (elapsedTime > 2)
 			{
 				if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
@@ -74,7 +79,7 @@ void Planet04AIcontroller::Update(float deltaTime)
 					}
 				}
 			}
-			break;
+			break;*/
 		case UNIT_STATE::MOVE_PATTERN:
 			elapsedTime = 8;
 			lpUnit->ResetTimer();
@@ -89,51 +94,45 @@ void Planet04AIcontroller::Update(float deltaTime)
 				state = UNIT_STATE::PATTERN_ATTACK;
 			}
 			break;
-		case UNIT_STATE::PATTERN_ATTACK:
-			if (elapsedTime < 5)
-			{
-				lpUnit->Fire();
-			}
-			else
-			{
-				lpUnit->lpPattern = nullptr;
-				state = UNIT_STATE::UPGRADE;
-			}
-			break;
 		case UNIT_STATE::ATTACK:
-			if (elapsedTime < 10)
+			currentPattern = USE_PATTERN::NONE;
+			lpUnit->Fire();
+			lpUnit->Update(deltaTime);
+			elapsedTime++;
+			if (elapsedTime > 10000)
 			{
-				lpUnit->Fire();
-			}
-			else
-			{
-				state = UNIT_STATE::UPGRADE;
+				state = UNIT_STATE::PATTERN_ATTACK;
 			}
 			break;
-		case UNIT_STATE::UPGRADE:
-			lpUnit->ChangeFactoryLine(1);
-			state = UNIT_STATE::RETURN;
+		case UNIT_STATE::PATTERN_ATTACK:
+			currentPattern = USE_PATTERN::BASIC;
+			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			lpUnit->Fire();
+			lpUnit->Update(deltaTime);
+			if (lpUnit->pos.x > 500)
+			{
+				lpUnit->angle = PI;
+				lpUnit->Translate(POINTFLOAT{ -10, 0 });
+			}
+			else if (lpUnit->pos.x < 100)
+			{
+				lpUnit->angle = 0;
+			}
 			break;
 		case UNIT_STATE::RETURN:
-			float distance = pow(origin.y - lpUnit->pos.y, 2) + pow(origin.x - lpUnit->pos.x, 2);
-			if (distance > 100)
+			if (lpUnit->pos.y < 200)
 			{
-				float angle = atan2(origin.y - lpUnit->pos.y, origin.x - lpUnit->pos.x);
-				lpUnit->Translate(POINTFLOAT{ cosf(angle) * 10, sin(angle) * 10 });
+				lpUnit->pos.y += 0.3f;
+				lpUnit->Translate(POINTFLOAT{ 0, -1 });
 			}
-			if (distance < 100)
+			else if (lpUnit->pos.y >= 200)
 			{
 				elapsedTime = 0;
-				lpUnit->pos = origin;
-				state = UNIT_STATE::IDLE;
+				state = UNIT_STATE::ATTACK;
 			}
 			break;
 			}
 		}
-
-		lpUnit->Update(deltaTime);
-	}
-	elapsedTime += deltaTime;
 }
 
 void Planet04AIcontroller::Render(HDC hdc)

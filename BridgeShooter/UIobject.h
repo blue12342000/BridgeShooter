@@ -18,12 +18,14 @@ private:
 
 	Image* lpBossHpBar;
 	Image* lpLifeStock;
-	Image* lpBombCount;
 	Image* lpMissile[6];
 	Image* lpFcukingManual;
+	Image* lpHp01;
+	Image* lpHp02;
+	Image* lpHp03;
+	Image* lpHp04;
 
 	int lifeAmount;
-	int bombAmount;
 	
 	float playerMaxHp;
 	float bossMaxHp;
@@ -46,11 +48,9 @@ public:
 	virtual void SetPlayerMaxHp(float playerMaxHp) { this->playerMaxHp = playerMaxHp; }
 	virtual void SetBossMaxHp(float enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
 	virtual void SetLifeAmount(int lifeAmount) { this->lifeAmount = lifeAmount; }
-	virtual void SetBombAmount(int bombAmount) { this->bombAmount = bombAmount; }
 
 	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
 	inline float GetBossMaxHp() { return this->bossMaxHp; }
-	inline int GetBombAmount() { return this->bombAmount; }
 	inline int GetLifeAmount() { return this->lifeAmount; }
 
 	inline RECT GetPlayerUIobject() { return this->playerUIobject; }

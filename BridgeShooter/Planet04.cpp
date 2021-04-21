@@ -9,7 +9,6 @@ void Planet04::Init()
 	transform.speed = 50;
 	hp = U_MAX_BOSS_HP;
 	maxHp = U_MAX_BOSS_HP;
-	bomb = 3;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new Planet04Factory();

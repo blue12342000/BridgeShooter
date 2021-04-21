@@ -17,10 +17,9 @@ protected:
 
 	float hp;
 	float maxHp;
-	int bomb;
 
 public:
-	Unit(): GameObject(), isReady(false), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false), hp(0), bomb(0){}
+	Unit(): GameObject(), isReady(false), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false), hp(0){}
 	virtual ~Unit() {}
 
 	virtual void Init() override;
@@ -42,7 +41,6 @@ public:
 
 	inline bool IsAlive() { return hp > FLT_EPSILON; }
 	inline int GetFactoryLine() {return factoryLine; }
-	inline int GetBomb() { return bomb; }
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline Unit*& GetTarget() { return lpTarget; }
 	inline void SetInetia(bool isInertia) { this->isInertia = isInertia; }

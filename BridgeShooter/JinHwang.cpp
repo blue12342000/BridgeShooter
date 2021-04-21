@@ -10,7 +10,6 @@ void JinHwang::Init()
 	transform.speed = 420;
 	hp = U_MAX_BOSS_HP;
 	maxHp = U_MAX_BOSS_HP;
-	bomb = 5;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new JinHwangFactory();
