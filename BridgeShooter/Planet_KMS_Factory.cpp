@@ -58,6 +58,7 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->SetMissile("MISSILE_01", 2 * PI * i / 16 + (PI * i / 8.0f), Transform{ lpUnit->pos, 2 * PI * i / 16 + (PI * i / 8.0f), 170 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::KFCP_BOOMERANG]);
+				lpMissile->SetLpTarget(&lpUnit->GetTarget());
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}

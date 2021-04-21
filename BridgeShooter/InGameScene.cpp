@@ -52,6 +52,7 @@ HRESULT InGameScene::Init()
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
     lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanetKMS->SetTarget(lpPlayer);
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
