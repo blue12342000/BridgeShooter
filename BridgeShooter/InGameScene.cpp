@@ -75,17 +75,14 @@ HRESULT InGameScene::Init()
     lpItem->Init();
     lpItem->SetPos({ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  });
 
-    lpPlayerController = new PlayerController();
-    lpPlayerController->Init();
-    lpPlayerController->SetController(lpPlayer);
+    vLpEnemyController.push_back(new JinHwangAIContoller()); 
+    vLpEnemyController.push_back(new SSJAIController());
+    vLpEnemyController.push_back(new Planet04AIcontroller());
+    vLpEnemyController.push_back(new KmsAIController());
 
-    //lpEnemyController = new JinHwangAIContoller();
-    //lpEnemyController->Init();
-    //lpEnemyController->SetController(lpJinHwang);  
-
-    lpEnemyController = new SSJAIController();
+    lpEnemyController = vLpEnemyController[1];
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ); 
+    lpEnemyController->SetController(lpPlanetSSJ);
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -101,15 +98,8 @@ HRESULT InGameScene::Init()
     lpLoadingCat = new Animation();
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
     catPos = { -50, 400 };
-    
-        
+            
     backgroundMover = 0;
- 
-    lpJinHwang = new JinHwang();
-    lpJinHwang->Init();
-    lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
-
-    
  
     //플레이어 
     lpPlayerController = new PlayerController();
@@ -160,6 +150,13 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
+    if (lpEnemyController)
+    {
+        lpEnemyController->Release();
+        delete lpEnemyController;
+        lpEnemyController = nullptr;
+    }
+
     if (!vEnemys.empty())
     {
         for (int i = 0; i < vEnemys.size(); i++)
@@ -196,13 +193,8 @@ void InGameScene::Release()
         lpPlayerController = nullptr;
     }
 
-    if (lpEnemyController)
-    {
-        lpEnemyController->Release();
-        delete lpEnemyController;
-        lpEnemyController = nullptr;
-    }
-
+  
+    //벡터로 바꾼거 릴리즈
 }
 
 void InGameScene::Update(float deltaTime)
@@ -210,9 +202,6 @@ void InGameScene::Update(float deltaTime)
     elapsedTime += deltaTime;
 
     CheckCollision();
-
-    if (lpPlayerController) lpPlayerController->Update(deltaTime);
-    if (lpEnemyController) lpEnemyController->Update(deltaTime);
     
     if (!isBossAlive)
     {
@@ -222,7 +211,9 @@ void InGameScene::Update(float deltaTime)
             if (elapsedTime > 10)
             {                
                 currStage = nextStage;
-                isBossAlive = true; //확인용
+                elapsedTime = 0;
+                isBossAlive = true;
+                //잡몹 세팅
             }
             else
             {
@@ -234,10 +225,13 @@ void InGameScene::Update(float deltaTime)
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE2;
             isBossAlive = true;
-            lpEnemyController = new SSJAIController();  
+            lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
-            lpEnemyController->SetController(lpPlanetSSJ);
+            lpEnemyController->SetController(lpJinHwang);
+            lpEnemyController->GetController()->SetHp(1000);
+            lpPlayer->SetTarget(lpJinHwang);
 
+            //미사일 해제
             //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
             //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
             //{
@@ -250,17 +244,40 @@ void InGameScene::Update(float deltaTime)
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE3;
             isBossAlive = true;
-            lpEnemyController->SetController(lpPlanetSSJ);
+            lpEnemyController = vLpEnemyController[2];
+            lpEnemyController->Init();
+            lpEnemyController->SetController(lpPlanet04);
+            lpPlayer->SetTarget(lpPlanet04);
+
+            //미사일 해제
+         //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+         //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+         //{
+         //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
+         //}
+
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE3:
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE4;
             isBossAlive = true;
-            lpEnemyController->SetController(lpPlanetSSJ);
+            lpEnemyController = vLpEnemyController[3];
+            lpEnemyController->Init();
+            lpEnemyController->SetController(lpPlanetKMS);
+            lpPlayer->SetTarget(lpPlanetKMS);
+            //미사일 해제
+         //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+         //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+         //{
+         //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
+         //}
+
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE4:
+            currStage = STAGE_STATE::NONE;  // 페이드아웃시켜주는것도..
+
             if(elapsedTime > 10)
                 SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
             break;
@@ -373,6 +390,7 @@ void InGameScene::CheckCollision()
                 {
                     lpPlayerController->GetController()->SetHp(0);
                     //플레이어의 사망 체크를 여기서 표현
+                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE"), 0, 20, 8, 8);
                 }
             }
             //체력이 0이 아니면 10씩 데미지를 줌 
@@ -403,6 +421,7 @@ void InGameScene::CheckCollision()
             {
                 lpEnemyController->GetController()->SetHp(0);
                 //적의 사망 체크를 여기서 표현
+                isBossAlive = false;
             }
             //체력이 0이 아니면 10씩 데미지를 줌
             else                               // 내가 적에게 주는 데미지값 :10

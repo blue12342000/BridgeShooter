@@ -142,6 +142,9 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("SELECT_INFO", new Image()));
     mLpImageDatas["SELECT_INFO"]->Init("Image/UI/SelectInfo.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, 1, 1, 1, true);
 
+    mLpImageDatas.insert(make_pair("ENDING", new Image()));
+    mLpImageDatas["ENDING"]->Init("Image/UI/Ending.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, 1, 1, 1, true);
+
     return S_OK;
 }
 

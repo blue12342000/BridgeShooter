@@ -15,12 +15,12 @@ void KmsAIController::Init()
 
 void KmsAIController::Release()
 {
-	if (lpUnit) 
-	{
-		lpUnit->Release();
-		delete lpUnit;
-		lpUnit = nullptr;
-	}
+	//if (lpUnit) 
+	//{
+	//	lpUnit->Release();
+	//	delete lpUnit;
+	//	lpUnit = nullptr;
+	//}
 	if (lpPattern) 
 	{
 		delete lpPattern;
