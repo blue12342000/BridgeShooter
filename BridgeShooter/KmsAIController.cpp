@@ -15,12 +15,12 @@ void KmsAIController::Init()
 
 void KmsAIController::Release()
 {
-	if (lpUnit) 
-	{
-		lpUnit->Release();
-		delete lpUnit;
-		lpUnit = nullptr;
-	}
+	//if (lpUnit) 
+	//{
+	//	lpUnit->Release();
+	//	delete lpUnit;
+	//	lpUnit = nullptr;
+	//}
 	if (lpPattern) 
 	{
 		delete lpPattern;
@@ -32,20 +32,20 @@ void KmsAIController::Update(float deltaTime)
 {
 	if (lpUnit) 
 	{
-		if (lpUnit->hp <= 0) 
+		if (lpUnit->GetHp() <= 0) 
 		{
 			
 		}
 		else 
 		{
 			lpUnit->SetElapsedTime(2);//계속 팅기게(10보다 작게)
-			if (lpUnit->hp >= 300)
+			if (lpUnit->GetHp() >= 300)
 			{
 				prevNum = 0;
 				lpUnit->speed = 0;
 				lpUnit->SetFactoryLine(0);
 			}
-			else if (lpUnit->hp >= 100)
+			else if (lpUnit->GetHp() >= 100)
 			{
 				if (prevNum != 1) 
 				{

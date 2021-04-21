@@ -23,7 +23,7 @@ void AlienAIController::Update(float deltaTime)
 {
 	if (lpUnit)
 	{
-		if (lpUnit->hp <= 0)
+		if (lpUnit->GetHp() <= 0)
 		{
 
 		}
