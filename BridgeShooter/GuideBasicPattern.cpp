@@ -11,8 +11,10 @@ void GuideBasicPattern::Move(float deltaTime, GameObject* lpObject)
 		{
 			Missile* lpMissile = (Missile*)lpObject;
 			Unit* lpUnit = lpMissile->GetTarget();
-
-			lpObject->angle = atan2(lpUnit->pos.y - lpObject->pos.y, lpUnit->pos.x - lpObject->pos.x);
+			if (lpUnit)
+			{
+				lpObject->angle = atan2(lpUnit->pos.y - lpObject->pos.y, lpUnit->pos.x - lpObject->pos.x);
+			}
 			if (lpMissile->delayTime > 0)
 			{
 				lpMissile->delayTime -= deltaTime;
