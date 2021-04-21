@@ -69,6 +69,7 @@ void UIobject::Render(HDC hdc)
 	lpFcukingManual->Render(hdc, WINSIZE_WIDTH / 10, WINSIZE_HEIGHT / 2, 0, U_IA_CENTER);
 }
 
+//최대치 저장하는 함수
 void UIobject::SetBossMaxHp()
 {
 	if (isMaxHp)

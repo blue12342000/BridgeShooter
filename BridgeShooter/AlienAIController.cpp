@@ -6,7 +6,7 @@
 
 void AlienAIController::Init()
 {
-	
+	lpUnit->Init();
 }
 
 void AlienAIController::Release()
@@ -23,18 +23,11 @@ void AlienAIController::Update(float deltaTime)
 {
 	if (lpUnit)
 	{
-		if (lpUnit->GetHp() <= 0)
-		{
-
-		}
-		else 
-		{
-			lpUnit->Fire();
-			lpUnit->Update(deltaTime);
-		}
-	}
-	elapsedTime += deltaTime;
+		lpUnit->Update(deltaTime);
+		elapsedTime += deltaTime;
+	} 
 }
+
 
 void AlienAIController::Render(HDC hdc)
 {

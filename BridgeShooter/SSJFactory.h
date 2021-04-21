@@ -12,7 +12,6 @@ private:
 		SFCP_SPIRAL,
 		SFCP_SINE,
 		SFCP_REFLECT,
-		SFCP_DELAYBASIC,
 		SFCP_NONE
 	};
 

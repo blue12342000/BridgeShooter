@@ -1,6 +1,7 @@
 #include "EffectManager.h"
 #include "BridgeShooter.h"
 #include "Image.h"
+#include "Animation.h"
 
 HRESULT EffectManager::Init()
 {
@@ -136,6 +137,11 @@ void EffectManager::Explosion(POINTFLOAT pos, Image* lpImage, int frame, int fps
 	vEffects.push_back(effect);
 }
 
+void EffectManager::Explosion(POINTFLOAT pos, Animation* animation, int fps, int splitX, int splitY)
+{
+	Explosion(pos, animation->GetLpImage(), animation->GetFrame(), fps, splitX, splitY);
+}
+
 void EffectManager::Blackhole(POINTFLOAT pos, Image* lpImage, int frame, int fps, int splitX, int splitY)
 {
 	Effect effect;
@@ -167,6 +173,11 @@ void EffectManager::Blackhole(POINTFLOAT pos, Image* lpImage, int frame, int fps
 	}
 
 	vEffects.push_back(effect);
+}
+
+void EffectManager::Blackhole(POINTFLOAT pos, Animation* animation, int fps, int splitX, int splitY)
+{
+	Blackhole(pos, animation->GetLpImage(), animation->GetFrame(), fps, splitX, splitY);
 }
 
 void EffectManager::FadeOut(POINTFLOAT pos, Image* lpImage, int frame, int fps, int splitX, int splitY)

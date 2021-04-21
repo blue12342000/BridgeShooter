@@ -1,18 +1,16 @@
 #include "AlienRed.h"
-//기본 라이브러리(필수)
 #include "Factory.h"
 #include "Animation.h"
 #include "Pattern.h"
 #include "GameObject.h"
 
-//쏘는 팩토리 라이브러리
 #include "BasicFactory.h"
 #include "SineFactory.h"
 #include "Planet04Factory.h"
 #include "RainFactory.h"
 #include "JinHwangFactory.h"
 
-//움직이는 패턴 라이브러리
+
 #include "BasicPattern.h"
 #include "ReflectPattern.h"
 #include "GuidePattern.h"
@@ -21,14 +19,22 @@
 
 void AlienRed::Init()
 {
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
+	lpPattern = new ReflectPattern();
 	elapsedTime = 0;
 	angle = 0;
-	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
+	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_4", 4, true);
-	lpFactory = new SineFactory();
-	lpPattern = new ReflectPattern();
-	speed = 80.0;
+	transform.speed = 80.0;
 	hp = 500;
 	moveAngle = 0;
 	shootAngle = PI / 2.0f;
@@ -76,6 +82,7 @@ void AlienRed::Release()
 	if (lpPattern)
 	{
 		delete lpPattern;
+		lpPattern = nullptr;
 	}
 }
 

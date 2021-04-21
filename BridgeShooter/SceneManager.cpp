@@ -37,11 +37,13 @@ HRESULT SceneManager::Init()
 
 void SceneManager::Release()
 {
+	scenes[(int)currScene]->Release();
+
 	for (int i = 0; i < (int)SCENE_STATE::NONE; ++i)
 	{
 		if (scenes[i])
 		{
-			scenes[i]->Release();
+			//scenes[i]->Release();
 			delete scenes[i];
 			scenes[i] = nullptr;
 		}

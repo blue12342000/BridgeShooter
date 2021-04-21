@@ -42,12 +42,12 @@ void Planet04AIcontroller::Update(float deltaTime)
 				else
 				{
 					elapsedTime = 0;
-					lpUnit->SetElapsedTime(elapsedTime);
+					lpUnit->elapsedTime = elapsedTime;
 					state = UNIT_STATE::MOVE;
 				}
 				break;
 		case UNIT_STATE::MOVE:
-			lpUnit->speed = 400;
+			lpUnit->transform.speed = 400;
 			lpUnit->Translate(POINTFLOAT{ (float)((rand() % 150 + 60) - 135) / 10, (float)((rand() % 150 + 60) - 135) / 10 });
 			state = UNIT_STATE::MOVE_ING;
 			elapsedTime = 0;
@@ -80,8 +80,8 @@ void Planet04AIcontroller::Update(float deltaTime)
 		case UNIT_STATE::MOVE_PATTERN:
 			elapsedTime = 8;
 			lpUnit->ResetTimer();
-			lpUnit->SetPattern(vLpPatterns[(int)currentPattern]);
-			lpUnit->speed = 100;
+			lpUnit->lpPattern = vLpPatterns[(int)currentPattern];
+			lpUnit->transform.speed = 100;
 			state = UNIT_STATE::MOVE_PATTERN_ING;
 			break;
 		case UNIT_STATE::MOVE_PATTERN_ING:
@@ -98,7 +98,7 @@ void Planet04AIcontroller::Update(float deltaTime)
 			}
 			else
 			{
-				lpUnit->SetPattern(nullptr);
+				lpUnit->lpPattern = nullptr;
 				state = UNIT_STATE::UPGRADE;
 			}
 			break;
@@ -126,7 +126,7 @@ void Planet04AIcontroller::Update(float deltaTime)
 			if (distance < 100)
 			{
 				elapsedTime = 0;
-				lpUnit->SetPos(origin);
+				lpUnit->pos = origin;
 				state = UNIT_STATE::IDLE;
 			}
 			break;
