@@ -1,7 +1,7 @@
 #include "AIController.h"
 #include "Unit.h"
 
-void AIController::SetController(Unit* lpUnit)
+void AIController::SetUnit(Unit* lpUnit)
 {
 	this->lpUnit = lpUnit;
 	lpUnit->SetInetia(true);

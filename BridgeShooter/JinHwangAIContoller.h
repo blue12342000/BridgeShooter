@@ -7,7 +7,6 @@ private:
 	enum class USE_PATTERN
 	{
 		BASIC,
-		CIRCLE,
 		NONE
 	};
 

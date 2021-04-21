@@ -1,13 +1,12 @@
 #pragma once
 #include"GameObject.h"
 
-class UIobject;
 class Animation;
 class Factory;
-class Pattern;
 class Unit : public GameObject
 {
 protected:
+	bool isReady;
 	UNIT_KIND kind;
 	Animation* lpAnimation;
 	Factory* lpFactory;
@@ -19,7 +18,7 @@ protected:
 	int bomb;
 
 public:
-	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false), hp(0), bomb(0){}
+	Unit(): GameObject(), isReady(false), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false), hp(0), bomb(0){}
 	virtual ~Unit() {}
 
 	virtual void Init() override;
@@ -33,18 +32,18 @@ public:
 	virtual void ToggleInertia() final { isInertia = !isInertia; }
 
 	virtual void ResetTimer() final;
-
 	virtual void SetFactory(Factory* lpFactory) final;
 	virtual void SetFactoryLine(int factoryLine) final;
-	virtual void SetHp(float hp) final { this->hp = hp; };
 
 	inline int GetFactoryLine() {return factoryLine; }
+	inline void SetHp(float hp) { this->hp = hp; };
 	inline float GetHp() { return hp; }
 	inline int GetBomb() { return bomb; }
-
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline Unit*& GetTarget() { return lpTarget; }
 	inline void SetInetia(bool isInertia) { this->isInertia = isInertia; }
 	inline Animation* GetLpAnimation() { return lpAnimation; }
+	inline bool IsReady() { return isReady; }
+	inline void SetIsReady(bool isReady) { this->isReady = isReady; }
 };
 

@@ -14,7 +14,7 @@ void SpaceShip::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
-	transform.speed = 200;
+	transform.speed = 300;
 	hp = 50;
 	elapsedTime = 0;
 	angle = -PI / 2;

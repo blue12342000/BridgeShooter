@@ -2,13 +2,11 @@
 #include "Unit.h"
 #include "Pattern.h"
 #include "BasicPattern.h"
-#include "CircleMovePattern.h"
 
 void Planet04AIcontroller::Init()
 {
 	vLpPatterns.resize((int)USE_PATTERN::NONE);
 	vLpPatterns[(int)USE_PATTERN::BASIC] = new BasicPattern();
-	vLpPatterns[(int)USE_PATTERN::CIRCLE] = new CircleMovePattern();
 	state = UNIT_STATE::IDLE;
 	currentPattern = USE_PATTERN::NONE;
 	elapsedTime = 0;

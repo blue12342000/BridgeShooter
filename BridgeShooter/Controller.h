@@ -14,7 +14,7 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render(HDC hdc) = 0;
 
-	virtual void SetController(Unit* lpUnit) = 0;
-	inline Unit* GetController() { return this->lpUnit; }
+	virtual void SetUnit(Unit* lpUnit) = 0;
+	inline Unit* GetUnit() { return this->lpUnit; }
 };
 

@@ -11,7 +11,7 @@ void PlayerController::Init()
 	mKeyMap.insert(make_pair(INPUT_COMMAND::DOWNGRADE, UnitEvent{ INPUT_TYPE::ONCE, VK_OEM_4 }));
 	mKeyMap.insert(make_pair(INPUT_COMMAND::UPGRADE, UnitEvent{ INPUT_TYPE::ONCE, VK_OEM_6 }));
 	mKeyMap.insert(make_pair(INPUT_COMMAND::INERTIA, UnitEvent{ INPUT_TYPE::ONCE, VK_OEM_7 }));
-	isInetia = false;
+	origin = { WINSIZE_WIDTH / 2.0f, WINSIZE_HEIGHT * 9 / 10.0f };
 }
 
 void PlayerController::Release()
@@ -22,25 +22,40 @@ void PlayerController::Update(float deltaTime)
 {
 	if (lpUnit)
 	{
-		for (auto& pair : mKeyMap)
+		if (!lpUnit->IsReady())
 		{
-			switch (pair.second.type)
+			float distance = pow(origin.y - lpUnit->pos.y, 2) + pow(origin.x - lpUnit->pos.x, 2);
+			if (distance > 100)
 			{
-			case INPUT_TYPE::ONCE:
-				if (KeyManager::GetSingleton()->IsKeyDownOne(pair.second.key))
-				{
-					pair.second.lpCmd();
-				}
-				break;
-			case INPUT_TYPE::STAY:
-				if (KeyManager::GetSingleton()->IsKeyDownStay(pair.second.key))
-				{
-					pair.second.lpCmd();
-				}
-				break;
+				lpUnit->Translate(POINTFLOAT{ origin.x - lpUnit->pos.x, origin.y - lpUnit->pos.y });
+			}
+			if (distance < 100)
+			{
+				lpUnit->SetIsReady(true);
+				lpUnit->SetInetia(false);
 			}
 		}
-
+		else
+		{
+			for (auto& pair : mKeyMap)
+			{
+				switch (pair.second.type)
+				{
+				case INPUT_TYPE::ONCE:
+					if (KeyManager::GetSingleton()->IsKeyDownOne(pair.second.key))
+					{
+						pair.second.lpCmd();
+					}
+					break;
+				case INPUT_TYPE::STAY:
+					if (KeyManager::GetSingleton()->IsKeyDownStay(pair.second.key))
+					{
+						pair.second.lpCmd();
+					}
+					break;
+				}
+			}
+		}
 		lpUnit->Update(deltaTime);
 	}
 }
@@ -50,12 +65,13 @@ void PlayerController::Render(HDC hdc)
 	if (lpUnit) lpUnit->Render(hdc);
 }
 
-void PlayerController::SetController(Unit* lpUnit)
+void PlayerController::SetUnit(Unit* lpUnit)
 {
 	this->lpUnit = lpUnit;
-	this->lpUnit->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT };
+	this->lpUnit->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT + 300 };
 	this->lpUnit->angle = PI * 3 / 2;
-	this->lpUnit->SetInetia(false);
+	this->lpUnit->SetInetia(true);
+	this->lpUnit->SetIsReady(false);
 	mKeyMap[INPUT_COMMAND::LEFT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ -10, 0 });
 	mKeyMap[INPUT_COMMAND::RIGHT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 10, 0 });
 	mKeyMap[INPUT_COMMAND::UP].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 0, -10 });

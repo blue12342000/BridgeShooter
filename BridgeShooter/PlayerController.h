@@ -32,8 +32,8 @@ private:
 	};
 
 private:
-	bool isInetia;
 	map<INPUT_COMMAND, UnitEvent> mKeyMap;
+	POINTFLOAT origin;
 
 private:
 	void Init() override;
@@ -41,6 +41,6 @@ private:
 	void Update(float deltaTime) override;
 	void Render(HDC hdc) override;
 
-	void SetController(Unit* lpUnit);
+	void SetUnit(Unit* lpUnit);
 };
 
