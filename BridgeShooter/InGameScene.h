@@ -55,6 +55,7 @@ private:
 	float elapsedTime;
 	float backgroundMover;
 
+
 public:
 	virtual HRESULT Init();
 	virtual void Release();

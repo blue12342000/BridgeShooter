@@ -199,7 +199,7 @@ void InGameScene::Release()
 
 void InGameScene::Update(float deltaTime)
 {
-    elapsedTime += deltaTime;
+    
 
     CheckCollision();
     
@@ -213,7 +213,7 @@ void InGameScene::Update(float deltaTime)
                 currStage = nextStage;
                 elapsedTime = 0;
                 isBossAlive = true;
-                //잡몹 세팅
+                catPos.x = -50;
             }
             else
             {
@@ -224,62 +224,57 @@ void InGameScene::Update(float deltaTime)
         case STAGE_STATE::STAGE1:
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE2;
-            isBossAlive = true;
+            
             lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpJinHwang);
-            lpEnemyController->GetController()->SetHp(1000);
+            lpUIobject->SetEnemy(lpEnemyController->GetController());
+            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
 
-            //미사일 해제
-            //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
-            //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+            //missile release
+            //vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+            //for (int i = 0; i < vLpEnemyMissile.size(); ++i)
             //{
             //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
             //}
-
+            
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE2:
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE3;
-            isBossAlive = true;
+            
             lpEnemyController = vLpEnemyController[2];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpPlanet04);
+            lpUIobject->SetEnemy(lpEnemyController->GetController());
+            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanet04);
 
-            //미사일 해제
-         //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
-         //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
-         //{
-         //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-         //}
+            //missile release
 
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE3:
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE4;
-            isBossAlive = true;
+            
             lpEnemyController = vLpEnemyController[3];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpPlanetKMS);
+            lpUIobject->SetEnemy(lpEnemyController->GetController());
+            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanetKMS);
-            //미사일 해제
-         //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
-         //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
-         //{
-         //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-         //}
+
+            //missile release
 
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE4:
-            currStage = STAGE_STATE::NONE;  // 페이드아웃시켜주는것도..
-
-            if(elapsedTime > 10)
-                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE4;
+            SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
             break;
              
         }
@@ -288,9 +283,13 @@ void InGameScene::Update(float deltaTime)
     if (elapsedTime > 10 && isBossAlive == true)
     {
         if (lpEnemyController) lpEnemyController->Update(deltaTime);
-    }
        
-    if (lpPlayerController) lpPlayerController->Update(deltaTime);
+    }
+
+    if(isBossAlive)
+        if (lpPlayerController) lpPlayerController->Update(deltaTime);
+       
+    
 
     for (int i =0; i <vEnemys.size(); i++)
     {
@@ -316,6 +315,8 @@ void InGameScene::Update(float deltaTime)
         else
             lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
     }
+
+    elapsedTime += deltaTime;
 
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
@@ -422,6 +423,7 @@ void InGameScene::CheckCollision()
                 lpEnemyController->GetController()->SetHp(0);
                 //적의 사망 체크를 여기서 표현
                 isBossAlive = false;
+                elapsedTime = 0;
             }
             //체력이 0이 아니면 10씩 데미지를 줌
             else                               // 내가 적에게 주는 데미지값 :10
