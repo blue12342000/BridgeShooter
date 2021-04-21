@@ -11,6 +11,7 @@ public:
 		TITLE,
 		SELECT,
 		INGAME,
+		ENDING,
 		NONE
 	};
 

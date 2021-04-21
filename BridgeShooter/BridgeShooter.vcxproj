@@ -151,6 +151,7 @@
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="CircleMovePattern.cpp" />
+    <ClCompile Include="Ending.cpp" />
     <ClCompile Include="JinHwangAIContoller.cpp" />
     <ClCompile Include="KmsAIController.cpp" />
     <ClCompile Include="Planet04AIController.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="CircleMovePattern.h" />
+    <ClInclude Include="Ending.h" />
     <ClInclude Include="JinHwangAIContoller.h" />
     <ClInclude Include="KmsAIController.h" />
     <ClInclude Include="Planet04AIController.h" />

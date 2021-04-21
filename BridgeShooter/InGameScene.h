@@ -7,10 +7,11 @@ class Unit;
 class Item;
 class Image;
 class Controller;
+class Animation;
 class InGameScene : public GameScene
 {
 private:
-	enum class STAGE_STATE
+	enum STAGE_STATE
 	{
 		LOADING,
 		STAGE1,
@@ -35,13 +36,19 @@ private:
 
 	Controller* lpPlayerController;
 	Controller* lpEnemyController;
-	vector<Controller*> vLpMobController;
 
 	Image* lpBackBuffer;
 	Image* lpBackImage;
 	Image* lpBackImage2;	
 
 	UIobject* lpUIobject;
+
+	STAGE_STATE currStage;
+	STAGE_STATE nextStage;
+	bool isBossAlive;
+
+	Animation* lpLoadingCat;
+	POINTFLOAT catPos;
 
 	float elapsedTime;
 	float backgroundMover;
@@ -51,6 +58,5 @@ public:
 	virtual void Release();
 	virtual void Update(float deltaTime);
 	virtual void Render(HDC hdc);
-	void CheckCollision( );
+	void CheckCollision();
 };
-

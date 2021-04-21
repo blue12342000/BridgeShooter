@@ -7,10 +7,10 @@ void SSJAIController::Init()
 {
 	vLpPatterns.resize((int)USE_PATTERN::NONE);
 	vLpPatterns[(int)USE_PATTERN::BASIC] = new BasicPattern();
-	state = UNIT_STATE::ATTACK;
+	state = UNIT_STATE::RETURN;
 	currentPattern = USE_PATTERN::NONE;
 	elapsedTime = 0;
-	
+	distance = 0;
 }
 
 void SSJAIController::Release()
@@ -30,14 +30,21 @@ void SSJAIController::Update(float deltaTime)
 		{
 		case UNIT_STATE::IDLE:
 			currentPattern = USE_PATTERN::NONE;
-			state = UNIT_STATE::ATTACK;
+			if (lpUnit->pos.y < 0)
+			{
+				state = UNIT_STATE::RETURN;
+			}
+			else
+			{
+				state = UNIT_STATE::ATTACK;
+			}
 			break;
 		case UNIT_STATE::ATTACK:
 			currentPattern = USE_PATTERN::NONE;
 			lpUnit->Fire();
 			lpUnit->Update(deltaTime);
 			elapsedTime++;
-			if (elapsedTime>6500) 
+			if (elapsedTime>10000) 
 			{
 				state = UNIT_STATE::PATTERN_ATTACK;
 			}
@@ -55,6 +62,18 @@ void SSJAIController::Update(float deltaTime)
 			else if (lpUnit->pos.x < 100)
 			{
 				lpUnit->SetAngle(0);
+			}
+			break;
+		case UNIT_STATE::RETURN:
+			if (lpUnit->pos.y < 200)
+			{
+				lpUnit->pos.y += 0.3f;
+				lpUnit->Translate(POINTFLOAT{ 0, -1 });
+			}
+			else if (lpUnit->pos.y >= 200)
+			{
+				elapsedTime = 0;
+				state = UNIT_STATE::ATTACK;
 			}
 			break;
 		case UNIT_STATE::NONE:
