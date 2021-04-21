@@ -1,10 +1,8 @@
 #include "SpiralPattern.h"
 #include "GameObject.h"
 
-MoveInfo SpiralPattern::Move(float deltaTime, GameObject* lpObject)
+void SpiralPattern::Move(float deltaTime, GameObject* lpObject)
 {
-    MoveInfo moveInfo = {};
-
     /*
         lpObject->origin : 탄의 첫 발사 각도
         lpObject->speed : 탄의 속도로 픽셀값이 아닌 PI 값을 기준으로 한다
@@ -13,11 +11,10 @@ MoveInfo SpiralPattern::Move(float deltaTime, GameObject* lpObject)
         lpObject->amplitude : 탄의 기울기 작을수록 많이 휜다.
     */
 
-    float dir = lpObject->speed / abs(lpObject->speed);
-    lpObject->period = lpObject->speed * pow(9.0f / 10.0f, 1 + log(lpObject->elapsedTime + 1));
-    lpObject->pos.x = lpObject->origin.x + cosf(lpObject->angle) * lpObject->amplitude * sqrt(lpObject->elapsedTime);
-    lpObject->pos.y = lpObject->origin.y + sinf(lpObject->angle) * lpObject->amplitude * sqrt(lpObject->elapsedTime);
-    lpObject->angle = lpObject->originAngle + lpObject->period * sqrt(lpObject->elapsedTime);
-
-    return moveInfo;
+    Transform& transform = lpObject->transform;
+    float dir = transform.speed / abs(transform.speed);
+    transform.period = transform.speed * pow(9.0f / 10.0f, 1 + log(lpObject->elapsedTime + 1));
+    lpObject->pos.x = transform.pos.x + cosf(lpObject->angle) * transform.amplitude * sqrt(lpObject->elapsedTime);
+    lpObject->pos.y = transform.pos.y + sinf(lpObject->angle) * transform.amplitude * sqrt(lpObject->elapsedTime);
+    lpObject->angle = transform.angle + transform.period * sqrt(lpObject->elapsedTime);
 }

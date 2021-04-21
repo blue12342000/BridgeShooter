@@ -7,13 +7,13 @@ void JinHwang::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("JINHWANG", 50, true);
-	speed = 420;
+	transform.speed = 420;
 	hp = 1000;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new JinHwangFactory();
 	lpFactory->Init();
-	collider.SetHitBox(pos, { 0, 0 }, 100, 100);
+	collider.SetHitBox(pos, 100, 100);
 }
 
 void JinHwang::Update(float deltaTime)

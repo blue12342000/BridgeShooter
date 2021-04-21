@@ -15,5 +15,8 @@ public:
 	void Update(float deltaTime);
 	void Render(HDC hdc, int destX, int destY);
 	void Render(HDC hdc, int destX, int destY, float angle);
+
+	inline Image* GetLpImage() { return lpImage; }
+	inline int GetFrame() { return (int)frame; }
 };
 

@@ -5,10 +5,8 @@
 #include "Missile.h"
 #include "SinePattern.h"
 #include "SpiralPattern.h"
-#include "ReverseSpiralPattern.h"
 #include "SinePattern.h"
 #include "ReflectPattern.h"
-#include "DelayBasicPattern.h"
 #include "BridgeShooter.h"
 
 
@@ -17,10 +15,8 @@ void SSJFactory::Init()
 	vLpPatterns.resize(CREATE_PATTERN::SFCP_NONE);
 	vLpPatterns[CREATE_PATTERN::SFCP_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL] = new SpiralPattern();
-	vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL] = new ReverseSpiralPattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_SINE] = new SinePattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_REFLECT] = new ReflectPattern();
-	vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC] = new DelayBasicPattern();
 
 	createLine = 0;
 	maxCreateLIne = 3;
@@ -83,7 +79,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->SetMissile("MISSILE_08", lpUnit->pos, lpUnit->angle - 2 * PI / 8 * i, 300, 14);
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL]);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
@@ -178,7 +174,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 						{
 							Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 							lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle - PI * 4 / 5 - 0.05 * i - PI / 2, 200, 14, 0.07f * j);
-							lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC]);
+							lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
 							lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 							MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 						}
@@ -199,7 +195,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 						{
 							Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 							lpMissile->SetMissile("MISSILE_01", lpUnit->pos, lpUnit->angle - PI * 4 / 5 - 0.05 * i + PI / 2, 200, 14, 0.07f * j);
-							lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC]);
+							lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
 							lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 							MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 						}

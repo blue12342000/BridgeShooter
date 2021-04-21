@@ -147,23 +147,14 @@
     <ClCompile Include="SpiralPattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="ReverseSpiralPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="JinHwangFactory.cpp">
       <Filter>소스 파일\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="DelayBasicPattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>소스 파일\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>소스 파일\Factory\Super</Filter>
-    </ClCompile>
-    <ClCompile Include="ReverseSinePattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="SSJFactory.cpp">
       <Filter>소스 파일\Factory</Filter>
@@ -235,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="KmsAIController.cpp">
       <Filter>소스 파일\Engine\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideBasicPattern.cpp">
+      <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,26 +328,17 @@
     <ClInclude Include="SSJFactory.h">
       <Filter>소스 파일\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="ReverseSpiralPattern.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="JinHwangFactory.h">
       <Filter>소스 파일\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>소스 파일\Factory\Super</Filter>
     </ClInclude>
-    <ClInclude Include="DelayBasicPattern.h">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>소스 파일\Engine</Filter>
     </ClInclude>
     <ClInclude Include="BridgeShooter.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ReverseSinePattern.h">
-      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>소스 파일\UI</Filter>
@@ -431,6 +416,9 @@
     </ClInclude>
     <ClInclude Include="KmsAIController.h">
       <Filter>소스 파일\Engine\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideBasicPattern.h">
+      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,27 +32,27 @@ void KmsAIController::Update(float deltaTime)
 {
 	if (lpUnit) 
 	{
-		if (lpUnit->hp <= 0) 
+		if (lpUnit->GetHP() <= 0) 
 		{
 			
 		}
 		else 
 		{
-			lpUnit->SetElapsedTime(2);//계속 팅기게(10보다 작게)
-			if (lpUnit->hp >= 300)
+			lpUnit->elapsedTime = 2;//계속 팅기게(10보다 작게)
+			if (lpUnit->GetHP() >= 300)
 			{
 				prevNum = 0;
-				lpUnit->speed = 0;
+				lpUnit->transform.speed = 0;
 				lpUnit->SetFactoryLine(0);
 			}
-			else if (lpUnit->hp >= 100)
+			else if (lpUnit->GetHP() >= 100)
 			{
 				if (prevNum != 1) 
 				{
-					lpUnit->SetAngle(0);
+					lpUnit->angle = 0;
 				}
 				prevNum = 1;
-				lpUnit->speed = 100;
+				lpUnit->transform.speed = 100;
 				lpUnit->SetFactoryLine(1);
 
 			}
@@ -60,10 +60,10 @@ void KmsAIController::Update(float deltaTime)
 			{
 				if (prevNum != 2)
 				{
-					lpUnit->SetAngle(PI*2/3);
+					lpUnit->angle = PI*2/3;
 				}
 				prevNum = 2;
-				lpUnit->speed = rand()%200+100;
+				lpUnit->transform.speed = rand()%200+100;
 				lpUnit->SetFactoryLine(2);
 			}
 			if (lpPattern)

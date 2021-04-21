@@ -15,40 +15,49 @@ struct Collider
 	int height;
 	RECT hitBox;
 
-	void SetHitBox(POINTFLOAT pos, POINTFLOAT deltaPos = { 0,0 }, int width = -1, int height = -1)
+	void SetHitBox(POINTFLOAT pos, int width = -1, int height = -1)
 	{
-		//width 값 갱신 this에 있는 내 width 값으로
 		if (width > 0)
 		{
 			this->width = width;
-			hitBox.left = (int)(pos.x + deltaPos.x - width / 2);
-			hitBox.right = (int)(pos.x + deltaPos.x + width / 2);
+			hitBox.left = (int)(pos.x - width / 2);
+			hitBox.right = (int)(pos.x + width / 2);
 		}
 		else
 		{
-			hitBox.left = (int)(pos.x  + deltaPos.x - this->width / 2);
-			hitBox.right = (int)(pos.x  + deltaPos.x + this->width / 2);
+			hitBox.left = (int)(pos.x - this->width / 2);
+			hitBox.right = (int)(pos.x + this->width / 2);
 		}
 
 		if (height > 0)
 		{
 			this->height = height;
-			hitBox.top = (int)(pos.y + deltaPos.y - height / 2);
-			hitBox.bottom = (int)(pos.y + deltaPos.y + height / 2);
+			hitBox.top = (int)(pos.y - height / 2);
+			hitBox.bottom = (int)(pos.y + height / 2);
 		}
 		else
 		{
 			
-			hitBox.top = (int)(pos.y + deltaPos.y - this->height / 2);
-			hitBox.bottom = (int)(pos.y + deltaPos.y + this->height / 2);
+			hitBox.top = (int)(pos.y - this->height / 2);
+			hitBox.bottom = (int)(pos.y + this->height / 2);
 		}
 	}
 };
 
-struct MoveInfo
+/*
+* POINTFLOAT	이동 시작점
+* float			이동 각도
+* float			이동 속도
+* float			진동 주기
+* float			진폭
+*/
+struct Transform
 {
+	POINTFLOAT pos;
 	float angle;
-	POINTFLOAT deltaPos;
+	float speed;
+	float period;
+	float amplitude;
 };
 
 interface GameEvent
@@ -64,31 +73,20 @@ class Pattern;
 class GameObject : public GameEvent
 {
 public:
-	POINTFLOAT origin;
-	POINTFLOAT pos;
-	float originAngle;
-	float angle;
-	float speed;
-	float period;
-	float amplitude;
-	Collider collider;
 	float elapsedTime;
-	MoveInfo deltaMove;
-	int hp;
-	
-	Pattern* lpPattern;
+	float angle;
+	Collider collider;
+	POINTFLOAT pos;
 
+	Transform transform;
+	Pattern* lpPattern;
+	
 public:
-	GameObject() :pos({ 0,0 }), angle(0), speed(0), period(0), amplitude(0), collider(Collider()), elapsedTime(0), hp(0), lpPattern(nullptr) {}
+	GameObject() :elapsedTime(0), angle(0), collider(Collider()), pos({0, 0}), lpPattern(nullptr), transform(Transform{}) {}
 	virtual ~GameObject() {}
 
 	virtual void Init() {}
 	virtual void Update(float deltaTime) {}
 	virtual void Release() {}
 	virtual void Render(HDC hdc) {}
-
-	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
-	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
-	inline void SetAngle(float angle) { this->angle = angle; }
-	inline void SetElapsedTime(float elapsedTime) { this->elapsedTime = elapsedTime; }
 };

@@ -15,7 +15,7 @@ void SineFactory::Fire(Unit* lpObject)
 	for (int i = -1; i < 2; i += 2)
 	{
 		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->SetSineMissile("MISSILE_01", lpObject->pos, lpObject->angle, PI / 2 * i, PI * 8, 30, 500, 20, 0);
+		lpMissile->SetMissile("MISSILE_01", lpObject->angle, Transform{ lpObject->pos, PI / 2 * i, 500, PI * 8, 30 }, 20);
 		lpMissile->SetPattern(pattern);
 		MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 	}

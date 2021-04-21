@@ -4,7 +4,6 @@
 #include "RainPattern.h"
 #include "ReflectPattern.h"
 #include "SpiralPattern.h"
-#include "ReverseSpiralPattern.h"
 #include "Missile.h"
 #include "Unit.h"
 //#include "Factory.h"
@@ -16,7 +15,6 @@ void Planet04Factory::Init()
 	vLpPatterns[CREATE_PATTERN::PLANET04_RAIN] = new RainPattern();
 	vLpPatterns[CREATE_PATTERN::PLANET04_REFLECT] = new ReflectPattern();
 	vLpPatterns[CREATE_PATTERN::PLANET04_SPRIAL] = new SpiralPattern();
-	vLpPatterns[CREATE_PATTERN::PLANET04_RSPRIAL] = new ReverseSpiralPattern();
 	
 	createLine = 0;
 	maxCreateLIne = 3;
@@ -86,7 +84,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle += -PI / 32, 200, 20);
-			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RSPRIAL]);
+			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_SPRIAL]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 		}
 	}

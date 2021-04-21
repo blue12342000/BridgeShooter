@@ -9,12 +9,12 @@ void Planet_KMS::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet_KMS", 50, true);
 	hp = 500;
-	speed = 374;
+	transform.speed = 374;
 	elapsedTime = 0;
 	angle =0;
 	lpFactory = new Planet_KMS_Factory();
 	lpFactory->Init();
-	collider.SetHitBox(pos, { 0, 0 }, 100, 100);
+	collider.SetHitBox(pos, 100, 100);
 
 }
 

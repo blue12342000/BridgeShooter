@@ -6,13 +6,13 @@
 void Item::Init()
 {
 	angle = PI / 4;
-	speed = 400;
+	transform.speed = 400;
 	elapsedTime = 0.0f;
     type = (ITEM_TYPE)(rand() % (int)ITEM_TYPE::NONE);
     lpPattern = new ReflectPattern();
     lpAnimation = new Animation();
     lpAnimation->Change("Item_Bomb", 20, true);
-    collider.SetHitBox(pos, { 0, 0 }, 60, 60);
+    collider.SetHitBox(pos, 60, 60);
 }
 
 void Item::Release()

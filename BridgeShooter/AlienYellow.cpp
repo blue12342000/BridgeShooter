@@ -26,9 +26,9 @@ void AlienYellow::Init()
 	lpPattern = new BasicPattern();
 	elapsedTime = 0;
 	angle = 0;
-	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
+	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_2", 4, true);
-	speed = 80.0f;
+	transform.speed = 80.0f;
 	hp = 50;
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;

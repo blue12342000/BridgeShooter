@@ -3,7 +3,6 @@
 #include "BasicPattern.h"
 #include "ReflectPattern.h"
 #include "SpiralPattern.h"
-#include "ReverseSpiralPattern.h"
 #include "BoomerangPattern.h"
 #include "Missile.h"
 #include "Unit.h"
@@ -14,7 +13,6 @@ void JinHwangFactory::Init()
 	vLpPatterns[CREATE_PATTERN::JFCP_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::JFCP_REFLECT] = new ReflectPattern();
 	vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL] = new SpiralPattern();
-	vLpPatterns[CREATE_PATTERN::JFCP_REVERSE_SPIRAL] = new ReverseSpiralPattern();
 	vLpPatterns[CREATE_PATTERN::JFCP_BOOMERANG] = new BoomerangPattern();
 
 	createLine = 1;
@@ -72,8 +70,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int i = 0; i < 8; ++i)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					//lpMissile->SetMissile("MISSILE_07", lpUnit->GetPos(), lpUnit->angle + lpUnit->elapsedTime * 1.5f + PI / 4 * i, 100, 20);
-					lpMissile->SetSineMissile("MISSILE_07", lpUnit->pos, lpUnit->angle + PI / 4 * i, lpUnit->angle+ PI / 4 * i, 0, 300, PI, 20, 0);
+					lpMissile->SetMissile("MISSILE_07", lpUnit->angle + PI / 4 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 4 * i, 300, 0, PI }, 20);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}
@@ -83,8 +80,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int i = 0; i < 8; ++i)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					//lpMissile->SetMissile("MISSILE_08", lpUnit->GetPos(), lpUnit->angle + lpUnit->elapsedTime * 1.5f + PI / 4 * i, 100, 20);
-					lpMissile->SetSineMissile("MISSILE_08", lpUnit->pos, lpUnit->angle + PI / 4 * i, lpUnit->angle + PI / 4 * i, 0, 300, -PI, 20, 0);
+					lpMissile->SetMissile("MISSILE_08", lpUnit->angle + PI / 4 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 4 * i, 300, 0, -PI }, 20);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}

@@ -23,22 +23,22 @@ void Unit::Update(float deltaTime)
 			float dir = atan2(force.y, force.x);
 			if (isInertia)
 			{
-				pos.x += cos(dir) * speed * abs(force.x) / 10 * deltaTime;
-				pos.y += sin(dir) * speed * abs(force.y) / 10 * deltaTime;
+				pos.x += cos(dir) * transform.speed * abs(force.x) / 10 * deltaTime;
+				pos.y += sin(dir) * transform.speed * abs(force.y) / 10 * deltaTime;
 			}
 			else
 			{
-				pos.x += cos(dir) * speed * deltaTime;
-				pos.y += sin(dir) * speed * deltaTime;
+				pos.x += cos(dir) * transform.speed * deltaTime;
+				pos.y += sin(dir) * transform.speed * deltaTime;
 			}
 		}
 	}
 	else
 	{
-		deltaMove = lpPattern->Move(deltaTime, this);
+		lpPattern->Move(deltaTime, this);
 	}
 
-	collider.SetHitBox(pos, deltaMove.deltaPos);
+	collider.SetHitBox(pos);
 	if (lpFactory) lpFactory->Update(deltaTime);
 	if (lpAnimation) lpAnimation->Update(deltaTime);
 	if (isInertia)
@@ -87,7 +87,7 @@ void Unit::Release()
 
 void Unit::Render(HDC hdc)
 {
-	if (lpAnimation) lpAnimation->Render(hdc, pos.x + deltaMove.deltaPos.x, pos.y + deltaMove.deltaPos.y);
+	if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y);
 	if (isDebugMode)
 	{
 		Ellipse(hdc, collider.hitBox.left, collider.hitBox.top, collider.hitBox.right, collider.hitBox.bottom);

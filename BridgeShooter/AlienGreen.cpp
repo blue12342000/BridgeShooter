@@ -24,11 +24,11 @@ void AlienGreen::Init()
 	lpAnimation = new Animation();
 	elapsedTime = 0;
 	angle = 0;
-	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
+	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_3", 4, true);
 	lpFactory = new Planet04Factory();
 	lpPattern = new BasicPattern();
-	speed = 80.0f;
+	transform.speed = 80.0f;
 	hp = 50;
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;

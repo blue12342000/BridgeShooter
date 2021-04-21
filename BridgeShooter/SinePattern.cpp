@@ -1,9 +1,8 @@
 #include "SinePattern.h"
 #include "GameObject.h"
 
-MoveInfo SinePattern::Move(float deltaTime, GameObject* lpObject)
+void SinePattern::Move(float deltaTime, GameObject* lpObject)
 {
-	MoveInfo moveInfo = { 0, 0 };
 	if (lpObject)
 	{
 		/*
@@ -13,11 +12,10 @@ MoveInfo SinePattern::Move(float deltaTime, GameObject* lpObject)
 			lpObject->amplitude : 사인곡선의 진폭 클수록 진동의 깊이가 커진다
 			lpObject->pos : 실제 위치
 		*/
-
-		lpObject->pos.x = lpObject->origin.x + cosf(lpObject->angle) * lpObject->speed * lpObject->elapsedTime
-			+ cosf(lpObject->angle + lpObject->originAngle) * sin(lpObject->originAngle) * sin(lpObject->angle + lpObject->originAngle + lpObject->period * lpObject->elapsedTime) * lpObject->amplitude;
-		lpObject->pos.y = lpObject->origin.y + sinf(lpObject->angle) * lpObject->speed * lpObject->elapsedTime
-			+ sinf(lpObject->angle + lpObject->originAngle) * sin(lpObject->originAngle) * sin(lpObject->angle + lpObject->originAngle + lpObject->period * lpObject->elapsedTime) * lpObject->amplitude;
+		Transform& transform = lpObject->transform;
+		lpObject->pos.x = transform.pos.x + cosf(lpObject->angle) * transform.speed * lpObject->elapsedTime
+			+ cosf(lpObject->angle + transform.angle) * sin(transform.angle) * sin(lpObject->angle + transform.angle + transform.period * lpObject->elapsedTime) * transform.amplitude;
+		lpObject->pos.y = transform.pos.y + sinf(lpObject->angle) * transform.speed * lpObject->elapsedTime
+			+ sinf(lpObject->angle + transform.angle) * sin(transform.angle) * sin(lpObject->angle + transform.angle + transform.period * lpObject->elapsedTime) * transform.amplitude;
 	}
-	return moveInfo;
 }
