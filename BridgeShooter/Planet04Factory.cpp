@@ -102,7 +102,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 			++count;
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpUnit->angle += PI * count / 16;
-			lpMissile->SetMissile("MISSILE_01", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 150 + (8 * count) }, 20);
+			lpMissile->SetMissile("MISSILE_01", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 150.0f + (8 * count) }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			if (count >= 9) count *= -1;
