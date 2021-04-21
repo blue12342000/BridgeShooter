@@ -24,8 +24,10 @@ void UIobject::Init()
 	lpMissile[0]	= ImageManager::GetSingleton()->FindImage("NowMissile_1");
 	lpMissile[1]	= ImageManager::GetSingleton()->FindImage("NowMissile_2");
 	lpMissile[2]	= ImageManager::GetSingleton()->FindImage("NowMissile_3");
-	lpMissile[3]	 = ImageManager::GetSingleton()->FindImage("NowMissile_2");
-	
+	lpMissile[3]	= ImageManager::GetSingleton()->FindImage("NowMissile_4");
+	lpMissile[4]	= ImageManager::GetSingleton()->FindImage("NowMissile_MAXXX");
+	lpMissile[5]	= ImageManager::GetSingleton()->FindImage("NowMissile_LVMAXXX");
+
 	isMaxHp = true;
 	
 	playerMaxHp = 0; 
@@ -49,8 +51,7 @@ void UIobject::Render(HDC hdc)
 	//최대값 저장.
 	SetBossMaxHp();
 	
-
-	playerUIobject = GetRectToCenter(lpPlayer->GetHp() / 2 + 50, 100, lpPlayer->GetHp(), 18);
+	playerUIobject = GetRectToCenter(lpPlayer->GetHp() / 2 + 50, 80, lpPlayer->GetHp(), 18);
 	Rectangle(hdc, playerUIobject.left, playerUIobject.top, playerUIobject.right, playerUIobject.bottom);
 	// 체력에 따라서 체력바 색상이 달라지게 하고싶다. 어떻게 할까
 	bossUIobject = GetRectToCenter(lpEnemy->GetHp() / 2 + 50, 50, lpEnemy->GetHp(), 18);
@@ -58,15 +59,15 @@ void UIobject::Render(HDC hdc)
 	lpBossHpBar->Render(hdc, WINSIZE_WIDTH / 2, WINSIZE_HEIGHT / 20, 0, U_IA_CENTER);
 	//봄
 	for (int i = 0; i < bombAmount; i++)
-		lpBombCount->Render(hdc, WINSIZE_WIDTH / 7 + 50 * i, WINSIZE_HEIGHT / 8 + 100, 0, U_IA_CENTER);
+		lpBombCount->Render(hdc, 30+30* i, WINSIZE_HEIGHT / 8 + 50, 0, U_IA_CENTER);
 	//목숨 . 라이프 스톡
 	for (int i = 0; i < lifeAmount; i++)
-		lpLifeStock->Render(hdc, WINSIZE_WIDTH / 7 + 50 * i, WINSIZE_HEIGHT / 8 + 50, 0, U_IA_CENTER);
+		lpLifeStock->Render(hdc, 30 + 30 * i, WINSIZE_HEIGHT / 8 + 15, 0, U_IA_CENTER);
 	//탄변경
 	if (lpPlayer)
-		lpMissile[lpPlayer->GetFactoryLine()]->Render(hdc, WINSIZE_WIDTH / 8, WINSIZE_HEIGHT - 100, 0, U_IA_CENTER);
+		lpMissile[lpPlayer->GetFactoryLine()]->Render(hdc, WINSIZE_WIDTH / 8, WINSIZE_HEIGHT - 70, 0, U_IA_CENTER);
 	//메뉴얼
-	lpFcukingManual->Render(hdc, WINSIZE_WIDTH / 10, WINSIZE_HEIGHT / 2, 0, U_IA_CENTER);
+	lpFcukingManual->Render(hdc, WINSIZE_WIDTH -80, WINSIZE_HEIGHT / 2, 0, U_IA_CENTER);
 }
 
 //최대치 저장하는 함수
