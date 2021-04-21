@@ -52,10 +52,11 @@ HRESULT InGameScene::Init()
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
     lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanetKMS->SetTarget(lpPlayer);
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
 
     lpItem = new Item();
@@ -405,6 +406,7 @@ void InGameScene::CheckCollision()
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
+                    MissileManager::GetSingleton()->ClearActiveMissile();
                     EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
                     //적의 사망 체크를 여기서 표현
                 }
@@ -437,6 +439,7 @@ void InGameScene::CheckCollision()
                
                 isBossAlive = false;
                 lpEnemyController->GetController()->SetHp(0);
+                MissileManager::GetSingleton()->ClearActiveMissile();
                 EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
             }
             else

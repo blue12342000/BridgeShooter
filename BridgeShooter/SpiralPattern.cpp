@@ -22,4 +22,10 @@ void SpiralPattern::Move(float deltaTime, GameObject* lpObject)
     lpObject->pos.x = transform.pos.x + cosf(lpObject->angle) * transform.amplitude * sqrt(lpObject->elapsedTime);
     lpObject->pos.y = transform.pos.y + sinf(lpObject->angle) * transform.amplitude * sqrt(lpObject->elapsedTime);
     lpObject->angle = transform.angle + transform.period * sqrt(lpObject->elapsedTime);
+
+    //float dir = lpObject->speed / abs(lpObject->speed);
+    //lpObject->period = lpObject->speed * pow(9.0f / 10.0f, 1 + log(lpObject->elapsedTime + 1));
+    //lpObject->pos.x = lpObject->origin.x + cosf(lpObject->angle) * lpObject->amplitude * sqrt(lpObject->elapsedTime);
+    //lpObject->pos.y = lpObject->origin.y + sinf(lpObject->angle) * lpObject->amplitude * sqrt(lpObject->elapsedTime);
+    //lpObject->angle = lpObject->originAngle + lpObject->period * sqrt(lpObject->elapsedTime);
 }

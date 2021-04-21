@@ -70,7 +70,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int i = 0; i < 8; ++i)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					lpMissile->SetMissile("MISSILE_07", lpUnit->angle + PI / 4 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 4 * i, 300, 0, PI }, 20);
+					lpMissile->SetMissile("MISSILE_07", lpUnit->angle + PI / 4 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 4 * i, PI, 0, 300 }, 20);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}
@@ -80,7 +80,7 @@ void JinHwangFactory::Fire(Unit* lpUnit)
 				for (int i = 0; i < 8; ++i)
 				{
 					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-					lpMissile->SetMissile("MISSILE_08", lpUnit->angle + PI / 4 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 4 * i, 300, 0, -PI }, 20);
+					lpMissile->SetMissile("MISSILE_08", lpUnit->angle + PI / 4 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 4 * i, -PI, 0, 300 }, 20);
 					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL]);
 					MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				}

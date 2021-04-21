@@ -16,6 +16,7 @@ public:
 	void Render(HDC hdc);
 
 	Missile* CreateMissile();
+	void ClearActiveMissile();
 	
 	inline vector<Missile*>& GetLpMissiles(UNIT_KIND kind) { return mvLpMissiles[kind]; }
 	inline void AddMissile(UNIT_KIND userKind, Missile* lpMissile) { mvLpMissiles[userKind].push_back(lpMissile); }
