@@ -49,7 +49,7 @@ void UIobject::Update(float deltaTime)
 void UIobject::Render(HDC hdc)
 {	
 	//최대값 저장.
-	SetBossMaxHp();
+	//SetBossMaxHp();
 	
 	playerUIobject = GetRectToCenter(lpPlayer->GetHp() / 2 + 50, 80, lpPlayer->GetHp(), 18);
 	Rectangle(hdc, playerUIobject.left, playerUIobject.top, playerUIobject.right, playerUIobject.bottom);

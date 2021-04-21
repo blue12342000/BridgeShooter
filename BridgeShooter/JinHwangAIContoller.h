@@ -20,6 +20,7 @@ private:
 
 private:
 	UNIT_STATE state;
+	int moveCount;
 
 private:
 	virtual void Init() override;
