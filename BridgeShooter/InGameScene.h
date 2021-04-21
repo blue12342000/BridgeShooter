@@ -24,6 +24,7 @@ private:
 private:
 	vector<Unit*> vEnemys;
 	vector<Item*> vItems;
+	vector<Controller*>vLpMobController;
 
 	Unit* lpPlayer;
 	Unit* lpPlanet04;

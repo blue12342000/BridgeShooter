@@ -241,7 +241,7 @@
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
     <ClCompile Include="AlienAIController.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -444,7 +444,7 @@
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
     <ClInclude Include="AlienAIController.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

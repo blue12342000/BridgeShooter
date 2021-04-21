@@ -1,4 +1,3 @@
-#pragma once
 #include "AIController.h"
 class AlienAIController :public AIController
 {
