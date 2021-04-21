@@ -6,18 +6,12 @@
 #include "GameObject.h"
 
 //쏘는 팩토리 라이브러리
-#include "BasicFactory.h"
-#include "SineFactory.h"
-#include "Planet04Factory.h"
 #include "RainFactory.h"
-#include "JinHwangFactory.h"
+#include "SineFactory.h"
 
 //움직이는 패턴 라이브러리
 #include "BasicPattern.h"
-#include "ReflectPattern.h"
-#include "GuidePattern.h"
-#include "SinePattern.h"
-#include "SpiralPattern.h"
+
 
 void AlienGreen::Init()
 {
@@ -29,7 +23,7 @@ void AlienGreen::Init()
 	{
 		delete lpPattern;
 	}
-	SetFactory(new Planet04Factory());
+	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
 	lpPattern = new BasicPattern();
 
@@ -42,7 +36,7 @@ void AlienGreen::Init()
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;
 	pos = { (float)(rand() % ((WINSIZE_WIDTH - 50) - 50 - 1) + 50),0.0f - 100.0f };
-	shootDuration = 200;
+	shootDuration = 2000;
 	lpFactory->Init();
 	lpFactory->SetCheckTime(shootDuration);
 	lpFactory->SetCreateLine(1);

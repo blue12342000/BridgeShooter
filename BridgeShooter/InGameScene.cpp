@@ -74,9 +74,9 @@ HRESULT InGameScene::Init()
     //lpEnemyController->Init();
     //lpEnemyController->SetController(lpJinHwang);  
 
-    lpEnemyController = new SSJAIController();
+    lpEnemyController = new KmsAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ); 
+    lpEnemyController->SetController(lpPlanetKMS); 
 
     vEnemys.push_back(new AlienBlue());
     vEnemys.push_back(new AlienGreen());
