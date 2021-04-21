@@ -13,13 +13,11 @@ void Planet04::Init()
 	angle = PI / 2;
 	lpFactory = new Planet04Factory();
 	lpFactory->Init();
-	collider.SetHitBox(pos, { 0,0 },180, 180);	//init 에서 수치
+	collider.SetHitBox(pos, { 0,0 },150, 150);	//init 에서 수치
 }
 
 void Planet04::Update(float deltaTime)
 {
-	Fire();
-
 	Unit::Update(deltaTime);
 }
 

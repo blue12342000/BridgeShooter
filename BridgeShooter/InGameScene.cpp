@@ -222,13 +222,17 @@ void InGameScene::Update(float deltaTime)
             }
             break;
         case STAGE_STATE::STAGE1:
+            elapsedTime = 0;
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE2;
             isBossAlive = true;
             lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpJinHwang);
-            lpEnemyController->GetController()->SetHp(1000);
+            //적이 죽고나서 바뀌고 다음 스테이지를 시작할때
+            //다음 행성에게 에너미를 새로 부여하고 0이었던  체력을 다시 설정.
+            lpUIobject->SetEnemy(lpEnemyController->GetController());
+            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
 
             //미사일 해제
@@ -419,7 +423,7 @@ void InGameScene::CheckCollision()
             //체력이 0이되면 데미지를 받아도 체력 0
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
-                lpEnemyController->GetController()->SetHp(0);
+                
                 //적의 사망 체크를 여기서 표현
                 isBossAlive = false;
             }

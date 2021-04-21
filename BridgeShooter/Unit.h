@@ -14,7 +14,7 @@ protected:
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
-	UIobject* lpUIobject;
+	
 	float hp;
 	int bomb;
 
