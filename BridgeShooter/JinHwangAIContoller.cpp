@@ -2,13 +2,11 @@
 #include "Unit.h"
 #include "Pattern.h"
 #include "BasicPattern.h"
-#include "CircleMovePattern.h"
 
 void JinHwangAIContoller::Init()
 {
 	vLpPatterns.resize((int)USE_PATTERN::NONE);
 	vLpPatterns[(int)USE_PATTERN::BASIC] = new BasicPattern();
-	vLpPatterns[(int)USE_PATTERN::CIRCLE] = new CircleMovePattern();
 	state = UNIT_STATE::IDLE;
 	currentPattern = USE_PATTERN::NONE;
 	elapsedTime = 0;
@@ -51,7 +49,6 @@ void JinHwangAIContoller::Update(float deltaTime)
 					else
 					{
 						elapsedTime = 0;
-						//currentPattern = USE_PATTERN::CIRCLE;
 						state = UNIT_STATE::MOVE;
 					}
 				}
@@ -95,31 +92,6 @@ void JinHwangAIContoller::Update(float deltaTime)
 				}
 			}
 			break;
-		case UNIT_STATE::MOVE_PATTERN:
-			elapsedTime = 0;
-			lpUnit->ResetTimer();
-			lpUnit->lpPattern = vLpPatterns[(int)currentPattern];
-			lpUnit->transform.speed = 200;
-			state = UNIT_STATE::MOVE_PATTERN_ING;
-			break;
-		case UNIT_STATE::MOVE_PATTERN_ING:
-			if (elapsedTime > 3)
-			{
-				elapsedTime = 0;
-				state = UNIT_STATE::PATTERN_ATTACK;
-			}
-			break;
-		case UNIT_STATE::PATTERN_ATTACK:
-			if (elapsedTime < 10)
-			{
-				lpUnit->Fire();
-			}
-			else
-			{
-				lpUnit->lpPattern = nullptr;
-				state = UNIT_STATE::UPGRADE;
-			}
-			break;
 		case UNIT_STATE::ATTACK:
 			if (elapsedTime < 10)
 			{
@@ -148,8 +120,6 @@ void JinHwangAIContoller::Update(float deltaTime)
 			}
 			break;
 		}
-
-
 		lpUnit->Update(deltaTime);
 	}
 	elapsedTime += deltaTime;

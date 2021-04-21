@@ -201,9 +201,6 @@
     <ClCompile Include="JinHwangAIContoller.cpp">
       <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="CircleMovePattern.cpp">
-      <Filter>소스 파일\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="AlienBlue.cpp">
       <Filter>소스 파일\GameObject\Unit</Filter>
     </ClCompile>
@@ -397,9 +394,6 @@
     </ClInclude>
     <ClInclude Include="JinHwangAIContoller.h">
       <Filter>소스 파일\Engine\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleMovePattern.h">
-      <Filter>소스 파일\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="AlienBlue.h">
       <Filter>소스 파일\GameObject\Unit</Filter>

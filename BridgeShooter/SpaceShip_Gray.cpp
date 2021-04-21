@@ -15,7 +15,7 @@ void SpaceShip_Gray::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_GRAY", 10, true);
-	transform.speed = 200;
+	transform.speed = 300;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 0;

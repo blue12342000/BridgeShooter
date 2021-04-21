@@ -1,6 +1,5 @@
 #include "Unit.h"
 #include "Factory.h"
-#include "Image.h"
 #include "BridgeShooter.h"
 #include "Animation.h"
 #include "Pattern.h"
@@ -13,6 +12,7 @@ void Unit::Init()
 	lpAnimation = nullptr;
 	lpFactory = nullptr;
 	lpPattern = nullptr;
+	isReady = false;
 }
 
 void Unit::Update(float deltaTime)
@@ -34,6 +34,13 @@ void Unit::Update(float deltaTime)
 				pos.y += sin(dir) * transform.speed * deltaTime;
 			}
 		}
+		if (isReady)
+		{
+			if (pos.x < 0) pos.x = 0;
+			else if (pos.x > WINSIZE_WIDTH) pos.x = WINSIZE_WIDTH;
+			if (pos.y < 0) pos.y = 0;
+			else if (pos.y > WINSIZE_HEIGHT) pos.y = WINSIZE_HEIGHT;
+		}
 	}
 	else
 	{
@@ -45,25 +52,25 @@ void Unit::Update(float deltaTime)
 	if (lpAnimation) lpAnimation->Update(deltaTime);
 	if (isInertia)
 	{
-		if (force.x > FLT_EPSILON)
+		if (force.x > 0)
 		{
 			force.x -= 10 * deltaTime;;
-			if (force.x < FLT_EPSILON) force.x = 0;
+			if (force.x < 0) force.x = 0;
 		}
-		else if (force.x < FLT_EPSILON)
+		else if (force.x < 0)
 		{
 			force.x += 10 * deltaTime;;
-			if (force.x > FLT_EPSILON) force.x = 0;
+			if (force.x > 0) force.x = 0;
 		}
-		if (force.y > FLT_EPSILON)
+		if (force.y > 0)
 		{
 			force.y -= 10 * deltaTime;;
-			if (force.y < FLT_EPSILON) force.y = 0;
+			if (force.y < 0) force.y = 0;
 		}
-		else if (force.y < FLT_EPSILON)
+		else if (force.y < 0)
 		{
 			force.y += 10 * deltaTime;;
-			if (force.y > FLT_EPSILON) force.y = 0;
+			if (force.y > 0) force.y = 0;
 		}
 	}
 	else
