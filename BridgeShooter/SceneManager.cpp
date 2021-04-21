@@ -60,14 +60,13 @@ void SceneManager::Render(HDC hdc)
 
 void SceneManager::ChangeScene(SCENE_STATE scene)
 {
-	//nullptr이면 init, 이미 생성되어있으면 씬만 바꾸기 ->reset함수호출
-	//씬리셋해주는 함수 - 각씬마다. ->동적할당 없어야함(꼭필요하면 넣고 릴리즈)
-
 	lastScene = currScene;
 	currScene = scene;
-	
-	if(lastScene != SCENE_STATE::NONE)
-		scenes[(int)lastScene]->Release();
-	scenes[(int)currScene]->Init();
 
+	if (lastScene != SCENE_STATE::NONE)
+	{
+		scenes[(int)lastScene]->Release();
+	}
+
+	scenes[(int)currScene]->Init();
 }

@@ -49,12 +49,14 @@ private:
 	STAGE_STATE currStage;
 	STAGE_STATE nextStage;
 	bool isBossAlive;
+	bool isPlayerAlive;
 
 	Animation* lpLoadingCat;
 	POINTFLOAT catPos;
 
 	float elapsedTime;
 	float backgroundMover;
+
 
 public:
 	virtual HRESULT Init();

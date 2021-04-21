@@ -21,3 +21,5 @@ void SinePattern::Move(float deltaTime, GameObject* lpObject)
 			+ sinf(lpObject->angle + transform.angle) * sin(transform.angle) * ratio * sin(lpObject->angle + transform.angle + transform.period * lpObject->elapsedTime) * transform.amplitude;
 	}
 }
+
+	

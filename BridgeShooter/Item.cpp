@@ -13,6 +13,7 @@ void Item::Init()
     lpAnimation = new Animation();
     lpAnimation->Change("Item_Bomb", 20, true);
     collider.SetHitBox(pos, 60, 60);
+
 }
 
 void Item::Release()

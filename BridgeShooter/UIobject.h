@@ -19,7 +19,7 @@ private:
 	Image* lpBossHpBar;
 	Image* lpLifeStock;
 	Image* lpBombCount;
-	Image* lpMissile[4];
+	Image* lpMissile[6];
 	Image* lpFcukingManual;
 
 	int lifeAmount;
@@ -29,7 +29,6 @@ private:
 	float bossMaxHp;
 
 	bool isMaxHp;
-
 public:
 
 	virtual void Init() ;
