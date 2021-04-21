@@ -36,7 +36,6 @@ void SpaceShip_Gray::Update(float deltaTime)
 	}
 	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
 	{
-		//여기서 봄 키 입력 테스트 해보고 싶다.
 		//lphpGauge->IsBombUsed(deltaTime);
 		//SetFactory(new RainFactory());
 	}

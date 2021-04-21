@@ -37,6 +37,8 @@ private:
 
 	Controller* lpPlayerController;
 	Controller* lpEnemyController;
+	vector<Controller*> vLpEnemyController;
+
 
 	Image* lpBackBuffer;
 	Image* lpBackImage;

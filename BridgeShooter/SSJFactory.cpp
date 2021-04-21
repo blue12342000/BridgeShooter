@@ -17,7 +17,6 @@ void SSJFactory::Init()
 	vLpPatterns.resize(CREATE_PATTERN::SFCP_NONE);
 	vLpPatterns[CREATE_PATTERN::SFCP_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL] = new SpiralPattern();
-	vLpPatterns[CREATE_PATTERN::SFCP_REVERSE_SPIRAL] = new ReverseSpiralPattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_SINE] = new SinePattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_REFLECT] = new ReflectPattern();
 	vLpPatterns[CREATE_PATTERN::SFCP_DELAYBASIC] = new DelayBasicPattern();
