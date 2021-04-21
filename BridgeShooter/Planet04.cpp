@@ -18,8 +18,6 @@ void Planet04::Init()
 
 void Planet04::Update(float deltaTime)
 {
-	Fire();
-
 	Unit::Update(deltaTime);
 }
 

@@ -14,7 +14,6 @@ protected:
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
-
 	float hp;
 	int bomb;
 
