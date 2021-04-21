@@ -21,9 +21,6 @@ public:
 
 	void Move(float deltaTime);
 
-	// 삭제할 함수
-	void SetMissile(string ImageKey, POINTFLOAT pos, float angle, float speed, int size, float delayTime = 0);
-
 	void SetMissile(string ImageKey, float angle, Transform transform, int size, float delayTime = 0);
 
 	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
