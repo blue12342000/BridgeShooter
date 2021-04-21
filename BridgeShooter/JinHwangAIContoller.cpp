@@ -61,8 +61,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
 				|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
 			{
-				float angle = atan2(origin.y - lpUnit->pos.y, origin.x - lpUnit->pos.x);
-				lpUnit->Translate(POINTFLOAT{ cosf(angle) * 10, sin(angle) * 10 });
+				lpUnit->Translate(POINTFLOAT{ origin.x - lpUnit->pos.x, origin.y - lpUnit->pos.y });
 				state = UNIT_STATE::MOVE;
 			}
 			else
@@ -78,8 +77,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 				if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
 					|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
 				{
-					float angle = atan2(origin.y - lpUnit->pos.y, origin.x - lpUnit->pos.x);
-					lpUnit->Translate(POINTFLOAT{ cosf(angle) * 10, sin(angle) * 10 });
+					lpUnit->Translate(POINTFLOAT{ origin.x - lpUnit->pos.x, origin.y - lpUnit->pos.y });
 					state = UNIT_STATE::MOVE_ING;
 				}
 				else
@@ -140,8 +138,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			float distance = pow(origin.y - lpUnit->pos.y, 2) + pow(origin.x - lpUnit->pos.x, 2);
 			if (distance > 100)
 			{
-				float angle = atan2(origin.y - lpUnit->pos.y, origin.x - lpUnit->pos.x);
-				lpUnit->Translate(POINTFLOAT{cosf(angle) * 10, sin(angle) * 10});
+				lpUnit->Translate(POINTFLOAT{ origin.x - lpUnit->pos.x, origin.y - lpUnit->pos.y });
 			}
 			if (distance < 100)
 			{
