@@ -3,10 +3,7 @@
 
 class SinePattern : public Pattern
 {
-private:
-	int scale = 10;
-
 public:
-	MoveInfo Move(float deltaTime, GameObject* lpObject) override;
+	void Move(float deltaTime, GameObject* lpObject) override;
 };
 

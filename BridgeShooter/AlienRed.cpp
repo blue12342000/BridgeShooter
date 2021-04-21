@@ -24,11 +24,11 @@ void AlienRed::Init()
 	lpAnimation = new Animation();
 	elapsedTime = 0;
 	angle = 0;
-	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
+	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_4", 4, true);
 	lpFactory = new SineFactory();
 	lpPattern = new ReflectPattern();
-	speed = 80.0;
+	transform.speed = 80.0;
 	hp = 500;
 	moveAngle = 0;
 	shootAngle = PI / 2.0f;

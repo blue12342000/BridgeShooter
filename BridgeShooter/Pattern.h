@@ -8,6 +8,6 @@ public:
 	Pattern() {};
 	virtual ~Pattern() {};
 
-	virtual MoveInfo Move(float deltaTime, GameObject* lpObject) = 0;
+	virtual void Move(float deltaTime, GameObject* lpObject) = 0;
 };
 

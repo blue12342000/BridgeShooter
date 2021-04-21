@@ -30,36 +30,32 @@ HRESULT InGameScene::Init()
     {
     case (int)DataManager::CHARACTER_CODE::YELLOW:
         lpPlayer = new SpaceShip();
-        lpPlayer->Init();
-        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     case (int)DataManager::CHARACTER_CODE::RED:
         lpPlayer = new SpaceShip_Red();
-        lpPlayer->Init();
-        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     case (int)DataManager::CHARACTER_CODE::GRAY:
         lpPlayer = new SpaceShip_Gray();
-        lpPlayer->Init();
-        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     }
+    lpPlayer->Init();
+    lpPlayer->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT };
        
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
-    lpPlanet04->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 });
+    lpPlanet04->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
-    lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 });
+    lpPlanetSSJ->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
-    lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+    lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
-    lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     vEnemys.push_back(new AlienBlue());
     vEnemys.push_back(new AlienGreen());
@@ -73,7 +69,7 @@ HRESULT InGameScene::Init()
 
     lpItem = new Item();
     lpItem->Init();
-    lpItem->SetPos({ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  });
+    lpItem->pos = { (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  };
 
     vLpEnemyController.push_back(new JinHwangAIContoller()); 
     vLpEnemyController.push_back(new SSJAIController());
@@ -98,10 +94,14 @@ HRESULT InGameScene::Init()
     lpLoadingCat = new Animation();
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
     catPos = { -50, 400 };
-            
     backgroundMover = 0;
  
     //플레이어 
+
+    lpJinHwang = new JinHwang();
+    lpJinHwang->Init();
+    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
@@ -302,7 +302,7 @@ void InGameScene::Update(float deltaTime)
     }
 
     
-    //아이템 등장시점도 조절 필요
+    
     if (lpItem) lpItem->Update(deltaTime);
     if (lpUIobject) lpUIobject->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
@@ -374,31 +374,31 @@ void InGameScene::CheckCollision()
     float dY = 0;
 
 
-    //적이 플레이어를 떄릴때
     for (int i = 0; i < vLpEnemyMissile.size();)
     {
-        dX = vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x - lpPlayer->pos.x;
-        dY = vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y - lpPlayer->pos.y;
+        dX = vLpEnemyMissile[i]->pos.x - lpPlayer->pos.x;
+        dY = vLpEnemyMissile[i]->pos.y - lpPlayer->pos.y;
         distance = sqrt(dX * dX + dY * dY);
 
         if (distance <= vLpEnemyMissile[i]->collider.width / 2 + lpPlayer->collider.width / 2)
         {
-            EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
+            EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            //체력이 0이되면 데미지를 받아도 체력 0
+            //체력이 0이 되면
             if (lpPlayerController->GetController()->GetHp() <= 0)
             {
                 lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
-                lpPlayerController->GetController()->SetHp(lpUIobject->GetPlayerMaxHp()); // 여기서 플레이어 체력을 풀로 채워줘야함
+                lpPlayerController->GetController()->SetHp(lpUIobject->GetPlayerMaxHp()); 
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
-                    //플레이어의 사망 체크를 여기서 표현
-                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE"), 0, 20, 8, 8);
+
+                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 20, 20);
+		//주석 위치
+
                 }
-            }
-            //체력이 0이 아니면 10씩 데미지를 줌 
-            else                            // 적이 플레이어에게 주는 데미지값 :10
+            } 
+            else
                 lpPlayerController->GetController()->SetHp(lpPlayerController->GetController()->GetHp() - 10);
         }
         else
@@ -413,22 +413,21 @@ void InGameScene::CheckCollision()
 
     for (int i = 0; i < vLpPlayerMissile.size();)
     {
-        dX2 = vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x - lpPlanetSSJ->pos.x;
-        dY2 = vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y - lpPlanetSSJ->pos.y;
+        dX2 = vLpPlayerMissile[i]->pos.x - lpPlanetSSJ->pos.x;
+        dY2 = vLpPlayerMissile[i]->pos.y - lpPlanetSSJ->pos.y;
         distance2 = sqrt(dX2 * dX2 + dY2 * dY2);
         if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
         {
-            EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
+            EffectManager::GetSingleton()->PlayImage(vLpPlayerMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
-            //체력이 0이되면 데미지를 받아도 체력 0
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
-                
                 //적의 사망 체크를 여기서 표현
                 isBossAlive = false;
+                lpEnemyController->GetController()->SetHp(0);
+                EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
             }
-            //체력이 0이 아니면 10씩 데미지를 줌
-            else                               // 내가 적에게 주는 데미지값 :10
+            else
                 lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp() - 10);
 
         }

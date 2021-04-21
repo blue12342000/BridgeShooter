@@ -48,7 +48,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			}
 			break;
 		case UNIT_STATE::MOVE:
-			lpUnit->speed = 400;
+			lpUnit->transform.speed = 400;
 			lpUnit->Translate(POINTFLOAT{ (float)((rand() % 150 + 60) - 135) / 10, (float)((rand() % 150 + 60) - 135) / 10 });
 			state = UNIT_STATE::MOVE_ING;
 			elapsedTime = 0;
@@ -81,8 +81,8 @@ void JinHwangAIContoller::Update(float deltaTime)
 		case UNIT_STATE::MOVE_PATTERN:
 			elapsedTime = 0;
 			lpUnit->ResetTimer();
-			lpUnit->SetPattern(vLpPatterns[(int)currentPattern]);
-			lpUnit->speed = 200;
+			lpUnit->lpPattern = vLpPatterns[(int)currentPattern];
+			lpUnit->transform.speed = 200;
 			state = UNIT_STATE::MOVE_PATTERN_ING;
 			break;
 		case UNIT_STATE::MOVE_PATTERN_ING:
@@ -99,7 +99,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			}
 			else
 			{
-				lpUnit->SetPattern(nullptr);
+				lpUnit->lpPattern = nullptr;
 				state = UNIT_STATE::UPGRADE;
 			}
 			break;
@@ -127,7 +127,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			if (distance < 100)
 			{
 				elapsedTime = 0;
-				lpUnit->SetPos(origin);
+				lpUnit->pos = origin;
 				state = UNIT_STATE::IDLE;
 			}
 			break;

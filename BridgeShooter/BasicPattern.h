@@ -4,6 +4,6 @@
 class BasicPattern : public Pattern
 {
 public:
-	MoveInfo Move(float deltaTime, GameObject* lpObject) override;
+	void Move(float deltaTime, GameObject* lpObject) override;
 };
 

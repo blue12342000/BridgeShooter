@@ -15,12 +15,12 @@ void SpaceShip_Gray::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_GRAY", 10, true);
-	speed = 200;
+	transform.speed = 200;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 0;
 	SetFactory(new SpaceShipFactory());
-	collider.SetHitBox(pos, { 0,0 }, 30, 30);
+	collider.SetHitBox(pos, 30, 30);
 }
 
 void SpaceShip_Gray::Update(float deltaTime)

@@ -3,7 +3,6 @@
 #include "Missile.h"
 #include "Unit.h"
 #include "BasicPattern.h"
-#include "ReverseSinePattern.h"
 #include "RainPattern.h"
 
 #include <cmath>
@@ -12,7 +11,7 @@ void RainFactory::Init()
 {
 	vLpPatterns.resize(CREATE_PATTERN::RFCP_NONE);
 	vLpPatterns[CREATE_PATTERN::RFCP_BASIC] =new BasicPattern();
-	vLpPatterns[CREATE_PATTERN::RFCP_RSINE] = new ReverseSinePattern();
+	vLpPatterns[CREATE_PATTERN::RFCP_RSINE] = nullptr;
 	vLpPatterns[CREATE_PATTERN::RFCP_RAIN] = new RainPattern();
 	maxCreateLIne = 3;
 
@@ -58,12 +57,12 @@ void RainFactory::Fire(Unit* lpUnit)
 	}
 	if (createLine == 2)
 	{
-		for (int i = -4; i < 3; ++i)
-		{
-			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 200, 0);
-			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::RFCP_RSINE]);
-			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
-		}
+		//for (int i = -4; i < 3; ++i)
+		//{
+		//	Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+		//	lpMissile->SetMissile("MISSILE_02", lpUnit->pos, lpUnit->angle, 200, 0);
+		//	lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::RFCP_RSINE]);
+		//	MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+		//}
 	}
 }

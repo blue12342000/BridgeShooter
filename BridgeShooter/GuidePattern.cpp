@@ -3,46 +3,49 @@
 #include "Missile.h"
 #include "Unit.h"
 
-MoveInfo GuidePattern::Move(float deltaTime, GameObject* lpObject)
+void GuidePattern::Move(float deltaTime, GameObject* lpObject)
 {
-	MoveInfo moveInfo = { 0, 0 };
-
 	if (lpObject)
 	{
+		Transform& transform = lpObject->transform;
 		if (typeid(*lpObject) == typeid(Missile))
 		{
 			Missile* lpMissile = (Missile*)lpObject;
+			if (lpMissile->delayTime > 0)
+			{
+				lpMissile->delayTime -= deltaTime;
+				return;
+			}
+
 			Unit* lpUnit = lpMissile->GetTarget();
 			if (lpUnit)
 			{
-				lpObject->originAngle = atan2(lpUnit->pos.y - lpObject->pos.y, lpUnit->pos.x - lpObject->pos.x);
-				while (lpObject->angle < 0) lpObject->angle += PI * 2;
-				while (lpObject->angle > PI * 2) lpObject->angle -= PI * 2;
-				float deltaAngle = lpObject->originAngle - lpObject->angle;
+				transform.angle = atan2(lpUnit->pos.y - lpObject->pos.y, lpUnit->pos.x - lpObject->pos.x);
+				while (transform.angle < 0) transform.angle += PI * 2;
+				while (transform.angle > PI * 2) transform.angle -= PI * 2;
+				float deltaAngle = transform.angle - lpObject->angle;
 				if (deltaAngle <= -PI)
 				{
 					deltaAngle += PI * 2;
 				}
-				if (abs(deltaAngle) < 0.01f) lpObject->angle = lpObject->originAngle;
+				if (abs(deltaAngle) < 0.01f) lpObject->angle = transform.angle;
 				else
 				{
 					lpObject->angle += deltaAngle / (abs(deltaAngle)) * PI * deltaTime;
 				}
-				lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
-				lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
+				lpObject->pos.x += cosf(lpObject->angle) * transform.speed * deltaTime;
+				lpObject->pos.y += sinf(lpObject->angle) * transform.speed * deltaTime;
 			}
 			else
 			{
-				lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
-				lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
+				lpObject->pos.x += cosf(transform.angle) * transform.speed * deltaTime;
+				lpObject->pos.y += sinf(transform.angle) * transform.speed * deltaTime;
 			}
 		}
 		else
 		{
-			lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
-			lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
+			lpObject->pos.x += cosf(transform.angle) * transform.speed * deltaTime;
+			lpObject->pos.y += sinf(transform.angle) * transform.speed * deltaTime;
 		}
 	}
-
-	return moveInfo;
 }

@@ -14,13 +14,13 @@ void SpaceShip::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
-	speed = 200;
-	hp = 500;
+	transform.speed = 200;
+	hp = 50;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 1;
 	SetFactory(new SpaceShipFactory());
-	collider.SetHitBox(pos, { 0,0 }, 20, 20);
+	collider.SetHitBox(pos, 20, 20);
 }
 
 void SpaceShip::Update(float deltaTime)
