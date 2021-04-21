@@ -38,14 +38,14 @@ void GuidePattern::Move(float deltaTime, GameObject* lpObject)
 			}
 			else
 			{
-				lpObject->pos.x += cosf(transform.angle) * transform.speed * deltaTime;
-				lpObject->pos.y += sinf(transform.angle) * transform.speed * deltaTime;
+				lpObject->pos.x += cosf(lpObject->angle) * transform.speed * deltaTime;
+				lpObject->pos.y += sinf(lpObject->angle) * transform.speed * deltaTime;
 			}
 		}
 		else
 		{
-			lpObject->pos.x += cosf(transform.angle) * transform.speed * deltaTime;
-			lpObject->pos.y += sinf(transform.angle) * transform.speed * deltaTime;
+			lpObject->pos.x += cosf(lpObject->angle) * transform.speed * deltaTime;
+			lpObject->pos.y += sinf(lpObject->angle) * transform.speed * deltaTime;
 		}
 	}
 }

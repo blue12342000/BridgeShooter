@@ -354,7 +354,7 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            //????? 0???? ???????? ???? ??? 0
+            //체력이 0이되면 데미지를 받아도 체력 0
             if (lpPlayerController->GetController()->GetHp() <= 0)
             {
                 lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
@@ -363,11 +363,11 @@ void InGameScene::CheckCollision()
                 {
                     lpPlayerController->GetController()->SetHp(0);
                     EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 20, 20);
-                    //?÷?????? ??? ???? ???? ???
+                    //적의 사망 체크를 여기서 표현
                 }
             }
-            //????? 0?? ???? 10?? ???????? ?? 
-            else                            // ???? ?÷?????? ??? ???????? :10
+            //체력이 0이 아니면 10씩 데미지를 줌
+            else                                
                 lpPlayerController->GetController()->SetHp(lpPlayerController->GetController()->GetHp() - 10);
         }
         else

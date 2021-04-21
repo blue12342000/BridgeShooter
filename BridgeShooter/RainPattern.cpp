@@ -13,16 +13,16 @@ void RainPattern::Move(float deltaTime, GameObject* lpObject)
 		//왼쪽으로 얼마나 나가서 멈추느냐
 		if (lpObject->elapsedTime < 4.5f)
 		{
-			lpObject->pos.x -= cosf(transform.angle) * transform.speed * deltaTime * lpObject->elapsedTime / 4;
-			lpObject->pos.y -= sinf(transform.angle) * transform.speed * deltaTime * lpObject->elapsedTime / 4; // elapsedTime 은 비율. delltaTime의 역할이 아님.
+			lpObject->pos.x -= cosf(lpObject->angle) * transform.speed * deltaTime * lpObject->elapsedTime / 4;
+			lpObject->pos.y -= sinf(lpObject->angle) * transform.speed * deltaTime * lpObject->elapsedTime / 4; // elapsedTime 은 비율. delltaTime의 역할이 아님.
 		}
 
 		if (lpObject->elapsedTime > 4.5f)
 		{
-			transform.angle = PI / 2;
+			lpObject->angle = PI / 2;
 			
-			lpObject->pos.x += cos(transform.angle) * transform.speed * deltaTime / 3;
-			lpObject->pos.y += sin(transform.angle) * transform.speed * deltaTime / 3;
+			lpObject->pos.x += cos(lpObject->angle) * transform.speed * deltaTime / 3;
+			lpObject->pos.y += sin(lpObject->angle) * transform.speed * deltaTime / 3;
 		}
 
 	}

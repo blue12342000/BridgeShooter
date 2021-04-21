@@ -20,8 +20,8 @@ void BoomerangPattern::Move(float deltaTime, GameObject* lpObject)
             }
             else
             {
-                lpObject->pos.x += cos(transform.angle) * transform.speed * deltaTime;
-                lpObject->pos.y += sin(transform.angle) * transform.speed * deltaTime;
+                lpObject->pos.x += cos(lpObject->angle) * transform.speed * deltaTime;
+                lpObject->pos.y += sin(lpObject->angle) * transform.speed * deltaTime;
             }
         }
     }
