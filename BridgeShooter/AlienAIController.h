@@ -1,4 +1,6 @@
 #include "AIController.h"
+
+class Unit;
 class AlienAIController :public AIController
 {
 private:

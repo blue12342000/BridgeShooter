@@ -13,6 +13,7 @@ void KmsAIController::Init()
 	elapsedTime = 0;
 	prevNum = 500;
 	state = UNIT_STATE::RETURN;
+	currentPattern = USE_PATTERN::REFLECT;
 }
 
 void KmsAIController::Release()
@@ -29,17 +30,17 @@ void KmsAIController::Update(float deltaTime)
 {
 	if (lpUnit)
 	{
-		if (lpUnit->hp <= 0)
+		if (lpUnit->GetHp() <= 0) 
 		{
 
 		}
 		else
 		{
-			if ((prevNum - 200) >= lpUnit->hp)
+			if ((prevNum - 200) >= lpUnit->GetHp())
 			{
 				state = UNIT_STATE::UPGRADE;
-				lpUnit->speed += 100;
-				prevNum = lpUnit->hp;
+				lpUnit->speed += 20;
+				prevNum = lpUnit->GetHp();
 			}
 			
 		}
@@ -48,7 +49,6 @@ void KmsAIController::Update(float deltaTime)
 		{
 
 		case UNIT_STATE::IDLE:
-			currentPattern = USE_PATTERN::NONE;
 			if ((lpUnit->pos.y < 0)|| (lpUnit->pos.y > WINSIZE_HEIGHT/2)|| (lpUnit->pos.x < 0)|| (lpUnit->pos.x > WINSIZE_WIDTH))
 			{
 				state = UNIT_STATE::RETURN;
@@ -59,23 +59,30 @@ void KmsAIController::Update(float deltaTime)
 			}
 			break;
 		case UNIT_STATE::ATTACK:
-			currentPattern = USE_PATTERN::NONE;
 			lpUnit->Fire();
 			lpUnit->Update(deltaTime);
 			elapsedTime+= deltaTime;
-			if (elapsedTime>20) 
+			if (elapsedTime>40) 
 			{
-				state = UNIT_STATE::PATTERN_ATTACK;
+				lpUnit->angle = (rand() % ((int)(2 * PI * 1000))) / 1000;
+				state = UNIT_STATE::MOVE;
+				elapsedTime = 0;
 			}
 			break;
 		case UNIT_STATE::PATTERN_ATTACK:
-			currentPattern = USE_PATTERN::REFLECT;
 			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			lpUnit->Fire();			
 			lpUnit->Update(deltaTime);
+			elapsedTime += deltaTime;
 			if ((lpUnit->pos.y < 0) || (lpUnit->pos.y > WINSIZE_HEIGHT / 2) || (lpUnit->pos.x < 0) || (lpUnit->pos.x > WINSIZE_WIDTH))
 			{
 				state = UNIT_STATE::RETURN;
+			}
+			if (elapsedTime > 40)
+			{
+				lpUnit->angle = (rand() % ((int)(2 * PI * 1000))) / 1000;
+				state = UNIT_STATE::MOVE;
+				elapsedTime = 0;
 			}
 			break;
 		case UNIT_STATE::RETURN:
@@ -100,14 +107,30 @@ void KmsAIController::Update(float deltaTime)
 		case UNIT_STATE::MOVE:
 			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			lpUnit->Update(deltaTime);
+			elapsedTime += deltaTime;
 			if ((lpUnit->pos.y < 0) || (lpUnit->pos.y > WINSIZE_HEIGHT / 2) || (lpUnit->pos.x < 0) || (lpUnit->pos.x > WINSIZE_WIDTH))
 			{
 				state = UNIT_STATE::RETURN;
 			}
+			if (elapsedTime>40)
+			{
+				if (rand() % 2) 
+				{
+					state = UNIT_STATE::ATTACK;
+					elapsedTime = 0;
+				}
+				else 
+				{
+					lpUnit->angle = (rand() % ((int)(2 * PI * 1000))) / 1000;
+					state = UNIT_STATE::PATTERN_ATTACK;
+					elapsedTime = 0;
+				}
+				
+			}
 			break;
 		case UNIT_STATE::UPGRADE:
 			lpUnit->ChangeFactoryLine(1);
-			state = UNIT_STATE::RETURN;
+			state = UNIT_STATE::IDLE;
 			break;
 		case UNIT_STATE::NONE:
 			break; 

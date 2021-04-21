@@ -9,7 +9,8 @@ void Planet_KMS::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet_KMS", 50, true);
 	hp = 500;
-	speed = 200;
+	bomb = 2;
+	speed = 30;
 	elapsedTime = 0;
 	angle =PI*2.0f/3.0f;
 	lpFactory = new Planet_KMS_Factory();

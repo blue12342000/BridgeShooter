@@ -7,6 +7,8 @@
 
 void Unit::Init()
 {
+	force.x = 0;
+	force.y = 0;
 	elapsedTime = 0;
 	lpAnimation = nullptr;
 	lpFactory = nullptr;

@@ -111,24 +111,24 @@ HRESULT InGameScene::Init()
     lpJinHwang->Init();
     lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
-    lpUIobject = new UIobject();
-    lpUIobject->Init();
+    
  
     //플레이어 
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
 
-    //lpPlayerController->SetController(lpJinHwang);
-    //lpPlayer->SetTarget(lpJinHwang);
-    //lpEnemyController = new JinHwangAIContoller();
-    //lpEnemyController->Init();
-    //lpEnemyController->SetController(lpPlayer);
+    lpPlayer->SetTarget(lpJinHwang);
+    lpEnemyController = new KmsAIController();
+    lpEnemyController->Init();
+    lpEnemyController->SetController(lpPlanetKMS);
+
+    lpUIobject = new UIobject();
+    lpUIobject->Init();
+    lpUIobject->SetPlayer(lpPlayer);
+    lpUIobject->SetEnemy(lpJinHwang);
     
-    lpPlayer->SetTarget(lpPlanetSSJ);
-
-
-     return S_OK;
+ return S_OK;
 }
 
 void InGameScene::Release()
@@ -225,6 +225,8 @@ void InGameScene::Update(float deltaTime)
 
     CheckCollision();
 
+    if (lpPlayerController) lpPlayerController->Update(deltaTime);
+    if (lpEnemyController) lpEnemyController->Update(deltaTime);
     
     if (!isBossAlive)
     {
@@ -280,7 +282,6 @@ void InGameScene::Update(float deltaTime)
         }
     }
 
-
     if (elapsedTime > 10 && isBossAlive == true)
     {
         if (lpEnemyController) lpEnemyController->Update(deltaTime);
@@ -291,7 +292,7 @@ void InGameScene::Update(float deltaTime)
     for (int i = 0; i < vLpMobController.size();i++)
     {
         vLpMobController[i]->Update(deltaTime);
-        if ((vEnemys[i]->hp > 0) && ((vEnemys[i]->pos.x > WINSIZE_LEFT) && (vEnemys[i]->pos.x < WINSIZE_RIGHT) &&
+        if ((vEnemys[i]->GetHp() > 0) && ((vEnemys[i]->pos.x > WINSIZE_LEFT) && (vEnemys[i]->pos.x < WINSIZE_RIGHT) &&
             (vEnemys[i]->pos.y > WINSIZE_TOP) && (vEnemys[i]->pos.y < WINSIZE_BOTTOM)))
         {
             vLpMobController[i]->Update(deltaTime);
@@ -308,14 +309,16 @@ void InGameScene::Update(float deltaTime)
 
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
-        
-    //if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
-    //{
-    //    lpHpGauge->SetBombAmount(lpHpGauge->GetBombAmount() - 1);
-    //}
 
-    //    lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
-    //}
+    if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
+    {
+        if (lpUIobject->GetBombAmount() < 0)
+        {
+            lpUIobject->SetBombAmount(0);
+        }
+        else
+            lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
+    }
 
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
@@ -334,6 +337,10 @@ void InGameScene::Render(HDC hdc)
     if (lpPlayerController) lpPlayerController->Render(hBackDC);
     if (lpEnemyController) lpEnemyController->Render(hBackDC);
 
+    //if (lpPlanet04) lpPlanet04->Render(hBackDC);
+    //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
+    //if (lpJinHwang) lpJinHwang->Render(hBackDC);
+    //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
     for (int i = 0; i < vEnemys.size(); i++)
     {
@@ -365,6 +372,8 @@ void InGameScene::CheckCollision()
     float dX = 0;
     float dY = 0;
 
+
+    //적이 플레이어를 떄릴때
     for (int i = 0; i < vLpEnemyMissile.size();)
     {
         dX = vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x - lpPlayer->pos.x;
@@ -375,7 +384,20 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            lpUIobject->SetPlayerMaxHp(lpUIobject->GetPlayerMaxHp() - 10);
+            //체력이 0이되면 데미지를 받아도 체력 0
+            if (lpPlayerController->GetController()->GetHp() <= 0)
+            {
+                lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
+                lpPlayerController->GetController()->SetHp(lpUIobject->GetPlayerMaxHp()); // 여기서 플레이어 체력을 풀로 채워줘야함
+                if (lpUIobject->GetLifeAmount() < 0)
+                {
+                    lpPlayerController->GetController()->SetHp(0);
+                    //플레이어의 사망 체크를 여기서 표현
+                }
+            }
+            //체력이 0이 아니면 10씩 데미지를 줌 
+            else                            // 적이 플레이어에게 주는 데미지값 :10
+                lpPlayerController->GetController()->SetHp(lpPlayerController->GetController()->GetHp() - 10);
         }
         else
         {
@@ -396,7 +418,16 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
-            lpUIobject->SetbossMaxHp(lpUIobject->GetbossMaxHp() - 10);
+            //체력이 0이되면 데미지를 받아도 체력 0
+            if (lpEnemyController->GetController()->GetHp() <= 0)
+            {
+                lpEnemyController->GetController()->SetHp(0);
+                //적의 사망 체크를 여기서 표현
+            }
+            //체력이 0이 아니면 10씩 데미지를 줌
+            else                               // 내가 적에게 주는 데미지값 :10
+                lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp() - 10);
+
         }
         else
         {
