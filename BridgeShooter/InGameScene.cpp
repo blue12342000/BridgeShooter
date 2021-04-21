@@ -43,7 +43,7 @@ HRESULT InGameScene::Init()
        
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
-    lpPlanet04->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanet04->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 -300};
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
@@ -51,11 +51,11 @@ HRESULT InGameScene::Init()
 
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
-    lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
 
     lpItem = new Item();
@@ -69,7 +69,7 @@ HRESULT InGameScene::Init()
 
     lpEnemyController = vLpEnemyController[1];
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetKMS); 
+    lpEnemyController->SetController(lpPlanetSSJ); 
 
     vEnemys.push_back(new AlienBlue());
     vEnemys.push_back(new AlienGreen());
@@ -85,6 +85,7 @@ HRESULT InGameScene::Init()
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
     lpBackImage2 = ImageManager::GetSingleton()->FindImage("SPACE");
+
     backgroundMover = 0;
     
     elapsedTime = 0;
@@ -97,16 +98,14 @@ HRESULT InGameScene::Init()
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
     catPos = { -50, 400 };
             
-    backgroundMover = 0;
- 
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
     lpPlayer->SetTarget(lpPlanetSSJ);
 
-    lpEnemyController = new JinHwangAIContoller();
-    lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ);
+    //lpEnemyController = new SSJAIController();
+    //lpEnemyController->Init();
+    //lpEnemyController->SetController(lpPlanetSSJ);
 
     lpUIobject = new UIobject();
     lpUIobject->Init();
@@ -195,7 +194,7 @@ void InGameScene::Release()
         lpPlayerController = nullptr;
     }
 
-    //????? ???? ??????
+    //controller vector release
 }
 
 void InGameScene::Update(float deltaTime)
@@ -208,7 +207,7 @@ void InGameScene::Update(float deltaTime)
         switch (currStage)
         {
         case STAGE_STATE::LOADING:
-            if (elapsedTime > 20)
+            if (elapsedTime > 10)
             {
                 currStage = nextStage;
                 elapsedTime = 0;
@@ -306,36 +305,35 @@ void InGameScene::Update(float deltaTime)
             vEnemys[i]->Update(deltaTime);
         }
 
-
-
-        if (lpItem) lpItem->Update(deltaTime);
-        if (lpUIobject) lpUIobject->Update(deltaTime);
-        MissileManager::GetSingleton()->Update(deltaTime);
-        EffectManager::GetSingleton()->Update(deltaTime);
-
- 
-
-        if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
-        {
-            if (lpUIobject->GetBombAmount() < 0)
-            {
-                lpUIobject->SetBombAmount(0);
-            }
-            else
-                lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
-        }
-
-        backgroundMover += 100 * deltaTime;
-        if (backgroundMover >= 800) backgroundMover = 0;
-
-        elapsedTime += deltaTime;
-
-        if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
-        {
-            SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
-        }
-
     }
+
+    if (lpItem) lpItem->Update(deltaTime);
+    if (lpUIobject) lpUIobject->Update(deltaTime);
+    MissileManager::GetSingleton()->Update(deltaTime);
+    EffectManager::GetSingleton()->Update(deltaTime);
+    
+
+    if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
+    {
+        if (lpUIobject->GetBombAmount() < 0)
+        {
+            lpUIobject->SetBombAmount(0);
+        }
+        else
+            lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
+    }
+
+    backgroundMover += 300 * deltaTime;
+    if (backgroundMover >= 800) backgroundMover = 0;
+
+    elapsedTime += deltaTime;
+
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+    }
+
+    
 }
 
 
@@ -419,10 +417,10 @@ void InGameScene::CheckCollision()
 
     for (int i = 0; i < vLpPlayerMissile.size();)
     {
-        dX2 = vLpPlayerMissile[i]->pos.x - lpPlanetSSJ->pos.x;
-        dY2 = vLpPlayerMissile[i]->pos.y - lpPlanetSSJ->pos.y;
+        dX2 = vLpPlayerMissile[i]->pos.x - lpEnemyController->GetController()->pos.x;
+        dY2 = vLpPlayerMissile[i]->pos.y - lpEnemyController->GetController()->pos.y;
         distance2 = sqrt(dX2 * dX2 + dY2 * dY2);
-        if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
+        if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpEnemyController->GetController()->collider.width / 2)
         {
             EffectManager::GetSingleton()->PlayImage(vLpPlayerMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
