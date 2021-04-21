@@ -16,6 +16,11 @@ void Ending::Release()
 
 void Ending::Update(float deltaTime)
 {
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+    }
+
 }
 
 void Ending::Render(HDC hdc)

@@ -49,6 +49,7 @@ private:
 	STAGE_STATE currStage;
 	STAGE_STATE nextStage;
 	bool isBossAlive;
+	bool isPlayerAlive;
 
 	Animation* lpLoadingCat;
 	POINTFLOAT catPos;
@@ -56,10 +57,13 @@ private:
 	float elapsedTime;
 	float backgroundMover;
 
+
 public:
 	virtual HRESULT Init();
 	virtual void Release();
 	virtual void Update(float deltaTime);
 	virtual void Render(HDC hdc);
 	void CheckCollision();
+	void KillAlien(int indexNum);
+	void CreateAlien(int indexNum);
 };
