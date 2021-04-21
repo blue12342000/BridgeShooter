@@ -8,6 +8,7 @@ void Planet04::Init()
 	lpAnimation->Change("Planet04", 50, true);
 	transform.speed = 50;
 	hp = 500;
+	bomb = 3;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new Planet04Factory();

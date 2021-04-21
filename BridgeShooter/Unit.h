@@ -18,9 +18,11 @@ protected:
 	int hp;
 
 	UIobject* lpUIobject;
+	float hp;
+	int bomb;
 
 public:
-	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false){}
+	Unit(): GameObject(), lpAnimation(nullptr), lpFactory(nullptr), lpTarget(nullptr), factoryLine(0), isInertia(false), hp(0), bomb(0){}
 	virtual ~Unit() {}
 
 	virtual void Init() override;
@@ -37,6 +39,11 @@ public:
 
 	virtual void SetFactory(Factory* lpFactory) final;
 	virtual void SetFactoryLine(int factoryLine) final;
+	virtual void SetHp(float hp) final { this->hp = hp; };
+
+	inline int GetFactoryLine() {return factoryLine; }
+	inline float GetHp() { return hp; }
+	inline int GetBomb() { return bomb; }
 
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline Unit*& GetTarget() { return lpTarget; }

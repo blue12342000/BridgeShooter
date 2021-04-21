@@ -32,20 +32,20 @@ void KmsAIController::Update(float deltaTime)
 {
 	if (lpUnit) 
 	{
-		if (lpUnit->GetHP() <= 0) 
+		if (lpUnit->GetHp() <= 0) 
 		{
 			
 		}
 		else 
 		{
-			lpUnit->elapsedTime = 2;//계속 팅기게(10보다 작게)
-			if (lpUnit->GetHP() >= 300)
+			lpUnit->SetElapsedTime(2);//계속 팅기게(10보다 작게)
+			if (lpUnit->GetHp() >= 300)
 			{
 				prevNum = 0;
 				lpUnit->transform.speed = 0;
 				lpUnit->SetFactoryLine(0);
 			}
-			else if (lpUnit->GetHP() >= 100)
+			else if (lpUnit->GetHp() >= 100)
 			{
 				if (prevNum != 1) 
 				{

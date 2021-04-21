@@ -4,6 +4,7 @@
 #include "Title.h"
 #include "InGameScene.h"
 #include "SelectPlayer.h"
+#include "Ending.h"
 
 HRESULT SceneManager::Init()
 {
@@ -19,6 +20,9 @@ HRESULT SceneManager::Init()
 			break;
 		case (int)SCENE_STATE::INGAME:
 			scenes[i] = new InGameScene();
+			break;
+		case (int)SCENE_STATE::ENDING:
+			scenes[i] = new Ending();
 			break;
 		case (int)SCENE_STATE::NONE:
 			break;

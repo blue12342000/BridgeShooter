@@ -21,6 +21,7 @@
 #include "AlienAIController.h"
 #include "KmsAIController.h"
 #include "SSJAIController.h"
+#include "Animation.h"
 
 HRESULT InGameScene::Init()
 {
@@ -74,11 +75,13 @@ HRESULT InGameScene::Init()
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
 
+    //lpEnemyController = new JinHwangAIContoller();
+    //lpEnemyController->Init();
+    //lpEnemyController->SetController(lpJinHwang);  
+
     lpEnemyController = new SSJAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ);  //스테이지에 따라 바뀜
-
-    //몹 컨트롤러 벡터
+    lpEnemyController->SetController(lpPlanetSSJ); 
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -86,6 +89,15 @@ HRESULT InGameScene::Init()
     backgroundMover = 0;
     
     elapsedTime = 0;
+
+    currStage = STAGE_STATE::LOADING;
+    nextStage = STAGE_STATE::STAGE1;
+    isBossAlive = false;
+    
+    lpLoadingCat = new Animation();
+    lpLoadingCat->Change("LOADING_CAT", 4, true, false);
+    catPos = { -50, 400 };
+    
         
     backgroundMover = 0;
  
@@ -93,19 +105,24 @@ HRESULT InGameScene::Init()
     lpJinHwang->Init();
     lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
-    lpUIobject = new UIobject();
-    lpUIobject->Init();
+    
  
-    //플레이어 
+    //?÷???? 
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
-    lpPlayerController->SetController(lpJinHwang);
+    lpPlayerController->SetController(lpPlayer);
+
     lpPlayer->SetTarget(lpJinHwang);
     lpEnemyController = new JinHwangAIContoller();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlayer);
+    lpEnemyController->SetController(lpJinHwang);
 
-     return S_OK;
+    lpUIobject = new UIobject();
+    lpUIobject->Init();
+    lpUIobject->SetPlayer(lpPlayer);
+    lpUIobject->SetEnemy(lpJinHwang);
+    
+ return S_OK;
 }
 
 void InGameScene::Release()
@@ -173,26 +190,93 @@ void InGameScene::Release()
         delete lpPlayerController;
         lpPlayerController = nullptr;
     }
+
+    if (lpEnemyController)
+    {
+        lpEnemyController->Release();
+        delete lpEnemyController;
+        lpEnemyController = nullptr;
+    }
+
 }
 
 void InGameScene::Update(float deltaTime)
 {
+    elapsedTime += deltaTime;
+
     CheckCollision();
 
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
     if (lpEnemyController) lpEnemyController->Update(deltaTime);
+    
+    if (!isBossAlive)
+    {
+        switch (currStage)
+        {
+        case STAGE_STATE::LOADING:
+            if (elapsedTime > 10)
+            {                
+                currStage = nextStage;
+                isBossAlive = true; //??ο?
+            }
+            else
+            {
+                lpLoadingCat->Update(deltaTime);
+                catPos.x += deltaTime * 100;
+            }
+            break;
+        case STAGE_STATE::STAGE1:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE2;
+            isBossAlive = true;
+            lpEnemyController = new SSJAIController();  
+            lpEnemyController->Init();
+            lpEnemyController->SetController(lpPlanetSSJ);
 
-    //if (lpPlanet04) lpPlanet04->Update(deltaTime);
-    //if (!isOnlyPlayer && lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpPlanetSSJ) lpPlanetSSJ->Update(deltaTime);
-    //if (lpJinHwang) lpJinHwang->Update(deltaTime);
-    //if (lpPlanetKMS) lpPlanetKMS->Update(deltaTime);
+            //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+            //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+            //{
+            //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
+            //}
+
+            elapsedTime = 0;
+            break;
+        case STAGE_STATE::STAGE2:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE3;
+            isBossAlive = true;
+            lpEnemyController->SetController(lpPlanetSSJ);
+            elapsedTime = 0;
+            break;
+        case STAGE_STATE::STAGE3:
+            currStage = STAGE_STATE::LOADING;
+            nextStage = STAGE_STATE::STAGE4;
+            isBossAlive = true;
+            lpEnemyController->SetController(lpPlanetSSJ);
+            elapsedTime = 0;
+            break;
+        case STAGE_STATE::STAGE4:
+            if(elapsedTime > 10)
+                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+            break;
+             
+        }
+    }
+
+    if (elapsedTime > 10 && isBossAlive == true)
+    {
+        if (lpEnemyController) lpEnemyController->Update(deltaTime);
+    }
+       
+    if (lpPlayerController) lpPlayerController->Update(deltaTime);
 
     for (int i =0; i <vEnemys.size(); i++)
     {
         vEnemys[i]->Update(deltaTime);
     }
 
+    
+    //?????? ????????? ???? ???
     if (lpItem) lpItem->Update(deltaTime);
     if (lpUIobject) lpUIobject->Update(deltaTime);
     MissileManager::GetSingleton()->Update(deltaTime);
@@ -201,10 +285,14 @@ void InGameScene::Update(float deltaTime)
     backgroundMover += 300 *deltaTime;
     if (backgroundMover >= 800) backgroundMover = 0;
 
-    
     if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
     {
-        lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
+        if (lpUIobject->GetBombAmount() < 0)
+        {
+            lpUIobject->SetBombAmount(0);
+        }
+        else
+            lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
     }
 
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
@@ -227,7 +315,8 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
-    if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
+    //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
+
     for (int i = 0; i < vEnemys.size(); i++)
     {
         vEnemys[i]->Render(hBackDC);
@@ -239,6 +328,12 @@ void InGameScene::Render(HDC hdc)
     EffectManager::GetSingleton()->Render(hBackDC);
     MissileManager::GetSingleton()->Render(hBackDC);
     
+    if (currStage == STAGE_STATE::LOADING)
+    {
+        lpLoadingCat->Render(hBackDC, catPos.x, catPos.y);
+    }
+        
+
     lpBackBuffer->Render(hdc);
    
 }
@@ -247,13 +342,13 @@ void InGameScene::CheckCollision()
 {
     vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
     vector<Missile*>& vLpPlayerMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::PLAYER);
-    //플레이어의 체력과 행성의 체력을 가져온다.
 
     float distance = 100.0f;
     float dX = 0;
     float dY = 0;
 
-    //적이 나를 떄릴때
+
+    //???? ?÷???? ??????
     for (int i = 0; i < vLpEnemyMissile.size();)
     {
         dX = vLpEnemyMissile[i]->pos.x - lpPlayer->pos.x;
@@ -264,7 +359,20 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            lpUIobject->SetPlayerMaxHp(lpUIobject->GetPlayerMaxHp() - 10);
+            //????? 0???? ???????? ???? ??? 0
+            if (lpPlayerController->GetController()->GetHp() <= 0)
+            {
+                lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
+                lpPlayerController->GetController()->SetHp(lpUIobject->GetPlayerMaxHp()); // ???? ?÷???? ????? ??? ????????
+                if (lpUIobject->GetLifeAmount() < 0)
+                {
+                    lpPlayerController->GetController()->SetHp(0);
+                    //?÷?????? ??? ???? ???? ???
+                }
+            }
+            //????? 0?? ???? 10?? ???????? ?? 
+            else                            // ???? ?÷?????? ??? ???????? :10
+                lpPlayerController->GetController()->SetHp(lpPlayerController->GetController()->GetHp() - 10);
         }
         else
         {
@@ -276,7 +384,6 @@ void InGameScene::CheckCollision()
     float dX2 = 0;
     float dY2 = 0;
 
-    //내가 적을 때릴때
     for (int i = 0; i < vLpPlayerMissile.size();)
     {
         dX2 = vLpPlayerMissile[i]->pos.x - lpPlanetSSJ->pos.x;
@@ -286,7 +393,16 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage(vLpPlayerMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
-            lpUIobject->SetbossMaxHp(lpUIobject->GetbossMaxHp() - 10);
+            //????? 0???? ???????? ???? ??? 0
+            if (lpEnemyController->GetController()->GetHp() <= 0)
+            {
+                lpEnemyController->GetController()->SetHp(0);
+                //???? ??? ???? ???? ???
+            }
+            //????? 0?? ???? 10?? ???????? ??
+            else                               // ???? ?????? ??? ???????? :10
+                lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp() - 10);
+
         }
         else
         {
@@ -304,9 +420,6 @@ void InGameScene::CheckCollision()
     if (distance3 <= lpItem->collider.width / 2 + lpPlayer->collider.width / 2)
     {
         EffectManager::GetSingleton()->PlayImage({ lpPlayer->pos.x , lpPlayer->pos.y }, "EFFECT_01", 10);
-        //lpItem->Release();   isItemdisabled = true;
-        //아이템 충돌판정 및 활동 중지
-        //isPlayerHitItem = true;
     }
 
 }

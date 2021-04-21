@@ -9,6 +9,7 @@ void JinHwang::Init()
 	lpAnimation->Change("JINHWANG", 50, true);
 	transform.speed = 420;
 	hp = 1000;
+	bomb = 5;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new JinHwangFactory();
