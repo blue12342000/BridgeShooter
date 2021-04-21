@@ -72,7 +72,7 @@ HRESULT InGameScene::Init()
 
     lpEnemyController = vLpEnemyController[1];
     lpEnemyController->Init();
-    lpEnemyController->SetUnit(lpPlanetKMS);
+    lpEnemyController->SetUnit(lpPlanetSSJ);
 
     vEnemys.push_back(new AlienBlue());
     vEnemys.push_back(new AlienGreen());
@@ -241,9 +241,9 @@ void InGameScene::Update(float deltaTime)
 
             lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
-            lpEnemyController->SetController(lpJinHwang);
-            lpUIobject->SetEnemy(lpEnemyController->GetController());
-            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
+            lpEnemyController->SetUnit(lpJinHwang);
+            lpUIobject->SetEnemy(lpEnemyController->GetUnit());
+            lpEnemyController->GetUnit()->SetHp(lpEnemyController->GetUnit()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
 
             elapsedTime = 0;
@@ -254,9 +254,9 @@ void InGameScene::Update(float deltaTime)
 
             lpEnemyController = vLpEnemyController[2];
             lpEnemyController->Init();
-            lpEnemyController->SetController(lpPlanet04);
-            lpUIobject->SetEnemy(lpEnemyController->GetController());
-            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
+            lpEnemyController->SetUnit(lpPlanet04);
+            lpUIobject->SetEnemy(lpEnemyController->GetUnit());
+            lpEnemyController->GetUnit()->SetHp(lpEnemyController->GetUnit()->GetHp());
             lpPlayer->SetTarget(lpPlanet04);
 
 
@@ -268,9 +268,9 @@ void InGameScene::Update(float deltaTime)
 
             lpEnemyController = vLpEnemyController[3];
             lpEnemyController->Init();
-            lpEnemyController->SetController(lpPlanetKMS);
-            lpUIobject->SetEnemy(lpEnemyController->GetController());
-            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
+            lpEnemyController->SetUnit(lpPlanetKMS);
+            lpUIobject->SetEnemy(lpEnemyController->GetUnit());
+            lpEnemyController->GetUnit()->SetHp(lpEnemyController->GetUnit()->GetHp());
             lpPlayer->SetTarget(lpPlanetKMS);
 
             elapsedTime = 0;
@@ -293,13 +293,13 @@ void InGameScene::Update(float deltaTime)
     //if alien is (over map || HP<0 ) will kill 
     for (int i = 0; i < vLpMobController.size();i++)
     {
-        if (vLpMobController[i]->GetController()->GetHp() > 0)
+        if (vLpMobController[i]->GetUnit()->GetHp() > 0)
         {
             vLpMobController[i]->Update(deltaTime);
         }
-        if ((vLpMobController[i]->GetController()->pos.x<=80000)&&((vLpMobController[i]->GetController()->GetHp() <= 0) 
-            || ((vLpMobController[i]->GetController()->pos.x <= WINSIZE_LEFT) || (vLpMobController[i]->GetController()->pos.x >= WINSIZE_RIGHT) ||
-            (vLpMobController[i]->GetController()->pos.y <= WINSIZE_TOP) || (vLpMobController[i]->GetController()->pos.y >= WINSIZE_BOTTOM))))
+        if ((vLpMobController[i]->GetUnit()->pos.x<=80000)&&((vLpMobController[i]->GetUnit()->GetHp() <= 0)
+            || ((vLpMobController[i]->GetUnit()->pos.x <= WINSIZE_LEFT) || (vLpMobController[i]->GetUnit()->pos.x >= WINSIZE_RIGHT) ||
+            (vLpMobController[i]->GetUnit()->pos.y <= WINSIZE_TOP) || (vLpMobController[i]->GetUnit()->pos.y >= WINSIZE_BOTTOM))))
         {
             KillAlien(i);
         }     
@@ -403,7 +403,6 @@ void InGameScene::CheckCollision()
         if (distance <= vLpEnemyMissile[i]->collider.width / 2 + lpPlayer->collider.width / 2)
         {
             EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
-            MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
             //체력이 0이되면 데미지를 받아도 체력 0
             if (lpPlayerController->GetUnit()->GetHp() <= 0)
             {
@@ -413,12 +412,8 @@ void InGameScene::CheckCollision()
                 EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
-                    lpPlayerController->GetController()->SetHp(0);
-
+                    lpPlayerController->GetUnit()->SetHp(0);
                     isPlayerAlive = false;
-
-                    MissileManager::GetSingleton()->ClearActiveMissile();
-                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
                     
                 }
                 else
@@ -431,6 +426,7 @@ void InGameScene::CheckCollision()
             //체력이 0이 아니면 10씩 데미지를 줌
             else
             {
+                MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
                 lpPlayerController->GetUnit()->SetHp(lpPlayerController->GetUnit()->GetHp() - 10);
             }
         }
@@ -446,27 +442,22 @@ void InGameScene::CheckCollision()
   
     for (int i = 0; i < vLpPlayerMissile.size();)
     {
-        dX2 = vLpPlayerMissile[i]->pos.x - lpEnemyController->GetController()->pos.x;
-        dY2 = vLpPlayerMissile[i]->pos.y - lpEnemyController->GetController()->pos.y;
+        dX2 = vLpPlayerMissile[i]->pos.x - lpEnemyController->GetUnit()->pos.x;
+        dY2 = vLpPlayerMissile[i]->pos.y - lpEnemyController->GetUnit()->pos.y;
         distance2 = sqrt(dX2 * dX2 + dY2 * dY2);
-        if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpEnemyController->GetController()->collider.width / 2)
+        if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpEnemyController->GetUnit()->collider.width / 2)
         {
             EffectManager::GetSingleton()->PlayImage(vLpPlayerMissile[i]->pos, "EFFECT_01", 10);
-            MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             if (lpEnemyController->GetUnit()->GetHp() <= 0)
             {
-
                 isBossAlive = false;
-
                 elapsedTime = 0;
-
-                lpEnemyController->GetController()->SetHp(0);
+                lpEnemyController->GetUnit()->SetHp(0);
                 MissileManager::GetSingleton()->ClearActiveMissile();
-                EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
-
             }
             else
             {
+                MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
                 lpEnemyController->GetUnit()->SetHp(lpEnemyController->GetUnit()->GetHp() - 10);
             }
         }
@@ -496,9 +487,9 @@ void InGameScene::KillAlien(int indexNum)
 {
     if (!vLpMobController.empty()&& (indexNum>=0)&& (indexNum < vLpMobController.size()))
     {
-        vLpMobController[indexNum]->GetController()->SetHp(0);
-       EffectManager::GetSingleton()->Explosion(vLpMobController[indexNum]->GetController()->pos, vLpMobController[indexNum]->GetController()->GetLpAnimation(), 10, 4, 4);
-       vLpMobController[indexNum]->GetController()->pos.x = 100000;
+        vLpMobController[indexNum]->GetUnit()->SetHp(0);
+       EffectManager::GetSingleton()->Explosion(vLpMobController[indexNum]->GetUnit()->pos, vLpMobController[indexNum]->GetUnit()->GetLpAnimation(), 10, 4, 4);
+       vLpMobController[indexNum]->GetUnit()->pos.x = 100000;
     }
    
 
@@ -506,8 +497,8 @@ void InGameScene::KillAlien(int indexNum)
 
 void InGameScene::CreateAlien(int indexNum)
 {
-    if (!vLpMobController.empty() && (indexNum >= 0) && (indexNum < vLpMobController.size())&& (vLpMobController[indexNum]->GetController()->GetHp()<=0))
+    if (!vLpMobController.empty() && (indexNum >= 0) && (indexNum < vLpMobController.size())&& (vLpMobController[indexNum]->GetUnit()->GetHp()<=0))
     {
-        vLpMobController[indexNum]->GetController()->Init();
+        vLpMobController[indexNum]->GetUnit()->Init();
     }
 }
