@@ -21,13 +21,21 @@
 
 void AlienRed::Init()
 {
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
+	lpPattern = new ReflectPattern();
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
 	lpAnimation->Change("Enemy_4", 4, true);
-	lpFactory = new SineFactory();
-	lpPattern = new ReflectPattern();
 	speed = 80.0;
 	hp = 500;
 	moveAngle = 0;

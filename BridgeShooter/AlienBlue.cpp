@@ -21,10 +21,18 @@
 
 void AlienBlue::Init()
 {
-
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new BasicFactory());
 	lpAnimation = new Animation();
-	lpFactory = new BasicFactory();
 	lpPattern = new ReflectPattern();
+
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);

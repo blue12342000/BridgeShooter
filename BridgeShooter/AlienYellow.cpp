@@ -21,9 +21,17 @@
 
 void AlienYellow::Init()
 {
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
-	lpFactory = new SineFactory();
-	lpPattern = new BasicPattern();
+	lpPattern = new ReflectPattern();
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);

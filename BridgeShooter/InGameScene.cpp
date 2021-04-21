@@ -60,16 +60,6 @@ HRESULT InGameScene::Init()
     lpJinHwang->Init();
     lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
 
-    vEnemys.push_back(new AlienBlue());
-    vEnemys.push_back(new AlienGreen());
-    vEnemys.push_back(new AlienRed());
-    vEnemys.push_back(new AlienYellow());
-    for (int i = 0; i < vEnemys.size(); i++)
-    {
-        vLpMobController.push_back(new AlienAIController);
-        vLpMobController[i]->SetController(vEnemys[i]);
-        vLpMobController[i]->Init();
-    }
 
     lpItem = new Item();
     lpItem->Init();
@@ -84,6 +74,17 @@ HRESULT InGameScene::Init()
     lpEnemyController->SetController(lpPlanetSSJ);  //스테이지에 따라 바뀜
 
     //몹 컨트롤러 벡터
+
+    vEnemys.push_back(new AlienBlue());
+    vEnemys.push_back(new AlienGreen());
+    vEnemys.push_back(new AlienRed());
+    vEnemys.push_back(new AlienYellow());
+    for (int i = 0; i < vEnemys.size(); i++)
+    {
+        vLpMobController.push_back(new AlienAIController);
+        vLpMobController[i]->SetController(vEnemys[i]);
+        vLpMobController[i]->Init();
+    }
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -209,6 +210,11 @@ void InGameScene::Update(float deltaTime)
     for (int i = 0; i < vLpMobController.size();i++)
     {
         vLpMobController[i]->Update(deltaTime);
+        if ((vEnemys[i]->hp > 0) && ((vEnemys[i]->pos.x > WINSIZE_LEFT) && (vEnemys[i]->pos.x < WINSIZE_RIGHT) &&
+            (vEnemys[i]->pos.y > WINSIZE_TOP) && (vEnemys[i]->pos.y < WINSIZE_BOTTOM)))
+        {
+            vLpMobController[i]->Update(deltaTime);
+        }
     }
    
 
@@ -329,3 +335,4 @@ void InGameScene::CheckCollision()
     }
 
 }
+

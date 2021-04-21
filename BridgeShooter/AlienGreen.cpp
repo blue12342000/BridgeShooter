@@ -21,13 +21,22 @@
 
 void AlienGreen::Init()
 {
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new Planet04Factory());
 	lpAnimation = new Animation();
+	lpPattern = new BasicPattern();
+
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
 	lpAnimation->Change("Enemy_3", 4, true);
-	lpFactory = new Planet04Factory();
-	lpPattern = new BasicPattern();
 	speed = 80.0f;
 	hp = 50;
 	moveAngle = PI / 2.0f;

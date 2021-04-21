@@ -18,7 +18,7 @@ void Planet_KMS_Factory::Init()
 	SetCheckTime(3400);
 	SetCheckTime(4000);
 	SetCheckTime(1000);
-	SetCheckTime(5);
+	SetCheckTime(10);
 }	
 
 
@@ -38,7 +38,7 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 	{
 		
 		if(IsCheckTime(1001))srand(time(NULL));
-		if (IsCheckTime(5))
+		if (IsCheckTime(10))
 		{
 			for (int i = 0; i < 1; i++)//·£´ý ¹Ì»çÀÏ
 			{
