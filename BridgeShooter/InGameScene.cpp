@@ -103,11 +103,11 @@ HRESULT InGameScene::Init()
     //플레이어 
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
-    lpPlayerController->SetController(lpPlayer);
+    lpPlayerController->SetController(lpJinHwang);
     lpPlayer->SetTarget(lpJinHwang);
     lpEnemyController = new JinHwangAIContoller();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetKMS);
+    lpEnemyController->SetController(lpPlayer);
 
      return S_OK;
 }

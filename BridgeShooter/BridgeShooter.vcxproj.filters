@@ -34,12 +34,6 @@
     <Filter Include="소스 파일\Scene\Super">
       <UniqueIdentifier>{409939e0-5fc0-4ba0-9f32-8f28765dd082}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Controller">
-      <UniqueIdentifier>{25bbd98c-65be-454f-8371-90b9939b95fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Controller\Super">
-      <UniqueIdentifier>{c34292eb-07ee-4ebb-b058-5e869c9de9e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\GameObject\Unit">
       <UniqueIdentifier>{719e516d-9771-4642-b73d-cdf504531c24}</UniqueIdentifier>
     </Filter>
@@ -54,6 +48,12 @@
     </Filter>
     <Filter Include="소스 파일\Engine\Manager">
       <UniqueIdentifier>{637018d1-1087-4b77-9f9d-ac63975506f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Engine\Controller">
+      <UniqueIdentifier>{25bbd98c-65be-454f-8371-90b9939b95fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Engine\Controller\Super">
+      <UniqueIdentifier>{c34292eb-07ee-4ebb-b058-5e869c9de9e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -193,10 +193,10 @@
       <Filter>소스 파일\Factory</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
     <ClCompile Include="AIController.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
     <ClCompile Include="SpaceShip_Red.cpp">
       <Filter>소스 파일\GameObject\Unit</Filter>
@@ -208,7 +208,7 @@
       <Filter>소스 파일\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="JinHwangAIContoller.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
     <ClCompile Include="CircleMovePattern.cpp">
       <Filter>소스 파일\Pattern</Filter>
@@ -228,13 +228,13 @@
     <ClCompile Include="AlienAIController.cpp">
     </ClCompile>
     <ClCompile Include="Planet04AIController.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
     <ClCompile Include="SSJAIController.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
     <ClCompile Include="KmsAIController.cpp">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -383,13 +383,13 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
-      <Filter>소스 파일\Controller\Super</Filter>
+      <Filter>소스 파일\Engine\Controller\Super</Filter>
     </ClInclude>
     <ClInclude Include="AIController.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>소스 파일\Engine\Manager</Filter>
@@ -404,7 +404,7 @@
       <Filter>소스 파일\GameObject\Unit</Filter>
     </ClInclude>
     <ClInclude Include="JinHwangAIContoller.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
     <ClInclude Include="CircleMovePattern.h">
       <Filter>소스 파일\Pattern</Filter>
@@ -424,13 +424,13 @@
     <ClInclude Include="AlienAIController.h">
     </ClInclude>
     <ClInclude Include="Planet04AIController.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
     <ClInclude Include="SSJAIController.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
     <ClInclude Include="KmsAIController.h">
-      <Filter>소스 파일\Controller</Filter>
+      <Filter>소스 파일\Engine\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
