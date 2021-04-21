@@ -228,8 +228,6 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpJinHwang);
-            //???? ?????? ???? ???? ?????????? ???????
-            //???? ?????? ?????? ???? ?ея???? 0?????  ????? ??? ????.
             lpUIobject->SetEnemy(lpEnemyController->GetController());
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
@@ -274,11 +272,8 @@ void InGameScene::Update(float deltaTime)
             break;
         case STAGE_STATE::STAGE4:
             elapsedTime = 0;
-            currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE4;
-
-            if (elapsedTime > 10)
-                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+            SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
             break;
 
         }
