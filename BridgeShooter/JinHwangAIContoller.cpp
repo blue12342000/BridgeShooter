@@ -12,6 +12,8 @@ void JinHwangAIContoller::Init()
 	state = UNIT_STATE::IDLE;
 	currentPattern = USE_PATTERN::NONE;
 	elapsedTime = 0;
+
+	origin = { WINSIZE_WIDTH / 2.0f, WINSIZE_HEIGHT / 4.0f };
 }
 
 void JinHwangAIContoller::Release()
@@ -31,27 +33,44 @@ void JinHwangAIContoller::Update(float deltaTime)
 		{
 		case UNIT_STATE::IDLE:
 			currentPattern = USE_PATTERN::NONE;
-			if (elapsedTime > 1)
+			if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
+				|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
 			{
-				if (rand() % 100 < 10)
+				state = UNIT_STATE::MOVE;
+			}
+			else
+			{
+				if (elapsedTime > 1)
 				{
-					elapsedTime = 0;
-					lpUnit->ResetTimer();
-					state = UNIT_STATE::ATTACK;
-				}
-				else
-				{
-					elapsedTime = 0;
-					//currentPattern = USE_PATTERN::CIRCLE;
-					state = UNIT_STATE::MOVE;
+					if (rand() % 100 < 10)
+					{
+						elapsedTime = 0;
+						lpUnit->ResetTimer();
+						state = UNIT_STATE::ATTACK;
+					}
+					else
+					{
+						elapsedTime = 0;
+						//currentPattern = USE_PATTERN::CIRCLE;
+						state = UNIT_STATE::MOVE;
+					}
 				}
 			}
 			break;
 		case UNIT_STATE::MOVE:
-			lpUnit->transform.speed = 400;
-			lpUnit->Translate(POINTFLOAT{ (float)((rand() % 150 + 60) - 135) / 10, (float)((rand() % 150 + 60) - 135) / 10 });
-			state = UNIT_STATE::MOVE_ING;
-			elapsedTime = 0;
+			if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
+				|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
+			{
+				float angle = atan2(origin.y - lpUnit->pos.y, origin.x - lpUnit->pos.x);
+				lpUnit->Translate(POINTFLOAT{ cosf(angle) * 10, sin(angle) * 10 });
+				state = UNIT_STATE::MOVE;
+			}
+			else
+			{
+				lpUnit->Translate(POINTFLOAT{ (float)((rand() % 150 + 60) - 135) / 10, (float)((rand() % 150 + 60) - 135) / 10 });
+				state = UNIT_STATE::MOVE_ING;
+				elapsedTime = 0;
+			}
 			break;
 		case UNIT_STATE::MOVE_ING:
 			if (elapsedTime > 2)
