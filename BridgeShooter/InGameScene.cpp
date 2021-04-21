@@ -293,16 +293,23 @@ void InGameScene::Update(float deltaTime)
        
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
 
+    //if alien is (over map || HP<0 ) will kill 
     for (int i = 0; i < vLpMobController.size();i++)
     {
-        //vLpMobController[i]->Update(deltaTime);
-        if ((vEnemys[i]->GetHp() > 0) && ((vEnemys[i]->pos.x > WINSIZE_LEFT) && (vEnemys[i]->pos.x < WINSIZE_RIGHT) &&
-            (vEnemys[i]->pos.y > WINSIZE_TOP) && (vEnemys[i]->pos.y < WINSIZE_BOTTOM)))
+        if (vEnemys[i]->GetHp() > 0) 
         {
             vLpMobController[i]->Update(deltaTime);
         }
+        if ((vEnemys[i]->pos.x<=80000)&&((vEnemys[i]->GetHp() <= 0) || ((vEnemys[i]->pos.x <= WINSIZE_LEFT) || (vEnemys[i]->pos.x >= WINSIZE_RIGHT) ||
+            (vEnemys[i]->pos.y <= WINSIZE_TOP) || (vEnemys[i]->pos.y >= WINSIZE_BOTTOM))))
+        {
+            KillAlien(i);
+        }     
     }
-   
+    if ((rand() % 1000000) <= 100) 
+    {
+        CreateAlien(rand() % vEnemys.size());
+    }
 
     
     if (lpItem) lpItem->Update(deltaTime);
@@ -347,7 +354,11 @@ void InGameScene::Render(HDC hdc)
 
     for (int i = 0; i < vEnemys.size(); i++)
     {
-        vLpMobController[i]->Render(hBackDC);
+        if (vEnemys[i]->GetHp() > 0) 
+        {
+            vLpMobController[i]->Render(hBackDC);
+        }
+       
     }
 
     if (lpItem) lpItem->Render(hBackDC);
@@ -423,7 +434,7 @@ void InGameScene::CheckCollision()
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
-                //???? ??? ???? ???? ???
+               
                 isBossAlive = false;
                 lpEnemyController->GetController()->SetHp(0);
                 EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
@@ -450,5 +461,26 @@ void InGameScene::CheckCollision()
         EffectManager::GetSingleton()->PlayImage({ lpPlayer->pos.x , lpPlayer->pos.y }, "EFFECT_01", 10);
     }
 
+   
+
 }
 
+void InGameScene::KillAlien(int indexNum)
+{
+    if (!vEnemys.empty()&& (indexNum>=0)&& (indexNum < vEnemys.size()))
+    {
+       vEnemys[indexNum]->SetHp(0);
+       EffectManager::GetSingleton()->Explosion(vEnemys[indexNum]->pos, vEnemys[indexNum]->GetLpAnimation(), 10, 4, 4);
+       vEnemys[indexNum]->pos.x = 100000;
+    }
+   
+
+}
+
+void InGameScene::CreateAlien(int indexNum)
+{
+    if (!vEnemys.empty() && (indexNum >= 0) && (indexNum < vEnemys.size())&& (vEnemys[indexNum]->GetHp()<=0))
+    {
+        vEnemys[indexNum]->Init();
+    }
+}

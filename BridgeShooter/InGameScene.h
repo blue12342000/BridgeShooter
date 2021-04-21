@@ -62,4 +62,6 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render(HDC hdc);
 	void CheckCollision();
+	void KillAlien(int indexNum);
+	void CreateAlien(int indexNum);
 };
