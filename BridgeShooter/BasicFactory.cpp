@@ -42,7 +42,7 @@ void BasicFactory::Fire(Unit* lpUnit)
 		for (int i = 0; i < 20; ++i)
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_01", lpUnit->angle + ((float)(rand() % 101) - 50) / 100, Transform{ lpUnit->pos, lpUnit->angle + ((float)(rand() % 101) - 50) / 100, rand() % 100 + 100 }, 20);
+			lpMissile->SetMissile("MISSILE_01", lpUnit->angle + ((float)(rand() % 101) - 50) / 100.0f, Transform{ lpUnit->pos, lpUnit->angle + ((float)(rand() % 101) - 50) / 100, rand() % 100 + 100 }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
 			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
 		}
