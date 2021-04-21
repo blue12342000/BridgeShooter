@@ -7,7 +7,7 @@
 #include <map>
 #include <ctime>
 #include <float.h>
-#include <algorithm>
+#include <random>
 
 using namespace std;
 

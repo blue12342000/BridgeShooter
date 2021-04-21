@@ -36,8 +36,6 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 {
 	if (createLine == 0)
 	{
-		
-		if(IsCheckTime(1001))srand(time(NULL));
 		if (IsCheckTime(10))
 		{
 			for (int i = 0; i < 1; i++)//·£´ý ¹Ì»çÀÏ

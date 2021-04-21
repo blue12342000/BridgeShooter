@@ -36,7 +36,7 @@ void EffectManager::Update(float deltaTime)
 		if (vEffects[i].type == EFFECT_TYPE::EXPLOSION
 			|| vEffects[i].type == EFFECT_TYPE::BLACKHOLE)
 		{
-			if (vEffects[i].frameTime >= 8)
+			if (vEffects[i].frameTime >= 2)
 			{
 				vEffects.erase(vEffects.begin() + i);
 			}

@@ -76,10 +76,11 @@ Missile* MissileManager::CreateMissile()
 	}
 }
 
-void MissileManager::ClearActiveMissile()
+void MissileManager::ClearActiveMissile(UNIT_KIND except)
 {
 	for (auto& pair : mvLpMissiles)
 	{
+		if (pair.first == except) continue;
 		// 이부분은 InGameScene에 있어야한다.
 		// 남은탄 all 삭제전에 남은 탄들위치에 Item 을 추가적으로 생성해 줘야 한다.
 		vector<Missile*> vLpMissile = pair.second;
@@ -88,7 +89,7 @@ void MissileManager::ClearActiveMissile()
 			EffectManager::GetSingleton()->PlayImage(vLpMissile[i]->pos, "EFFECT_01", 10);
 		}
 
-		vLpDeactive.insert(vLpDeactive.end(), pair.second.begin(), pair.second.end());
+		vLpDeactive.insert(vLpDeactive.begin(), pair.second.begin(), pair.second.end());
 		pair.second.clear();
 	}
 }

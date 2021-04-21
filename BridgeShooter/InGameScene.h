@@ -52,10 +52,6 @@ private:
 	Controller* lpCurrentBossController;
 	map<STAGE_STATE, Controller*> mLpBossController;
 
-
-	bool isBossAlive;
-	bool isPlayerAlive;
-
 public:
 	virtual HRESULT Init();
 	virtual void Release();

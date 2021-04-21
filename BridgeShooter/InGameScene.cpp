@@ -25,6 +25,8 @@
 
 HRESULT InGameScene::Init()
 {
+    slowScale = 1;
+
     elapsedTime = 0;
     backgroundMover = 0;
     state = INGAME_STATE::NORMAL;
@@ -74,8 +76,13 @@ HRESULT InGameScene::Init()
         vLpMobController[i]->Init();
     }
 
-    isBossAlive = false;
-    isPlayerAlive = true;
+    vItems.resize(2);
+    for (int i = 0; i < vItems.size(); ++i)
+    {
+        vItems[i] = new Item();
+        vItems[i]->Init();
+        vItems[i]->SetIsActive(false);
+    }
 
     lpUIobject = new UIobject();
     lpUIobject->Init();
@@ -128,6 +135,12 @@ void InGameScene::Release()
         }
         mLpBossController.clear();
     }
+
+    for (auto& item : vItems)
+    {
+        delete item;
+    }
+    vItems.clear();
 }
 
 void InGameScene::Update(float deltaTime)
@@ -185,18 +198,11 @@ void InGameScene::Update(float deltaTime)
         }
         if (!vLpMobController.empty()) UnitCollision(vLpMobController[0]->GetUnit()->GetUnitKind(), lpPlayerController);
 
-        for (auto it = vItems.begin(); it != vItems.end();)
+        for (auto it = vItems.begin(); it != vItems.end(); ++it)
         {
-            if (ItemCollision(lpPlayerController->GetUnit(), *it))
-            {
-                (*it)->Release();
-                delete *it;
-                it = vItems.erase(it);
-            }
-            else
+            if ((*it)->IsActive() && !ItemCollision(lpPlayerController->GetUnit(), *it))
             {
                 (*it)->Update(deltaTime / slowScale);
-                ++it;
             }
         }
 
@@ -209,17 +215,17 @@ void InGameScene::Update(float deltaTime)
         POINTFLOAT p1,p2;
         for (int i = 0; i < vLpMobController.size(); i++)
         {
-            p1 = vLpMobController[i]->GetUnit()->pos;
-            p2 = lpPlayerController->GetUnit()->pos;
-            distance = (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y);
-            if (minDistance > distance)
-            {
-                minDistance = distance;
-                lpEnemy = vLpMobController[i]->GetUnit();
-            }
-
             if (vLpMobController[i]->IsReady())
             {
+                p1 = vLpMobController[i]->GetUnit()->pos;
+                p2 = lpPlayerController->GetUnit()->pos;
+                distance = (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y);
+                if (minDistance > distance)
+                {
+                    minDistance = distance;
+                    lpEnemy = vLpMobController[i]->GetUnit();
+                }
+
                 if (vLpMobController[i]->GetUnit()->IsAlive())
                 {
                     vLpMobController[i]->Update(deltaTime / slowScale);
@@ -360,9 +366,16 @@ void InGameScene::UnitCollision(UNIT_KIND attackerKind, Controller* target)
                 else if (lpUnit->GetUnitKind() == UNIT_KIND::ENEMY)
                 {
                     target->SetIsReady(false);
-                    vItems.push_back(new Item());
-                    vItems.back()->Init();
-                    vItems.back()->pos = lpUnit->pos;
+                    for (int i = 0; i < vItems.size(); ++i)
+                    {
+                        if (!vItems[i]->IsActive())
+                        {
+                            vItems[i]->Init();
+                            vItems[i]->SetIsActive(true);
+                            vItems[i]->pos = lpUnit->pos;
+                            break;
+                        }
+                    }
                 }
                 else if (lpUnit->GetUnitKind() == UNIT_KIND::BOSS)
                 {
@@ -394,23 +407,25 @@ bool InGameScene::ItemCollision(Unit* target, Item* item)
 
     if (distance < pow(target->collider.width + item->collider.width, 2))
     {
-        // 충돌 아이템 획득/사용
+        // 충돌 아이템 사용
         switch (item->GetItemType())
         {
         case ITEM_TYPE::POWER_UP:
             target->ChangeFactoryLine(1, false);
             break;
         case ITEM_TYPE::BOMB:
-            DataManager::GetSingleton()->SetBombAmount(DataManager::GetSingleton()->GetBombAmount() + 1);
+            //DataManager::GetSingleton()->SetBombAmount(DataManager::GetSingleton()->GetBombAmount() + 1);
+            MissileManager::GetSingleton()->ClearActiveMissile(target->GetUnitKind());
             break;
         case ITEM_TYPE::HP_POTION:
             target->Heal(100);
             break;
         case ITEM_TYPE::SPEED_UP:
             slowTimer = 5;
-            slowScale = 2;
+            slowScale = 5;
             break;
         }
+        item->SetIsActive(false);
         return true;
     }
     return false;

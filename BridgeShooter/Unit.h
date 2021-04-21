@@ -31,7 +31,7 @@ public:
 	virtual bool Hit(int damage) final;
 	virtual void Fire() final;
 	virtual void Translate(POINTFLOAT force) final;
-	virtual void ChangeFactoryLine(int delta, bool isLoop = false) final;
+	virtual void ChangeFactoryLine(int delta, bool isLoop = true) final;
 	virtual void ToggleInertia() final { isInertia = !isInertia; }
 
 	virtual void ResetTimer() final;
