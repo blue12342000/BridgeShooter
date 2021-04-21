@@ -87,7 +87,7 @@ void SelectPlayer::Update(float deltaTime)
 		}
 	}
 	
-	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_SPACE))
+	if (KeyManager::GetSingleton()->IsKeyDownOne(VK_RETURN))
 	{
 		if (hasSelected == true)
 		{
@@ -102,19 +102,38 @@ void SelectPlayer::Render(HDC hdc)
 	lpBackImage->Render(hBackDC);
 	lpSelctInfo->Render(hBackDC);
 
-	HPEN hPen;
-	HPEN hOldPen;
-	HBRUSH hBr = (HBRUSH)GetStockObject(NULL_BRUSH);
-	HBRUSH hOldBr = (HBRUSH)SelectObject(hBackDC, hBr);
-	hPen = CreatePen(PS_SOLID, 3, RGB(29, 247, 255));
-	hOldPen = (HPEN)::SelectObject(hBackDC, (HGDIOBJ)hPen);
+	if (!hasSelected)
+	{
+		HPEN hPen;
+		HPEN hOldPen;
+		HBRUSH hBr = (HBRUSH)GetStockObject(NULL_BRUSH);
+		HBRUSH hOldBr = (HBRUSH)SelectObject(hBackDC, hBr);
+		hPen = CreatePen(PS_SOLID, 3, RGB(29, 247, 255));
+		hOldPen = (HPEN)::SelectObject(hBackDC, (HGDIOBJ)hPen);
 
-	Rectangle(hBackDC, selectBox.left, selectBox.top, selectBox.right, selectBox.bottom);
+		Rectangle(hBackDC, selectBox.left, selectBox.top, selectBox.right, selectBox.bottom);
 
-	hPen = (HPEN)::SelectObject(hBackDC, hOldPen);
-	hBr = (HBRUSH)SelectObject(hBackDC, hOldBr);
-	DeleteObject(hPen);
-	DeleteObject(hBr);
+		hPen = (HPEN)::SelectObject(hBackDC, hOldPen);
+		hBr = (HBRUSH)SelectObject(hBackDC, hOldBr);
+		DeleteObject(hPen);
+		DeleteObject(hBr);
+	}
+	else if (hasSelected)
+	{
+		HPEN hPen;
+		HPEN hOldPen;
+		HBRUSH hBr = (HBRUSH)GetStockObject(NULL_BRUSH);
+		HBRUSH hOldBr = (HBRUSH)SelectObject(hBackDC, hBr);
+		hPen = CreatePen(PS_SOLID, 3, RGB(255, 255, 0));
+		hOldPen = (HPEN)::SelectObject(hBackDC, (HGDIOBJ)hPen);
+
+		Rectangle(hBackDC, selectBox.left, selectBox.top, selectBox.right, selectBox.bottom);
+
+		hPen = (HPEN)::SelectObject(hBackDC, hOldPen);
+		hBr = (HBRUSH)SelectObject(hBackDC, hOldBr);
+		DeleteObject(hPen);
+		DeleteObject(hBr);
+	}
 
 
 	for (int i = 0; i < vLpPlayerImg.size(); ++i)

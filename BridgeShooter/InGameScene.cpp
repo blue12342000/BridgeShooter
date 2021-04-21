@@ -79,13 +79,14 @@ HRESULT InGameScene::Init()
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
 
-    //lpEnemyController = new JinHwangAIContoller();
-    //lpEnemyController->Init();
-    //lpEnemyController->SetController(lpJinHwang);  
+    vLpEnemyController.push_back(new JinHwangAIContoller()); 
+    vLpEnemyController.push_back(new SSJAIController());
+    vLpEnemyController.push_back(new Planet04AIcontroller());
+    vLpEnemyController.push_back(new KmsAIController());
 
-    lpEnemyController = new SSJAIController();
+    lpEnemyController = vLpEnemyController[0];
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ); 
+    lpEnemyController->SetController(lpJinHwang);
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
@@ -123,7 +124,7 @@ HRESULT InGameScene::Init()
     //lpEnemyController->Init();
     //lpEnemyController->SetController(lpPlayer);
     
-    lpPlayer->SetTarget(lpPlanetSSJ);
+    lpPlayer->SetTarget(lpJinHwang);
 
 
      return S_OK;
@@ -159,6 +160,13 @@ void InGameScene::Release()
         delete lpPlanetKMS;
         lpPlanetKMS = nullptr;
     }
+    if (lpEnemyController)
+    {
+        lpEnemyController->Release();
+        delete lpEnemyController;
+        lpEnemyController = nullptr;
+    }
+
     if (!vEnemys.empty())
     {
         for (int i = 0; i < vEnemys.size(); i++)
@@ -195,13 +203,8 @@ void InGameScene::Release()
         lpPlayerController = nullptr;
     }
 
-    if (lpEnemyController)
-    {
-        lpEnemyController->Release();
-        delete lpEnemyController;
-        lpEnemyController = nullptr;
-    }
-
+  
+    //벡터로 바꾼거 릴리즈
 }
 
 void InGameScene::Update(float deltaTime)
@@ -220,6 +223,8 @@ void InGameScene::Update(float deltaTime)
             {                
                 currStage = nextStage;
                 isBossAlive = true; //확인용
+                elapsedTime = 0;
+                //잡몹 세팅
             }
             else
             {
@@ -231,10 +236,13 @@ void InGameScene::Update(float deltaTime)
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE2;
             isBossAlive = true;
-            lpEnemyController = new SSJAIController();  
+            //다음꺼 세팅 - 밑에 뉴는 이미 해준 벡터 값으로 교체예정
+            lpEnemyController = vLpEnemyController[1];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpPlanetSSJ);
+            lpPlayer->SetTarget(lpPlanetSSJ);
 
+            //미사일 해제
             //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
             //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
             //{
@@ -247,17 +255,40 @@ void InGameScene::Update(float deltaTime)
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE3;
             isBossAlive = true;
-            lpEnemyController->SetController(lpPlanetSSJ);
+            lpEnemyController = vLpEnemyController[2];
+            lpEnemyController->Init();
+            lpEnemyController->SetController(lpPlanet04);
+            lpPlayer->SetTarget(lpPlanet04);
+
+            //미사일 해제
+         //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+         //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+         //{
+         //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
+         //}
+
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE3:
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE4;
             isBossAlive = true;
-            lpEnemyController->SetController(lpPlanetSSJ);
+            lpEnemyController = vLpEnemyController[3];
+            lpEnemyController->Init();
+            lpEnemyController->SetController(lpPlanetKMS);
+            lpPlayer->SetTarget(lpPlanetKMS);
+            //미사일 해제
+         //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
+         //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
+         //{
+         //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
+         //}
+
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE4:
+            currStage = STAGE_STATE::NONE;  // 페이드아웃시켜주는것도..
+
             if(elapsedTime > 10)
                 SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
             break;
