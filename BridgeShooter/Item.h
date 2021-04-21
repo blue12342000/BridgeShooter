@@ -6,8 +6,7 @@ enum class ITEM_TYPE
 	POWER_UP,	//유닛의 생성라인 바꿈
 	BOMB,
 	HP_POTION,
-	SLOW_MOTION,
-	TIME_STOP,
+	SPEED_UP,
 	NONE
 };
 

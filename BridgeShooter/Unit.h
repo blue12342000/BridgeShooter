@@ -8,13 +8,13 @@ class Pattern;
 class Unit : public GameObject
 {
 protected:
+	UNIT_KIND kind;
 	Animation* lpAnimation;
 	Factory* lpFactory;
 	Unit* lpTarget;
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
-
 	float hp;
 	int bomb;
 

@@ -4,7 +4,24 @@ class Pattern;
 class KmsAIController :public AIController
 {
 protected:
-	Pattern* lpPattern;
+	enum class USE_PATTERN
+	{
+		REFLECT,
+		NONE
+	};
+	enum class UNIT_STATE
+	{
+		IDLE,
+		MOVE,
+		PATTERN_ATTACK,
+		ATTACK,
+		UPGRADE,
+		RETURN,
+		NONE
+	};
+protected:
+	UNIT_STATE state;
+	USE_PATTERN currentPattern;
 	int prevNum;
 public:
 	virtual void Init()override;

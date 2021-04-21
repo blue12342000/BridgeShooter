@@ -25,7 +25,7 @@ public:
 
 	inline void SetPattern(Pattern* lpPattern) { this->lpPattern = lpPattern; }
 	inline void SetDelayTime(float delayTime) { this->delayTime = delayTime; }
-	inline Unit* GetTarget() { return *lpLpTarget; }
+	inline Unit* GetTarget() { return (lpLpTarget)?*lpLpTarget:nullptr; }
 	inline void SetLpTarget(Unit** lpLpUnit) { this->lpLpTarget = lpLpUnit; }
 };
 

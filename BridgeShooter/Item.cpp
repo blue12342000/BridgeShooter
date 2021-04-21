@@ -35,13 +35,11 @@ void Item::Update(float deltaTime)
             lpAnimation->Change("Item_Bomb", 10, true);
             break;
         case ITEM_TYPE::HP_POTION:
-            lpAnimation->Change("Item_Power", 10, true);
+            lpAnimation->Change("Item_Health", 10, true);
             break;
-        case ITEM_TYPE::SLOW_MOTION:
-            lpAnimation->Change("Item_Bomb", 10, true);
+        case ITEM_TYPE::SPEED_UP:
+            lpAnimation->Change("Item_Speed", 10, true);
             break;
-        case ITEM_TYPE::TIME_STOP:
-            lpAnimation->Change("Item_Power", 10, true);
             break;
         }
     }
