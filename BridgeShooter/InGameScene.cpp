@@ -297,19 +297,20 @@ void InGameScene::Update(float deltaTime)
     //if alien is (over map || HP<0 ) will kill 
     for (int i = 0; i < vLpMobController.size();i++)
     {
-        if (vEnemys[i]->GetHp() > 0) 
+        if (vLpMobController[i]->GetController()->GetHp() > 0)
         {
             vLpMobController[i]->Update(deltaTime);
         }
-        if ((vEnemys[i]->pos.x<=80000)&&((vEnemys[i]->GetHp() <= 0) || ((vEnemys[i]->pos.x <= WINSIZE_LEFT) || (vEnemys[i]->pos.x >= WINSIZE_RIGHT) ||
-            (vEnemys[i]->pos.y <= WINSIZE_TOP) || (vEnemys[i]->pos.y >= WINSIZE_BOTTOM))))
+        if ((vLpMobController[i]->GetController()->pos.x<=80000)&&((vLpMobController[i]->GetController()->GetHp() <= 0) 
+            || ((vLpMobController[i]->GetController()->pos.x <= WINSIZE_LEFT) || (vLpMobController[i]->GetController()->pos.x >= WINSIZE_RIGHT) ||
+            (vLpMobController[i]->GetController()->pos.y <= WINSIZE_TOP) || (vLpMobController[i]->GetController()->pos.y >= WINSIZE_BOTTOM))))
         {
             KillAlien(i);
         }     
     }
     if ((rand() % 1000000) <= 100) 
     {
-        CreateAlien(rand() % vEnemys.size());
+        CreateAlien(rand() % vLpMobController.size());
     }
 
     
@@ -353,7 +354,7 @@ void InGameScene::Render(HDC hdc)
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
     //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
 
-    for (int i = 0; i < vEnemys.size(); i++)
+    for (int i = 0; i < vLpMobController.size(); i++)
     {
         if (vEnemys[i]->GetHp() > 0) 
         {
@@ -424,7 +425,7 @@ void InGameScene::CheckCollision()
     float distance2 = 100.0f;
     float dX2 = 0;
     float dY2 = 0;
-
+  
     for (int i = 0; i < vLpPlayerMissile.size();)
     {
         dX2 = vLpPlayerMissile[i]->pos.x - lpPlanetSSJ->pos.x;
@@ -470,11 +471,11 @@ void InGameScene::CheckCollision()
 
 void InGameScene::KillAlien(int indexNum)
 {
-    if (!vEnemys.empty()&& (indexNum>=0)&& (indexNum < vEnemys.size()))
+    if (!vLpMobController.empty()&& (indexNum>=0)&& (indexNum < vLpMobController.size()))
     {
-       vEnemys[indexNum]->SetHp(0);
-       EffectManager::GetSingleton()->Explosion(vEnemys[indexNum]->pos, vEnemys[indexNum]->GetLpAnimation(), 10, 4, 4);
-       vEnemys[indexNum]->pos.x = 100000;
+        vLpMobController[indexNum]->GetController()->SetHp(0);
+       EffectManager::GetSingleton()->Explosion(vLpMobController[indexNum]->GetController()->pos, vLpMobController[indexNum]->GetController()->GetLpAnimation(), 10, 4, 4);
+       vLpMobController[indexNum]->GetController()->pos.x = 100000;
     }
    
 
@@ -482,8 +483,8 @@ void InGameScene::KillAlien(int indexNum)
 
 void InGameScene::CreateAlien(int indexNum)
 {
-    if (!vEnemys.empty() && (indexNum >= 0) && (indexNum < vEnemys.size())&& (vEnemys[indexNum]->GetHp()<=0))
+    if (!vLpMobController.empty() && (indexNum >= 0) && (indexNum < vLpMobController.size())&& (vLpMobController[indexNum]->GetController()->GetHp()<=0))
     {
-        vEnemys[indexNum]->Init();
+        vLpMobController[indexNum]->GetController()->Init();
     }
 }
