@@ -251,6 +251,8 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController = vLpEnemyController[2];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpPlanet04);
+            lpUIobject->SetEnemy(lpEnemyController->GetController());
+            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanet04);
          //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
          //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
@@ -267,6 +269,8 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController = vLpEnemyController[3];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpPlanetKMS);
+            lpUIobject->SetEnemy(lpEnemyController->GetController());
+            lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanetKMS);
          //vector<Missile*>& vLpEnemyMissile2 = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
          //for (int i=0; i< vLpEnemyMissile2.size(); ++i)
@@ -423,7 +427,6 @@ void InGameScene::CheckCollision()
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
-                //???? ??? ???? ???? ???
                 isBossAlive = false;
                 lpEnemyController->GetController()->SetHp(0);
                 EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
