@@ -44,7 +44,7 @@ void SSJAIController::Update(float deltaTime)
 			lpUnit->Fire();
 			lpUnit->Update(deltaTime);
 			elapsedTime++;
-			if (elapsedTime>6500) 
+			if (elapsedTime>10000) 
 			{
 				state = UNIT_STATE::PATTERN_ATTACK;
 			}
@@ -73,7 +73,6 @@ void SSJAIController::Update(float deltaTime)
 			else if (lpUnit->pos.y >= 200)
 			{
 				elapsedTime = 0;
-				//lpUnit->SetPos(origin);
 				state = UNIT_STATE::ATTACK;
 			}
 			break;

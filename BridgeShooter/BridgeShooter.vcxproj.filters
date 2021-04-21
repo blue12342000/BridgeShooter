@@ -228,8 +228,6 @@
     <ClCompile Include="AlienRed.cpp">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="AlienAIController.cpp">
-    </ClCompile>
     <ClCompile Include="Planet04AIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
@@ -237,6 +235,12 @@
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
     <ClCompile Include="KmsAIController.cpp">
+      <Filter>소스 파일\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienAIController.cpp">
       <Filter>소스 파일\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -424,8 +428,6 @@
     <ClInclude Include="AlienRed.h">
       <Filter>소스 파일\Bridge\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="AlienAIController.h">
-    </ClInclude>
     <ClInclude Include="Planet04AIController.h">
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
@@ -433,6 +435,12 @@
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
     <ClInclude Include="KmsAIController.h">
+      <Filter>소스 파일\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienAIController.h">
       <Filter>소스 파일\Controller</Filter>
     </ClInclude>
   </ItemGroup>

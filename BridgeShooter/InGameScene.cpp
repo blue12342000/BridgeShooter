@@ -116,7 +116,7 @@ HRESULT InGameScene::Init()
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
-    lpPlayer->SetTarget(lpJinHwang);
+    lpPlayer->SetTarget(lpPlanetSSJ);
 
 
      return S_OK;
@@ -212,7 +212,7 @@ void InGameScene::Update(float deltaTime)
             if (elapsedTime > 10)
             {                
                 currStage = nextStage;
-                isBossAlive = true; 
+                isBossAlive = true; //È®ÀÎ¿ë
             }
             else
             {
@@ -251,11 +251,8 @@ void InGameScene::Update(float deltaTime)
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE4:
-            currStage = STAGE_STATE::LOADING;
-            nextStage = STAGE_STATE::STAGE4;    
-            lpEnemyController->SetController(lpPlanetSSJ); 
-
-            elapsedTime = 0;
+            if(elapsedTime > 10)
+                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
             break;
              
         }
@@ -268,8 +265,6 @@ void InGameScene::Update(float deltaTime)
     }
        
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
-    if (lpEnemyController) lpEnemyController->Update(deltaTime);
-
 
     for (int i =0; i <vEnemys.size(); i++)
     {
