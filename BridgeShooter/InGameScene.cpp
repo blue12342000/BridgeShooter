@@ -53,6 +53,9 @@ HRESULT InGameScene::Init()
     lpPlanetKMS->Init();
     lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
+    //what
+    lpPlanetKMS->SetTarget(lpPlayer);
+
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
     lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
@@ -92,7 +95,9 @@ HRESULT InGameScene::Init()
 
     currStage = STAGE_STATE::LOADING;
     nextStage = STAGE_STATE::STAGE1;
+
     isBossAlive = false;
+    isPlayerAlive = true;
     
     lpLoadingCat = new Animation();
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
@@ -199,8 +204,8 @@ void InGameScene::Release()
 
 void InGameScene::Update(float deltaTime)
 {
-
-    CheckCollision();
+    if(isPlayerAlive)
+        CheckCollision();
 
     if (!isBossAlive)
     {
@@ -212,6 +217,7 @@ void InGameScene::Update(float deltaTime)
                 currStage = nextStage;
                 elapsedTime = 0;
                 isBossAlive = true;
+                isPlayerAlive = true;
                 catPos.x = -50;
             }
             else
@@ -232,12 +238,6 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
 
-            //missile release
-            //vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
-            //for (int i = 0; i < vLpEnemyMissile.size(); ++i)
-            //{
-            //    MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            //}
 
             elapsedTime = 0;
             break;
@@ -252,7 +252,6 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanet04);
 
-            //missile release
 
             elapsedTime = 0;
             break;
@@ -267,7 +266,6 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanetKMS);
 
-            //missile release
 
             break;
         case STAGE_STATE::STAGE4:
@@ -292,14 +290,11 @@ void InGameScene::Update(float deltaTime)
 
     for (int i = 0; i < vEnemys.size(); i++)
     {
-
-        //vLpMobController[i]->Update(deltaTime);
         if ((vEnemys[i]->GetHp() > 0) && ((vEnemys[i]->pos.x > WINSIZE_LEFT) && (vEnemys[i]->pos.x < WINSIZE_RIGHT) &&
             (vEnemys[i]->pos.y > WINSIZE_TOP) && (vEnemys[i]->pos.y < WINSIZE_BOTTOM)))
         {
             vEnemys[i]->Update(deltaTime);
         }
-
     }
 
     if (lpItem) lpItem->Update(deltaTime);
@@ -307,7 +302,6 @@ void InGameScene::Update(float deltaTime)
     MissileManager::GetSingleton()->Update(deltaTime);
     EffectManager::GetSingleton()->Update(deltaTime);
     
-
     if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
     {
         if (lpUIobject->GetBombAmount() < 0)
@@ -323,12 +317,14 @@ void InGameScene::Update(float deltaTime)
 
     elapsedTime += deltaTime;
 
+    if (!isPlayerAlive)
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
-
-    
+        
 }
 
 
@@ -392,8 +388,9 @@ void InGameScene::CheckCollision()
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
+                    isPlayerAlive = false;
                     EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
-                    //적의 사망 체크를 여기서 표현
+                    
                 }
             }
 

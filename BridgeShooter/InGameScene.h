@@ -49,6 +49,7 @@ private:
 	STAGE_STATE currStage;
 	STAGE_STATE nextStage;
 	bool isBossAlive;
+	bool isPlayerAlive;
 
 	Animation* lpLoadingCat;
 	POINTFLOAT catPos;
