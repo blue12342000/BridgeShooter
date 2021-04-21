@@ -394,7 +394,7 @@ void InGameScene::CheckCollision()
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
-                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 20, 20);
+                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
                     //적의 사망 체크를 여기서 표현
                 }
             }
