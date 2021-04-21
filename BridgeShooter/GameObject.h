@@ -74,12 +74,12 @@ public:
 	Collider collider;
 	float elapsedTime;
 	MoveInfo deltaMove;
-	int hp;
+	
 	
 	Pattern* lpPattern;
 
 public:
-	GameObject() :pos({ 0,0 }), angle(0), speed(0), period(0), amplitude(0), collider(Collider()), elapsedTime(0), hp(0), lpPattern(nullptr) {}
+	GameObject() :pos({ 0,0 }), angle(0), speed(0), period(0), amplitude(0), collider(Collider()), elapsedTime(0), lpPattern(nullptr) {}
 	virtual ~GameObject() {}
 
 	virtual void Init() {}
