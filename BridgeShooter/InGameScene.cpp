@@ -99,12 +99,6 @@ HRESULT InGameScene::Init()
             
     backgroundMover = 0;
  
-    //?¡À???? 
-
-    lpJinHwang = new JinHwang();
-    lpJinHwang->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
-
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
