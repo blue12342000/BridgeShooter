@@ -51,9 +51,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPSTR lpCmdLin
 		}
 		else
 		{
-			g_mainGame.Render();
 			g_mainGame.Update();
-			
+			g_mainGame.Render();
 		}
 	}
 	g_mainGame.Release();

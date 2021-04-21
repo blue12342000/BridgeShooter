@@ -38,27 +38,29 @@ HRESULT InGameScene::Init()
         lpPlayer = new SpaceShip_Gray();
         break;
     }
+    lpPlayer->Init();
+    lpPlayer->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT };
        
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
-    lpPlanet04->pos={ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 };
+    lpPlanet04->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
-    lpPlanetSSJ->pos={(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
+    lpPlanetSSJ->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
-    lpPlanetKMS->pos={ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
-    lpJinHwang->pos={ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
 
     lpItem = new Item();
     lpItem->Init();
-    lpItem->pos={ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  };
+    lpItem->pos = { (float)WINSIZE_WIDTH / 8, (float)WINSIZE_HEIGHT / 7 };
 
     vLpEnemyController.push_back(new JinHwangAIContoller()); 
     vLpEnemyController.push_back(new SSJAIController());
@@ -97,10 +99,6 @@ HRESULT InGameScene::Init()
             
     backgroundMover = 0;
  
-    lpJinHwang = new JinHwang();
-    lpJinHwang->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
-
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
@@ -203,7 +201,6 @@ void InGameScene::Release()
 void InGameScene::Update(float deltaTime)
 {
 
-
     CheckCollision();
 
     if (!isBossAlive)
@@ -301,7 +298,10 @@ void InGameScene::Update(float deltaTime)
 
     for (int i = 0; i < vEnemys.size(); i++)
     {
-        vEnemys[i]->Update(deltaTime);
+
+        //vLpMobController[i]->Update(deltaTime);
+        if ((vEnemys[i]->GetHp() > 0) && ((vEnemys[i]->pos.x > WINSIZE_LEFT) && (vEnemys[i]->pos.x < WINSIZE_RIGHT) &&
+            (vEnemys[i]->pos.y > WINSIZE_TOP) && (vEnemys[i]->pos.y < WINSIZE_BOTTOM)))
         {
             vEnemys[i]->Update(deltaTime);
         }
@@ -313,8 +313,7 @@ void InGameScene::Update(float deltaTime)
         MissileManager::GetSingleton()->Update(deltaTime);
         EffectManager::GetSingleton()->Update(deltaTime);
 
-        backgroundMover += 300 * deltaTime;
-        if (backgroundMover >= 800) backgroundMover = 0;
+ 
 
         if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
         {
@@ -325,6 +324,9 @@ void InGameScene::Update(float deltaTime)
             else
                 lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
         }
+
+        backgroundMover += 100 * deltaTime;
+        if (backgroundMover >= 800) backgroundMover = 0;
 
         elapsedTime += deltaTime;
 

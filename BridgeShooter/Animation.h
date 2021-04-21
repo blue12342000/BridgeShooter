@@ -9,6 +9,7 @@ private:
 	float frame;
 	int fps;
 	Image* lpImage;
+	string imageKey;
 
 public:
 	void Change(string imageKey, int fps, bool isLoop = true, bool isReset = false);
