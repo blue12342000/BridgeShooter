@@ -54,11 +54,11 @@ void SSJFactory::Fire(Unit* lpUnit)
 		{
 			for (int i = 0; i < 36; ++i)
 			{
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_07", lpUnit->pos, lpUnit->angle - 2 * PI / 36 * i, 200, 14);
-				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				//Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				//lpMissile->SetMissile("MISSILE_07", lpUnit->pos, lpUnit->angle - 2 * PI / 36 * i, 200, 14);
+				//lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				//lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
+				//MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 
 		}
@@ -67,21 +67,20 @@ void SSJFactory::Fire(Unit* lpUnit)
 			//???? ????? ???????
 			for (int i = 0; i < 8; ++i)
 			{
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetSineMissile("MISSILE_08", lpUnit->pos, lpUnit->angle + PI/4*i, lpUnit->angle + PI/4*i, 0, 500, PI/4, 14, 0);
-				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				//Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				//lpMissile->SetSineMissile("MISSILE_08", lpUnit->pos, lpUnit->angle + PI/4*i, lpUnit->angle + PI/4*i, 0, 500, PI/4, 14, 0);
+				//lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				//lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
+				//MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 				
 			}
 			for (int i = 0; i < 8; ++i)
 			{
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetSineMissile("MISSILE_08", lpUnit->pos, lpUnit->angle + PI / 4 * i, lpUnit->angle + PI / 4 * i, 0, 500, -PI/4, 14, 0);
-				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
-
+				//Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				//lpMissile->SetSineMissile("MISSILE_08", lpUnit->pos, lpUnit->angle + PI / 4 * i, lpUnit->angle + PI / 4 * i, 0, 500, -PI/4, 14, 0);
+				//lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				//lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
+				//MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
 
@@ -95,29 +94,29 @@ void SSJFactory::Fire(Unit* lpUnit)
 			//???¥ä? ???
 			for (int i = 0; i < 6; ++i)
 			{
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetSineMissile("MISSILE_02", lpUnit->pos, lpUnit->angle - 2 * PI / 6 *i, PI/2, PI, 100, 500, 14, 0);
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
-				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				//Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				//lpMissile->SetSineMissile("MISSILE_02", lpUnit->pos, lpUnit->angle - 2 * PI / 6 *i, PI/2, PI, 100, 500, 14, 0);
+				//lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
+				//lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				//MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 			//???¥ä? ???
 			for (int i = 0; i < 6; ++i)
 			{
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetSineMissile("MISSILE_02", { lpUnit->pos.x - 300, lpUnit->pos.y + 300 }, lpUnit->angle - 2 * PI / 6 * i, PI / 2, PI, 100, 500, 14, 0);
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
-				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				//Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				//lpMissile->SetSineMissile("MISSILE_02", { lpUnit->pos.x - 300, lpUnit->pos.y + 300 }, lpUnit->angle - 2 * PI / 6 * i, PI / 2, PI, 100, 500, 14, 0);
+				//lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
+				//lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				//MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 			//???¥ä? ???
 			for (int i = 0; i < 6; ++i)
 			{
-				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetSineMissile("MISSILE_02", { lpUnit->pos.x + 300, lpUnit->pos.y + 300 }, lpUnit->angle - 2 * PI / 6 * i, PI / 2, PI, 100, 500, 14, 0);
-				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
-				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				//Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				//lpMissile->SetSineMissile("MISSILE_02", { lpUnit->pos.x + 300, lpUnit->pos.y + 300 }, lpUnit->angle - 2 * PI / 6 * i, PI / 2, PI, 100, 500, 14, 0);
+				//lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SINE]);
+				//lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+				//MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
 			}
 		}
 		

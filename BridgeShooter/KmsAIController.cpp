@@ -38,7 +38,7 @@ void KmsAIController::Update(float deltaTime)
 		}
 		else 
 		{
-			lpUnit->SetElapsedTime(2);//계속 팅기게(10보다 작게)
+			lpUnit->elapsedTime = 2;//계속 팅기게(10보다 작게)
 			if (lpUnit->GetHp() >= 300)
 			{
 				prevNum = 0;

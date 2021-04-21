@@ -15,9 +15,6 @@ protected:
 	int factoryLine;
 	bool isInertia;
 
-	int hp;
-
-	UIobject* lpUIobject;
 	float hp;
 	int bomb;
 
@@ -49,6 +46,5 @@ public:
 	inline Unit*& GetTarget() { return lpTarget; }
 	inline void SetInetia(bool isInertia) { this->isInertia = isInertia; }
 	inline Animation* GetLpAnimation() { return lpAnimation; }
-	inline int GetHP() { return hp; }
 };
 

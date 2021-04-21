@@ -43,15 +43,15 @@ HRESULT InGameScene::Init()
        
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanet04->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanetSSJ->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpPlanetKMS->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
@@ -98,7 +98,6 @@ HRESULT InGameScene::Init()
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
     catPos = { -50, 400 };
     
-        
     backgroundMover = 0;
  
     lpJinHwang = new JinHwang();
@@ -111,16 +110,12 @@ HRESULT InGameScene::Init()
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
-
-    lpPlayer->SetTarget(lpJinHwang);
-    lpEnemyController = new JinHwangAIContoller();
-    lpEnemyController->Init();
-    lpEnemyController->SetController(lpJinHwang);
+    lpPlayer->SetTarget(lpPlanetSSJ);
 
     lpUIobject = new UIobject();
     lpUIobject->Init();
     lpUIobject->SetPlayer(lpPlayer);
-    lpUIobject->SetEnemy(lpJinHwang);
+    lpUIobject->SetEnemy(lpPlanetSSJ);
     
  return S_OK;
 }
@@ -367,6 +362,7 @@ void InGameScene::CheckCollision()
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
+                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 20, 20);
                     //?¡À?????? ??? ???? ???? ???
                 }
             }
@@ -397,7 +393,7 @@ void InGameScene::CheckCollision()
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
                 lpEnemyController->GetController()->SetHp(0);
-                //???? ??? ???? ???? ???
+                EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
             }
             //????? 0?? ???? 10?? ???????? ??
             else                               // ???? ?????? ??? ???????? :10
