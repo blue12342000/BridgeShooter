@@ -43,6 +43,7 @@ void Missile::SetMissile(string ImageKey, float angle, Transform transform, int 
 	this->pos = transform.pos;
 	this->angle = angle;
 	this->delayTime = delayTime;
+	this->elapsedTime = 0;
 	collider.SetHitBox(transform.pos, size, size);
 	lpPattern = nullptr;
 }

@@ -55,7 +55,7 @@ HRESULT InGameScene::Init()
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
-    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
+    lpJinHwang->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
 
     lpItem = new Item();
