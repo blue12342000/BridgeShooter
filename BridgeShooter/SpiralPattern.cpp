@@ -11,6 +11,11 @@ MoveInfo SpiralPattern::Move(float deltaTime, GameObject* lpObject)
         lpObject->period : 실제 계산할 탄의 속도 매번 speed로 계산해주기에 초기값이 의미 없다
         lpObject->pos : 실제 위치
         lpObject->amplitude : 탄의 기울기 작을수록 많이 휜다.
+
+        speed : PI 값으로 조절하고 이 PI에 -1 곱하면 역방향 패턴이 된다.
+        amplitue / speed : 스피드를 조정할 경우 곡률이 변한다.
+        스피드의 증가량만큼 amplitude 를 줄여주어야 곡률을 유지하면서 속도를 줄일 수 있다.
+
     */
 
     float dir = lpObject->speed / abs(lpObject->speed);

@@ -130,6 +130,9 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("MOVING_CAT", new Image()));
     mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1004/2, 251/2, 4, 1, 4, true);
 
+    mLpImageDatas.insert(make_pair("LOADING_CAT", new Image()));
+    mLpImageDatas["LOADING_CAT"]->Init("Image/UI/LoadingCat.bmp", 1004, 251, 4, 1, 4, true);
+
     mLpImageDatas.insert(make_pair("SPACESHIP_RED", new Image()));
     mLpImageDatas["SPACESHIP_RED"]->Init("Image/Unit/SpaceShip/SpaceShip_Red.bmp", 507/2, 218/2, 3, 1, 3, true, RGB(255,5,255));
 

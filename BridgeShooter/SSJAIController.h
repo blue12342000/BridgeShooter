@@ -15,12 +15,14 @@ private:
 		IDLE,
 		ATTACK,
 		PATTERN_ATTACK,
+		RETURN,
 		NONE
 	};
 
 private:
 	UNIT_STATE state;
 	USE_PATTERN currentPattern;
+	float distance;
 
 private:
 	virtual void Init() override;
