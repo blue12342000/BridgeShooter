@@ -199,7 +199,15 @@ void InGameScene::Release()
         lpPlayerController = nullptr;
     }
 
-    //controller vector release
+    //is this right
+    if (!vLpEnemyController.empty())
+    {
+        for (int i = 0; i < vLpEnemyController.size(); ++i)
+        {
+            vLpEnemyController[i]->Release();
+        }
+        vLpEnemyController.clear();
+    }
 }
 
 void InGameScene::Update(float deltaTime)
@@ -238,7 +246,6 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
 
-
             elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE2:
@@ -266,7 +273,7 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpPlanetKMS);
 
-
+            elapsedTime = 0;
             break;
         case STAGE_STATE::STAGE4:
             elapsedTime = 0;
@@ -388,7 +395,10 @@ void InGameScene::CheckCollision()
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
+
                     isPlayerAlive = false;
+
+                    MissileManager::GetSingleton()->ClearActiveMissile();
                     EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
                     
                 }
@@ -420,7 +430,13 @@ void InGameScene::CheckCollision()
             {
 
                 isBossAlive = false;
+
                 elapsedTime = 0;
+
+                lpEnemyController->GetController()->SetHp(0);
+                MissileManager::GetSingleton()->ClearActiveMissile();
+                EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
+
             }
             else
                 lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp() - 10);
