@@ -115,16 +115,17 @@ HRESULT InGameScene::Init()
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
+    lpPlayer->SetTarget(lpPlanetSSJ);
 
-    lpPlayer->SetTarget(lpJinHwang);
-    lpEnemyController = new JinHwangAIContoller();
+    //Àû
+    lpEnemyController = new SSJAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpJinHwang);
+    lpEnemyController->SetController(lpPlanetSSJ);
 
     lpUIobject = new UIobject();
     lpUIobject->Init();
-    lpUIobject->SetPlayer(lpPlayer);
-    lpUIobject->SetEnemy(lpJinHwang);
+    lpUIobject->SetPlayer(lpPlayer);    
+    lpUIobject->SetEnemy(lpEnemyController->GetController());
     
  return S_OK;
 }
