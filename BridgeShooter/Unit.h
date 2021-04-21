@@ -45,5 +45,7 @@ public:
 	inline Animation* GetLpAnimation() { return lpAnimation; }
 	inline bool IsReady() { return isReady; }
 	inline void SetIsReady(bool isReady) { this->isReady = isReady; }
+	inline void SetUnitKind(UNIT_KIND kind) { this->kind = kind; }
+	inline UNIT_KIND GetUnitKind() { return this->kind; }
 };
 

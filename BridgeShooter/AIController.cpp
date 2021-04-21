@@ -4,5 +4,6 @@
 void AIController::SetUnit(Unit* lpUnit)
 {
 	this->lpUnit = lpUnit;
-	lpUnit->SetInetia(true);
+	this->lpUnit->SetInetia(true);
+	this->lpUnit->SetUnitKind(UNIT_KIND::ENEMY);
 }

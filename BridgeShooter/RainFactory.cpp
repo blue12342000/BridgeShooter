@@ -39,7 +39,7 @@ void RainFactory::Fire(Unit* lpUnit)
 			lpMissile->pos.x = lpUnit->pos.x - (i - 2) * rnd;
 			lpMissile->SetMissile("MISSILE_01", lpUnit->angle + PI / 32 * (i - 2), Transform{ lpUnit->pos, lpUnit->angle + PI / 32 * (i - 2), 150 }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::RFCP_BASIC]);
-			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 		}
 	}
 	if (createLine == 1)
@@ -51,7 +51,7 @@ void RainFactory::Fire(Unit* lpUnit)
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->SetMissile("MISSILE_02", lpUnit->angle + PI / 64 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 64 * i, 200 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::RFCP_RAIN]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::PLAYER, lpMissile);
+				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
 		}
 	}

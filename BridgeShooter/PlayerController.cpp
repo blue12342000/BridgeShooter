@@ -72,6 +72,7 @@ void PlayerController::SetUnit(Unit* lpUnit)
 	this->lpUnit->angle = PI * 3 / 2;
 	this->lpUnit->SetInetia(true);
 	this->lpUnit->SetIsReady(false);
+	this->lpUnit->SetUnitKind(UNIT_KIND::PLAYER);
 	mKeyMap[INPUT_COMMAND::LEFT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ -10, 0 });
 	mKeyMap[INPUT_COMMAND::RIGHT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 10, 0 });
 	mKeyMap[INPUT_COMMAND::UP].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 0, -10 });
