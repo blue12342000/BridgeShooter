@@ -97,7 +97,7 @@ HRESULT InGameScene::Init()
             
     backgroundMover = 0;
  
-    //플레이어 
+    //?÷???? 
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
@@ -218,6 +218,7 @@ void InGameScene::Update(float deltaTime)
                 currStage = nextStage;
                 elapsedTime = 0;
                 isBossAlive = true;
+                //잡몹 세팅
             }
             else
             {
@@ -233,6 +234,8 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpJinHwang);
+            //적이 죽고나서 바뀌고 다음 스테이지를 시작할때
+            //다음 행성에게 에너미를 새로 부여하고 0이었던  체력을 다시 설정.
             lpUIobject->SetEnemy(lpEnemyController->GetController());
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
@@ -387,7 +390,7 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            //체력이 0이 되면
+            //????? 0?? ???
             if (lpPlayerController->GetController()->GetHp() <= 0)
             {
                 lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
@@ -395,7 +398,10 @@ void InGameScene::CheckCollision()
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
-                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, ImageManager::GetSingleton()->FindImage("SPACESHIP_IDLE"), 0, 20, 8, 8);
+
+                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
+		//주석 위치
+
                 }
             } 
             else
@@ -422,7 +428,7 @@ void InGameScene::CheckCollision()
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
-                //적의 사망 체크를 여기서 표현
+                //???? ??? ???? ???? ???
                 isBossAlive = false;
                 lpEnemyController->GetController()->SetHp(0);
                 EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
