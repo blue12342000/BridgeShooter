@@ -393,7 +393,7 @@ void InGameScene::CheckCollision()
                 {
                     lpPlayerController->GetController()->SetHp(0);
 
-                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 20, 20);
+                    EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
 		//주석 위치
 
                 }
