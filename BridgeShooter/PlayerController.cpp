@@ -67,19 +67,22 @@ void PlayerController::Render(HDC hdc)
 
 void PlayerController::SetUnit(Unit* lpUnit)
 {
+	isReady = true;
 	this->lpUnit = lpUnit;
+	this->lpUnit->Init();
 	this->lpUnit->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT + 300 };
 	this->lpUnit->angle = PI * 3 / 2;
 	this->lpUnit->SetInetia(true);
 	this->lpUnit->SetIsReady(false);
 	this->lpUnit->SetUnitKind(UNIT_KIND::PLAYER);
+
 	mKeyMap[INPUT_COMMAND::LEFT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ -10, 0 });
 	mKeyMap[INPUT_COMMAND::RIGHT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 10, 0 });
 	mKeyMap[INPUT_COMMAND::UP].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 0, -10 });
 	mKeyMap[INPUT_COMMAND::DOWN].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 0, 10 });
 	mKeyMap[INPUT_COMMAND::ATTACK].lpCmd = bind(&Unit::Fire, lpUnit);
 
-	mKeyMap[INPUT_COMMAND::DOWNGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, -1);
-	mKeyMap[INPUT_COMMAND::UPGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, 1);
+	mKeyMap[INPUT_COMMAND::DOWNGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, -1, false);
+	mKeyMap[INPUT_COMMAND::UPGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, 1, false);
 	mKeyMap[INPUT_COMMAND::INERTIA].lpCmd = bind(&Unit::ToggleInertia, lpUnit);
 }

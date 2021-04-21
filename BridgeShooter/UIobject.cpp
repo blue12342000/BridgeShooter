@@ -54,9 +54,12 @@ void UIobject::Render(HDC hdc)
 	playerUIobject = GetRectToCenter(lpPlayer->GetHp() / 2 + 50, 80, lpPlayer->GetHp(), 18);
 	Rectangle(hdc, playerUIobject.left, playerUIobject.top, playerUIobject.right, playerUIobject.bottom);
 	// 체력에 따라서 체력바 색상이 달라지게 하고싶다. 어떻게 할까
-	bossUIobject = GetRectToCenter(lpEnemy->GetHp() / 2 + 50, 50, lpEnemy->GetHp(), 18);
-	Rectangle(hdc, bossUIobject.left, bossUIobject.top, bossUIobject.right, bossUIobject.bottom);
-	lpBossHpBar->Render(hdc, WINSIZE_WIDTH / 2, WINSIZE_HEIGHT / 20, 0, U_IA_CENTER);
+	if (lpEnemy)
+	{
+		bossUIobject = GetRectToCenter(lpEnemy->GetHp() / 2 + 50, 50, lpEnemy->GetHp(), 18);
+		Rectangle(hdc, bossUIobject.left, bossUIobject.top, bossUIobject.right, bossUIobject.bottom);
+		lpBossHpBar->Render(hdc, WINSIZE_WIDTH / 2, WINSIZE_HEIGHT / 20, 0, U_IA_CENTER);
+	}
 	//봄
 	for (int i = 0; i < bombAmount; i++)
 		lpBombCount->Render(hdc, 30+30* i, WINSIZE_HEIGHT / 8 + 50, 0, U_IA_CENTER);
@@ -76,7 +79,7 @@ void UIobject::SetBossMaxHp()
 	if (isMaxHp)
 	{
 		SetPlayerMaxHp(lpPlayer->GetHp());
-		SetBossMaxHp(lpEnemy->GetHp());
+		if (lpEnemy) SetBossMaxHp(lpEnemy->GetHp());
 		isMaxHp = false;
 	}
 }

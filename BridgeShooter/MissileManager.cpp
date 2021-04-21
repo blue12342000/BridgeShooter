@@ -8,6 +8,7 @@ HRESULT MissileManager::Init()
 	vLpDeactive.reserve(5000);
 	mvLpMissiles.insert(make_pair(UNIT_KIND::PLAYER, vMissiles));
 	mvLpMissiles.insert(make_pair(UNIT_KIND::ENEMY, vMissiles));
+	mvLpMissiles.insert(make_pair(UNIT_KIND::BOSS, vMissiles));
 	return S_OK;
 }
 

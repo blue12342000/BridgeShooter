@@ -8,7 +8,8 @@ void Planet_KMS::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet_KMS", 50, true);
-	hp = 500;
+	hp = U_MAX_BOSS_HP;
+	maxHp = U_MAX_BOSS_HP;
 	bomb = 2;
 	transform.speed = 30;
 	elapsedTime = 0;

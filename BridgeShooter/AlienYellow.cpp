@@ -32,12 +32,14 @@ void AlienYellow::Init()
 	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
 	lpPattern = new ReflectPattern();
+
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_2", 4, true);
 	transform.speed = 80.0f;
-	hp = 50;
+	hp = U_MAX_ENEMY_HP;
+	maxHp = U_MAX_ENEMY_HP;
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;
 	pos = { (float)(rand() % ((WINSIZE_WIDTH - 50) - 50 - 1) + 50),0.0f - 100.0f };

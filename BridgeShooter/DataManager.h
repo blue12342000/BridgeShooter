@@ -31,5 +31,7 @@ public:
 	inline void SetBombAmount(int bombAmount) { this->bombAmount = bombAmount; }
 	inline int GetBombAmount() { return this->bombAmount; }
 	inline int GetLifeAmount() { return this->lifeAmount; }
+
+	inline bool UseLife() { if (lifeAmount > 0) { --lifeAmount; return true; } else { return false; } }
 };
 

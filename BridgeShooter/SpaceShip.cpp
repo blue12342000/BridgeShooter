@@ -15,12 +15,14 @@ void SpaceShip::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
 	transform.speed = 200;
-	hp = 500;
+	hp = U_MAX_PLAYER_HP;
+	maxHp = U_MAX_PLAYER_HP;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 1;
 	SetFactory(new SpaceShipFactory());
 	collider.SetHitBox(pos, 20, 20);
+	force = { 0, 0 };
 }
 
 void SpaceShip::Update(float deltaTime)
@@ -37,32 +39,6 @@ void SpaceShip::Update(float deltaTime)
 	{
 		lpAnimation->Change("SPACESHIP_IDLE", 20, true);
 	}
-
-	if (KeyManager::GetSingleton()->IsKeyDownOne('1'))
-	{
-		SetFactory(new BasicFactory());
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('2'))
-	{
-		SetFactory(new SineFactory());
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('3'))
-	{
-		SetFactory(new RainFactory());
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('4'))
-	{
-		SetFactory(new Planet_KMS_Factory());
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('5'))
-	{
-		SetFactory(new SSJFactory());
-	}
-	if (KeyManager::GetSingleton()->IsKeyDownOne('6'))
-	{
-		SetFactory(new JinHwangFactory());
-	}
-
 
 	Unit::Update(deltaTime);
 }

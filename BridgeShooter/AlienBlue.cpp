@@ -38,7 +38,8 @@ void AlienBlue::Init()
 	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_1", 4, true);
 	transform.speed = 80.0;
-	hp = 50;
+	hp = U_MAX_ENEMY_HP;
+	maxHp = U_MAX_ENEMY_HP;
 	moveAngle = 0;
 	shootAngle = PI / 2.0f;
 	pos = { 0 - 100,float(rand() % 200 + 100) };

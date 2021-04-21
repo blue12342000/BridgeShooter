@@ -5,10 +5,7 @@
 
 void JinHwangAIContoller::Init()
 {
-	vLpPatterns.resize((int)USE_PATTERN::NONE);
-	vLpPatterns[(int)USE_PATTERN::BASIC] = new BasicPattern();
 	state = UNIT_STATE::IDLE;
-	currentPattern = USE_PATTERN::NONE;
 	elapsedTime = 0;
 
 	origin = { WINSIZE_WIDTH / 2.0f, WINSIZE_HEIGHT / 4.0f };
@@ -30,7 +27,6 @@ void JinHwangAIContoller::Update(float deltaTime)
 		switch (state)
 		{
 		case UNIT_STATE::IDLE:
-			currentPattern = USE_PATTERN::NONE;
 			if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
 				|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
 			{
@@ -128,4 +124,14 @@ void JinHwangAIContoller::Update(float deltaTime)
 void JinHwangAIContoller::Render(HDC hdc)
 {
 	if (lpUnit) lpUnit->Render(hdc);
+}
+
+void JinHwangAIContoller::SetUnit(Unit* lpUnit)
+{
+	this->isReady = false;
+	this->lpUnit = lpUnit;
+	this->lpUnit->Init();
+	this->lpUnit->SetInetia(true);
+	this->lpUnit->SetUnitKind(UNIT_KIND::BOSS);
+	this->lpUnit->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 }

@@ -17,14 +17,13 @@ private:
 	ITEM_TYPE type;
 	Animation* lpAnimation;
 
-
 public:
 	void Init() override;
 	void Release() override;
 	void Update(float deltaTime) override;
 	void Render(HDC hdc) override;
 	
-	inline void GetItemType(ITEM_TYPE type) { this->type = type; }
+	inline ITEM_TYPE GetItemType() { return type; }
 
 	void Move(float deltaTime);
 };

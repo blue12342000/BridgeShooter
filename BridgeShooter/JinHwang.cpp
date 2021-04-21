@@ -8,7 +8,8 @@ void JinHwang::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("JINHWANG", 50, true);
 	transform.speed = 420;
-	hp = 1000;
+	hp = U_MAX_BOSS_HP;
+	maxHp = U_MAX_BOSS_HP;
 	bomb = 5;
 	elapsedTime = 0;
 	angle = PI / 2;

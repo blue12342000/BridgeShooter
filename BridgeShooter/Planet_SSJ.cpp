@@ -7,7 +7,8 @@ void Planet_SSJ::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("PLANET_SSJ", 50, true);
 	transform.speed = 100;
-	hp = 500;
+	hp = U_MAX_BOSS_HP;
+	maxHp = U_MAX_BOSS_HP;
 	elapsedTime = 0;
 	angle = /*-PI / 2*/0;
 	lpFactory = new SSJFactory();	

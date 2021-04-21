@@ -30,7 +30,8 @@ void AlienGreen::Init()
 	lpFactory = new Planet04Factory();
 	lpPattern = new BasicPattern();
 	transform.speed = 80.0f;
-	hp = 50;
+	hp = U_MAX_ENEMY_HP;
+	maxHp = U_MAX_ENEMY_HP;
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;
 	pos = { (float)(rand() % ((WINSIZE_WIDTH - 50) - 50 - 1) + 50),0.0f - 100.0f };

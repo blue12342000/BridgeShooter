@@ -14,7 +14,9 @@ protected:
 	POINTFLOAT force;
 	int factoryLine;
 	bool isInertia;
+
 	float hp;
+	float maxHp;
 	int bomb;
 
 public:
@@ -26,18 +28,20 @@ public:
 	virtual void Release() override;
 	virtual void Render(HDC hdc) override;
 
+	virtual bool Hit(int damage) final;
 	virtual void Fire() final;
 	virtual void Translate(POINTFLOAT force) final;
-	virtual void ChangeFactoryLine(int delta) final;
+	virtual void ChangeFactoryLine(int delta, bool isLoop = false) final;
 	virtual void ToggleInertia() final { isInertia = !isInertia; }
 
 	virtual void ResetTimer() final;
+	inline void Heal(int heal) { hp += heal; if (hp > maxHp) hp = maxHp; }
+
 	virtual void SetFactory(Factory* lpFactory) final;
 	virtual void SetFactoryLine(int factoryLine) final;
 
+	inline bool IsAlive() { return hp > FLT_EPSILON; }
 	inline int GetFactoryLine() {return factoryLine; }
-	inline void SetHp(float hp) { this->hp = hp; };
-	inline float GetHp() { return hp; }
 	inline int GetBomb() { return bomb; }
 	inline void SetTarget(Unit* lpTarget) { this->lpTarget = lpTarget; }
 	inline Unit*& GetTarget() { return lpTarget; }
@@ -47,5 +51,7 @@ public:
 	inline void SetIsReady(bool isReady) { this->isReady = isReady; }
 	inline void SetUnitKind(UNIT_KIND kind) { this->kind = kind; }
 	inline UNIT_KIND GetUnitKind() { return this->kind; }
+	inline int GetHp() { return hp; }
+	inline int GetMaxHp() { return maxHp; }
 };
 

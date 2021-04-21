@@ -6,6 +6,7 @@ class Unit;
 class Controller : public GameEvent
 {
 protected:
+	bool isReady;
 	Unit* lpUnit;
 
 public:
@@ -15,6 +16,10 @@ public:
 	virtual void Render(HDC hdc) = 0;
 
 	virtual void SetUnit(Unit* lpUnit) = 0;
+
+
 	inline Unit* GetUnit() { return this->lpUnit; }
+	inline bool IsReady() { return isReady; }
+	inline void SetIsReady(bool isReady) { this->isReady = isReady; }
 };
 

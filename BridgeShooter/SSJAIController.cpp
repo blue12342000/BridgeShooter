@@ -86,3 +86,13 @@ void SSJAIController::Render(HDC hdc)
 {
 	if (lpUnit) lpUnit->Render(hdc);
 }
+
+void SSJAIController::SetUnit(Unit* lpUnit)
+{
+	this->isReady = false;
+	this->lpUnit = lpUnit;
+	this->lpUnit->Init();
+	this->lpUnit->SetInetia(true);
+	this->lpUnit->SetUnitKind(UNIT_KIND::BOSS);
+	this->lpUnit->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
+}

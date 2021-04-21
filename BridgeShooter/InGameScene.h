@@ -11,7 +11,7 @@ class Animation;
 class InGameScene : public GameScene
 {
 private:
-	enum STAGE_STATE
+	enum class STAGE_STATE
 	{
 		LOADING,
 		STAGE1,
@@ -21,49 +21,50 @@ private:
 		NONE
 	};
 
+	enum class INGAME_STATE
+	{
+		NORMAL,
+		SLOWTIME,
+		NONE
+	};
+
 private:
+	INGAME_STATE state;
+	float slowTimer;
+	float slowScale;
+	STAGE_STATE currStage;
+	STAGE_STATE nextStage;
+	float elapsedTime;
+	float backgroundMover;
+	Image* lpBackBuffer;
+	Image* lpBackImage;
+	Image* lpBackImage2;
+	Animation* lpLoadingCat;
+	POINTFLOAT catPos;
+	UIobject* lpUIobject;
+
 	vector<Unit*> vEnemys;
 	vector<Item*> vItems;
 	vector<Controller*>vLpMobController;
 
-	Unit* lpPlayer;
-	Unit* lpPlanet04;
-	Unit* lpPlanetSSJ;
-	Unit* lpPlanetKMS;
-
-	Unit* lpJinHwang;
-
-	Item* lpItem;
-
 	Controller* lpPlayerController;
-	Controller* lpEnemyController;
-	vector<Controller*> vLpEnemyController;
+	// ÂüÁ¶¿ë
+	Controller* lpCurrentBossController;
+	map<STAGE_STATE, Controller*> mLpBossController;
 
 
-	Image* lpBackBuffer;
-	Image* lpBackImage;
-	Image* lpBackImage2;	
-
-	UIobject* lpUIobject;
-
-	STAGE_STATE currStage;
-	STAGE_STATE nextStage;
 	bool isBossAlive;
 	bool isPlayerAlive;
-
-	Animation* lpLoadingCat;
-	POINTFLOAT catPos;
-
-	float elapsedTime;
-	float backgroundMover;
-
 
 public:
 	virtual HRESULT Init();
 	virtual void Release();
 	virtual void Update(float deltaTime);
 	virtual void Render(HDC hdc);
-	void CheckCollision();
+
+	void UnitCollision(UNIT_KIND attackerKind, Controller* target);
+	bool ItemCollision(Unit* target, Item* item);
+
 	void KillAlien(int indexNum);
 	void CreateAlien(int indexNum);
 };

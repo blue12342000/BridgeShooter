@@ -5,7 +5,8 @@
 
 void Item::Init()
 {
-	angle = PI / 4;
+    srand(time(NULL));
+	angle = (rand() % 360) / 180.0f * PI;
 	transform.speed = 400;
 	elapsedTime = 0.0f;
     type = (ITEM_TYPE)(rand() % (int)ITEM_TYPE::NONE);
@@ -13,7 +14,6 @@ void Item::Init()
     lpAnimation = new Animation();
     lpAnimation->Change("Item_Bomb", 20, true);
     collider.SetHitBox(pos, 60, 60);
-
 }
 
 void Item::Release()

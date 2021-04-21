@@ -16,6 +16,6 @@ public:
 	virtual void Update(float deltaTime) {};
 	virtual void Render(HDC hdc) {};
 
-	virtual void SetUnit(Unit* lpUnit) final;
+	virtual void SetUnit(Unit* lpUnit) = 0;
 };
 

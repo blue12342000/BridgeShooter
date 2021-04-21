@@ -103,6 +103,17 @@ void Unit::Render(HDC hdc)
 	}
 }
 
+bool Unit::Hit(int damage)
+{
+	hp -= damage;
+	if (hp <= 0)
+	{
+		hp = 0;
+		return true;
+	}
+	return false;
+}
+
 void Unit::Fire(void)
 {
 	if (lpFactory) lpFactory->Fire(this);
@@ -121,9 +132,12 @@ void Unit::Translate(POINTFLOAT force)
 	}
 }
 
-void Unit::ChangeFactoryLine(int delta)
+void Unit::ChangeFactoryLine(int delta, bool isLoop)
 {
-	SetFactoryLine(factoryLine + delta);
+	if (isLoop || (factoryLine + 1 < lpFactory->GetMaxCreateLIne()))
+	{
+		SetFactoryLine(factoryLine + delta);
+	}
 }
 
 void Unit::ResetTimer()
