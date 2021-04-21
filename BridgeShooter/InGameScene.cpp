@@ -106,7 +106,7 @@ HRESULT InGameScene::Init()
 
     lpEnemyController = new SSJAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetSSJ);
+    lpEnemyController->SetController(lpJinHwang);
 
     lpUIobject = new UIobject();
     lpUIobject->Init();
