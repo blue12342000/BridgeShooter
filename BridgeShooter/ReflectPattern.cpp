@@ -2,22 +2,20 @@
 #include "GameObject.h"
 #include "Missile.h"
 
-MoveInfo ReflectPattern::Move(float deltaTime, GameObject* lpObject)
+void ReflectPattern::Move(float deltaTime, GameObject* lpObject)
 {
-    MoveInfo moveInfo = { 0, 0 };
-
     if (typeid(*lpObject) == typeid(Missile))
     {
         Missile* lpMissile = (Missile*)lpObject;
         if (lpMissile->delayTime > 0)
         {
             lpMissile->delayTime -= deltaTime;
-            return moveInfo;
+            return;
         }
     }
 
-    lpObject->pos.x += cosf(lpObject->angle) * lpObject->speed * deltaTime;
-    lpObject->pos.y += sinf(lpObject->angle) * lpObject->speed * deltaTime;
+    lpObject->pos.x += cosf(lpObject->angle) * lpObject->transform.speed * deltaTime;
+    lpObject->pos.y += sinf(lpObject->angle) * lpObject->transform.speed * deltaTime;
 
     while (lpObject->angle > PI * 2) lpObject->angle -= PI * 2;
     while (lpObject->angle < 0) lpObject->angle += PI * 2;
@@ -67,6 +65,4 @@ MoveInfo ReflectPattern::Move(float deltaTime, GameObject* lpObject)
             }
         }
     }
-    moveInfo.angle = lpObject->angle;
-    return moveInfo;
 }

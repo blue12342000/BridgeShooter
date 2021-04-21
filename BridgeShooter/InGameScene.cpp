@@ -30,41 +30,35 @@ HRESULT InGameScene::Init()
     {
     case (int)DataManager::CHARACTER_CODE::YELLOW:
         lpPlayer = new SpaceShip();
-        lpPlayer->Init();
-        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     case (int)DataManager::CHARACTER_CODE::RED:
         lpPlayer = new SpaceShip_Red();
-        lpPlayer->Init();
-        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     case (int)DataManager::CHARACTER_CODE::GRAY:
         lpPlayer = new SpaceShip_Gray();
-        lpPlayer->Init();
-        lpPlayer->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
         break;
     }
        
     lpPlanet04 = new Planet04();
     lpPlanet04->Init();
-    lpPlanet04->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 });
+    lpPlanet04->pos={ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT/4 };
 
     lpPlanetSSJ = new Planet_SSJ();
     lpPlanetSSJ->Init();
-    lpPlanetSSJ->SetPos({(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 });
+    lpPlanetSSJ->pos={(float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 - 300 };
 
     lpPlanetKMS = new Planet_KMS();
     lpPlanetKMS->Init();
-    lpPlanetKMS->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+    lpPlanetKMS->pos={ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
     lpJinHwang = new JinHwang();
     lpJinHwang->Init();
-    lpJinHwang->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 });
+    lpJinHwang->pos={ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT / 4 };
 
 
     lpItem = new Item();
     lpItem->Init();
-    lpItem->SetPos({ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  });
+    lpItem->pos={ (float)WINSIZE_WIDTH /8, (float)WINSIZE_HEIGHT /7  };
 
     vLpEnemyController.push_back(new JinHwangAIContoller()); 
     vLpEnemyController.push_back(new SSJAIController());
@@ -106,11 +100,12 @@ HRESULT InGameScene::Init()
     lpPlayerController = new PlayerController();
     lpPlayerController->Init();
     lpPlayerController->SetController(lpPlayer);
+    lpPlayer->SetTarget(lpPlanetSSJ);
 
     //적 보스    
-    //lpEnemyController = new SSJAIController();
-    //lpEnemyController->Init();
-    //lpEnemyController->SetController(lpPlanetSSJ);
+    lpEnemyController = new SSJAIController();
+    lpEnemyController->Init();
+    lpEnemyController->SetController(lpPlanetSSJ);
     lpPlayer->SetTarget(lpPlanetSSJ);
 
     lpUIobject = new UIobject();
@@ -201,7 +196,6 @@ void InGameScene::Release()
     }
 
   
-    //벡터로 바꾼거 릴리즈
 }
 
 void InGameScene::Update(float deltaTime)
@@ -379,18 +373,18 @@ void InGameScene::CheckCollision()
 
     for (int i = 0; i < vLpEnemyMissile.size();)
     {
-        dX = vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x - lpPlayer->pos.x;
-        dY = vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y - lpPlayer->pos.y;
+        dX = vLpEnemyMissile[i]->pos.x - lpPlayer->pos.x;
+        dY = vLpEnemyMissile[i]->pos.y - lpPlayer->pos.y;
         distance = sqrt(dX * dX + dY * dY);
 
         if (distance <= vLpEnemyMissile[i]->collider.width / 2 + lpPlayer->collider.width / 2)
         {
-            EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
+            EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
             if (lpPlayerController->GetController()->GetHp() <= 0)
             {
                 lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
-                lpPlayerController->GetController()->SetHp(lpUIobject->GetPlayerMaxHp()); // ???? ?÷???? ????? ??? ????????
+                lpPlayerController->GetController()->SetHp(lpUIobject->GetPlayerMaxHp()); // ???? ??????? ????? ??? ????????
                 if (lpUIobject->GetLifeAmount() < 0)
                 {
                     lpPlayerController->GetController()->SetHp(0);
@@ -412,16 +406,17 @@ void InGameScene::CheckCollision()
 
     for (int i = 0; i < vLpPlayerMissile.size();)
     {
-        dX2 = vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x - lpPlanetSSJ->pos.x;
-        dY2 = vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y - lpPlanetSSJ->pos.y;
+        dX2 = vLpPlayerMissile[i]->pos.x - lpPlanetSSJ->pos.x;
+        dY2 = vLpPlayerMissile[i]->pos.y - lpPlanetSSJ->pos.y;
         distance2 = sqrt(dX2 * dX2 + dY2 * dY2);
         if (distance2 <= vLpPlayerMissile[i]->collider.width / 2 + lpPlanetSSJ->collider.width / 2)
         {
-            EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
+            EffectManager::GetSingleton()->PlayImage(vLpPlayerMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
                 lpEnemyController->GetController()->SetHp(0);
+                EffectManager::GetSingleton()->Explosion(lpPlanetSSJ->pos, lpPlanetSSJ->GetLpAnimation(), 20, 20, 20);
                 isBossAlive = false;
             }
             else                            

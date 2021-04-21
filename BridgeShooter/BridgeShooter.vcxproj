@@ -151,6 +151,7 @@
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
     <ClCompile Include="CircleMovePattern.cpp" />
+    <ClCompile Include="GuideBasicPattern.cpp" />
     <ClCompile Include="Ending.cpp" />
     <ClCompile Include="JinHwangAIContoller.cpp" />
     <ClCompile Include="KmsAIController.cpp" />
@@ -158,7 +159,6 @@
     <ClCompile Include="Planet_KMS_Factory.cpp" />
     <ClCompile Include="BoomerangPattern.cpp" />
     <ClCompile Include="DataManager.cpp" />
-    <ClCompile Include="DelayBasicPattern.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GuidePattern.cpp" />
@@ -179,8 +179,6 @@
     <ClCompile Include="Planet_KMS.cpp" />
     <ClCompile Include="Planet_SSJ.cpp" />
     <ClCompile Include="ReflectPattern.cpp" />
-    <ClCompile Include="ReverseSinePattern.cpp" />
-    <ClCompile Include="ReverseSpiralPattern.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SelectPlayer.cpp" />
     <ClCompile Include="SineFactory.cpp" />
@@ -207,6 +205,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
     <ClInclude Include="CircleMovePattern.h" />
+    <ClInclude Include="GuideBasicPattern.h" />
     <ClInclude Include="Ending.h" />
     <ClInclude Include="JinHwangAIContoller.h" />
     <ClInclude Include="KmsAIController.h" />
@@ -215,7 +214,6 @@
     <ClInclude Include="BridgeShooter.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="Controller.h" />
-    <ClInclude Include="DelayBasicPattern.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="BasicPattern.h" />
@@ -239,8 +237,6 @@
     <ClInclude Include="Planet_KMS.h" />
     <ClInclude Include="Planet_SSJ.h" />
     <ClInclude Include="ReflectPattern.h" />
-    <ClInclude Include="ReverseSinePattern.h" />
-    <ClInclude Include="ReverseSpiralPattern.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SelectPlayer.h" />
     <ClInclude Include="SineFactory.h" />

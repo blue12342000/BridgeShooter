@@ -51,17 +51,17 @@ void SSJAIController::Update(float deltaTime)
 			break;
 		case UNIT_STATE::PATTERN_ATTACK:
 			currentPattern = USE_PATTERN::BASIC;
-			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			lpUnit->Fire();			
 			lpUnit->Update(deltaTime);
 			if (lpUnit->pos.x > 500)
 			{
-				lpUnit->SetAngle(PI);
+				lpUnit->angle = PI;
 				lpUnit->Translate(POINTFLOAT{ -10, 0 });
 			}
 			else if (lpUnit->pos.x < 100)
 			{
-				lpUnit->SetAngle(0);
+				lpUnit->angle = 0;
 			}
 			break;
 		case UNIT_STATE::RETURN:

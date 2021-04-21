@@ -53,8 +53,8 @@ void PlayerController::Render(HDC hdc)
 void PlayerController::SetController(Unit* lpUnit)
 {
 	this->lpUnit = lpUnit;
-	this->lpUnit->SetPos({ (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT });
-	this->lpUnit->SetAngle(PI * 3 / 2);
+	this->lpUnit->pos = { (float)WINSIZE_WIDTH / 2, (float)WINSIZE_HEIGHT };
+	this->lpUnit->angle = PI * 3 / 2;
 	this->lpUnit->SetInetia(false);
 	mKeyMap[INPUT_COMMAND::LEFT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ -10, 0 });
 	mKeyMap[INPUT_COMMAND::RIGHT].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 10, 0 });

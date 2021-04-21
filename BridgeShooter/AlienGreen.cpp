@@ -1,15 +1,11 @@
 #include "AlienGreen.h"
-//기본 라이브러리(필수)
 #include "Factory.h"
 #include "Animation.h"
 #include "Pattern.h"
 #include "GameObject.h"
-
-//쏘는 팩토리 라이브러리
 #include "RainFactory.h"
 #include "SineFactory.h"
-
-//움직이는 패턴 라이브러리
+#include "Planet04Factory.h"
 #include "BasicPattern.h"
 
 
@@ -29,9 +25,11 @@ void AlienGreen::Init()
 
 	elapsedTime = 0;
 	angle = 0;
-	collider.SetHitBox(pos, { 0, 0 }, 50, 50);
+	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_3", 4, true);
-	speed = 80.0f;
+	lpFactory = new Planet04Factory();
+	lpPattern = new BasicPattern();
+	transform.speed = 80.0f;
 	hp = 50;
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;

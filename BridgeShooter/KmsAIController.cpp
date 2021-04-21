@@ -39,7 +39,7 @@ void KmsAIController::Update(float deltaTime)
 			if ((prevNum - 200) >= lpUnit->GetHp())
 			{
 				state = UNIT_STATE::UPGRADE;
-				lpUnit->speed += 20;
+				lpUnit->transform.speed += 20;
 				prevNum = lpUnit->GetHp();
 			}
 			
@@ -70,7 +70,7 @@ void KmsAIController::Update(float deltaTime)
 			}
 			break;
 		case UNIT_STATE::PATTERN_ATTACK:
-			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			lpUnit->Fire();			
 			lpUnit->Update(deltaTime);
 			elapsedTime += deltaTime;
@@ -105,7 +105,7 @@ void KmsAIController::Update(float deltaTime)
 			state = UNIT_STATE::MOVE;
 			break;
 		case UNIT_STATE::MOVE:
-			lpUnit->deltaMove = vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
 			lpUnit->Update(deltaTime);
 			elapsedTime += deltaTime;
 			if ((lpUnit->pos.y < 0) || (lpUnit->pos.y > WINSIZE_HEIGHT / 2) || (lpUnit->pos.x < 0) || (lpUnit->pos.x > WINSIZE_WIDTH))

@@ -6,13 +6,13 @@ void Planet_SSJ::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("PLANET_SSJ", 50, true);
-	speed = 100;
-	hp = 700;
+	transform.speed = 100;
+	hp = 500;
 	elapsedTime = 0;
 	angle = /*-PI / 2*/0;
 	lpFactory = new SSJFactory();	
 	lpFactory->Init();
-	collider.SetHitBox(pos, { 0,0 }, 100, 100);
+	collider.SetHitBox(pos, 100, 100);
 }
 
 void Planet_SSJ::Update(float deltaTime)
