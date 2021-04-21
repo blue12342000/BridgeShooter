@@ -24,7 +24,7 @@ void UIobject::Init()
 	lpMissile[0]	= ImageManager::GetSingleton()->FindImage("NowMissile_1");
 	lpMissile[1]	= ImageManager::GetSingleton()->FindImage("NowMissile_2");
 	lpMissile[2]	= ImageManager::GetSingleton()->FindImage("NowMissile_3");
-	lpMissile[3]	 = ImageManager::GetSingleton()->FindImage("NowMissile_2");
+	lpMissile[3]	= ImageManager::GetSingleton()->FindImage("NowMissile_2");
 	
 	isMaxHp = true;
 	
