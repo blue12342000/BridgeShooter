@@ -106,7 +106,7 @@ HRESULT InGameScene::Init()
 
     lpEnemyController = new SSJAIController();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpJinHwang);
+    lpEnemyController->SetController(lpPlanetSSJ);
 
     lpUIobject = new UIobject();
     lpUIobject->Init();
@@ -208,7 +208,7 @@ void InGameScene::Update(float deltaTime)
         switch (currStage)
         {
         case STAGE_STATE::LOADING:
-            if (elapsedTime > 10)
+            if (elapsedTime > 20)
             {
                 currStage = nextStage;
                 elapsedTime = 0;
@@ -277,7 +277,7 @@ void InGameScene::Update(float deltaTime)
             elapsedTime = 0;
             currStage = STAGE_STATE::LOADING;
             nextStage = STAGE_STATE::STAGE4;
-            SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+
             if (elapsedTime > 10)
                 SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
             break;
@@ -403,7 +403,7 @@ void InGameScene::CheckCollision()
                     //적의 사망 체크를 여기서 표현
                 }
             }
-            //????? 0?? ???? 10?? ???????? ??
+
             else                                
                 lpPlayerController->GetController()->SetHp(lpPlayerController->GetController()->GetHp() - 10);
         }
@@ -428,8 +428,7 @@ void InGameScene::CheckCollision()
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
-                //???? ??? ???? ???? ???
-                //???? ??? ???? ???? ???
+
                 isBossAlive = false;
                 elapsedTime = 0;
             }
