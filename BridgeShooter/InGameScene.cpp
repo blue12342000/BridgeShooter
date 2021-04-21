@@ -255,21 +255,6 @@ void InGameScene::Update(float deltaTime)
         break;
     }
 
-    
-    //if (KeyManager::GetSingleton()->IsKeyDownOne('E'))
-    //{
-    //    if (lpUIobject->GetBombAmount() < 0)
-    //    {
-    //        lpUIobject->SetBombAmount(0);
-    //    }
-    //    else
-    //        lpUIobject->SetBombAmount(lpUIobject->GetBombAmount() - 1);
-    //}
-
-    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
-    {
-        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
-    }
     backgroundMover += 300 * deltaTime / 2;
     if (backgroundMover >= 800) backgroundMover = 0;
         
@@ -283,6 +268,10 @@ void InGameScene::Update(float deltaTime)
     {
         slowTimer = 0;
         slowScale = 1;
+    }
+    if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
 }
 

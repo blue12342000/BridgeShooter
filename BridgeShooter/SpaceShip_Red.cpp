@@ -17,7 +17,7 @@ void SpaceShip_Red::Init()
 	maxHp = U_MAX_PLAYER_HP;
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_RED", 10, true);
-	transform.speed = 300;
+	transform.speed = 350;
 	elapsedTime = 0;
 	angle = -PI / 2;
 	power = 0;

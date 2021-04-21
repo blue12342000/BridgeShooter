@@ -52,14 +52,13 @@ void UIobject::Render(HDC hdc)
 {	
 	//최대값 저장.
 	//SetBossMaxHp();
-	
+
 	playerUIobject = GetRectToCenter(lpPlayer->GetHp()*2 + 50, 80, lpPlayer->GetHp()*4, 18);
 	//Rectangle(hdc, playerUIobject.left, playerUIobject.top, playerUIobject.right, playerUIobject.bottom);
 	for (int i = 0; i < lpPlayer->GetHp() / 5; i++)
 	{
 		lpHp01->Render(hdc, 75 + 0 + 18 * i, WINSIZE_HEIGHT / 20 + 41, 0, U_IA_CENTER);
 	}
-	
 	
 	// 체력에 따라서 체력바 색상이 달라지게 하고싶다. 어떻게 할까
 	if (lpEnemy)

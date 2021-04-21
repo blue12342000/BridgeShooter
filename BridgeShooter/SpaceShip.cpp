@@ -14,7 +14,7 @@ void SpaceShip::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_IDLE", 20, true);
-	transform.speed = 200;
+	transform.speed = 350;
 	hp = U_MAX_PLAYER_HP;
 	maxHp = U_MAX_PLAYER_HP;
 	elapsedTime = 0;

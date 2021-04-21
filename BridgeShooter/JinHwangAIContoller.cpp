@@ -7,7 +7,7 @@ void JinHwangAIContoller::Init()
 {
 	state = UNIT_STATE::IDLE;
 	elapsedTime = 0;
-
+	moveCount = 0;
 	origin = { WINSIZE_WIDTH / 2.0f, WINSIZE_HEIGHT / 4.0f };
 }
 
@@ -56,22 +56,26 @@ void JinHwangAIContoller::Update(float deltaTime)
 			{
 				lpUnit->Translate(POINTFLOAT{ origin.x - lpUnit->pos.x, origin.y - lpUnit->pos.y });
 				state = UNIT_STATE::MOVE;
+				++moveCount;
 			}
 			else
 			{
 				lpUnit->Translate(POINTFLOAT{ (float)((rand() % 150 + 60) - 135) / 10, (float)((rand() % 150 + 60) - 135) / 10 });
 				state = UNIT_STATE::MOVE_ING;
 				elapsedTime = 0;
+				++moveCount;
 			}
 			break;
 		case UNIT_STATE::MOVE_ING:
 			if (elapsedTime > 2)
 			{
-				if (lpUnit->pos.x < 50 || lpUnit->pos.y < 50
-					|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50)
+				if (moveCount < 3 &&
+					(lpUnit->pos.x < 50 || lpUnit->pos.y < 50
+					|| lpUnit->pos.x > WINSIZE_WIDTH - 50 || lpUnit->pos.y > WINSIZE_HEIGHT / 2 - 50))
 				{
 					lpUnit->Translate(POINTFLOAT{ origin.x - lpUnit->pos.x, origin.y - lpUnit->pos.y });
 					state = UNIT_STATE::MOVE_ING;
+					++moveCount;
 				}
 				else
 				{
@@ -112,6 +116,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			{
 				elapsedTime = 0;
 				lpUnit->pos = origin;
+				moveCount = 0;
 				state = UNIT_STATE::IDLE;
 			}
 			break;
