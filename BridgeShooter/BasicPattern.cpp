@@ -15,7 +15,6 @@ void BasicPattern::Move(float deltaTime, GameObject* lpObject)
         }
     }
 
-	lpObject->pos.x += cosf(transform.angle) * transform.speed * deltaTime;
-	lpObject->pos.y += sinf(transform.angle) * transform.speed * deltaTime;
-    lpObject->angle = transform.angle;
+	lpObject->pos.x += cosf(lpObject->angle) * transform.speed * deltaTime;
+	lpObject->pos.y += sinf(lpObject->angle) * transform.speed * deltaTime;
 }

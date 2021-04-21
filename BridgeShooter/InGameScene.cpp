@@ -195,7 +195,7 @@ void InGameScene::Release()
         lpPlayerController = nullptr;
     }
 
-    //벡터로 바꾼거 릴리즈
+    //????? ???? ??????
 }
 
 void InGameScene::Update(float deltaTime)
@@ -229,8 +229,8 @@ void InGameScene::Update(float deltaTime)
             lpEnemyController = vLpEnemyController[0];
             lpEnemyController->Init();
             lpEnemyController->SetController(lpJinHwang);
-            //적이 죽고나서 바뀌고 다음 스테이지를 시작할때
-            //다음 행성에게 에너미를 새로 부여하고 0이었던  체력을 다시 설정.
+            //???? ?????? ???? ???? ?????????? ???????
+            //???? ?????? ?????? ???? ?ο???? 0?????  ????? ??? ????.
             lpUIobject->SetEnemy(lpEnemyController->GetController());
             lpEnemyController->GetController()->SetHp(lpEnemyController->GetController()->GetHp());
             lpPlayer->SetTarget(lpJinHwang);
@@ -390,7 +390,7 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage(vLpEnemyMissile[i]->pos, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-
+            //체력이 0이되면 데미지를 받아도 체력 0
             if (lpPlayerController->GetController()->GetHp() <= 0)
             {
                 lpUIobject->SetLifeAmount(lpUIobject->GetLifeAmount()-1);
@@ -400,10 +400,11 @@ void InGameScene::CheckCollision()
                 {
                     lpPlayerController->GetController()->SetHp(0);
                     EffectManager::GetSingleton()->Explosion(lpPlayer->pos, lpPlayer->GetLpAnimation(), 20, 8, 8);
-
+                    //적의 사망 체크를 여기서 표현
                 }
-            } 
-            else
+            }
+            //????? 0?? ???? 10?? ???????? ??
+            else                                
                 lpPlayerController->GetController()->SetHp(lpPlayerController->GetController()->GetHp() - 10);
         }
         else
@@ -428,7 +429,7 @@ void InGameScene::CheckCollision()
             if (lpEnemyController->GetController()->GetHp() <= 0)
             {
                 //???? ??? ???? ???? ???
-                //적의 사망 체크를 여기서 표현
+                //???? ??? ???? ???? ???
                 isBossAlive = false;
                 elapsedTime = 0;
             }

@@ -61,10 +61,16 @@ HRESULT ImageManager::Init()
     mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 134 * 10, 134, 10, 1, 10, true, RGB(0, 0, 0));
 
     mLpImageDatas.insert(make_pair("Item_Power", new Image()));
-    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 266, 32, 6, 1, 6, true);
+    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 504, 84, 6, 1, 6, true);
 
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
-    mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true);
+    mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 504, 84, 6, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("Item_Speed", new Image()));
+    mLpImageDatas["Item_Speed"]->Init("Image/Item/Item_Speed.bmp", 504, 84, 6, 1, 6, true);
+
+    mLpImageDatas.insert(make_pair("Item_Health", new Image()));
+    mLpImageDatas["Item_Health"]->Init("Image/Item/Item_Health.bmp", 504, 84, 6, 1, 4, true);
 
     mLpImageDatas.insert(make_pair("BossHpGauge", new Image()));
     mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 600, 76, 1, 1, 1, true);
