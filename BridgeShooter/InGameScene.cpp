@@ -66,10 +66,10 @@ HRESULT InGameScene::Init()
     vEnemys.push_back(new AlienRed());
     vEnemys.push_back(new AlienYellow());
 
-    for (int i = 0; i < vEnemys.size();i++)
-    {
-        vEnemys[i]->Init();
-    }
+    //for (int i = 0; i < vEnemys.size();i++)
+    //{
+    //    vEnemys[i]->Init();
+    //}
 
     lpItem = new Item();
     lpItem->Init();
@@ -193,7 +193,6 @@ void InGameScene::Release()
         lpPlayerController = nullptr;
     }
 
-  
     //∫§≈Õ∑Œ πŸ≤€∞≈ ∏±∏Æ¡Ó
 }
 
