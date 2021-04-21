@@ -8,7 +8,7 @@ void Planet_KMS::Init()
 {
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet_KMS", 50, true);
-	hp = 500;
+	hp = 200;
 	speed = 374;
 	elapsedTime = 0;
 	angle =0;

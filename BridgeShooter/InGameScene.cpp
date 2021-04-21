@@ -107,7 +107,7 @@ HRESULT InGameScene::Init()
     lpPlayer->SetTarget(lpJinHwang);
     lpEnemyController = new JinHwangAIContoller();
     lpEnemyController->Init();
-    lpEnemyController->SetController(lpPlanetKMS);
+    lpEnemyController->SetController(lpJinHwang);
 
      return S_OK;
 }
@@ -182,7 +182,6 @@ void InGameScene::Release()
 void InGameScene::Update(float deltaTime)
 {
     CheckCollision();
-
     if (lpPlayerController) lpPlayerController->Update(deltaTime);
     if (lpEnemyController) lpEnemyController->Update(deltaTime);
 
@@ -231,7 +230,7 @@ void InGameScene::Render(HDC hdc)
     //if (lpPlanet04) lpPlanet04->Render(hBackDC);
     //if (lpPlanetSSJ) lpPlanetSSJ->Render(hBackDC);
     //if (lpJinHwang) lpJinHwang->Render(hBackDC);
-    if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
+    //if (lpPlanetKMS) lpPlanetKMS->Render(hBackDC);
     for (int i = 0; i < vEnemys.size(); i++)
     {
         vEnemys[i]->Render(hBackDC);
@@ -251,7 +250,6 @@ void InGameScene::CheckCollision()
 {
     vector<Missile*>& vLpEnemyMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::ENEMY);
     vector<Missile*>& vLpPlayerMissile = MissileManager::GetSingleton()->GetLpMissiles(UNIT_KIND::PLAYER);
-    //플레이어의 체력과 행성의 체력을 가져온다.
 
     float distance = 100.0f;
     float dX = 0;
@@ -268,7 +266,12 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpEnemyMissile[i]->pos.x + vLpEnemyMissile[i]->deltaMove.deltaPos.x , vLpEnemyMissile[i]->pos.y + vLpEnemyMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::ENEMY, i);
-            lpUIobject->SetPlayerMaxHp(lpUIobject->GetPlayerMaxHp() - 10);
+            lpUIobject->SetPlayerCurrentHp(lpUIobject->GetPlayerCurrentHp() - 10);
+            //체력이 0이 되었을때
+            if (lpUIobject->GetPlayerCurrentHp() == 0)
+            {
+            }
+        
         }
         else
         {
@@ -290,7 +293,7 @@ void InGameScene::CheckCollision()
         {
             EffectManager::GetSingleton()->PlayImage({ vLpPlayerMissile[i]->pos.x + vLpPlayerMissile[i]->deltaMove.deltaPos.x , vLpPlayerMissile[i]->pos.y + vLpPlayerMissile[i]->deltaMove.deltaPos.y }, "EFFECT_01", 10);
             MissileManager::GetSingleton()->DisableMissile(UNIT_KIND::PLAYER, i);
-            lpUIobject->SetbossMaxHp(lpUIobject->GetbossMaxHp() - 10);
+            lpUIobject->SetbossCurrentHp(lpUIobject->GetBossCurrentHp() - 10);
         }
         else
         {

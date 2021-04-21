@@ -40,11 +40,14 @@ private:
 	Image* lpFcukingManual;
 
 	bool isBossAlive;
+	bool isplayerAlive;
 	bool isBombUsed;
 	bool isBombLeft;
 	bool isHpLeft;
 	bool isNowMissile;
 	bool isPushedManualButton;
+	bool isSetPlayerHp;
+	bool isSetBossHp;
 
 	int hp;
 	int hpCount;
@@ -54,7 +57,10 @@ private:
 	int index;
 	int power;
 	int createLine;
-
+	int playerCurrentHp;
+	int bossCurrentHp;
+	int playerHp;
+	int bossHp;
 
 public:
 
@@ -63,10 +69,11 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
-
-	void PlayerUIobjectData( );
+	void CopyPlayerHp();
+	void CopyBossHp();
+	void PlayerHpBar( );
 	//void EnemyUIobjectData(float deltaTime);
-	void BossUIobjectData( );
+	void BossHpBar( );
 	void IndexData();
 
 	void HpCount( );
@@ -76,12 +83,18 @@ public:
 	void IsBombUsed();
 	void IndexControl(HDC hdc);
 
+	void SetPlayer(Unit* lpPlayer) { this->lpPlayer = lpPlayer; }
 
-	void SetPlayerUIobject(RECT playerUIobject) { this->playerUIobject = playerUIobject; }
-	void SetbossUIobject(RECT enemyUIobject) { this->bossUIobject = enemyUIobject; }
+	void SetPlayerHpBar(RECT playerUIobject) { this->playerUIobject = playerUIobject; }
+	void SetBossHpBar(RECT enemyUIobject) { this->bossUIobject = enemyUIobject; }
 
 	void SetPlayerMaxHp(int playerMaxHp) { this->playerMaxHp = playerMaxHp; }
+	void SetPlayerCurrentHp(int playerCurrentHp) { this->playerCurrentHp = playerCurrentHp; }
+	
 	void SetbossMaxHp(int enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
+	void SetbossCurrentHp(int bossCurrentHp) { this->bossCurrentHp = bossCurrentHp; }
+	
+	void SetHpCount(int hpCount) { this->hpCount = hpCount; }
 	void SetBombAmount(int bombAmount) { this->bombAmount = bombAmount; }
 	void SetFactoryLine(int createLine) { this->createLine = createLine; }
 	
@@ -90,11 +103,14 @@ public:
 	//inline POINTFLOAT GetPos() { return this->pos; }
 
 	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
+	inline float GetPlayerCurrentHp() { return this->playerCurrentHp; }
 	inline float GetbossMaxHp() { return this->bossMaxHp; }
+	inline float GetBossCurrentHp() { return this->bossCurrentHp; }
 	inline float GetBombAmount() { return this->bombAmount; }
 	inline float GetFactoryLine(){ return this->createLine; }
-
-
+	inline float GetHpCount(){ return this->hpCount; }
+	inline bool GetIsplayerAlive() { return this->isplayerAlive; }
+	
 	inline RECT GetPlayerUIobject() { return this->playerUIobject; }
 	inline RECT GetbossUIobject() { return this->bossUIobject; }
 

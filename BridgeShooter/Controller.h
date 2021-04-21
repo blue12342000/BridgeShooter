@@ -15,5 +15,6 @@ public:
 	virtual void Render(HDC hdc) = 0;
 
 	virtual void SetController(Unit* lpUnit) = 0;
+	inline Unit* GetController() { return this->lpUnit; }
 };
 
