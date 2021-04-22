@@ -10,7 +10,11 @@ public:
 		YELLOW, 
 		RED,
 		GRAY,
-		NONE
+		NONE,
+		BOSS1,
+		BOSS2,
+		BOSS3,
+		BOSS4
 	};
 
 private:

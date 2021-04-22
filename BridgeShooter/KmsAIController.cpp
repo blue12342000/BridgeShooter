@@ -18,7 +18,13 @@ void KmsAIController::Init()
 
 void KmsAIController::Release()
 {
-	
+	if (lpUnit)
+	{
+		lpUnit->Release();
+		delete lpUnit;
+		lpUnit = nullptr;
+	}
+
 	for (auto lpPattern : vLpPatterns)
 	{
 		delete lpPattern;

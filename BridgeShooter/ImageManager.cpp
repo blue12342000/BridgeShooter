@@ -123,7 +123,6 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("LifeMiniGRAY", new Image()));
     mLpImageDatas["LifeMiniGRAY"]->Init("Image/UI/Select_Gray.bmp", 200 / 3, 200 / 3, true);
     
-    
     mLpImageDatas.insert(make_pair("NowMissile_1", new Image()));
     mLpImageDatas["NowMissile_1"]->Init("Image/UI/NowMissile_1.bmp", 700/4, 291 / 4, 1, 1, 1, true);
 

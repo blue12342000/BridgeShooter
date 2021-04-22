@@ -20,7 +20,7 @@ private:
 	Controller* lpPlayerController;
 
 	Image* lpBossHpBar;
-	Image* lpLifeStock[3];
+	Image* lpLifeStock[7];
 	Image* lpMissile[6];
 	Image* lpFcukingManual;
 	Image* lpHp01;
