@@ -1,17 +1,17 @@
 #include "SpaceShip_Gray.h"
 #include "Animation.h"
-#include "SpaceShipFactory.h"
+#include "RainFactory.h"
 
 void SpaceShip_Gray::Init()
 {
-	hp = U_MAX_PLAYER_HP;
-	maxHp = U_MAX_PLAYER_HP;
+	hp = U_MAX_PLAYER_HP - 10;
+	maxHp = U_MAX_PLAYER_HP - 10;
 	lpAnimation = new Animation();
 	lpAnimation->Change("SPACESHIP_GRAY", 10, true);
 	transform.speed = 350;
 	elapsedTime = 0;
 	angle = -PI / 2;
-	SetFactory(new SpaceShipFactory());
+	SetFactory(new RainFactory());
 	collider.SetHitBox(pos, 20, 20);
 	force = { 0, 0 };
 

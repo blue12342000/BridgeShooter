@@ -1,6 +1,6 @@
 #include "SpaceShip_Red.h"
 #include "Animation.h"
-#include "SpaceShipFactory.h"
+#include "SineFactory.h"
 
 void SpaceShip_Red::Init()
 {
@@ -11,7 +11,7 @@ void SpaceShip_Red::Init()
 	transform.speed = 350;
 	elapsedTime = 0;
 	angle = -PI / 2;
-	SetFactory(new SpaceShipFactory());
+	SetFactory(new SineFactory());
 	collider.SetHitBox(pos, 20, 20);
 	force = { 0, 0 };
 

@@ -9,14 +9,13 @@ private:
 	enum CREATE_PATTERN
 	{
 		RFCP_BASIC,
-		RFCP_RAIN,
-		RFCP_RSINE,
 		RFCP_NONE
 	};
+
 private:
 	vector<Pattern*> vLpPatterns;
-
-	int rnd;
+	vector<string> vMissileKey;
+	int missileCount;
 
 private:
 	virtual void Init() final;

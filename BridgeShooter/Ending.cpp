@@ -17,18 +17,20 @@ HRESULT Ending::Init()
 void Ending::Release()
 {
     delete lpGhoust;
+    lpGhoust = nullptr;
 }
 
 void Ending::Update(float deltaTime)
 {
+    if (lpGhoust) lpGhoust->Update(deltaTime);
+
+    backgroundMover += 300 * deltaTime;
+    if (backgroundMover >= 800) backgroundMover = 0;
+
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
     }
-    lpGhoust->Update(deltaTime);
-
-    backgroundMover += 300 * deltaTime;
-    if (backgroundMover >= 800) backgroundMover = 0;
 }
 
 void Ending::Render(HDC hdc)

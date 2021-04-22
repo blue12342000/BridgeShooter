@@ -2,9 +2,7 @@
 #include "UI.h"
 #include "BridgeShooter.h"
 
-class Controller;
 class Item;
-class SpaceShip;
 class Unit;
 class Image;
 class UIobject : public UI
@@ -24,6 +22,8 @@ private:
 	Image* lpHp02;
 	Image* lpHp03;
 	Image* lpHp04;
+
+	float elapsedTime;
 
 public:
 	virtual void Init() ;
