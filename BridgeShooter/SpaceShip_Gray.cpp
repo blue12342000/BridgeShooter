@@ -22,7 +22,7 @@ void SpaceShip_Gray::Init()
 	angle = -PI / 2;
 	power = 0;
 	SetFactory(new SpaceShipFactory());
-	collider.SetHitBox(pos, 30, 30);
+	collider.SetHitBox(pos, 20, 20);
 	force = { 0, 0 };
 }
 

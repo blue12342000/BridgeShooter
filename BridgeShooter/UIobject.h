@@ -3,6 +3,7 @@
 #include "Unit.h"
 #include "BridgeShooter.h"
 
+class Controller;
 class Item;
 class SpaceShip;
 class Unit;
@@ -16,8 +17,10 @@ private:
 	RECT playerUIobject;
 	RECT bossUIobject;
 
+	Controller* lpPlayerController;
+
 	Image* lpBossHpBar;
-	Image* lpLifeStock;
+	Image* lpLifeStock[3];
 	Image* lpMissile[6];
 	Image* lpFcukingManual;
 	Image* lpHp01;
