@@ -9,7 +9,7 @@ HRESULT Title::Init()
     lpPressKey = ImageManager::GetSingleton()->FindImage("TITLE_PRESSKEY");
     lpTitle = ImageManager::GetSingleton()->FindImage("TITLE");
     lpMovingCat = new Animation();
-    lpMovingCat->Change("MOVING_CAT", 24, true, false);
+    lpMovingCat->Change("MOVING_CAT", 10, true, false);
     catPos = {-50, 400 };
 
     return S_OK;
@@ -23,7 +23,7 @@ void Title::Release()
 void Title::Update(float deltaTime)
 {
     lpMovingCat->Update(deltaTime);
-    catPos.x += deltaTime * 10;
+    catPos.x += deltaTime * 100;
 
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_SPACE))
     {

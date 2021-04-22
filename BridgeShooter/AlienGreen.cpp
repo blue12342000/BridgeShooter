@@ -5,7 +5,6 @@
 #include "GameObject.h"
 #include "RainFactory.h"
 #include "SineFactory.h"
-#include "Planet04Factory.h"
 #include "BasicPattern.h"
 
 
@@ -27,7 +26,7 @@ void AlienGreen::Init()
 	angle = 0;
 	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_3", 4, true);
-	lpFactory = new Planet04Factory();
+	lpFactory = new SineFactory();
 	lpPattern = new BasicPattern();
 	transform.speed = 80.0f;
 	hp = U_MAX_ENEMY_HP;

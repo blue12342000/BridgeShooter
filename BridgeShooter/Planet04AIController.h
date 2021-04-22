@@ -7,6 +7,7 @@ private:
 	enum class USE_PATTERN
 	{
 		BASIC,
+		RAIN,
 		NONE
 	};
 
@@ -16,10 +17,8 @@ private:
 		MOVE,
 		MOVE_ING,
 		MOVE_PATTERN,
-		MOVE_PATTERN_ING,
 		PATTERN_ATTACK,
 		ATTACK,
-		UPGRADE,
 		RETURN,
 		NONE
 	};
