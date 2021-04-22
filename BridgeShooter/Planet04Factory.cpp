@@ -3,7 +3,7 @@
 #include "BasicPattern.h"
 #include "RainPattern.h"
 #include "ReflectPattern.h"
-#include "SpiralPattern.h"
+#include "SinePattern.h"
 #include "Missile.h"
 #include "Unit.h"
 //#include "Factory.h"
@@ -14,7 +14,7 @@ void Planet04Factory::Init()
 	vLpPatterns[CREATE_PATTERN::PLANET04_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::PLANET04_RAIN] = new RainPattern();
 	vLpPatterns[CREATE_PATTERN::PLANET04_REFLECT] = new ReflectPattern();
-	vLpPatterns[CREATE_PATTERN::PLANET04_SPRIAL] = new SpiralPattern();
+	vLpPatterns[CREATE_PATTERN::PLANET04_SINE] = new SinePattern();
 	
 	createLine = 0;
 	maxCreateLIne = 3;
@@ -22,6 +22,7 @@ void Planet04Factory::Init()
 
 	// 1ch 1000
 	SetCheckTime(10);
+	SetCheckTime(30);
 	SetCheckTime(50);
 	SetCheckTime(100);
 	SetCheckTime(200);
@@ -46,7 +47,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 	
 	if (createLine == 0)
 	{
-		if (IsCheckTime(100) && GetTimeMod(100) < 1000)
+		if (IsCheckTime(100) && GetTimeMod(100) < 100)
 		{
 
 			for (int i = 0; i < 4; ++i)	//한번에 여러개 나가게 하기
@@ -63,7 +64,7 @@ void Planet04Factory::Fire(Unit* lpUnit)
 	//2페이즈
 	if (createLine == 1)
 	{
-		if (IsCheckTime(300) && GetTimeMod(10000) < 5000)
+		if (IsCheckTime(300) && GetTimeMod(10000) < 10000)
 		{
 			++count;
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
@@ -75,21 +76,25 @@ void Planet04Factory::Fire(Unit* lpUnit)
 			if (count >= 9) count *= -1;
 		}
 	
-		if (IsCheckTime(100) && GetTimeMod(10000) < 5000)
+		if (IsCheckTime(50) && GetTimeMod(1000) < 1000)
 		{
-			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpUnit->angle += -PI / 32;
-			lpMissile->SetMissile("MISSILE_02", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 200 }, 20);
-			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_SPRIAL]);
-			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			for (int i = 0; i < 9; ++i)
+			{
+				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->angle - 2 * PI / 9 * i, Transform{ lpUnit->pos, -PI / 2, 300, PI, 100 }, 14, 0);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_SINE]);
+				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			}
 		}
-		if (IsCheckTime(100) && GetTimeMod(10000) < 5000)
+		if (IsCheckTime(50) && GetTimeMod(1000) < 1000)
 		{
-			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpUnit->angle += -PI / 32;
-			lpMissile->SetMissile("MISSILE_02", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 200 }, 20);
-			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_SPRIAL]);
-			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			for (int i = 0; i < 9; ++i)
+			{
+				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_02", lpUnit->angle - 2 * PI / 9 * i, Transform{ lpUnit->pos, PI / 2, 300, PI, 100 }, 14, 0);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_SINE]);
+				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			}
 		}
 	}
 
@@ -97,25 +102,24 @@ void Planet04Factory::Fire(Unit* lpUnit)
 
 	if (createLine == 2)
 	{
-		if (IsCheckTime(50) && GetTimeMod(10000) < 5000)
+		if (IsCheckTime(30) && GetTimeMod(15000) < 15000)
 		{
 			++count;
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpUnit->angle += PI * count / 16;
-			lpMissile->SetMissile("MISSILE_01", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 150.0f + (8 * count) }, 20);
+			lpMissile->SetMissile("MISSILE_01", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle += PI * count / 16, 150.0f + (8 * count) }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_RAIN]);
-			MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			if (count >= 9) count *= -1;
 		}
 
-		if (IsCheckTime(50) && GetTimeMod(10000) < 5000)
+		if (IsCheckTime(50) && GetTimeMod(10000) < 8000)
 		{
-			for (int i = -3; i < 4; ++i)
+			for (int i = -2; i < 3; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->SetMissile("MISSILE_02", lpUnit->angle - PI / 64 * i, Transform{ lpUnit->pos, lpUnit->angle - PI / 64 * i, 200 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::PLANET04_BASIC]);
-				MissileManager::GetSingleton()->AddMissile(UNIT_KIND::ENEMY, lpMissile);
+				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
 		}
 	}
