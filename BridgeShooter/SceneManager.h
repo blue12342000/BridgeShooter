@@ -12,6 +12,7 @@ public:
 		SELECT,
 		INGAME,
 		ENDING,
+		CLEAR,
 		NONE
 	};
 

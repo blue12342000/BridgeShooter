@@ -19,10 +19,12 @@ void SSJFactory::Init()
 	vLpPatterns[CREATE_PATTERN::SFCP_REFLECT] = new ReflectPattern();
 
 	createLine = 0;
-	maxCreateLIne = 3;
+	maxCreateLIne = 4;
 
 	phaseChanger = 0;
 
+	lastEndingLine = 0;
+	SetCheckTime(10);
 	SetCheckTime(100);
 	SetCheckTime(200);
 	SetCheckTime(300);
@@ -41,12 +43,14 @@ void SSJFactory::Release()
 
 void SSJFactory::Fire(Unit* lpUnit)
 {
+	if (createLine < 3)
+	{
+		phaseChanger++;
+		if (phaseChanger >= 5000) createLine = 1;
+		if (phaseChanger >= 10000) createLine = 2;
+	}
 
-	phaseChanger++;
-	if (phaseChanger >= 5000) createLine = 1;
-	if (phaseChanger >= 10000) createLine = 2;
-
-
+	//1 phase
 	if (createLine == 0)
 	{
 
@@ -72,7 +76,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_SPIRAL]);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
-				
+
 			}
 			for (int i = 0; i < 8; ++i)
 			{
@@ -85,8 +89,8 @@ void SSJFactory::Fire(Unit* lpUnit)
 		}
 
 	}
-		
-	//2??????
+
+	//2 phase
 	else if (createLine == 1)
 	{
 		if (IsCheckTime(100))
@@ -119,9 +123,9 @@ void SSJFactory::Fire(Unit* lpUnit)
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
 		}
-		
+
 		//??? ??????
-		if(IsCheckTime(200))
+		if (IsCheckTime(200))
 		{
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_03", lpUnit->angle + PI / 5, Transform{ lpUnit->pos, lpUnit->angle + PI / 5, 500 }, 14);
@@ -140,7 +144,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 
 	}
 
-	//3??????
+	//3 phase
 	else if (createLine == 2)
 	{
 		if (IsCheckTime(3000))
@@ -187,8 +191,28 @@ void SSJFactory::Fire(Unit* lpUnit)
 
 				}
 			}
-			
+
 		}
 
+	}
+
+	//credit
+	else if (createLine == 3)
+	{
+		if (IsCheckTime(100))
+		{
+			for (int i = 0; i < 30; ++i)
+			{
+				if (endingCredit[lastEndingLine][i] == 0)
+				{
+					Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile(); // -PI * 3 / 4 + (PI / 2 / 43.0f) * i
+					lpMissile->SetMissile("MISSILE_01", -PI / 2, Transform{ { WINSIZE_WIDTH / 30.0f * i, WINSIZE_HEIGHT},0, 200.0f }, 14);
+					lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
+					lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
+					MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+				}
+			}
+			lastEndingLine = (lastEndingLine + 1) % 44;
+		}
 	}
 }
