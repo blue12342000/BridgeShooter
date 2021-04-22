@@ -48,7 +48,7 @@ void SpaceShipFactory::Fire(Unit* lpUnit)
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_05", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 500 }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
-			lpMissile->SetDamage(5);
+			lpMissile->SetDamage(3);
 			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 		}
 	}
@@ -59,7 +59,7 @@ void SpaceShipFactory::Fire(Unit* lpUnit)
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_05", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 500 }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
-			lpMissile->SetDamage(5);
+			lpMissile->SetDamage(3);
 			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 
 			for (int i = -1; i < 2; i += 2)
@@ -67,7 +67,7 @@ void SpaceShipFactory::Fire(Unit* lpUnit)
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 				lpMissile->SetMissile("MISSILE_04", lpUnit->angle, Transform{ { lpUnit->pos.x + i * 20, lpUnit->pos.y + 10 }, lpUnit->angle, 500 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
-				lpMissile->SetDamage(2);
+				lpMissile->SetDamage(1);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
 		}
@@ -79,7 +79,7 @@ void SpaceShipFactory::Fire(Unit* lpUnit)
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
 			lpMissile->SetMissile("MISSILE_05", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 500 }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
-			lpMissile->SetDamage(5);
+			lpMissile->SetDamage(3);
 			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 
 			for (int i = -1; i < 2; i += 2)

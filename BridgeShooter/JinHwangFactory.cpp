@@ -15,7 +15,7 @@ void JinHwangFactory::Init()
 	vLpPatterns[CREATE_PATTERN::JFCP_SPIRAL] = new SpiralPattern();
 	vLpPatterns[CREATE_PATTERN::JFCP_BOOMERANG] = new BoomerangPattern();
 
-	createLine = 1;
+	createLine = 0;
 	maxCreateLIne = 3;
 
 	// 1√  1000 

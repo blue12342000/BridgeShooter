@@ -43,7 +43,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 			{
 				if (elapsedTime > 1)
 				{
-					if (rand() % 100 < 10)
+					if (rand() % 100 < 40)
 					{
 						elapsedTime = 0;
 						lpUnit->ResetTimer();
@@ -86,7 +86,7 @@ void JinHwangAIContoller::Update(float deltaTime)
 				}
 				else
 				{
-					if (rand() % 100 < 30)
+					if (rand() % 100 < 60)
 					{
 						elapsedTime = 0;
 						lpUnit->ResetTimer();
