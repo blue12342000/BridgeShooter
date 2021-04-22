@@ -36,19 +36,6 @@ void Missile::Move(float deltaTime)
 	if (lpPattern) lpPattern->Move(deltaTime, this);
 }
 
-void Missile::SetMissile(string ImageKey, POINTFLOAT pos, float angle, float speed, int size, float delayTime)
-{
-	this->elapsedTime = 0;
-	this->delayTime = delayTime;
-	this->lpAnimation->Change(ImageKey, 10, true, true);
-	this->transform.pos = pos;
-	this->transform.angle = angle;
-	this->transform.speed = speed;
-	collider.SetHitBox(pos, size, size);
-
-	lpPattern = nullptr;
-}
-
 void Missile::SetMissile(string ImageKey, float angle, Transform transform, int size, float delayTime)
 {
 	this->lpAnimation->Change(ImageKey, 10, true, true);
@@ -56,6 +43,8 @@ void Missile::SetMissile(string ImageKey, float angle, Transform transform, int 
 	this->pos = transform.pos;
 	this->angle = angle;
 	this->delayTime = delayTime;
+	this->elapsedTime = 0;
 	collider.SetHitBox(transform.pos, size, size);
 	lpPattern = nullptr;
+	lpLpTarget = nullptr;
 }

@@ -1,27 +1,28 @@
 #include "AlienGreen.h"
-//기본 라이브러리(필수)
 #include "Factory.h"
 #include "Animation.h"
 #include "Pattern.h"
 #include "GameObject.h"
-
-//쏘는 팩토리 라이브러리
-#include "BasicFactory.h"
+#include "RainFactory.h"
 #include "SineFactory.h"
 #include "Planet04Factory.h"
-#include "RainFactory.h"
-#include "JinHwangFactory.h"
-
-//움직이는 패턴 라이브러리
 #include "BasicPattern.h"
-#include "ReflectPattern.h"
-#include "GuidePattern.h"
-#include "SinePattern.h"
-#include "SpiralPattern.h"
+
 
 void AlienGreen::Init()
 {
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
+	lpPattern = new BasicPattern();
+
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, 50, 50);
@@ -29,11 +30,12 @@ void AlienGreen::Init()
 	lpFactory = new Planet04Factory();
 	lpPattern = new BasicPattern();
 	transform.speed = 80.0f;
-	hp = 50;
+	hp = U_MAX_ENEMY_HP;
+	maxHp = U_MAX_ENEMY_HP;
 	moveAngle = PI / 2.0f;
 	shootAngle = PI / 2.0f;
 	pos = { (float)(rand() % ((WINSIZE_WIDTH - 50) - 50 - 1) + 50),0.0f - 100.0f };
-	shootDuration = 200;
+	shootDuration = 2000;
 	lpFactory->Init();
 	lpFactory->SetCheckTime(shootDuration);
 	lpFactory->SetCreateLine(1);
@@ -76,6 +78,7 @@ void AlienGreen::Release()
 	if (lpPattern)
 	{
 		delete lpPattern;
+		lpPattern = nullptr;
 	}
 }
 

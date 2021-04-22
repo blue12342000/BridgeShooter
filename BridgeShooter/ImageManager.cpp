@@ -61,10 +61,16 @@ HRESULT ImageManager::Init()
     mLpImageDatas["Planet_KMS"]->Init("Image/Unit/Planet/planet_KMS.bmp", 134 * 10, 134, 10, 1, 10, true, RGB(0, 0, 0));
 
     mLpImageDatas.insert(make_pair("Item_Power", new Image()));
-    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 266, 32, 6, 1, 6, true);
+    mLpImageDatas["Item_Power"]->Init("Image/Item/Item_Power.bmp", 504, 84, 6, 1, 6, true);
 
     mLpImageDatas.insert(make_pair("Item_Bomb", new Image()));
-    mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 216, 32, 4, 1, 4, true);
+    mLpImageDatas["Item_Bomb"]->Init("Image/Item/Item_Bomb.bmp", 504, 84, 6, 1, 4, true);
+
+    mLpImageDatas.insert(make_pair("Item_Speed", new Image()));
+    mLpImageDatas["Item_Speed"]->Init("Image/Item/Item_Speed.bmp", 504, 84, 6, 1, 6, true);
+
+    mLpImageDatas.insert(make_pair("Item_Health", new Image()));
+    mLpImageDatas["Item_Health"]->Init("Image/Item/Item_Health.bmp", 504, 84, 6, 1, 4, true);
 
     mLpImageDatas.insert(make_pair("BossHpGauge", new Image()));
     mLpImageDatas["BossHpGauge"]->Init("Image/UI/BossHpGauge.bmp", 600, 76, 1, 1, 1, true);
@@ -108,27 +114,32 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
     mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
     //이하 테스트용 더미 이미지
-    mLpImageDatas.insert(make_pair("BombCount", new Image()));
-    mLpImageDatas["BombCount"]->Init("Image/UI/Item_BombUI.bmp", 56, 32, 1, 1, 1, true);
-
     mLpImageDatas.insert(make_pair("HpCount", new Image()));
     mLpImageDatas["HpCount"]->Init("Image/UI/SpaceShip_mini.bmp.", 136/4, 174/4, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("NowMissile_1", new Image()));
-    mLpImageDatas["NowMissile_1"]->Init("Image/UI/NowMissile_1.bmp", 122, 76, 1, 1, 1, true);
+    mLpImageDatas["NowMissile_1"]->Init("Image/UI/NowMissile_1.bmp", 700/4, 291 / 4, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("NowMissile_2", new Image()));
-    mLpImageDatas["NowMissile_2"]->Init("Image/UI/NowMissile_2.bmp", 116 ,76, 1, 1, 1, true);
+    mLpImageDatas["NowMissile_2"]->Init("Image/UI/NowMissile_2.bmp", 700 / 4, 291 / 4, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("NowMissile_3", new Image()));
-    mLpImageDatas["NowMissile_3"]->Init("Image/UI/NowMissile_3.bmp", 92, 57, 1, 1, 1, true);
+    mLpImageDatas["NowMissile_3"]->Init("Image/UI/NowMissile_3.bmp", 700 / 4, 291 / 4, 1, 1, 1, true);
     
-    mLpImageDatas.insert(make_pair("Manual", new Image()));
-    mLpImageDatas["Manual"]->Init("Image/UI/Manual.bmp", 115, 109, 1, 1, 1, true);
+    mLpImageDatas.insert(make_pair("NowMissile_4", new Image()));
+    mLpImageDatas["NowMissile_4"]->Init("Image/UI/NowMissile_4.bmp", 700 / 4, 291 / 4, 1, 1, 1, true);
 
+    mLpImageDatas.insert(make_pair("NowMissile_MAXXX", new Image()));
+    mLpImageDatas["NowMissile_MAXXX"]->Init("Image/UI/NowMissile_MAXXX.bmp", 700 / 4, 291 / 4, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("NowMissile_LVMAXXX", new Image()));
+    mLpImageDatas["NowMissile_LVMAXXX"]->Init("Image/UI/NowMissile_LVMAXXX.bmp", 700 /4, 291/4, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("Manual", new Image()));
+    mLpImageDatas["Manual"]->Init("Image/UI/Manual.bmp", 700/4, 586/4, 1, 1, 1, true);
 
     mLpImageDatas.insert(make_pair("MOVING_CAT", new Image()));
-    mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1004/2, 251/2, 4, 1, 4, true);
+    mLpImageDatas["MOVING_CAT"]->Init("Image/UI/MovingCat.bmp", 1456/2, 209/2, 8, 1, 8, true);
 
     mLpImageDatas.insert(make_pair("LOADING_CAT", new Image()));
     mLpImageDatas["LOADING_CAT"]->Init("Image/UI/LoadingCat.bmp", 1004, 251, 4, 1, 4, true);
@@ -144,6 +155,22 @@ HRESULT ImageManager::Init()
 
     mLpImageDatas.insert(make_pair("ENDING", new Image()));
     mLpImageDatas["ENDING"]->Init("Image/UI/Ending.bmp", WINSIZE_WIDTH, WINSIZE_HEIGHT, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_01", new Image()));
+    mLpImageDatas["hp_01"]->Init("Image/UI/hp_01.bmp", 24, 12, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_02", new Image()));
+    mLpImageDatas["hp_02"]->Init("Image/UI/hp_02.bmp", 24, 12, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_03", new Image()));
+    mLpImageDatas["hp_03"]->Init("Image/UI/hp_03.bmp", 24, 12, 1, 1, 1, true);
+
+    mLpImageDatas.insert(make_pair("hp_04", new Image()));
+    mLpImageDatas["hp_04"]->Init("Image/UI/hp_04.bmp", 24, 12, 1, 1, 1, true);
+
+
+
+
 
     return S_OK;
 }

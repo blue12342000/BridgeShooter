@@ -45,11 +45,11 @@ struct Collider
 };
 
 /*
-* POINTFLOAT
-* float
-* float
-* float
-* float
+* POINTFLOAT 이동 시작점
+* float 이동 각도
+* float 이동 속도
+* float 진동 주기
+* float 진폭
 */
 struct Transform
 {

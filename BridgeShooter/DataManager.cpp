@@ -4,7 +4,6 @@ HRESULT DataManager::Init()
 {
 	selectedCharacter = (int)CHARACTER_CODE::NONE;
 	playTime = 0.0f;
-	bombAmount = 9;
 	lifeAmount = 3;
 	return S_OK;
 }

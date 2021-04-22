@@ -30,9 +30,10 @@ public:
 
 	virtual void ResetTimer() final;
 
-	virtual inline int SetCreateLine(int createLine) final { (maxCreateLIne > 0 && createLine > 0) ? this->createLine = createLine % maxCreateLIne : this->createLine = 0; return this->createLine; }
-	virtual inline void SetCheckTime(int millisec) { mTimeCheck.insert(std::make_pair(millisec, TimeCheck{ (float)millisec/1000.0f, false})); }
-	virtual inline bool IsCheckTime(int millisec) { return mTimeCheck[millisec].isChanged; }
-	virtual inline int GetTimeMod(int millisec) { return ((int)(elapsedTime * 1000)) % millisec; }
+	inline int SetCreateLine(int createLine) { (maxCreateLIne > 0 && createLine > 0) ? this->createLine = createLine % maxCreateLIne : this->createLine = 0; return this->createLine; }
+	inline void SetCheckTime(int millisec) { mTimeCheck.insert(std::make_pair(millisec, TimeCheck{ (float)millisec/1000.0f, false})); }
+	inline bool IsCheckTime(int millisec) { return mTimeCheck[millisec].isChanged; }
+	inline int GetTimeMod(int millisec) { return ((int)(elapsedTime * 1000)) % millisec; }
+	inline int GetMaxCreateLIne() { return maxCreateLIne; }
 
 };

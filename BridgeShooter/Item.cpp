@@ -5,14 +5,30 @@
 
 void Item::Init()
 {
-	angle = PI / 4;
+    isActive = false;
+	angle = (rand() % 360) / 180.0f * PI;
 	transform.speed = 400;
 	elapsedTime = 0.0f;
     type = (ITEM_TYPE)(rand() % (int)ITEM_TYPE::NONE);
     lpPattern = new ReflectPattern();
     lpAnimation = new Animation();
-    lpAnimation->Change("Item_Bomb", 20, true);
+    switch (type)
+    {
+    case ITEM_TYPE::POWER_UP:
+        lpAnimation->Change("Item_Power", 10, true);
+        break;
+    case ITEM_TYPE::BOMB:
+        lpAnimation->Change("Item_Bomb", 10, true);
+        break;
+    case ITEM_TYPE::HP_POTION:
+        lpAnimation->Change("Item_Health", 10, true);
+        break;
+    case ITEM_TYPE::SPEED_UP:
+        lpAnimation->Change("Item_Speed", 10, true);
+        break;
+    }
     collider.SetHitBox(pos, 60, 60);
+    changeTimer = 3;
 }
 
 void Item::Release()
@@ -23,7 +39,16 @@ void Item::Release()
 
 void Item::Update(float deltaTime)
 {
-    if ((int)type != (int)(elapsedTime / 3))
+    if (!isActive) return;
+    if (pos.x < WINSIZE_LEFT || pos.y < WINSIZE_TOP
+        || pos.x > WINSIZE_RIGHT || pos.y > WINSIZE_BOTTOM)
+    {
+        isActive = false;
+        return;
+    }
+
+    changeTimer -= deltaTime;
+    if (changeTimer < 0)
     {
         type = (ITEM_TYPE)(((int)type + 1) % (int)ITEM_TYPE::NONE);
         switch (type)
@@ -35,15 +60,13 @@ void Item::Update(float deltaTime)
             lpAnimation->Change("Item_Bomb", 10, true);
             break;
         case ITEM_TYPE::HP_POTION:
-            lpAnimation->Change("Item_Power", 10, true);
+            lpAnimation->Change("Item_Health", 10, true);
             break;
-        case ITEM_TYPE::SLOW_MOTION:
-            lpAnimation->Change("Item_Bomb", 10, true);
-            break;
-        case ITEM_TYPE::TIME_STOP:
-            lpAnimation->Change("Item_Power", 10, true);
+        case ITEM_TYPE::SPEED_UP:
+            lpAnimation->Change("Item_Speed", 10, true);
             break;
         }
+        changeTimer = 3;
     }
     
     Move(deltaTime);
@@ -54,6 +77,7 @@ void Item::Update(float deltaTime)
 
 void Item::Render(HDC hdc)
 {
+    if (!isActive) return;
 	if (lpAnimation) lpAnimation->Render(hdc, pos.x, pos.y, angle);
 	if (isDebugMode)
 	{

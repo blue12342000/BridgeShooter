@@ -9,7 +9,7 @@ HRESULT Title::Init()
     lpPressKey = ImageManager::GetSingleton()->FindImage("TITLE_PRESSKEY");
     lpTitle = ImageManager::GetSingleton()->FindImage("TITLE");
     lpMovingCat = new Animation();
-    lpMovingCat->Change("MOVING_CAT", 4, true, false);
+    lpMovingCat->Change("MOVING_CAT", 24, true, false);
     catPos = {-50, 400 };
 
     return S_OK;

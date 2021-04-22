@@ -21,15 +21,25 @@
 
 void AlienBlue::Init()
 {
-
+	if (lpAnimation)
+	{
+		delete lpAnimation;
+	}
+	if (lpPattern)
+	{
+		delete lpPattern;
+	}
+	SetFactory(new SineFactory());
 	lpAnimation = new Animation();
-	lpFactory = new BasicFactory();
 	lpPattern = new ReflectPattern();
+
 	elapsedTime = 0;
 	angle = 0;
 	collider.SetHitBox(pos, 50, 50);
 	lpAnimation->Change("Enemy_1", 4, true);
 	transform.speed = 80.0;
+	hp = U_MAX_ENEMY_HP;
+	maxHp = U_MAX_ENEMY_HP;
 	moveAngle = 0;
 	shootAngle = PI / 2.0f;
 	pos = { 0 - 100,float(rand() % 200 + 100) };
@@ -76,6 +86,7 @@ void AlienBlue::Release()
 	if (lpPattern)
 	{
 		delete lpPattern;
+		lpPattern = nullptr;
 	}
 }
 

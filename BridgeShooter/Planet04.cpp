@@ -7,8 +7,8 @@ void Planet04::Init()
 	lpAnimation = new Animation();
 	lpAnimation->Change("Planet04", 50, true);
 	transform.speed = 50;
-	hp = 500;
-	bomb = 3;
+	hp = U_MAX_BOSS_HP;
+	maxHp = U_MAX_BOSS_HP;
 	elapsedTime = 0;
 	angle = PI / 2;
 	lpFactory = new Planet04Factory();

@@ -6,6 +6,7 @@ void Animation::Change(string imageKey, int fps, bool isLoop, bool isReset)
 	if (isReset)
 	{
 		lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
+		this->imageKey = imageKey;
 		this->isLoop = isLoop;
 		this->fps = fps;
 		frame = 0;
@@ -14,10 +15,10 @@ void Animation::Change(string imageKey, int fps, bool isLoop, bool isReset)
 	{
 		if (lpImage)
 		{
-			Image* lpTempImage = ImageManager::GetSingleton()->FindImage(imageKey);
-			if (lpImage != lpTempImage)
+			if (this->imageKey != imageKey)
 			{
-				lpImage = lpTempImage;
+				lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
+				this->imageKey = imageKey;
 				this->isLoop = isLoop;
 				this->fps = fps;
 				frame = 0;
@@ -26,6 +27,7 @@ void Animation::Change(string imageKey, int fps, bool isLoop, bool isReset)
 		else
 		{
 			lpImage = ImageManager::GetSingleton()->FindImage(imageKey);
+			this->imageKey = imageKey;
 			this->isLoop = isLoop;
 			this->fps = fps;
 			frame = 0;

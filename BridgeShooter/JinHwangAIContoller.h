@@ -4,13 +4,6 @@
 class JinHwangAIContoller : public AIController
 {
 private:
-	enum class USE_PATTERN
-	{
-		BASIC,
-		CIRCLE,
-		NONE
-	};
-
 	enum class UNIT_STATE
 	{
 		IDLE,
@@ -27,12 +20,14 @@ private:
 
 private:
 	UNIT_STATE state;
-	USE_PATTERN currentPattern;
+	int moveCount;
 
 private:
 	virtual void Init() override;
 	virtual void Release() override;
 	virtual void Update(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
+
+	virtual void SetUnit(Unit* lpUnit);
 };
 
