@@ -46,8 +46,8 @@ void SSJFactory::Fire(Unit* lpUnit)
 	if (createLine < 3)
 	{
 		phaseChanger++;
-		if (phaseChanger >= 5000) createLine = 1;
-		if (phaseChanger >= 10000) createLine = 2;
+		if (phaseChanger >= 2000) createLine = 1;
+		if (phaseChanger >= 7000) createLine = 2;
 	}
 
 	//1 phase
@@ -59,7 +59,7 @@ void SSJFactory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 36; ++i)
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_07", lpUnit->angle - 2 * PI / 36 * i, Transform{ lpUnit->pos, lpUnit->angle - 2 * PI / 36 * i, 200 }, 14);
+				lpMissile->SetMissile("MISSILE_07", lpUnit->angle - 2 * PI / 36 * i, Transform{ lpUnit->pos, lpUnit->angle - 2 * PI / 36 * i, 300 }, 14);
 				lpMissile->collider.type = COLLIDER_TYPE::CIRCLE;
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::SFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
