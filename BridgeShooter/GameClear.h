@@ -6,7 +6,7 @@ class Controller;
 class GameClear : public GameScene
 {
 private:
-	Unit* lpCredit;
+
 	Image* lpBackImage;
 	Image* lpBackBuffer;
 
