@@ -269,13 +269,14 @@ void InGameScene::Update(float deltaTime)
         slowScale = 1;
     }
 
-    if (lpPlayerController->GetUnit()->GetHp() == 0 && DataManager::GetSingleton()->GetLifeAmount() ==0)
+    if (lpPlayerController && !lpPlayerController->GetUnit()->IsAlive() && DataManager::GetSingleton()->GetLifeAmount() == 0)
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
     }
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+        currStage = STAGE_STATE::LOADING;
     }
 }
 
