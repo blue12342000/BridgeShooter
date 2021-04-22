@@ -18,7 +18,9 @@ void UIobject::Init()
 {
 	lpBossHpBar		= ImageManager::GetSingleton()->FindImage("BossHpGauge");
 	lpFcukingManual = ImageManager::GetSingleton()->FindImage("Manual");
-	lpLifeStock		= ImageManager::GetSingleton()->FindImage("HpCount");
+	lpLifeStock[0]	= ImageManager::GetSingleton()->FindImage("LifeMiniYELLOW");
+	lpLifeStock[1]	= ImageManager::GetSingleton()->FindImage("LifeMiniRED");
+	lpLifeStock[2]	= ImageManager::GetSingleton()->FindImage("LifeMiniGRAY");
 	lpMissile[0]	= ImageManager::GetSingleton()->FindImage("NowMissile_1");
 	lpMissile[1]	= ImageManager::GetSingleton()->FindImage("NowMissile_2");
 	lpMissile[2]	= ImageManager::GetSingleton()->FindImage("NowMissile_3");
@@ -77,8 +79,21 @@ void UIobject::Render(HDC hdc)
 		}
 	}
 	//∏Òº˚ . ∂Û¿Ã«¡ Ω∫≈Â
-	for (int i = 0; i < DataManager::GetSingleton()->GetLifeAmount(); i++)
-		lpLifeStock->Render(hdc, 30 + 30 * i, WINSIZE_HEIGHT / 8 + 15, 0, U_IA_CENTER);
+	if (DataManager::GetSingleton()->GetSelectedCharacter() == (int)DataManager::CHARACTER_CODE::YELLOW)
+	{
+		for (int i = 0; i < DataManager::GetSingleton()->GetLifeAmount(); i++)
+			lpLifeStock[0]->Render(hdc, 30 + 30 * i, WINSIZE_HEIGHT / 8 + 15, 0, U_IA_CENTER);
+	}
+	if (DataManager::GetSingleton()->GetSelectedCharacter() == (int)DataManager::CHARACTER_CODE::RED)
+	{
+		for (int i = 0; i < DataManager::GetSingleton()->GetLifeAmount(); i++)
+			lpLifeStock[1]->Render(hdc, 30 + 30 * i, WINSIZE_HEIGHT / 8 + 15, 0, U_IA_CENTER);
+	}
+	if (DataManager::GetSingleton()->GetSelectedCharacter() == (int)DataManager::CHARACTER_CODE::GRAY)
+	{
+		for (int i = 0; i < DataManager::GetSingleton()->GetLifeAmount(); i++)
+			lpLifeStock[2]->Render(hdc, 30 + 30 * i, WINSIZE_HEIGHT / 8 + 15, 0, U_IA_CENTER);
+	}
 	//≈∫∫Ø∞Ê
 	if (lpPlayer)
 		lpMissile[lpPlayer->GetFactoryLine()]->Render(hdc, WINSIZE_WIDTH / 8, WINSIZE_HEIGHT - 70, 0, U_IA_CENTER);

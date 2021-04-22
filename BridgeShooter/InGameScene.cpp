@@ -163,7 +163,7 @@ void InGameScene::Update(float deltaTime)
             }
             else
             {
-                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::CLEAR);
             }
         }
         else
@@ -268,6 +268,11 @@ void InGameScene::Update(float deltaTime)
         slowTimer = 0;
         slowScale = 1;
     }
+
+    if (lpPlayerController->GetUnit()->GetHp() == 0 && DataManager::GetSingleton()->GetLifeAmount() ==0)
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+    }
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
@@ -352,6 +357,7 @@ void InGameScene::UnitCollision(UNIT_KIND attackerKind, Controller* target)
                     else
                     {
                         lpPlayerController->SetIsReady(false);
+ 
                     }
                 }
                 else if (lpUnit->GetUnitKind() == UNIT_KIND::ENEMY)

@@ -5,6 +5,7 @@
 #include "InGameScene.h"
 #include "SelectPlayer.h"
 #include "Ending.h"
+#include "GameClear.h"
 
 HRESULT SceneManager::Init()
 {
@@ -23,6 +24,9 @@ HRESULT SceneManager::Init()
 			break;
 		case (int)SCENE_STATE::ENDING:
 			scenes[i] = new Ending();
+			break;
+		case (int)SCENE_STATE::CLEAR:
+			scenes[i] = new GameClear();
 			break;
 		case (int)SCENE_STATE::NONE:
 			break;
