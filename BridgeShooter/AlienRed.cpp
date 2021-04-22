@@ -11,8 +11,7 @@ void AlienRed::Init()
 	if (!lpAnimation) lpAnimation = new Animation();
 	lpAnimation->Change("Enemy_4", 4, true, true);
 	if (!lpFactory) SetFactory(new BasicFactory());
-	lpFactory->SetCreateLine(1);
-	lpFactory->ResetTimer();
+	lpFactory->SetCreateLine(4);
 	elapsedTime = 0;
 	if (!lpPattern) lpPattern = new ReflectPattern();
 	angle = 0;

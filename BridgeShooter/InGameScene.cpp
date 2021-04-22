@@ -83,6 +83,7 @@ HRESULT InGameScene::Init()
     {
         vLpMobController.push_back(new AlienAIController);
         vLpMobController[i]->SetUnit(vEnemys[i]);
+        vEnemys[i]->SetTarget(lpPlayerController->GetUnit());
     }
 
     vItems.resize(2);

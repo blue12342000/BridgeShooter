@@ -12,8 +12,7 @@ void AlienGreen::Init()
 	if (!lpAnimation) lpAnimation = new Animation();
 	lpAnimation->Change("Enemy_3", 4, true, true);
 	if (!lpFactory) SetFactory(new BasicFactory());
-	lpFactory->SetCreateLine(1);
-	lpFactory->ResetTimer();
+	lpFactory->SetCreateLine(4);
 	if (!lpPattern) lpPattern = new BasicPattern();
 	elapsedTime = 0;
 	angle = PI /2;

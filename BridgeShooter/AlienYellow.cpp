@@ -11,8 +11,7 @@ void AlienYellow::Init()
 	if (!lpAnimation) lpAnimation = new Animation();
 	lpAnimation->Change("Enemy_2", 4, true, true);
 	if (!lpFactory) SetFactory(new BasicFactory());
-	lpFactory->SetCreateLine(0);
-	lpFactory->ResetTimer();
+	lpFactory->SetCreateLine(4);
 	if (!lpPattern) lpPattern = new ReflectPattern();
 	elapsedTime = 0;
 

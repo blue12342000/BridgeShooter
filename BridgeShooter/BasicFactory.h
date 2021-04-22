@@ -10,6 +10,7 @@ private:
 	{
 		BFCP_BASIC,
 		BFCP_REFLECT,
+		BFCP_GUIDE_BASIC,
 		BFCP_NONE
 	};
 

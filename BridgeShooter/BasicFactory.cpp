@@ -3,18 +3,17 @@
 #include "Missile.h"
 #include "Unit.h"
 #include "BasicPattern.h"
-#include "SinePattern.h"
-#include "BoomerangPattern.h"
-#include "SpiralPattern.h"
 #include "ReflectPattern.h"
+#include "GuideBasicPattern.h"
 
 void BasicFactory::Init()
 {
 	vLpPatterns.resize(CREATE_PATTERN::BFCP_NONE);
 	vLpPatterns[CREATE_PATTERN::BFCP_BASIC] = new BasicPattern();
 	vLpPatterns[CREATE_PATTERN::BFCP_REFLECT] = new ReflectPattern();
+	vLpPatterns[CREATE_PATTERN::BFCP_GUIDE_BASIC] = new GuideBasicPattern();
 
-	maxCreateLIne = 3;
+	maxCreateLIne = 5;
 	SetCheckTime(2000);
 }
 
@@ -29,7 +28,7 @@ void BasicFactory::Release()
 
 void BasicFactory::Fire(Unit* lpUnit)
 {
-	if (this->IsCheckTime(2000))
+	if (IsCheckTime(2000))
 	{
 		if (createLine == 1)
 		{
@@ -60,6 +59,15 @@ void BasicFactory::Fire(Unit* lpUnit)
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_REFLECT]);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
+		}
+		else if (createLine == 4)
+		{
+			// Å¸°Ù°ø°Ý
+			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+			lpMissile->SetMissile("MISSILE_02", PI / 2, Transform{ lpUnit->pos, PI / 2, 250 }, 20, 0.01f);
+			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_GUIDE_BASIC]);
+			lpMissile->SetLpTarget(&lpUnit->GetTarget());
+			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 		}
 	}
 	

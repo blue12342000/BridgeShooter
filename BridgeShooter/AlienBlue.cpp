@@ -8,11 +8,10 @@
 
 void AlienBlue::Init()
 {
-	if (!lpFactory) lpAnimation = new Animation();
+	if (!lpAnimation) lpAnimation = new Animation();
 	lpAnimation->Change("Enemy_1", 4, true, true);
 	if (!lpFactory) SetFactory(new BasicFactory());
-	lpFactory->SetCreateLine(2);
-	lpFactory->ResetTimer();
+	lpFactory->SetCreateLine(4);
 	if (!lpPattern) lpPattern = new ReflectPattern();
 	elapsedTime = 0;
 	angle = 0;
