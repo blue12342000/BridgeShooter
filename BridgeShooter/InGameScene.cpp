@@ -272,11 +272,14 @@ void InGameScene::Update(float deltaTime)
     if (lpPlayerController && !lpPlayerController->GetUnit()->IsAlive() && DataManager::GetSingleton()->GetLifeAmount() == 0)
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+        DataManager::GetSingleton()->SetLifeAmount(3);
     }
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
         currStage = STAGE_STATE::LOADING;
+        DataManager::GetSingleton()->SetLifeAmount(3);
+
     }
 }
 
