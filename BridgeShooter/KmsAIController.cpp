@@ -11,7 +11,8 @@ void KmsAIController::Init()
 	vLpPatterns.resize((int)USE_PATTERN::NONE);
 	vLpPatterns[(int)USE_PATTERN::REFLECT] = new ReflectPattern();
 	elapsedTime = 0;
-	prevNum = 500;
+	goalPos = { WINSIZE_WIDTH / 2.0f,200.0f };
+	prevNum = U_MAX_BOSS_HP;
 	state = UNIT_STATE::RETURN;
 	currentPattern = USE_PATTERN::REFLECT;
 }
@@ -36,10 +37,10 @@ void KmsAIController::Update(float deltaTime)
 		}
 		else
 		{
-			if ((prevNum - 200) >= lpUnit->GetHp())
+			if ((prevNum - 800) >= lpUnit->GetHp())
 			{
 				state = UNIT_STATE::UPGRADE;
-				lpUnit->transform.speed += 20;
+				lpUnit->transform.speed += 100;
 				prevNum = lpUnit->GetHp();
 			}
 			
@@ -62,7 +63,7 @@ void KmsAIController::Update(float deltaTime)
 			lpUnit->Fire();
 			lpUnit->Update(deltaTime);
 			elapsedTime+= deltaTime;
-			if (elapsedTime>40) 
+			if (elapsedTime>10) 
 			{
 				lpUnit->angle = (rand() % ((int)(2 * PI * 1000))) / 1000;
 				state = UNIT_STATE::MOVE;
@@ -86,23 +87,14 @@ void KmsAIController::Update(float deltaTime)
 			}
 			break;
 		case UNIT_STATE::RETURN:
-			if (lpUnit->pos.x < 0)
+			goalPos = { (float)(rand() % WINSIZE_WIDTH),(float)((rand() % ((WINSIZE_HEIGHT / 2)  + 1)) )};
+			lpUnit->angle = atan2((goalPos.y - lpUnit->pos.y), (goalPos.x - lpUnit->pos.x));
+			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);
+			if (sqrt((goalPos.y - lpUnit->pos.y) * (goalPos.y - lpUnit->pos.y) + (goalPos.x - lpUnit->pos.x) * (goalPos.x - lpUnit->pos.x)) <= 50)
 			{
-				lpUnit->angle = 0;
+				state = UNIT_STATE::ATTACK;
 			}
-			else if (lpUnit->pos.x > WINSIZE_WIDTH)
-			{
-				lpUnit->angle = PI;
-			}
-			if (lpUnit->pos.y <0)
-			{
-				lpUnit->angle = PI/2;
-			}
-			else if (lpUnit->pos.y >WINSIZE_HEIGHT / 2)
-			{
-				lpUnit->angle = -PI/2;
-			}
-			state = UNIT_STATE::MOVE;
+			
 			break;
 		case UNIT_STATE::MOVE:
 			vLpPatterns[(int)currentPattern]->Move(deltaTime, lpUnit);

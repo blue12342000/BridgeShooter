@@ -56,11 +56,11 @@ HRESULT InGameScene::Init()
         break;
     }
     
-    mLpBossController.insert(make_pair(STAGE_STATE::STAGE1, new JinHwangAIContoller()));
+    mLpBossController.insert(make_pair(STAGE_STATE::STAGE1, new KmsAIController()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE2, new SSJAIController()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE3, new Planet04AIcontroller()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE4, new KmsAIController()));
-    mLpBossController[STAGE_STATE::STAGE1]->SetUnit(new JinHwang());
+    mLpBossController[STAGE_STATE::STAGE1]->SetUnit(new Planet_KMS());
     mLpBossController[STAGE_STATE::STAGE2]->SetUnit(new Planet_SSJ());
     mLpBossController[STAGE_STATE::STAGE3]->SetUnit(new Planet04());
     mLpBossController[STAGE_STATE::STAGE4]->SetUnit(new Planet_KMS());

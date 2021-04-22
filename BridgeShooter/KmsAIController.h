@@ -23,6 +23,7 @@ protected:
 	UNIT_STATE state;
 	USE_PATTERN currentPattern;
 	int prevNum;
+	POINTFLOAT goalPos;
 public:
 	virtual void Init()override;
 	virtual void Release()override;

@@ -65,10 +65,10 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 	{
 		if (IsCheckTime(4000))
 		{
-			for (int i = 0; i < 8; i++)// 미사일 위에서
+			for (int i = 0; i < 10; i++)// 미사일 위에서
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_01", PI / 2.0f, Transform{ { (float)WINSIZE_WIDTH * (float)i / 16 + 15 ,0.0f }, PI / 2.0f, 150 }, 20);
+				lpMissile->SetMissile("MISSILE_01", PI / 2.0f, Transform{ { (float)WINSIZE_WIDTH * (float)i / 10+50  ,0.0f }, PI / 2.0f, 150 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::KFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
@@ -78,14 +78,14 @@ void Planet_KMS_Factory::Fire(Unit* lpUnit)
 			for (int i = 0; i < 12; i++)// 미사일 왼쪽에서
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_01", 0, Transform{ { 0.0f,(float)(WINSIZE_HEIGHT + 10) * (float)i / 20 }, 0.0f, 150 }, 20);
+				lpMissile->SetMissile("MISSILE_01", 0, Transform{ { 0.0f,(float)(WINSIZE_HEIGHT + 630) * (float)i / 20 }, 0.0f, 150 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::KFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
 			for (int i = 0; i < 12; i++)// 미사일 오른쪽에서
 			{
 				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-				lpMissile->SetMissile("MISSILE_01", PI, Transform{ { (float)WINSIZE_WIDTH,(float)(WINSIZE_HEIGHT + 200) * (float)i / 20 }, PI, 150 }, 20);
+				lpMissile->SetMissile("MISSILE_01", PI, Transform{ { (float)WINSIZE_WIDTH,(float)(WINSIZE_HEIGHT + 700) * (float)i / 20 }, PI, 150 }, 20);
 				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::KFCP_BASIC]);
 				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 			}
