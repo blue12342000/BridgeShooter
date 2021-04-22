@@ -362,7 +362,7 @@ void Image::SplitRender(HDC hdc, POINT dest, int splitX, int splitY, int splitIn
     {
         GdiTransparentBlt(hdc, dest.x, dest.y, width, height,
             lpImageInfo->vHMemDC[0], lpImageInfo->width * (frame % lpImageInfo->maxFrameX) + width * (splitIndex % splitX), lpImageInfo->height * (frame / lpImageInfo->maxFrameX) + height * (splitIndex / splitX), width, height, lpImageInfo->transColor);
-    }
+     }
     else
     {
         StretchBlt(hdc, dest.x, dest.y, width, height,

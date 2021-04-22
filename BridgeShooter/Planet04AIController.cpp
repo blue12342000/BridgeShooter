@@ -18,6 +18,13 @@ void Planet04AIcontroller::Init()
 
 void Planet04AIcontroller::Release()
 {
+	if (lpUnit)
+	{
+		lpUnit->Release();
+		delete lpUnit;
+		lpUnit = nullptr;
+	}
+
 	for (auto lpPattern : vLpPatterns)
 	{
 		delete lpPattern;

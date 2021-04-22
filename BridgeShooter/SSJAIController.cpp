@@ -15,6 +15,13 @@ void SSJAIController::Init()
 
 void SSJAIController::Release()
 {
+	if (lpUnit)
+	{
+		lpUnit->Release();
+		delete lpUnit;
+		lpUnit = nullptr;
+	}
+
 	for (auto lpPattern : vLpPatterns)
 	{
 		delete lpPattern;

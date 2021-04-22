@@ -42,6 +42,15 @@ void SelectPlayer::Update(float deltaTime)
 {
 	if (hasSelected == false)
 	{
+		for (int i = '1'; i < '1' + 4; ++i)
+		{
+			if (KeyManager::GetSingleton()->IsKeyDownOne(i))
+			{
+				hasSelected = true;
+				DataManager::GetSingleton()->SetCharacter((DataManager::CHARACTER_CODE)(i - '1' + 4));
+			}
+		}
+
 		if (KeyManager::GetSingleton()->IsKeyDownOne('A'))
 		{
 			selectBox.left -= 200;

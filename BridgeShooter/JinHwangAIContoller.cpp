@@ -13,6 +13,13 @@ void JinHwangAIContoller::Init()
 
 void JinHwangAIContoller::Release()
 {
+	if (lpUnit)
+	{
+		lpUnit->Release();
+		delete lpUnit;
+		lpUnit = nullptr;
+	}
+
 	for (auto lpPattern : vLpPatterns)
 	{
 		delete lpPattern;

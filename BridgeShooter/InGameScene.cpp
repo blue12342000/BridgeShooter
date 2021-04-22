@@ -52,8 +52,19 @@ HRESULT InGameScene::Init()
     case (int)DataManager::CHARACTER_CODE::GRAY:
         lpPlayerController->SetUnit(new SpaceShip_Gray());
         break;
+    case (int)DataManager::CHARACTER_CODE::BOSS1:
+        lpPlayerController->SetUnit(new JinHwang());
+        break;
+    case (int)DataManager::CHARACTER_CODE::BOSS2:
+        lpPlayerController->SetUnit(new Planet_SSJ());
+        break;
+    case (int)DataManager::CHARACTER_CODE::BOSS3:
+        lpPlayerController->SetUnit(new Planet04());
+        break;
+    case (int)DataManager::CHARACTER_CODE::BOSS4:
+        lpPlayerController->SetUnit(new Planet_KMS());
+        break;
     }
-    
 
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE1, new JinHwangAIContoller()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE2, new SSJAIController()));

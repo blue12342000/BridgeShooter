@@ -5,7 +5,10 @@ class Image;
 class Ending : public GameScene 
 {
 private:
-	Image* lpEnding;
+	float backgroundMover;
+	Image* lpBackBuffer;
+	Image* lpBackImage;
+	Animation* lpGhoust;
 
 public:
 	HRESULT Init();
