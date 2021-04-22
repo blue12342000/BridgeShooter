@@ -191,7 +191,6 @@
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJAIController.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
-    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>

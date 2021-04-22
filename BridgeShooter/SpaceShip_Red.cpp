@@ -1,15 +1,6 @@
 #include "SpaceShip_Red.h"
 #include "Animation.h"
-#include "BasicFactory.h"
-#include "SineFactory.h"
-#include "RainFactory.h"
-#include "BoomerangPattern.h"
-#include "SSJFactory.h"
-#include "JinHwangFactory.h"
 #include "SpaceShipFactory.h"
-#include "Planet_KMS_Factory.h"
-
-#include "UIobject.h"
 
 void SpaceShip_Red::Init()
 {
@@ -20,18 +11,29 @@ void SpaceShip_Red::Init()
 	transform.speed = 350;
 	elapsedTime = 0;
 	angle = -PI / 2;
-	power = 0;
 	SetFactory(new SpaceShipFactory());
 	collider.SetHitBox(pos, 20, 20);
 	force = { 0, 0 };
+
+	lpHitBoxAni = new Animation();
+	lpHitBoxAni->Change("HitBox", 12, true);
+}
+
+void SpaceShip_Red::Release()
+{
+	Unit::Release();
+	delete lpHitBoxAni;
+	lpHitBoxAni = nullptr;
 }
 
 void SpaceShip_Red::Update(float deltaTime)
 {
 	Unit::Update(deltaTime);
+	if (lpHitBoxAni) lpHitBoxAni->Update(deltaTime);
 }
 
 void SpaceShip_Red::Render(HDC hdc)
 {
 	Unit::Render(hdc);
+	if (lpHitBoxAni) lpHitBoxAni->Render(hdc, pos.x, pos.y);
 }

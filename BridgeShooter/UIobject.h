@@ -1,6 +1,5 @@
 #pragma once
 #include "UI.h"
-#include "Unit.h"
 #include "BridgeShooter.h"
 
 class Controller;
@@ -8,7 +7,7 @@ class Item;
 class SpaceShip;
 class Unit;
 class Image;
-class UIobject : public Unit
+class UIobject : public UI
 {
 private:
 	Unit* lpPlayer;
@@ -17,48 +16,23 @@ private:
 	RECT playerUIobject;
 	RECT bossUIobject;
 
-	Controller* lpPlayerController;
-
 	Image* lpBossHpBar;
 	Image* lpLifeStock[8];
 	Image* lpMissile[6];
-	Image* lpFcukingManual;
+	Image* lpManual;
 	Image* lpHp01;
 	Image* lpHp02;
 	Image* lpHp03;
 	Image* lpHp04;
 
-	int lifeAmount;
-	
-	float playerMaxHp;
-	float bossMaxHp;
-
-	bool isMaxHp;
 public:
-
 	virtual void Init() ;
 	virtual void Release() ;
 	virtual void Update(float deltaTime) ;
 	virtual void Render(HDC hdc) ;
-	virtual void SetBossMaxHp();
-
 
 	virtual void SetPlayer(Unit* lpPlayer) { this->lpPlayer = lpPlayer; }
 	virtual void SetEnemy(Unit* lpEnemy) { this->lpEnemy = lpEnemy; }
-	virtual void SetPlayerHpBar(RECT playerUIobject) { this->playerUIobject = playerUIobject; }
-	virtual void SetBossHpBar(RECT enemyUIobject) { this->bossUIobject = enemyUIobject; }
-
-	virtual void SetPlayerMaxHp(float playerMaxHp) { this->playerMaxHp = playerMaxHp; }
-	virtual void SetBossMaxHp(float enemyMaxHp) { this->bossMaxHp = enemyMaxHp; }
-	virtual void SetLifeAmount(int lifeAmount) { this->lifeAmount = lifeAmount; }
-
-	inline float GetPlayerMaxHp() { return this->playerMaxHp; }
-	inline float GetBossMaxHp() { return this->bossMaxHp; }
-	inline int GetLifeAmount() { return this->lifeAmount; }
-
-	inline RECT GetPlayerUIobject() { return this->playerUIobject; }
-	inline RECT GetbossUIobject() { return this->bossUIobject; }
-
 
 	inline void RenderRectToCenter(HDC hdc, int x, int y, int width, int height)
 	{
