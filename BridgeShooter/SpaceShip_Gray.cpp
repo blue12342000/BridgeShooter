@@ -1,6 +1,6 @@
 #include "SpaceShip_Gray.h"
 #include "Animation.h"
-#include "SpaceShipFactory.h"
+#include "RainFactory.h"
 
 void SpaceShip_Gray::Init()
 {
@@ -11,7 +11,7 @@ void SpaceShip_Gray::Init()
 	transform.speed = 350;
 	elapsedTime = 0;
 	angle = -PI / 2;
-	SetFactory(new SpaceShipFactory());
+	SetFactory(new RainFactory());
 	collider.SetHitBox(pos, 20, 20);
 	force = { 0, 0 };
 
