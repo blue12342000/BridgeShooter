@@ -10,7 +10,7 @@ void Planet_KMS::Init()
 	lpAnimation->Change("Planet_KMS", 50, true);
 	hp = U_MAX_BOSS_HP;
 	maxHp = U_MAX_BOSS_HP;
-	transform.speed = 30;
+	transform.speed = 500;
 	elapsedTime = 0;
 	angle =PI*2.0f/3.0f;
 	lpFactory = new Planet_KMS_Factory();

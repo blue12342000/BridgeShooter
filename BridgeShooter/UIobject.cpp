@@ -1,21 +1,10 @@
-#include "InGameScene.h"
 #include "UIobject.h"
 #include "Image.h"
 #include "Unit.h""
-#include "PlayerController.h"
-#include "SpaceShip.h"
-
-#include "Planet_SSJ.h"
-#include "Planet04.h"
-#include "JinHwang.h"
-#include "Planet_KMS.h"
-#include "Item.h"
-#include "Missile.h"
-#include "UIobject.h"
-#include "GameScene.h"
 
 void UIobject::Init()
 {
+	elapsedTime = 0;
 	lpBossHpBar		= ImageManager::GetSingleton()->FindImage("BossHpGauge");
 	lpManual = ImageManager::GetSingleton()->FindImage("Manual");
 	lpLifeStock[0]	= ImageManager::GetSingleton()->FindImage("LifeMiniYELLOW");
@@ -41,10 +30,12 @@ void UIobject::Init()
 
 void UIobject::Release()
 {
+	elapsedTime = 0;
 }
 
 void UIobject::Update(float deltaTime)
 {
+	elapsedTime += deltaTime;
 }
 
 
@@ -78,7 +69,7 @@ void UIobject::Render(HDC hdc)
 		lpLifeStock[(int)DataManager::GetSingleton()->GetSelectedCharacter()]->Render(hdc, 30 + 30 * i, WINSIZE_HEIGHT / 8 + 15, 0, U_IA_CENTER);
 	//탄변경
 	if (lpPlayer)
-		lpMissile[lpPlayer->GetFactoryLine()]->Render(hdc, WINSIZE_WIDTH / 8, WINSIZE_HEIGHT - 70, 0, U_IA_CENTER);
+		lpMissile[lpPlayer->GetFactoryLine()]->Render(hdc, WINSIZE_WIDTH / 8, WINSIZE_HEIGHT - 40, 0, U_IA_CENTER);
 	//메뉴얼
-	lpManual->Render(hdc, WINSIZE_WIDTH -80, WINSIZE_HEIGHT - 100, 0, U_IA_CENTER);
+	if (elapsedTime < 5) lpManual->Render(hdc, WINSIZE_WIDTH -80, WINSIZE_HEIGHT - 80, 0, U_IA_CENTER);
 }

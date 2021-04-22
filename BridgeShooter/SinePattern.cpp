@@ -1,10 +1,21 @@
 #include "SinePattern.h"
 #include "GameObject.h"
+#include "Missile.h"
 
 void SinePattern::Move(float deltaTime, GameObject* lpObject)
 {
 	if (lpObject)
 	{
+		if (typeid(*lpObject) == typeid(Missile))
+		{
+			Missile* lpMissile = (Missile*)lpObject;
+			if (lpMissile->delayTime > 0.000001f)
+			{
+				lpMissile->delayTime -= deltaTime;
+				return;
+			}
+		}
+
 		/*
 			lpObject->originAngle : 첫 진동의 방향
 			lpObject->speed : 직선으로 쐈을때 속도
