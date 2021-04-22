@@ -27,7 +27,7 @@ using namespace std;
 #define U_IA_CENTER 0x01
 
 
-#define U_MAX_PLAYER_HP 80
+#define U_MAX_PLAYER_HP 65
 #define U_MAX_BOSS_HP 2000
 #define U_MAX_ENEMY_HP 20
 
