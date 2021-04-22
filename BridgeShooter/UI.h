@@ -1,19 +1,15 @@
 #pragma once
 #include "GameObject.h"
 
-class Animation;
 class UI : public GameEvent
 {
-protected:
-	Animation* lpAnimation;
-
 public:
-	UI() : GameEvent(), lpAnimation(nullptr) {}
+	UI() {}
 	virtual ~UI() {}
 
-	virtual void Init() override;
-	virtual void Update(float deltaTime) override;
-	virtual void Release() override;
-	virtual void Render(HDC hdc) override;
+	virtual void Init() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Release() = 0;
+	virtual void Render(HDC hdc) = 0;
 };
 

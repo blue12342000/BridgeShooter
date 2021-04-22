@@ -114,9 +114,15 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("Enemy_4", new Image()));
     mLpImageDatas["Enemy_4"]->Init("Image/Unit/Mob/mob4_sprite.bmp", 50 * 4, 50, 4, 1, 4, true);
     //이하 테스트용 더미 이미지
-    mLpImageDatas.insert(make_pair("HpCount", new Image()));
-    mLpImageDatas["HpCount"]->Init("Image/UI/SpaceShip_mini.bmp.", 136/4, 174/4, 1, 1, 1, true);
+    mLpImageDatas.insert(make_pair("LifeMiniYELLOW", new Image()));
+    mLpImageDatas["LifeMiniYELLOW"]->Init("Image/UI/Select_Yellow.bmp", 200/3, 200/3, true);
 
+    mLpImageDatas.insert(make_pair("LifeMiniRED", new Image()));
+    mLpImageDatas["LifeMiniRED"]->Init("Image/UI/Select_Red.bmp", 200/3, 200 / 3, true);
+
+    mLpImageDatas.insert(make_pair("LifeMiniGRAY", new Image()));
+    mLpImageDatas["LifeMiniGRAY"]->Init("Image/UI/Select_Gray.bmp", 200 / 3, 200 / 3, true);
+    
     mLpImageDatas.insert(make_pair("NowMissile_1", new Image()));
     mLpImageDatas["NowMissile_1"]->Init("Image/UI/NowMissile_1.bmp", 700/4, 291 / 4, 1, 1, 1, true);
 
@@ -168,9 +174,11 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("hp_04", new Image()));
     mLpImageDatas["hp_04"]->Init("Image/UI/hp_04.bmp", 24, 12, 1, 1, 1, true);
 
-
-
-
+    mLpImageDatas.insert(make_pair("Ghoust", new Image()));
+    mLpImageDatas["Ghoust"]->Init("Image/UI/Ghoust.bmp", 800, 320, 2, 1, 2, true);
+    
+    mLpImageDatas.insert(make_pair("HitBox", new Image()));
+    mLpImageDatas["HitBox"]->Init("Image/Unit/Hit_Box.bmp", 168 / 2, 42 / 2, 4, 1, 4, true);
 
     return S_OK;
 }

@@ -9,6 +9,11 @@ HRESULT EffectManager::Init()
 	return S_OK;
 }
 
+void EffectManager::Release()
+{
+	vEffects.clear();
+}
+
 void EffectManager::Update(float deltaTime)
 {
 	for (int i = 0; i < vEffects.size();)

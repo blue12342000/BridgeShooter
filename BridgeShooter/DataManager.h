@@ -10,7 +10,11 @@ public:
 		YELLOW, 
 		RED,
 		GRAY,
-		NONE
+		NONE,
+		BOSS1,
+		BOSS2,
+		BOSS3,
+		BOSS4
 	};
 
 private:
@@ -28,7 +32,7 @@ public:
 	inline void SetPlayTime(float playTime) { this->playTime = playTime; }
 	inline float GetPlayTime() { return this->playTime; }
 	inline int GetLifeAmount() { return this->lifeAmount; }
-
+	inline void SetLifeAmount(int lifeAmount) { this->lifeAmount = lifeAmount; }
 	inline bool UseLife() { if (lifeAmount > 0) { lifeAmount--; return true; } else { return false; } }
 };
 

@@ -29,13 +29,11 @@ HRESULT InGameScene::Init()
 
     elapsedTime = 0;
     backgroundMover = 0;
-    state = INGAME_STATE::NORMAL;
     currStage = STAGE_STATE::LOADING;
     nextStage = STAGE_STATE::STAGE1;
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
-    lpBackImage2 = ImageManager::GetSingleton()->FindImage("SPACE");
 
     lpLoadingCat = new Animation();
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
@@ -54,9 +52,21 @@ HRESULT InGameScene::Init()
     case (int)DataManager::CHARACTER_CODE::GRAY:
         lpPlayerController->SetUnit(new SpaceShip_Gray());
         break;
+    case (int)DataManager::CHARACTER_CODE::BOSS1:
+        lpPlayerController->SetUnit(new JinHwang());
+        break;
+    case (int)DataManager::CHARACTER_CODE::BOSS2:
+        lpPlayerController->SetUnit(new Planet_SSJ());
+        break;
+    case (int)DataManager::CHARACTER_CODE::BOSS3:
+        lpPlayerController->SetUnit(new Planet04());
+        break;
+    case (int)DataManager::CHARACTER_CODE::BOSS4:
+        lpPlayerController->SetUnit(new Planet_KMS());
+        break;
     }
-    
-    mLpBossController.insert(make_pair(STAGE_STATE::STAGE1, new KmsAIController()));
+
+    mLpBossController.insert(make_pair(STAGE_STATE::STAGE1, new JinHwangAIContoller()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE2, new SSJAIController()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE3, new Planet04AIcontroller()));
     mLpBossController.insert(make_pair(STAGE_STATE::STAGE4, new KmsAIController()));
@@ -73,7 +83,7 @@ HRESULT InGameScene::Init()
     {
         vLpMobController.push_back(new AlienAIController);
         vLpMobController[i]->SetUnit(vEnemys[i]);
-        vLpMobController[i]->Init();
+        vEnemys[i]->SetTarget(lpPlayerController->GetUnit());
     }
 
     vItems.resize(2);
@@ -93,7 +103,8 @@ HRESULT InGameScene::Init()
 
 void InGameScene::Release()
 {
-    MissileManager::GetSingleton()->Release();
+    MissileManager::GetSingleton()->ClearActiveMissile();
+    EffectManager::GetSingleton()->Release();
 
     if (!vEnemys.empty())
     {
@@ -164,7 +175,7 @@ void InGameScene::Update(float deltaTime)
             }
             else
             {
-                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+                SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::CLEAR);
             }
         }
         else
@@ -255,7 +266,7 @@ void InGameScene::Update(float deltaTime)
         break;
     }
 
-    backgroundMover += 300 * deltaTime / 2;
+    backgroundMover += 300 * deltaTime / slowScale;
     if (backgroundMover >= 800) backgroundMover = 0;
         
     if (lpUIobject) lpUIobject->Update(deltaTime);
@@ -269,9 +280,18 @@ void InGameScene::Update(float deltaTime)
         slowTimer = 0;
         slowScale = 1;
     }
+
+    if (lpPlayerController && !lpPlayerController->GetUnit()->IsAlive() && DataManager::GetSingleton()->GetLifeAmount() == 0)
+    {
+        SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::ENDING);
+        DataManager::GetSingleton()->SetLifeAmount(3);
+    }
     if (KeyManager::GetSingleton()->IsKeyDownOne(VK_ESCAPE))
     {
         SceneManager::GetSingleton()->ChangeScene(SceneManager::SCENE_STATE::TITLE);
+        currStage = STAGE_STATE::LOADING;
+        DataManager::GetSingleton()->SetLifeAmount(3);
+
     }
 }
 
@@ -280,8 +300,11 @@ void InGameScene::Render(HDC hdc)
 {
     HDC hBackDC = lpBackBuffer->GetMemDC();
 
-    if (lpBackImage) lpBackImage->Render(hBackDC, 0, backgroundMover);
-    if (lpBackImage2) lpBackImage2->Render(hBackDC, 0, -800 + backgroundMover);
+    if (lpBackImage)
+    {
+        lpBackImage->Render(hBackDC, 0, backgroundMover);
+        lpBackImage->Render(hBackDC, 0, -800 + backgroundMover);
+    }
 
     for (auto item : vItems)
     {
@@ -350,6 +373,7 @@ void InGameScene::UnitCollision(UNIT_KIND attackerKind, Controller* target)
                     else
                     {
                         lpPlayerController->SetIsReady(false);
+ 
                     }
                 }
                 else if (lpUnit->GetUnitKind() == UNIT_KIND::ENEMY)

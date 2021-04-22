@@ -16,6 +16,12 @@ void PlayerController::Init()
 
 void PlayerController::Release()
 {
+	if (lpUnit)
+	{
+		lpUnit->Release();
+		delete lpUnit;
+		lpUnit = nullptr;
+	}
 }
 
 void PlayerController::Update(float deltaTime)
@@ -82,7 +88,7 @@ void PlayerController::SetUnit(Unit* lpUnit)
 	mKeyMap[INPUT_COMMAND::DOWN].lpCmd = bind(&Unit::Translate, lpUnit, POINTFLOAT{ 0, 10 });
 	mKeyMap[INPUT_COMMAND::ATTACK].lpCmd = bind(&Unit::Fire, lpUnit);
 
-	mKeyMap[INPUT_COMMAND::DOWNGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, -1, false);
-	mKeyMap[INPUT_COMMAND::UPGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, 1, false);
+	mKeyMap[INPUT_COMMAND::DOWNGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, -1, true);
+	mKeyMap[INPUT_COMMAND::UPGRADE].lpCmd = bind(&Unit::ChangeFactoryLine, lpUnit, 1, true);
 	mKeyMap[INPUT_COMMAND::INERTIA].lpCmd = bind(&Unit::ToggleInertia, lpUnit);
 }

@@ -2,12 +2,6 @@
 #include "Unit.h"
 class AlienGreen :public Unit
 {
-private:
-	Pattern* lpPattern;
-private:
-	float moveAngle;
-	float shootAngle;
-	int	  shootDuration;
 public:
 	virtual void Init() override;
 	virtual void Update(float deltaTime)override;

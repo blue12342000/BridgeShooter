@@ -150,6 +150,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BasicFactory.cpp" />
     <ClCompile Include="BasicPattern.cpp" />
+    <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GuideBasicPattern.cpp" />
     <ClCompile Include="Ending.cpp" />
     <ClCompile Include="JinHwangAIContoller.cpp" />
@@ -190,7 +191,6 @@
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="SSJAIController.cpp" />
     <ClCompile Include="SSJFactory.cpp" />
-    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
@@ -203,6 +203,7 @@
     <ClInclude Include="AlienYellow.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BasicFactory.h" />
+    <ClInclude Include="GameClear.h" />
     <ClInclude Include="GuideBasicPattern.h" />
     <ClInclude Include="Ending.h" />
     <ClInclude Include="JinHwangAIContoller.h" />

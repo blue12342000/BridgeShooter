@@ -1,15 +1,16 @@
 #pragma once
 #include "GameScene.h"
 
-class Image;
-class Ending : public GameScene 
+class Unit;
+class Controller;
+class GameClear : public GameScene
 {
 private:
-	float backgroundMover;
-	Image* lpBackBuffer;
+
 	Image* lpBackImage;
-	Image* lpRetry;
-	Animation* lpGhoust;
+	Image* lpBackBuffer;
+
+	Controller* lpPlayerController;
 
 public:
 	HRESULT Init();

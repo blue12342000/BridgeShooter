@@ -3,7 +3,7 @@
 
 enum class ITEM_TYPE
 {
-	POWER_UP,	//유닛의 생성라인 바꿈
+	POWER_UP,
 	BOMB,
 	HP_POTION,
 	SPEED_UP,

@@ -1,24 +1,14 @@
 #pragma once
 #include "Unit.h"
 
-enum class INPUT_TYPE4
-{
-	LEFT,
-	UP,
-	RIGHT,
-	DOWN,
-	NONE
-};
-
 class SpaceShip_Gray : public Unit
 {
 private:
-	INPUT_TYPE4 input;
-	float fireTimer;
-	int power;
+	Animation* lpHitBoxAni;
 
 public:
 	virtual void Init() override;
+	virtual void Release() override;
 	virtual void Update(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 };

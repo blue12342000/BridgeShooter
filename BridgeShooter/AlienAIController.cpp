@@ -23,6 +23,7 @@ void AlienAIController::Update(float deltaTime)
 {
 	if (lpUnit)
 	{
+		lpUnit->Fire();
 		lpUnit->Update(deltaTime);
 		elapsedTime += deltaTime;
 	} 
