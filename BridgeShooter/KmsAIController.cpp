@@ -11,6 +11,7 @@ void KmsAIController::Init()
 	vLpPatterns.resize((int)USE_PATTERN::NONE);
 	vLpPatterns[(int)USE_PATTERN::REFLECT] = new ReflectPattern();
 	elapsedTime = 0;
+	lpUnit->transform.speed = 100;
 	goalPos = { WINSIZE_WIDTH / 2.0f,200.0f };
 	prevNum = U_MAX_BOSS_HP;
 	state = UNIT_STATE::RETURN;
@@ -63,7 +64,7 @@ void KmsAIController::Update(float deltaTime)
 			lpUnit->Fire();
 			lpUnit->Update(deltaTime);
 			elapsedTime+= deltaTime;
-			if (elapsedTime>10) 
+			if (elapsedTime>5) 
 			{
 				lpUnit->angle = (rand() % ((int)(2 * PI * 1000))) / 1000;
 				state = UNIT_STATE::MOVE;
@@ -79,7 +80,7 @@ void KmsAIController::Update(float deltaTime)
 			{
 				state = UNIT_STATE::RETURN;
 			}
-			if (elapsedTime > 40)
+			if (elapsedTime > 5)
 			{
 				lpUnit->angle = (rand() % ((int)(2 * PI * 1000))) / 1000;
 				state = UNIT_STATE::MOVE;
@@ -104,7 +105,7 @@ void KmsAIController::Update(float deltaTime)
 			{
 				state = UNIT_STATE::RETURN;
 			}
-			if (elapsedTime>40)
+			if (elapsedTime>5)
 			{
 				if (rand() % 2) 
 				{
