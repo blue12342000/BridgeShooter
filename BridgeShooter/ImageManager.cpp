@@ -174,9 +174,8 @@ HRESULT ImageManager::Init()
     mLpImageDatas.insert(make_pair("hp_04", new Image()));
     mLpImageDatas["hp_04"]->Init("Image/UI/hp_04.bmp", 24, 12, 1, 1, 1, true);
 
-
-
-
+    mLpImageDatas.insert(make_pair("Ghoust", new Image()));
+    mLpImageDatas["Ghoust"]->Init("Image/UI/Ghoust.bmp", 800, 320, 2, 1, 2, true);
 
     return S_OK;
 }
