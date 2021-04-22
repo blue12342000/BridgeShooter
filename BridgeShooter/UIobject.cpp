@@ -21,10 +21,11 @@ void UIobject::Init()
 	lpLifeStock[0]	= ImageManager::GetSingleton()->FindImage("LifeMiniYELLOW");
 	lpLifeStock[1]	= ImageManager::GetSingleton()->FindImage("LifeMiniRED");
 	lpLifeStock[2]	= ImageManager::GetSingleton()->FindImage("LifeMiniGRAY");
-	lpLifeStock[3]	= ImageManager::GetSingleton()->FindImage("Item_Health");
+	lpLifeStock[3]  = nullptr;
 	lpLifeStock[4]	= ImageManager::GetSingleton()->FindImage("Item_Health");
 	lpLifeStock[5]	= ImageManager::GetSingleton()->FindImage("Item_Health");
 	lpLifeStock[6]	= ImageManager::GetSingleton()->FindImage("Item_Health");
+	lpLifeStock[7]  = ImageManager::GetSingleton()->FindImage("Item_Health");
 	lpMissile[0]	= ImageManager::GetSingleton()->FindImage("NowMissile_1");
 	lpMissile[1]	= ImageManager::GetSingleton()->FindImage("NowMissile_2");
 	lpMissile[2]	= ImageManager::GetSingleton()->FindImage("NowMissile_3");
