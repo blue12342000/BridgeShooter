@@ -21,15 +21,7 @@ private:
 		NONE
 	};
 
-	enum class INGAME_STATE
-	{
-		NORMAL,
-		SLOWTIME,
-		NONE
-	};
-
 private:
-	INGAME_STATE state;
 	float slowTimer;
 	float slowScale;
 	STAGE_STATE currStage;
@@ -38,14 +30,13 @@ private:
 	float backgroundMover;
 	Image* lpBackBuffer;
 	Image* lpBackImage;
-	Image* lpBackImage2;
 	Animation* lpLoadingCat;
 	POINTFLOAT catPos;
 	UIobject* lpUIobject;
 
 	vector<Unit*> vEnemys;
 	vector<Item*> vItems;
-	vector<Controller*>vLpMobController;
+	vector<Controller*> vLpMobController;
 
 	Controller* lpPlayerController;
 	// ÂüÁ¶¿ë

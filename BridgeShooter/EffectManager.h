@@ -47,6 +47,7 @@ private:
 
 public:
 	HRESULT Init();
+	void Release();
 	void Update(float deltaTime);
 	void Render(HDC hdc);
 

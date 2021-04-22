@@ -3,69 +3,29 @@
 #include "Animation.h"
 #include "Pattern.h"
 #include "GameObject.h"
-
 #include "BasicFactory.h"
-#include "SineFactory.h"
-#include "Planet04Factory.h"
-#include "RainFactory.h"
-#include "JinHwangFactory.h"
-
-
-#include "BasicPattern.h"
 #include "ReflectPattern.h"
-#include "GuidePattern.h"
-#include "SinePattern.h"
-#include "SpiralPattern.h"
 
 void AlienRed::Init()
 {
-	if (lpAnimation)
-	{
-		delete lpAnimation;
-	}
-	if (lpPattern)
-	{
-		delete lpPattern;
-	}
-	SetFactory(new SineFactory());
-	lpAnimation = new Animation();
-	lpPattern = new ReflectPattern();
-
+	if (!lpAnimation) lpAnimation = new Animation();
+	lpAnimation->Change("Enemy_4", 4, true, true);
+	if (!lpFactory) SetFactory(new BasicFactory());
+	lpFactory->SetCreateLine(1);
+	lpFactory->ResetTimer();
 	elapsedTime = 0;
+	if (!lpPattern) lpPattern = new ReflectPattern();
 	angle = 0;
-	collider.SetHitBox(pos, 50, 50);
-	lpAnimation->Change("Enemy_4", 4, true);
 	transform.speed = 80.0;
 	hp = U_MAX_ENEMY_HP;
 	maxHp = U_MAX_ENEMY_HP;
-	moveAngle = 0;
-	shootAngle = PI / 2.0f;
 	pos = { WINSIZE_WIDTH + 100,float(rand() % 200 + 100) };
-	shootDuration = 500;
-	lpFactory->Init();
-	lpFactory->SetCheckTime(shootDuration);
-	lpFactory->SetCreateLine(1);
+	collider.SetHitBox(pos, 50, 50);
 }
 
 void AlienRed::Update(float deltaTime)
 {
-	if (lpFactory && lpFactory->IsCheckTime(shootDuration))
-	{
-		angle = shootAngle;
-		Fire();
-		shootAngle = angle;
-	}
-	if (lpAnimation)
-	{
-		lpAnimation->Update(deltaTime);
-	}
-	if (lpPattern)
-	{
-		angle = moveAngle;
-		Unit::Update(deltaTime);
-		lpPattern->Move(deltaTime, this);
-		moveAngle = angle;
-	}
+	Unit::Update(deltaTime);
 }
 
 void AlienRed::Release()

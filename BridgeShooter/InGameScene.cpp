@@ -29,13 +29,11 @@ HRESULT InGameScene::Init()
 
     elapsedTime = 0;
     backgroundMover = 0;
-    state = INGAME_STATE::NORMAL;
     currStage = STAGE_STATE::LOADING;
     nextStage = STAGE_STATE::STAGE1;
 
     lpBackBuffer = ImageManager::GetSingleton()->FindImage("BACKBUFFER");
     lpBackImage = ImageManager::GetSingleton()->FindImage("SPACE");
-    lpBackImage2 = ImageManager::GetSingleton()->FindImage("SPACE");
 
     lpLoadingCat = new Animation();
     lpLoadingCat->Change("LOADING_CAT", 4, true, false);
@@ -73,7 +71,6 @@ HRESULT InGameScene::Init()
     {
         vLpMobController.push_back(new AlienAIController);
         vLpMobController[i]->SetUnit(vEnemys[i]);
-        vLpMobController[i]->Init();
     }
 
     vItems.resize(2);
@@ -93,7 +90,8 @@ HRESULT InGameScene::Init()
 
 void InGameScene::Release()
 {
-    MissileManager::GetSingleton()->Release();
+    MissileManager::GetSingleton()->ClearActiveMissile();
+    EffectManager::GetSingleton()->Release();
 
     if (!vEnemys.empty())
     {
@@ -255,7 +253,7 @@ void InGameScene::Update(float deltaTime)
         break;
     }
 
-    backgroundMover += 300 * deltaTime / 2;
+    backgroundMover += 300 * deltaTime / slowScale;
     if (backgroundMover >= 800) backgroundMover = 0;
         
     if (lpUIobject) lpUIobject->Update(deltaTime);
@@ -280,8 +278,11 @@ void InGameScene::Render(HDC hdc)
 {
     HDC hBackDC = lpBackBuffer->GetMemDC();
 
-    if (lpBackImage) lpBackImage->Render(hBackDC, 0, backgroundMover);
-    if (lpBackImage2) lpBackImage2->Render(hBackDC, 0, -800 + backgroundMover);
+    if (lpBackImage)
+    {
+        lpBackImage->Render(hBackDC, 0, backgroundMover);
+        lpBackImage->Render(hBackDC, 0, -800 + backgroundMover);
+    }
 
     for (auto item : vItems)
     {

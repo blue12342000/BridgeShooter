@@ -15,6 +15,7 @@ void BasicFactory::Init()
 	vLpPatterns[CREATE_PATTERN::BFCP_REFLECT] = new ReflectPattern();
 
 	maxCreateLIne = 3;
+	SetCheckTime(2000);
 }
 
 void BasicFactory::Release()
@@ -28,34 +29,38 @@ void BasicFactory::Release()
 
 void BasicFactory::Fire(Unit* lpUnit)
 {
-	if (createLine == 1)
+	if (this->IsCheckTime(2000))
 	{
-		// ±‚∫ª≈∫
-		Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-		lpMissile->SetMissile("MISSILE_01", lpUnit->angle, Transform{ lpUnit->pos, lpUnit->angle, 200 }, 20);
-		lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
-		MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
-	}
-	else if (createLine == 2)
-	{
-		// ªÍ≈∫
-		for (int i = 0; i < 20; ++i)
+		if (createLine == 1)
 		{
+			// ±‚∫ª≈∫
 			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_01", lpUnit->angle + ((float)(rand() % 101) - 50) / 100, Transform{ lpUnit->pos, lpUnit->angle + ((float)(rand() % 101) - 50) / 100, rand() % 100 + 100.0f }, 20);
+			lpMissile->SetMissile("MISSILE_01", PI/2, Transform{ lpUnit->pos, 0, 200 }, 20);
 			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
 			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
 		}
-	}
-	else if (createLine == 3)
-	{
-		// π›ªÁ
-		for (int i = -3; i < 4; i += 2)
+		else if (createLine == 2)
 		{
-			Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
-			lpMissile->SetMissile("MISSILE_07", lpUnit->angle + PI / 24 * i, Transform{ lpUnit->pos, lpUnit->angle + PI / 24 * i, 400 }, 20);
-			lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_REFLECT]);
-			MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			// ªÍ≈∫
+			for (int i = 0; i < 20; ++i)
+			{
+				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_01", PI / 2 + ((float)(rand() % 101) - 50) / 100, Transform{ lpUnit->pos, 0, rand() % 100 + 100.0f }, 20);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_BASIC]);
+				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			}
+		}
+		else if (createLine == 3)
+		{
+			// π›ªÁ
+			for (int i = -3; i < 4; i += 2)
+			{
+				Missile* lpMissile = MissileManager::GetSingleton()->CreateMissile();
+				lpMissile->SetMissile("MISSILE_07", PI / 2 + PI / 24 * i, Transform{ lpUnit->pos, PI / 2 + PI / 24 * i, 400 }, 20);
+				lpMissile->SetPattern(vLpPatterns[CREATE_PATTERN::BFCP_REFLECT]);
+				MissileManager::GetSingleton()->AddMissile(lpUnit->GetUnitKind(), lpMissile);
+			}
 		}
 	}
+	
 }
