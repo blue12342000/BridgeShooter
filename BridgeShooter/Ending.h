@@ -8,6 +8,7 @@ private:
 	float backgroundMover;
 	Image* lpBackBuffer;
 	Image* lpBackImage;
+	Image* lpRetry;
 	Animation* lpGhoust;
 
 public:
